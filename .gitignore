@@ -18,5 +18,8 @@ build/
 .vscode/
 .idea/
 
+# Misc
+.token
+
 # Generated data
 powder/web/data/forecasts.json
