@@ -1,23 +1,60 @@
-name: Deploy to GitHub Pages
+name: Update Forecasts & Deploy
 
 on:
+  # Run every 6 hours
+  schedule:
+    - cron: '0 */6 * * *'
+  # Run on push to main
   push:
     branches: ["main"]
+  # Allow manual trigger
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 jobs:
+  update-forecasts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.7.1
+      
+      - name: Install dependencies
+        run: poetry install --no-interaction
+      
+      - name: Generate forecast data
+        run: poetry run powder --export-json --no-cache
+      
+      - name: Commit updated forecasts
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add powder/web/data/forecasts.json
+          git diff --staged --quiet || git commit -m "Update forecast data [automated]"
+          git push
+
   deploy:
+    needs: update-forecasts
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main  # Get the latest with updated forecasts
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
