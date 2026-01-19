@@ -124,31 +124,35 @@
             </div>
         </div>
 
-        <div class="map-wrapper">
-            <div id="map"></div>
-        </div>
+        <!-- Content area: side panel + map -->
+        <div class="content-wrapper">
+            <!-- Unified side panel (desktop only) - LEFT SIDE -->
+            <aside id="side-panel" class="side-panel">
+                <div class="panel-header">
+                    <button id="panel-collapse" class="panel-collapse" title="Collapse panel">◀</button>
+                    <div class="panel-tabs">
+                        <button class="panel-tab active" data-tab="top10">Top 10</button>
+                        <button class="panel-tab" data-tab="details">Details</button>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <div id="top10-content" class="tab-content">
+                        <div id="top-resorts-list" class="top-resorts-list"></div>
+                    </div>
+                    <div id="details-content" class="tab-content hidden">
+                        <div id="detail-content"></div>
+                    </div>
+                </div>
+            </aside>
 
-        <!-- Unified side panel (desktop only) -->
-        <aside id="side-panel" class="side-panel">
-            <div class="panel-header">
-                <div class="panel-tabs">
-                    <button class="panel-tab active" data-tab="top10">Top 10</button>
-                    <button class="panel-tab" data-tab="details">Details</button>
-                </div>
-                <button id="panel-collapse" class="panel-collapse" title="Collapse panel">◀</button>
+            <div class="map-wrapper">
+                <div id="map"></div>
             </div>
-            <div class="panel-content">
-                <div id="top10-content" class="tab-content">
-                    <div id="top-resorts-list" class="top-resorts-list"></div>
-                </div>
-                <div id="details-content" class="tab-content hidden">
-                    <div id="detail-content"></div>
-                </div>
-            </div>
-        </aside>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
