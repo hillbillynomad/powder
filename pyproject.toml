@@ -1,0 +1,19 @@
+[project]
+name = "powder"
+version = "0.1.0"
+description = "Ski resort snowfall forecast tracker"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.31.0",
+    "python-dateutil>=2.8.2",
+]
+
+[project.scripts]
+powder = "powder.cli:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [{include = "powder"}]
