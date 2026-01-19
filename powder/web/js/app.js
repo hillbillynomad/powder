@@ -2,11 +2,19 @@
 
 const BUBBLE_COLOR = '#3b82f6';
 const BUBBLE_FILL_OPACITY = 0.6;
-const MIN_RADIUS = 5;  // Minimum radius for zero-snow resorts
+const MIN_RADIUS = 5;
 
 let map;
 let markers = [];
 let resortData = [];
+let currentDetailResort = null;
+
+// Hover popup state
+let hoverPopup = null;
+let hoverPopupChart = null;
+let hoverHideTimeout = null;
+let currentHoverResort = null;
+const HOVER_HIDE_DELAY = 150;
 
 // Country code to name mapping
 const COUNTRY_NAMES = {
@@ -24,10 +32,9 @@ function initMap() {
         minZoom: 2,
         maxBoundsViscosity: 1.0,
         maxBounds: [[-90, -180], [90, 180]],
-        zoomControl: false  // Disable default zoom control
-    }).setView([30, 0], 2);  // World view
+        zoomControl: false
+    }).setView([30, 0], 2);
 
-    // Add zoom control to top-right
     L.control.zoom({ position: 'topright' }).addTo(map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -46,14 +53,10 @@ function getRadius(totalInches) {
 function getSnowfallForFilter(resort) {
     const filter = document.getElementById('snow-filter').value;
     switch (filter) {
-        case 'forecast':
-            return resort.total_snowfall_inches || 0;
-        case 'historical':
-            return resort.total_historical_inches || 0;
-        case 'total':
-            return (resort.total_snowfall_inches || 0) + (resort.total_historical_inches || 0);
-        default:
-            return resort.total_snowfall_inches || 0;
+        case 'forecast': return resort.total_snowfall_inches || 0;
+        case 'historical': return resort.total_historical_inches || 0;
+        case 'total': return (resort.total_snowfall_inches || 0) + (resort.total_historical_inches || 0);
+        default: return resort.total_snowfall_inches || 0;
     }
 }
 
@@ -79,18 +82,290 @@ function getCountryName(code) {
     return COUNTRY_NAMES[code] || code;
 }
 
-// Build tooltip content (basic info on hover)
-function buildTooltip(resort) {
+// Calculate days between two date strings (YYYY-MM-DD format)
+function daysBetween(date1, date2) {
+    const d1 = new Date(date1 + 'T00:00:00');
+    const d2 = new Date(date2 + 'T00:00:00');
+    return Math.round((d1 - d2) / (1000 * 60 * 60 * 24));
+}
+
+// Get cumulative snowfall data for charts
+function getCumulativeChartData(resort) {
+    const today = new Date().toISOString().split('T')[0];
+    const allDays = [];
+    
+    for (const h of resort.historical_snowfall || []) {
+        allDays.push({ date: h.date, value: h.snowfall_inches || 0 });
+    }
+    for (const f of resort.daily_forecasts || []) {
+        allDays.push({ date: f.date, value: f.avg_inches || 0 });
+    }
+    
+    allDays.sort((a, b) => a.date.localeCompare(b.date));
+    
+    const points = [];
+    let cumulative = 0;
+    for (const day of allDays) {
+        cumulative += day.value;
+        points.push({
+            date: day.date,
+            dayOffset: daysBetween(day.date, today),
+            daily: day.value,
+            cumulative: cumulative
+        });
+    }
+    
+    return points;
+}
+
+// ApexCharts configuration for snowfall graphs
+function getChartConfig(data, options = {}) {
+    const { width = 280, height = 100, interactive = true, onDataPointHover = null, onMouseLeave = null } = options;
+    
+    const seriesData = data.map(d => ({
+        x: new Date(d.date + 'T00:00:00').getTime(),
+        y: d.cumulative,
+        daily: d.daily
+    }));
+    
+    return {
+        series: [{ name: 'Cumulative Snow', data: seriesData }],
+        chart: {
+            type: 'area',
+            height: height,
+            width: width,
+            toolbar: { show: false },
+            zoom: { enabled: false },
+            animations: { enabled: false },
+            background: 'transparent',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            events: {
+                mouseLeave: function() { if (onMouseLeave) onMouseLeave(); }
+            }
+        },
+        theme: { mode: 'dark' },
+        colors: ['#3b82f6'],
+        fill: { type: 'solid', opacity: 0.4 },
+        stroke: { curve: 'straight', width: 2 },
+        markers: { size: 0, hover: { size: 5 } },
+        dataLabels: { enabled: false },
+        xaxis: {
+            type: 'datetime',
+            labels: { 
+                style: { colors: '#888', fontSize: '9px' },
+                datetimeUTC: false,
+                datetimeFormatter: { day: 'MMM dd' }
+            },
+            axisBorder: { show: true, color: '#333' },
+            axisTicks: { show: true, color: '#333' },
+            crosshairs: { show: interactive, stroke: { color: '#fff', width: 1, dashArray: 3 } },
+            tooltip: { enabled: false }
+        },
+        yaxis: { show: false, min: 0 },
+        grid: { show: false, padding: { left: 0, right: 0, top: 0, bottom: 0 } },
+        tooltip: {
+            enabled: interactive,
+            shared: true,
+            intersect: false,
+            custom: function({ dataPointIndex }) {
+                if (onDataPointHover && dataPointIndex >= 0) {
+                    onDataPointHover(seriesData[dataPointIndex]);
+                }
+                return '<div style="display:none"></div>';
+            }
+        },
+        annotations: {
+            xaxis: [{
+                x: new Date().setHours(0, 0, 0, 0),
+                borderColor: 'rgba(255,255,255,0.5)',
+                strokeDashArray: 3,
+                label: {
+                    text: 'Today',
+                    borderColor: 'transparent',
+                    style: { color: '#fff', background: 'transparent', fontSize: '9px', fontWeight: 600 },
+                    position: 'bottom',
+                    offsetY: 15
+                }
+            }]
+        }
+    };
+}
+
+// Render ApexCharts detail graph in detail panel
+let detailChart = null;
+function renderDetailChart(resort) {
+    const container = document.getElementById('detail-chart-container');
+    if (!container) return;
+    
+    if (detailChart) {
+        detailChart.destroy();
+        detailChart = null;
+    }
+    
+    const data = getCumulativeChartData(resort);
+    if (data.length === 0) return;
+    
+    detailChart = new ApexCharts(container, getChartConfig(data, {
+        width: '100%',
+        height: 120,
+        interactive: true,
+        onDataPointHover: updateDetailSnowfall,
+        onMouseLeave: restoreDetailSnowfall
+    }));
+    detailChart.render();
+}
+
+// Build hover popup content
+function buildHoverPopupContent(resort) {
     const snowfall = getSnowfallForFilter(resort);
     const label = getFilterLabel();
     const region = resort.region || resort.state || '';
     const countryName = getCountryName(resort.country);
     const location = region ? `${region}, ${countryName}` : countryName;
+    const lifts = resort.lift_count ? `${resort.lift_count} lifts` : '';
+    const originalSnowfallText = `${label}: ${snowfall.toFixed(1)}"`;
+    
     return `
-        <div class="tooltip-name">${resort.name}</div>
-        <div class="tooltip-info">${location} | ${resort.elevation_ft.toLocaleString()}' elev</div>
-        <div class="tooltip-total">${label}: ${snowfall.toFixed(1)}"</div>
+        <div class="hover-popup-header">
+            <h3 class="hover-popup-name">${resort.name}</h3>
+            <div class="hover-popup-meta">${location} | ${resort.elevation_ft.toLocaleString()}' elev${lifts ? ' | ' + lifts : ''}</div>
+        </div>
+        <div class="hover-popup-snowfall" id="hover-popup-snowfall" data-original="${originalSnowfallText}">${originalSnowfallText}</div>
+        <div id="hover-popup-chart"></div>
     `;
+}
+
+// Create hover popup element
+function createHoverPopup() {
+    if (hoverPopup) return;
+    
+    hoverPopup = document.createElement('div');
+    hoverPopup.id = 'hover-popup';
+    hoverPopup.className = 'hover-popup';
+    hoverPopup.style.display = 'none';
+    
+    hoverPopup.addEventListener('mouseenter', () => {
+        if (hoverHideTimeout) {
+            clearTimeout(hoverHideTimeout);
+            hoverHideTimeout = null;
+        }
+    });
+    
+    hoverPopup.addEventListener('mouseleave', () => hideHoverPopup());
+    
+    document.body.appendChild(hoverPopup);
+}
+
+// Show hover popup for a resort
+function showHoverPopup(resort, marker) {
+    if (hoverHideTimeout) {
+        clearTimeout(hoverHideTimeout);
+        hoverHideTimeout = null;
+    }
+    
+    if (currentHoverResort && currentHoverResort.name === resort.name) {
+        hoverPopup.style.display = 'block';
+        return;
+    }
+    
+    currentHoverResort = resort;
+    hoverPopup.innerHTML = buildHoverPopupContent(resort);
+    hoverPopup.style.display = 'block';
+    positionHoverPopup(marker);
+    renderHoverPopupChart(resort);
+}
+
+// Position hover popup relative to marker
+function positionHoverPopup(marker) {
+    const point = map.latLngToContainerPoint(marker.getLatLng());
+    const mapContainer = document.getElementById('map');
+    const mapRect = mapContainer.getBoundingClientRect();
+    
+    const popupWidth = 300;
+    const popupHeight = 220;
+    
+    let left = mapRect.left + point.x + 15;
+    let top = mapRect.top + point.y - popupHeight - 10;
+    
+    if (left + popupWidth > window.innerWidth) {
+        left = mapRect.left + point.x - popupWidth - 15;
+    }
+    if (top < 0) {
+        top = mapRect.top + point.y + 20;
+    }
+    
+    hoverPopup.style.left = `${left}px`;
+    hoverPopup.style.top = `${top}px`;
+}
+
+// Update chart snowfall info display
+function updateChartSnowfallInfo(elementId, point) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    
+    const date = new Date(point.x);
+    const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const isToday = date.toDateString() === new Date().toDateString();
+    const label = isToday ? 'Today' : dateStr;
+    
+    el.innerHTML = `<span class="hover-date">${label}</span> <span class="hover-daily">Daily: ${point.daily.toFixed(1)}"</span> <span class="hover-total">Total: ${point.y.toFixed(1)}"</span>`;
+}
+
+// Restore chart snowfall info
+function restoreChartSnowfallInfo(elementId) {
+    const el = document.getElementById(elementId);
+    if (el && el.dataset.original) {
+        el.textContent = el.dataset.original;
+    }
+}
+
+function updateHoverPopupSnowfall(point) { updateChartSnowfallInfo('hover-popup-snowfall', point); }
+function restoreHoverPopupSnowfall() { restoreChartSnowfallInfo('hover-popup-snowfall'); }
+function updateDetailSnowfall(point) { updateChartSnowfallInfo('detail-chart-info', point); }
+function restoreDetailSnowfall() { restoreChartSnowfallInfo('detail-chart-info'); }
+
+// Render hover popup chart
+let hoverPopupChartInstance = null;
+function renderHoverPopupChart(resort) {
+    const container = document.getElementById('hover-popup-chart');
+    if (!container) return;
+    
+    if (hoverPopupChart) {
+        hoverPopupChart.destroy();
+        hoverPopupChart = null;
+    }
+    
+    const data = getCumulativeChartData(resort);
+    if (data.length === 0) return;
+    
+    hoverPopupChart = new ApexCharts(container, getChartConfig(data, {
+        width: 280,
+        height: 100,
+        interactive: true,
+        onDataPointHover: updateHoverPopupSnowfall,
+        onMouseLeave: restoreHoverPopupSnowfall
+    }));
+    hoverPopupChart.render();
+}
+
+// Schedule hiding hover popup
+function scheduleHideHoverPopup() {
+    if (hoverHideTimeout) clearTimeout(hoverHideTimeout);
+    hoverHideTimeout = setTimeout(() => hideHoverPopup(), HOVER_HIDE_DELAY);
+}
+
+// Hide hover popup
+function hideHoverPopup() {
+    if (hoverHideTimeout) {
+        clearTimeout(hoverHideTimeout);
+        hoverHideTimeout = null;
+    }
+    if (hoverPopup) hoverPopup.style.display = 'none';
+    if (hoverPopupChart) {
+        hoverPopupChart.destroy();
+        hoverPopupChart = null;
+    }
+    currentHoverResort = null;
 }
 
 // Get unique sources from daily forecasts
@@ -104,7 +379,7 @@ function getSourcesFromForecasts(dailyForecasts) {
     return Array.from(sources).sort();
 }
 
-// Build detail panel content (full info on click)
+// Build detail panel content
 function buildDetailContent(resort) {
     const passDisplay = resort.pass_type || 'Independent';
     const filter = document.getElementById('snow-filter').value;
@@ -112,47 +387,35 @@ function buildDetailContent(resort) {
     const displayLabel = getFilterLabel() + ' Snowfall';
     const region = resort.region || resort.state || '';
     const countryName = getCountryName(resort.country);
+    const lifts = resort.lift_count ? `${resort.lift_count} lifts` : '';
 
-    // Get dynamic sources from the forecast data
     const sources = getSourcesFromForecasts(resort.daily_forecasts || []);
     const sourceHeaders = sources.map(s => `<th>${s}</th>`).join('');
     const numSourceCols = sources.length || 1;
 
-    // Build historical rows if showing historical or total
-    let historicalRows = '';
-    if ((filter === 'historical' || filter === 'total') && resort.historical_snowfall) {
-        if (filter === 'total') {
-            historicalRows = `<tr class="section-header"><td colspan="${2 + numSourceCols}">Recent Snowfall (Past 14 Days)</td></tr>`;
-        }
-        for (const day of resort.historical_snowfall) {
-            historicalRows += `
-                <tr class="historical">
-                    <td class="date">${formatDate(day.date)}</td>
-                    <td class="avg">${day.snowfall_inches}"</td>
-                    <td class="source" colspan="${numSourceCols}">Archive</td>
-                </tr>
-            `;
-        }
-    }
-
-    // Build forecast rows if showing forecast or total
     let forecastRows = '';
     if (filter === 'forecast' || filter === 'total') {
         if (filter === 'total') {
             forecastRows = `<tr class="section-header"><td colspan="${2 + numSourceCols}">Upcoming Forecast</td></tr>`;
         }
-        for (const day of resort.daily_forecasts || []) {
+        const sortedForecasts = [...(resort.daily_forecasts || [])].sort((a, b) => b.date.localeCompare(a.date));
+        for (const day of sortedForecasts) {
             const sourceCells = sources.map(s => {
                 const val = day.sources && day.sources[s] !== undefined ? day.sources[s] : '-';
                 return `<td class="source">${val !== '-' ? val + '"' : val}</td>`;
             }).join('');
-            forecastRows += `
-                <tr>
-                    <td class="date">${formatDate(day.date)}</td>
-                    <td class="avg">${day.avg_inches}"</td>
-                    ${sourceCells}
-                </tr>
-            `;
+            forecastRows += `<tr><td class="date">${formatDate(day.date)}</td><td class="avg">${day.avg_inches}"</td>${sourceCells}</tr>`;
+        }
+    }
+
+    let historicalRows = '';
+    if ((filter === 'historical' || filter === 'total') && resort.historical_snowfall) {
+        if (filter === 'total') {
+            historicalRows = `<tr class="section-header"><td colspan="${2 + numSourceCols}">Recent Snowfall (Past 14 Days)</td></tr>`;
+        }
+        const sortedHistorical = [...resort.historical_snowfall].sort((a, b) => b.date.localeCompare(a.date));
+        for (const day of sortedHistorical) {
+            historicalRows += `<tr class="historical"><td class="date">${formatDate(day.date)}</td><td class="avg">${day.snowfall_inches}"</td><td class="source" colspan="${numSourceCols}">Archive</td></tr>`;
         }
     }
 
@@ -162,6 +425,7 @@ function buildDetailContent(resort) {
             <div class="detail-meta">
                 <span>${region}${region ? ', ' : ''}${countryName}</span>
                 <span>${resort.elevation_ft.toLocaleString()}' elevation</span>
+                ${lifts ? `<span>${lifts}</span>` : ''}
                 <span>${passDisplay}</span>
             </div>
         </div>
@@ -169,42 +433,79 @@ function buildDetailContent(resort) {
             <div class="value">${displaySnowfall.toFixed(1)}"</div>
             <div class="label">${displayLabel}</div>
         </div>
+        <div id="detail-chart-container"></div>
+        <div class="detail-chart-info" id="detail-chart-info" data-original="${displayLabel}: ${displaySnowfall.toFixed(1)}&quot;">${displayLabel}: ${displaySnowfall.toFixed(1)}"</div>
         <table class="forecast-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Snow</th>
-                    ${sourceHeaders}
-                </tr>
-            </thead>
-            <tbody>
-                ${historicalRows}
-                ${forecastRows}
-            </tbody>
+            <thead><tr><th>Date</th><th>Snow</th>${sourceHeaders}</tr></thead>
+            <tbody>${forecastRows}${historicalRows}</tbody>
         </table>
     `;
 }
 
 // Show detail panel for a resort
 function showDetail(resort) {
-    const panel = document.getElementById('detail-panel');
-    const content = document.getElementById('detail-content');
-    content.innerHTML = buildDetailContent(resort);
-    panel.classList.remove('hidden');
-    panel.classList.add('visible');
+    document.getElementById('detail-content').innerHTML = buildDetailContent(resort);
+    switchPanelTab('details');
+    document.getElementById('side-panel').classList.remove('collapsed');
+    currentDetailResort = resort;
+    
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => renderDetailChart(resort));
+    });
 }
 
 // Hide detail panel
 function hideDetail() {
-    const panel = document.getElementById('detail-panel');
-    panel.classList.remove('visible');
-    panel.classList.add('hidden');
+    document.getElementById('side-panel').classList.add('collapsed');
+    switchPanelTab('top10');
+    currentDetailResort = null;
+}
+
+// Toggle detail for a resort
+function toggleDetail(resort) {
+    if (currentDetailResort && currentDetailResort.name === resort.name) {
+        hideDetail();
+        return;
+    }
+    showDetail(resort);
+}
+
+// Switch panel tab
+function switchPanelTab(tabName) {
+    document.querySelectorAll('.panel-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.dataset.tab === tabName);
+    });
+    document.getElementById('top10-content').classList.toggle('hidden', tabName !== 'top10');
+    document.getElementById('details-content').classList.toggle('hidden', tabName !== 'details');
+}
+
+// Toggle filter drawer
+function toggleFilterDrawer() {
+    const drawer = document.getElementById('filter-drawer');
+    drawer.classList.toggle('visible');
+    drawer.classList.toggle('hidden');
+}
+
+// Update filter badge count
+function updateFilterBadge() {
+    let count = 0;
+    if (document.getElementById('country-filter').value) count++;
+    if (document.getElementById('region-filter').value) count++;
+    if (document.getElementById('pass-filter').value) count++;
+
+    const badge = document.getElementById('filter-badge');
+    if (count > 0) {
+        badge.textContent = count;
+        badge.classList.remove('hidden');
+    } else {
+        badge.classList.add('hidden');
+    }
 }
 
 // Center map on resort and open detail panel
 function focusResort(resort) {
     map.setView([resort.latitude, resort.longitude], 10);
-    showDetail(resort);
+    toggleDetail(resort);
 }
 
 // Get filtered resorts based on current filters
@@ -223,16 +524,12 @@ function getFilteredResorts() {
     });
 }
 
-// Update Top 10 sidebar
+// Update Top 10 list
 function updateTop10() {
     const filtered = getFilteredResorts();
-
-    // Sort by snowfall based on current filter
-    const sorted = [...filtered].sort((a, b) => {
-        return getSnowfallForFilter(b) - getSnowfallForFilter(a);
-    });
-
+    const sorted = [...filtered].sort((a, b) => getSnowfallForFilter(b) - getSnowfallForFilter(a));
     const top10 = sorted.slice(0, 10);
+
     const container = document.getElementById('top-resorts-list');
     container.innerHTML = '';
 
@@ -258,9 +555,9 @@ function updateTop10() {
 
 // Create markers for all resorts
 function createMarkers() {
-    // Clear existing markers
     markers.forEach(m => map.removeLayer(m.marker));
     markers = [];
+    hideHoverPopup();
 
     const filtered = getFilteredResorts();
 
@@ -276,69 +573,51 @@ function createMarkers() {
             weight: 2,
         });
 
-        marker.bindTooltip(buildTooltip(resort), {
-            direction: 'top',
-            offset: [0, -radius],
-        });
-
-        marker.on('click', () => showDetail(resort));
+        marker.on('mouseover', () => showHoverPopup(resort, marker));
+        marker.on('mouseout', () => scheduleHideHoverPopup());
+        marker.on('click', () => toggleDetail(resort));
 
         marker.addTo(map);
         markers.push({ marker, resort });
     }
 
-    // Update Top 10 sidebar when markers change
     updateTop10();
+    updateFilterBadge();
 }
 
-// Populate country filter dropdown
+// Populate filter dropdown
+function populateFilter(selector, options, allLabel) {
+    document.querySelectorAll(selector).forEach(select => {
+        select.innerHTML = `<option value="">${allLabel}</option>`;
+        options.forEach(opt => {
+            const option = document.createElement('option');
+            option.value = opt.value;
+            option.textContent = opt.label;
+            select.appendChild(option);
+        });
+    });
+}
+
+// Populate country filter
 function populateCountryFilter() {
     const countries = [...new Set(resortData.map(r => r.country))].sort();
-    const select = document.getElementById('country-filter');
-
-    // Clear existing options except "All Countries"
-    select.innerHTML = '<option value="">All Countries</option>';
-
-    for (const country of countries) {
-        const option = document.createElement('option');
-        option.value = country;
-        option.textContent = getCountryName(country);
-        select.appendChild(option);
-    }
+    const options = countries.map(c => ({ value: c, label: getCountryName(c) }));
+    populateFilter('.country-filter', options, 'All Countries');
 }
 
-// Populate region filter dropdown based on selected country
+// Populate region filter based on selected country
 function populateRegionFilter() {
     const countryFilter = document.getElementById('country-filter').value;
-    const select = document.getElementById('region-filter');
-
-    // Clear existing options
-    select.innerHTML = '<option value="">All Regions</option>';
-
-    let regions;
-    if (countryFilter) {
-        // Only regions for selected country
-        regions = [...new Set(
-            resortData
-                .filter(r => r.country === countryFilter)
-                .map(r => r.region || r.state || '')
-                .filter(r => r)
-        )].sort();
-    } else {
-        // All regions
-        regions = [...new Set(
-            resortData
-                .map(r => r.region || r.state || '')
-                .filter(r => r)
-        )].sort();
-    }
-
-    for (const region of regions) {
-        const option = document.createElement('option');
-        option.value = region;
-        option.textContent = region;
-        select.appendChild(option);
-    }
+    const filtered = countryFilter 
+        ? resortData.filter(r => r.country === countryFilter)
+        : resortData;
+    
+    const regions = [...new Set(
+        filtered.map(r => r.region || r.state || '').filter(r => r)
+    )].sort();
+    
+    const options = regions.map(r => ({ value: r, label: r }));
+    populateFilter('.region-filter', options, 'All Regions');
 }
 
 // Handle country filter change
@@ -346,50 +625,64 @@ function onCountryChange() {
     populateRegionFilter();
     createMarkers();
 
-    // Fit map to selected country's resorts
     const countryFilter = document.getElementById('country-filter').value;
     if (countryFilter) {
         const countryResorts = resortData.filter(r => r.country === countryFilter);
         if (countryResorts.length > 0) {
-            const bounds = L.latLngBounds(
-                countryResorts.map(r => [r.latitude, r.longitude])
-            );
+            const bounds = L.latLngBounds(countryResorts.map(r => [r.latitude, r.longitude]));
             map.fitBounds(bounds, { padding: [50, 50] });
         }
     } else {
-        // Reset to world view
         map.setView([30, 0], 2);
     }
 }
 
+// Handle other filter changes
+function onFilterChange() {
+    createMarkers();
+}
+
+// Toggle panel collapse
+function togglePanelCollapse() {
+    document.getElementById('side-panel').classList.toggle('collapsed');
+}
+
 // Set up event listeners
 function setupEventListeners() {
+    // Filter listeners
     document.getElementById('country-filter').addEventListener('change', onCountryChange);
-    document.getElementById('region-filter').addEventListener('change', createMarkers);
-    document.getElementById('pass-filter').addEventListener('change', createMarkers);
-    document.getElementById('snow-filter').addEventListener('change', createMarkers);
-    document.getElementById('close-panel').addEventListener('click', hideDetail);
+    document.getElementById('region-filter').addEventListener('change', onFilterChange);
+    document.getElementById('pass-filter').addEventListener('change', onFilterChange);
+    document.getElementById('snow-filter').addEventListener('change', onFilterChange);
 
-    // Close panel when clicking outside
-    document.getElementById('map').addEventListener('click', (e) => {
-        // Only close if clicking on the map itself, not a marker
-        if (e.target.classList.contains('leaflet-container') ||
-            e.target.classList.contains('leaflet-tile')) {
+    // Panel tab listeners
+    document.querySelectorAll('.panel-tab').forEach(tab => {
+        tab.addEventListener('click', () => switchPanelTab(tab.dataset.tab));
+    });
+
+    // Controls
+    document.getElementById('panel-collapse').addEventListener('click', togglePanelCollapse);
+    document.getElementById('menu-toggle').addEventListener('click', toggleFilterDrawer);
+
+    // Close details when clicking on map
+    map.on('click', (e) => {
+        if (e.originalEvent.target.classList.contains('leaflet-container') ||
+            e.originalEvent.target.classList.contains('leaflet-tile-pane') ||
+            e.originalEvent.target.classList.contains('leaflet-tile')) {
             hideDetail();
         }
     });
 }
 
-// Load forecast data and initialize
+// Initialize
 async function init() {
     initMap();
+    createHoverPopup();
     setupEventListeners();
 
     try {
         const response = await fetch('data/forecasts.json');
-        if (!response.ok) {
-            throw new Error('Failed to load forecast data');
-        }
+        if (!response.ok) throw new Error('Failed to load forecast data');
         const data = await response.json();
         resortData = data.resorts;
 
@@ -404,5 +697,4 @@ async function init() {
     }
 }
 
-// Start the app
 document.addEventListener('DOMContentLoaded', init);
