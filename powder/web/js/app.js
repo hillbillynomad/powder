@@ -286,7 +286,9 @@ function renderDetailChart(resort) {
     detailChart = new ApexCharts(container, getChartConfig(data, {
         width: '100%',
         height: 120,
-        interactive: true
+        interactive: true,
+        onDataPointHover: updateDetailSnowfall,
+        onMouseLeave: restoreDetailSnowfall
     }));
     detailChart.render();
 }
@@ -392,9 +394,9 @@ function positionHoverPopup(marker) {
     hoverPopup.style.top = `${top}px`;
 }
 
-// Update hover popup snowfall line with interactive data
-function updateHoverPopupSnowfall(point) {
-    const el = document.getElementById('hover-popup-snowfall');
+// Generic function to update chart snowfall info display
+function updateChartSnowfallInfo(elementId, point) {
+    const el = document.getElementById(elementId);
     if (!el) return;
     
     const date = new Date(point.x);
@@ -406,15 +408,35 @@ function updateHoverPopupSnowfall(point) {
     el.innerHTML = `<span class="hover-date">${label}</span> <span class="hover-daily">Daily: ${point.daily.toFixed(1)}"</span> <span class="hover-total">Total: ${point.y.toFixed(1)}"</span>`;
 }
 
-// Restore hover popup snowfall line to original value
-function restoreHoverPopupSnowfall() {
-    const el = document.getElementById('hover-popup-snowfall');
+// Generic function to restore chart snowfall info to original value
+function restoreChartSnowfallInfo(elementId) {
+    const el = document.getElementById(elementId);
     if (!el) return;
     
     const original = el.dataset.original;
     if (original) {
         el.textContent = original;
     }
+}
+
+// Update hover popup snowfall line with interactive data
+function updateHoverPopupSnowfall(point) {
+    updateChartSnowfallInfo('hover-popup-snowfall', point);
+}
+
+// Restore hover popup snowfall line to original value
+function restoreHoverPopupSnowfall() {
+    restoreChartSnowfallInfo('hover-popup-snowfall');
+}
+
+// Update detail panel snowfall line with interactive data
+function updateDetailSnowfall(point) {
+    updateChartSnowfallInfo('detail-chart-info', point);
+}
+
+// Restore detail panel snowfall line to original value
+function restoreDetailSnowfall() {
+    restoreChartSnowfallInfo('detail-chart-info');
 }
 
 // Render interactive chart in hover popup
@@ -553,6 +575,7 @@ function buildDetailContent(resort) {
             <div class="label">${displayLabel}</div>
         </div>
         <div id="detail-chart-container"></div>
+        <div class="detail-chart-info" id="detail-chart-info" data-original="${displayLabel}: ${displaySnowfall.toFixed(1)}&quot;">${displayLabel}: ${displaySnowfall.toFixed(1)}"</div>
         <table class="forecast-table">
             <thead>
                 <tr>
