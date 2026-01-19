@@ -8,15 +8,8 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Desktop header (hidden on mobile) -->
-    <header class="desktop-header">
-        <h1>Powder</h1>
-        <p class="subtitle">Global Ski Resort Snowfall Forecast</p>
-    </header>
-
-    <!-- Mobile header with menu toggle (hidden on desktop) -->
-    <header class="mobile-header">
-        <div class="mobile-header-content">
+    <header class="header">
+        <div class="header-content">
             <h1>Powder</h1>
             <button id="menu-toggle" class="menu-toggle">
                 Menu <span id="filter-badge" class="filter-badge hidden">0</span>
@@ -24,64 +17,8 @@
         </div>
     </header>
 
-    <!-- Mobile drawer (hidden on desktop) -->
-    <div id="mobile-drawer" class="mobile-drawer hidden">
-        <div class="drawer-tabs">
-            <button class="drawer-tab active" data-tab="filters">Filters</button>
-            <button class="drawer-tab" data-tab="top10">Top 10</button>
-        </div>
-        <div class="drawer-content">
-            <div id="drawer-filters" class="drawer-panel">
-                <div class="drawer-filter-group">
-                    <label for="mobile-country-filter">Country</label>
-                    <select id="mobile-country-filter" class="country-filter">
-                        <option value="">All Countries</option>
-                    </select>
-                </div>
-                <div class="drawer-filter-group">
-                    <label for="mobile-region-filter">Region</label>
-                    <select id="mobile-region-filter" class="region-filter">
-                        <option value="">All Regions</option>
-                    </select>
-                </div>
-                <div class="drawer-filter-group">
-                    <label for="mobile-pass-filter">Pass</label>
-                    <select id="mobile-pass-filter" class="pass-filter">
-                        <option value="">All Passes</option>
-                        <option value="EPIC">EPIC</option>
-                        <option value="IKON">IKON</option>
-                        <option value="none">Independent</option>
-                    </select>
-                </div>
-                <div class="drawer-filter-group">
-                    <label for="mobile-snow-filter">Snowfall</label>
-                    <select id="mobile-snow-filter" class="snow-filter">
-                        <option value="forecast">Powder on the Way</option>
-                        <option value="historical">Recent Powder</option>
-                        <option value="total">Total Recent + Forecast</option>
-                    </select>
-                </div>
-                <div class="drawer-legend">
-                    <span class="legend-item">
-                        <span class="bubble small"></span> 1-5"
-                    </span>
-                    <span class="legend-item">
-                        <span class="bubble medium"></span> 6-12"
-                    </span>
-                    <span class="legend-item">
-                        <span class="bubble large"></span> 13"+
-                    </span>
-                </div>
-            </div>
-            <div id="drawer-top10" class="drawer-panel hidden">
-                <div id="mobile-top-resorts-list" class="top-resorts-list"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <!-- Desktop controls bar (hidden on mobile) -->
-        <div class="controls desktop-controls">
+    <div id="filter-drawer" class="filter-drawer hidden">
+        <div class="filter-drawer-content">
             <div class="filter-group">
                 <label for="country-filter">Country</label>
                 <select id="country-filter" class="country-filter">
@@ -123,10 +60,10 @@
                 </span>
             </div>
         </div>
+    </div>
 
-        <!-- Content area: side panel + map -->
+    <div class="main-container">
         <div class="content-wrapper">
-            <!-- Unified side panel (desktop only) - LEFT SIDE -->
             <aside id="side-panel" class="side-panel">
                 <div class="panel-header">
                     <button id="panel-collapse" class="panel-collapse" title="Collapse panel">◀</button>
