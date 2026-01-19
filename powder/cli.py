@@ -9,7 +9,15 @@ from pathlib import Path
 
 from .cache import set_cache_enabled
 from .forecast import DailyForecast, ForecastResult, calculate_avg_forecasts
-from .providers import ECMWFProvider, NWSProvider, OpenMeteoProvider
+from .providers import (
+    BOMProvider,
+    ECMWFProvider,
+    EUROPEAN_COUNTRIES,
+    ICONProvider,
+    JMAProvider,
+    NWSProvider,
+    OpenMeteoProvider,
+)
 from .resorts import SkiResort, filter_resorts, load_resorts
 
 
@@ -29,20 +37,39 @@ def fetch_all_forecasts(resort: SkiResort) -> dict[date, list[DailyForecast]]:
 
     Each provider is queried for its maximum supported forecast range.
     Returns all dates that have at least one forecast.
+
+    Uses regional providers for better accuracy:
+    - Open-Meteo/GFS: Global baseline (16 days)
+    - ECMWF: Global premium (10 days)
+    - NWS: US only (7 days)
+    - ICON: Europe - best for Alpine terrain (7 days)
+    - JMA: Japan (7 days)
+    - BOM: Australia/NZ (7 days)
     """
-    # Three providers using different underlying models:
-    # - Open-Meteo/GFS: up to 16 days
-    # - NWS: ~7 days (US only)
-    # - ECMWF: up to 10 days
-    # See providers/MODELS.md for details
+    # Global providers (always used)
     providers_with_max_days = [
         (OpenMeteoProvider(), 16),
         (ECMWFProvider(), 10),
     ]
 
+    # Regional providers for better accuracy
+    country = resort.country
+
     # NWS only covers the US
-    if resort.country == "US":
+    if country == "US":
         providers_with_max_days.append((NWSProvider(), 7))
+
+    # ICON for European countries (best Alpine resolution)
+    if country in EUROPEAN_COUNTRIES:
+        providers_with_max_days.append((ICONProvider(), 7))
+
+    # JMA for Japan
+    if country == "JP":
+        providers_with_max_days.append((JMAProvider(), 7))
+
+    # BOM for Australia/New Zealand
+    if country in ("AU", "NZ"):
+        providers_with_max_days.append((BOMProvider(), 7))
 
     all_forecasts: dict[date, list[DailyForecast]] = defaultdict(list)
 
@@ -58,7 +85,8 @@ def fetch_all_forecasts(resort: SkiResort) -> dict[date, list[DailyForecast]]:
 def display_forecasts(resort: SkiResort) -> None:
     """Display snowfall forecasts for a resort."""
     print(f"\n{'=' * 60}")
-    print(f"  Snowfall Forecast: {resort.name}, {resort.state}")
+    location = f"{resort.name}, {resort.region}, {resort.country}"
+    print(f"  Snowfall Forecast: {location}")
     print(f"  Elevation: {resort.elevation_ft:,} ft")
     print(f"{'=' * 60}\n")
 
@@ -110,14 +138,15 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
     daily_forecasts = []
     for result in results:
         source_values = {f.source: f.snowfall_inches for f in result.forecasts}
+        # Include all sources that were used for this resort
+        sources = {}
+        for source_name in ["Open-Meteo", "ECMWF", "NWS", "ICON", "JMA", "BOM"]:
+            if source_name in source_values:
+                sources[source_name] = round(source_values[source_name], 1)
         daily_forecasts.append({
             "date": result.date.isoformat(),
             "avg_inches": round(result.avg_snowfall_inches, 1),
-            "sources": {
-                "Open-Meteo": round(source_values.get("Open-Meteo", 0), 1),
-                "NWS": round(source_values.get("NWS", 0), 1),
-                "ECMWF": round(source_values.get("ECMWF", 0), 1),
-            }
+            "sources": sources,
         })
 
     # Fetch historical data
@@ -134,11 +163,14 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
 
     return {
         "name": resort.name,
-        "state": resort.state,
+        "country": resort.country,
+        "region": resort.region,
         "latitude": resort.latitude,
         "longitude": resort.longitude,
         "elevation_ft": resort.elevation_ft,
+        "lift_count": getattr(resort, 'lift_count', 0),
         "pass_type": resort.pass_type,
+        "timezone": getattr(resort, 'timezone', 'UTC'),
         "total_snowfall_inches": round(total_forecast, 1),
         "daily_forecasts": daily_forecasts,
         "total_historical_inches": round(total_historical, 1),
@@ -169,19 +201,21 @@ def export_json(resorts: list[SkiResort], output_path: Path) -> None:
 
 def list_resorts(resorts: list[SkiResort]) -> None:
     """Display a list of available resorts."""
-    print(f"\n{'Available Ski Resorts':^60}")
-    print("=" * 60)
-    print(f"{'Resort Name':<30} {'State':>5} {'Elev':>8} {'Pass':>8}")
-    print("-" * 60)
+    print(f"\n{'Available Ski Resorts':^75}")
+    print("=" * 75)
+    print(f"{'Resort Name':<30} {'Country':>4} {'Region':>12} {'Lifts':>6} {'Pass':>8}")
+    print("-" * 75)
 
-    # Sort by state, then by name
-    sorted_resorts = sorted(resorts, key=lambda r: (r.state, r.name))
+    # Sort by country, then by region, then by name
+    sorted_resorts = sorted(resorts, key=lambda r: (r.country, r.region, r.name))
 
     for resort in sorted_resorts:
         pass_str = resort.pass_type if resort.pass_type else "-"
-        print(f"{resort.name:<30} {resort.state:>5} {resort.elevation_ft:>7}' {pass_str:>8}")
+        lift_count = getattr(resort, 'lift_count', 0)
+        region = resort.region[:12] if len(resort.region) > 12 else resort.region
+        print(f"{resort.name:<30} {resort.country:>4} {region:>12} {lift_count:>6} {pass_str:>8}")
 
-    print("-" * 60)
+    print("-" * 75)
     print(f"Total: {len(resorts)} resorts")
     print()
 
@@ -193,12 +227,13 @@ def main() -> None:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  powder                      Show forecast for all resorts
-  powder --resort "Park City" Show forecast for Park City
-  powder --state CO           Show forecasts for Colorado resorts
-  powder --pass EPIC          Show forecasts for EPIC pass resorts
-  powder --list               List all available resorts
-  powder --list --state UT    List Utah resorts only
+  powder                        Show forecast for all resorts
+  powder --resort "Chamonix"    Show forecast for Chamonix
+  powder --country FR           Show forecasts for French resorts
+  powder --country US --state CO Show forecasts for Colorado resorts
+  powder --pass EPIC            Show forecasts for EPIC pass resorts
+  powder --list                 List all available resorts
+  powder --list --country JP    List Japanese resorts only
         """,
     )
     parser.add_argument(
@@ -207,9 +242,14 @@ Examples:
         help="Filter by resort name (partial match, case-insensitive)",
     )
     parser.add_argument(
+        "--country", "-c",
+        type=str,
+        help="Filter by country code (e.g., US, FR, JP, CH)",
+    )
+    parser.add_argument(
         "--state", "-s",
         type=str,
-        help="Filter by state abbreviation (e.g., UT, CO)",
+        help="Filter by state/region (e.g., UT, CO, Savoie, Hokkaido)",
     )
     parser.add_argument(
         "--pass", "-p",
@@ -254,6 +294,7 @@ Examples:
     filtered_resorts = filter_resorts(
         resorts,
         name_filter=args.resort,
+        country_filter=args.country,
         state_filter=args.state,
         pass_filter=args.pass_type,
     )

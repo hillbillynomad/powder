@@ -1,13 +1,13 @@
 # Powder
 
-Ski resort snowfall forecast tracker. Aggregates forecasts from three weather models (GFS, NWS, ECMWF) and displays the average prediction, plus 14 days of historical snowfall data.
+Ski resort snowfall forecast tracker. Aggregates forecasts from multiple weather models and displays the average prediction, plus 14 days of historical snowfall data.
 
 ## Features
 
-- **CLI** - Query forecasts by resort, state, or pass type
-- **Web UI** - Interactive map with bubble visualization
-- **53 Resorts** - Major US and Canadian ski resorts
-- **3 Weather Models** - GFS (16 days), NWS (7 days), ECMWF (10 days)
+- **CLI** - Query forecasts by resort, country, region, or pass type
+- **Web UI** - Interactive world map with bubble visualization and Top 10 sidebar
+- **165 Resorts** - Ski resorts across 25 countries (10+ lifts each)
+- **Regional Weather Models** - Best-in-class models for each region
 - **Historical Data** - 14 days of past snowfall from Open-Meteo Archive
 - **No API Keys** - All data sources are free and open
 
@@ -24,43 +24,48 @@ poetry install
 # List all resorts
 poetry run powder --list
 
-# Get forecasts for a specific resort
-poetry run powder --resort "Park City"
+# List resorts by country
+poetry run powder --list --country JP
 
-# Filter by state
-poetry run powder --state CO
+# Get forecasts for a specific resort
+poetry run powder --resort "Chamonix"
+
+# Filter by country
+poetry run powder --country FR
+
+# Filter by country and region
+poetry run powder --country US --state CO
 
 # Filter by pass type
 poetry run powder --pass EPIC
 
 # Combine filters
-poetry run powder --state UT --pass IKON
+poetry run powder --country US --state UT --pass IKON
 
 # Bypass cache for fresh data
-poetry run powder --no-cache --resort "Vail"
+poetry run powder --no-cache --resort "Niseko"
 ```
 
 ### Example Output
 
 ```
 ============================================================
-  Snowfall Forecast: Park City Mountain, UT
-  Elevation: 6,900 ft
+  Snowfall Forecast: Chamonix Mont-Blanc, Haute-Savoie, FR
+  Elevation: 3,396 ft
 ============================================================
 
-Date              Avg      GFS      NWS    ECMWF
-----------------------------------------------
-Sun 01/19        0.0"     0.0"     0.0"     0.0"
-Mon 01/20        2.1"     1.8"     2.5"     2.0"
-Tue 01/21        4.3"     3.9"     4.8"     4.2"
+Date              Avg   Open-Meteo    ECMWF     ICON
+----------------------------------------------------
+Mon 01/20        2.1"       1.8"      2.5"     2.0"
+Tue 01/21        4.3"       3.9"      4.8"     4.2"
 ...
-----------------------------------------------
+----------------------------------------------------
 Total:       12.5"
 ```
 
 ## Web UI
 
-Interactive map showing resorts with forecasted snowfall as blue bubbles. Bubble size is proportional to total predicted snowfall.
+Interactive world map showing resorts with forecasted snowfall as blue bubbles. Bubble size is proportional to total predicted snowfall.
 
 ### Generate Data & Launch
 
@@ -76,14 +81,32 @@ cd powder/web && python -m http.server 8000
 
 ### Features
 
+- **World Map** - Global view with all 165 resorts
 - **Bubble Map** - Blue circles sized by snowfall amount
+- **Top 10 Sidebar** - Highest snowfall resorts (updates with filters)
 - **Hover** - Quick view of resort name and snowfall total
-- **Click** - Detailed daily breakdown with all three models
-- **Filters** - Filter by state, pass type (EPIC/IKON), or view mode
-- **View Modes**:
-  - *Powder on the Way* - Upcoming forecast only
-  - *Recent Powder* - Past 14 days of historical snowfall
-  - *Total Recent + Forecast* - Combined view
+- **Click** - Detailed daily breakdown with all weather models
+- **Filters**:
+  - *Country* - Filter by country (auto-zooms to selection)
+  - *Region* - Filter by state/province/region
+  - *Pass* - EPIC, IKON, or Independent
+  - *Snowfall* - Forecast, Recent, or Total view
+
+### Snowfall View Modes
+
+- **Powder on the Way** - Upcoming forecast only
+- **Recent Powder** - Past 14 days of historical snowfall
+- **Total Recent + Forecast** - Combined view
+
+## Supported Countries
+
+| Region | Countries |
+|--------|-----------|
+| North America | US (43), Canada (10) |
+| Europe | France (14), Austria (14), Switzerland (12), Italy (11), Germany (5), Norway (5), Spain (3), Finland (3), Sweden (3), Andorra (2), Bulgaria (2), Poland (2), Czech Republic, Romania, Slovenia, Slovakia |
+| Asia | Japan (12), South Korea (3), China (5) |
+| Oceania | Australia (5), New Zealand (2) |
+| South America | Argentina (3), Chile (2) |
 
 ## Project Structure
 
@@ -95,9 +118,12 @@ powder/
 ├── cache.py            # HTTP response caching (12hr TTL)
 ├── providers/
 │   ├── base.py         # Abstract ForecastProvider
-│   ├── open_meteo.py   # GFS model via Open-Meteo
-│   ├── nws.py          # National Weather Service
-│   ├── ecmwf.py        # ECMWF via Open-Meteo
+│   ├── open_meteo.py   # GFS model via Open-Meteo (global)
+│   ├── ecmwf.py        # ECMWF via Open-Meteo (global)
+│   ├── nws.py          # National Weather Service (US only)
+│   ├── icon.py         # DWD ICON via Open-Meteo (Europe)
+│   ├── jma.py          # JMA via Open-Meteo (Japan)
+│   ├── bom.py          # BOM via Open-Meteo (Australia/NZ)
 │   └── MODELS.md       # Weather model documentation
 ├── data/
 │   ├── resorts.json    # Resort coordinates and metadata
@@ -109,25 +135,31 @@ powder/
     └── data/           # Generated forecast JSON
 ```
 
-## Data Sources
+## Weather Models
 
-### Forecast Models
+### Global Models (All Resorts)
 
 | Model | Source | Range | Resolution | Update Frequency |
 |-------|--------|-------|------------|------------------|
 | GFS | Open-Meteo | 16 days | 25km | Every 6 hours |
-| NWS | weather.gov | 7 days | 2.5km | Every 6 hours |
 | ECMWF | Open-Meteo | 10 days | 9km | Every 12 hours |
 
-The average of all three models is used as the final forecast. This reduces individual model bias and improves overall accuracy.
+### Regional Models (Better Accuracy)
+
+| Model | Provider | Region | Range | Resolution |
+|-------|----------|--------|-------|------------|
+| NWS Blend | weather.gov | US only | 7 days | 2.5km |
+| ICON | Open-Meteo | Europe | 7 days | 2-11km |
+| JMA | Open-Meteo | Japan | 7 days | 20km |
+| BOM | Open-Meteo | Australia/NZ | 7 days | 6km |
+
+The average of all available models is used as the final forecast. This reduces individual model bias and improves overall accuracy.
 
 ### Historical Data
 
 | Source | Range | Resolution | Delay |
 |--------|-------|------------|-------|
 | Open-Meteo Archive | 14 days | 9km | ~5 days |
-
-Historical snowfall is retrieved from the Open-Meteo Archive API, which provides ERA5 reanalysis data. Note: There is approximately a 5-day delay in data availability.
 
 See [providers/MODELS.md](powder/providers/MODELS.md) for detailed model documentation.
 
@@ -142,16 +174,19 @@ Edit `powder/data/resorts.json`:
 ```json
 {
   "name": "New Resort",
-  "state": "XX",
-  "latitude": 40.0000,
-  "longitude": -111.0000,
+  "country": "FR",
+  "region": "Savoie",
+  "latitude": 45.5000,
+  "longitude": 6.5000,
   "elevation_ft": 8000,
+  "lift_count": 25,
+  "timezone": "Europe/Paris",
   "avg_snowfall_inches": 300,
-  "pass_type": "EPIC"
+  "pass_type": null
 }
 ```
 
-Required fields: `name`, `state`, `latitude`, `longitude`, `elevation_ft`
+Required fields: `name`, `country`, `region`, `latitude`, `longitude`, `elevation_ft`
 
 ## License
 

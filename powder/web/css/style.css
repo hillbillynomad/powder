@@ -33,6 +33,85 @@ header .subtitle {
     color: #888;
 }
 
+/* Main layout container */
+.main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Left sidebar with Top 10 */
+.sidebar-left {
+    width: 280px;
+    background: #16213e;
+    border-right: 1px solid #0f3460;
+    padding: 16px;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.sidebar-left h3 {
+    font-size: 1rem;
+    color: #3b82f6;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #0f3460;
+}
+
+#top-resorts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.top-resort-item {
+    background: #0f3460;
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.top-resort-item:hover {
+    background: #1e4d8c;
+}
+
+.top-resort-item .rank {
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.top-resort-item .name {
+    font-weight: 500;
+    margin-top: 2px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.top-resort-item .info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.top-resort-item .snowfall {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+/* Map container */
+.map-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
 .controls {
     background: #16213e;
     padding: 12px 20px;
@@ -108,6 +187,12 @@ header .subtitle {
 #map {
     flex: 1;
     min-height: 500px;
+}
+
+/* Leaflet zoom controls - move to top-right */
+.leaflet-top.leaflet-right {
+    top: 10px;
+    right: 10px;
 }
 
 /* Leaflet tooltip customization */
@@ -284,6 +369,30 @@ header .subtitle {
 }
 
 /* Responsive adjustments */
+@media (max-width: 900px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sidebar-left {
+        width: 100%;
+        max-height: 200px;
+        border-right: none;
+        border-bottom: 1px solid #0f3460;
+    }
+
+    #top-resorts-list {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 12px;
+    }
+
+    .top-resort-item {
+        min-width: 200px;
+        flex-shrink: 0;
+    }
+}
+
 @media (max-width: 600px) {
     header {
         flex-direction: column;

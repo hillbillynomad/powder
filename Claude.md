@@ -1,19 +1,22 @@
 # Powder - Ski Resort Snowfall Forecast Tracker
 
-Python CLI + Web UI that tracks forecasted snowfall at US ski resorts. Collects forecasts from 3 sources and uses the average as the final forecast. Also displays 14-day historical snowfall.
+Python CLI + Web UI that tracks forecasted snowfall at ski resorts worldwide. Collects forecasts from multiple weather models (with regional providers for better accuracy) and uses the average as the final forecast. Also displays 14-day historical snowfall.
 
 ## Project Status
 - [x] CLI with multi-resort support
 - [x] Web UI with interactive map
 - [x] Historical snowfall data (14 days)
+- [x] Global resort coverage (165 resorts, 25 countries)
+- [x] Regional weather providers (ICON for Europe, JMA for Japan, BOM for Australia/NZ)
 
 ## Quick Start
 ```bash
 poetry install
-poetry run powder --list              # List all resorts
-poetry run powder --state UT          # Forecasts for Utah
+poetry run powder --list              # List all 165 resorts
+poetry run powder --country FR        # Forecasts for French resorts
+poetry run powder --country US --state UT  # Forecasts for Utah
 poetry run powder --pass EPIC         # Forecasts for EPIC pass resorts
-poetry run powder --resort "Vail"     # Single resort forecast
+poetry run powder --resort "Chamonix" # Single resort forecast
 poetry run powder --export-json       # Generate data for web UI
 ```
 
@@ -24,9 +27,9 @@ cd powder/web && python -m http.server 8000
 # Open http://localhost:8000
 ```
 
-Features: Blue bubble map (size = snowfall), hover tooltips, click for daily detail, state/pass/view filters.
+Features: Blue bubble map (size = snowfall), hover tooltips, click for daily detail, country/region/pass/snowfall filters, Top 10 sidebar.
 
-### View Filter Options
+### Snowfall Filter Options
 - **Powder on the Way** - Upcoming forecast snowfall only
 - **Recent Powder** - Past 14 days of historical snowfall
 - **Total Recent + Forecast** - Combined historical and forecast
@@ -41,14 +44,17 @@ powder/
 ├── providers/      # Forecast data sources (see providers/MODELS.md)
 │   ├── base.py     # Abstract ForecastProvider
 │   ├── open_meteo.py   # GFS model (16 days) + Historical Archive (14 days)
-│   ├── nws.py          # NWS Blend (7 days)
-│   └── ecmwf.py        # ECMWF IFS (10 days)
+│   ├── ecmwf.py        # ECMWF IFS (10 days) - Global
+│   ├── nws.py          # NWS Blend (7 days) - US only
+│   ├── icon.py         # DWD ICON (7 days) - Europe
+│   ├── jma.py          # JMA (7 days) - Japan
+│   └── bom.py          # BOM (7 days) - Australia/NZ
 ├── data/           # Resort configuration (see data/README.md)
-│   └── resorts.json    # Major US/CA ski resorts
+│   └── resorts.json    # 165 global ski resorts (25 countries)
 └── web/            # Static web UI
     ├── index.html      # Map page with Leaflet
     ├── css/style.css   # Dark theme styling
-    ├── js/app.js       # Map rendering, interactions
+    ├── js/app.js       # Map rendering, interactions, Top 10 sidebar
     └── data/           # Generated forecasts.json (gitignored)
 ```
 

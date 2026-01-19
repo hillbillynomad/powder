@@ -1,7 +1,7 @@
-"""ECMWF weather model provider via Open-Meteo API (free, no API key required).
+"""DWD ICON weather model provider via Open-Meteo API (free, no API key required).
 
-Uses the ECMWF IFS (Integrated Forecasting System) model, which is consistently
-rated as the most accurate global weather model. See MODELS.md for details.
+Uses the German Weather Service (DWD) ICON model, which provides excellent
+resolution (2.2-11km) for European mountain terrain. Best for Alpine forecasts.
 """
 
 from datetime import datetime
@@ -12,21 +12,21 @@ from ..resorts import SkiResort
 from .base import ForecastProvider
 
 
-class ECMWFProvider(ForecastProvider):
-    """Forecast provider using ECMWF model via Open-Meteo API."""
+class ICONProvider(ForecastProvider):
+    """Forecast provider using DWD ICON model via Open-Meteo API."""
 
-    BASE_URL = "https://api.open-meteo.com/v1/ecmwf"
+    BASE_URL = "https://api.open-meteo.com/v1/dwd-icon"
 
     @property
     def name(self) -> str:
-        return "ECMWF"
+        return "ICON"
 
     def get_snowfall_forecast(
         self, resort: SkiResort, days: int = 7
     ) -> list[DailyForecast]:
-        """Fetch snowfall forecast from ECMWF model via Open-Meteo."""
-        # ECMWF endpoint supports up to 10 days
-        forecast_days = min(days, 10)
+        """Fetch snowfall forecast from ICON model via Open-Meteo."""
+        # ICON endpoint supports up to 7 days
+        forecast_days = min(days, 7)
 
         params = {
             "latitude": resort.latitude,

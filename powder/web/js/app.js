@@ -8,13 +8,27 @@ let map;
 let markers = [];
 let resortData = [];
 
+// Country code to name mapping
+const COUNTRY_NAMES = {
+    'AD': 'Andorra', 'AR': 'Argentina', 'AT': 'Austria', 'AU': 'Australia',
+    'BG': 'Bulgaria', 'CA': 'Canada', 'CH': 'Switzerland', 'CL': 'Chile',
+    'CZ': 'Czech Republic', 'DE': 'Germany', 'ES': 'Spain', 'FI': 'Finland',
+    'FR': 'France', 'IT': 'Italy', 'JP': 'Japan', 'KR': 'South Korea',
+    'NO': 'Norway', 'NZ': 'New Zealand', 'PL': 'Poland', 'RO': 'Romania',
+    'SE': 'Sweden', 'SI': 'Slovenia', 'SK': 'Slovakia', 'US': 'United States'
+};
+
 // Initialize the map
 function initMap() {
     map = L.map('map', {
-        minZoom: 3,
+        minZoom: 2,
         maxBoundsViscosity: 1.0,
-        maxBounds: [[-90, -180], [90, 180]]
-    }).setView([39.5, -98.5], 4);
+        maxBounds: [[-90, -180], [90, 180]],
+        zoomControl: false  // Disable default zoom control
+    }).setView([30, 0], 2);  // World view
+
+    // Add zoom control to top-right
+    L.control.zoom({ position: 'topright' }).addTo(map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -60,15 +74,34 @@ function formatDate(dateStr) {
     return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 }
 
+// Get country display name
+function getCountryName(code) {
+    return COUNTRY_NAMES[code] || code;
+}
+
 // Build tooltip content (basic info on hover)
 function buildTooltip(resort) {
     const snowfall = getSnowfallForFilter(resort);
     const label = getFilterLabel();
+    const region = resort.region || resort.state || '';
+    const countryName = getCountryName(resort.country);
+    const location = region ? `${region}, ${countryName}` : countryName;
     return `
         <div class="tooltip-name">${resort.name}</div>
-        <div class="tooltip-info">${resort.state} | ${resort.elevation_ft.toLocaleString()}' elev</div>
+        <div class="tooltip-info">${location} | ${resort.elevation_ft.toLocaleString()}' elev</div>
         <div class="tooltip-total">${label}: ${snowfall.toFixed(1)}"</div>
     `;
+}
+
+// Get unique sources from daily forecasts
+function getSourcesFromForecasts(dailyForecasts) {
+    const sources = new Set();
+    for (const day of dailyForecasts) {
+        if (day.sources) {
+            Object.keys(day.sources).forEach(s => sources.add(s));
+        }
+    }
+    return Array.from(sources).sort();
 }
 
 // Build detail panel content (full info on click)
@@ -77,19 +110,26 @@ function buildDetailContent(resort) {
     const filter = document.getElementById('snow-filter').value;
     const displaySnowfall = getSnowfallForFilter(resort);
     const displayLabel = getFilterLabel() + ' Snowfall';
+    const region = resort.region || resort.state || '';
+    const countryName = getCountryName(resort.country);
+
+    // Get dynamic sources from the forecast data
+    const sources = getSourcesFromForecasts(resort.daily_forecasts || []);
+    const sourceHeaders = sources.map(s => `<th>${s}</th>`).join('');
+    const numSourceCols = sources.length || 1;
 
     // Build historical rows if showing historical or total
     let historicalRows = '';
     if ((filter === 'historical' || filter === 'total') && resort.historical_snowfall) {
         if (filter === 'total') {
-            historicalRows = '<tr class="section-header"><td colspan="5">Recent Snowfall (Past 14 Days)</td></tr>';
+            historicalRows = `<tr class="section-header"><td colspan="${2 + numSourceCols}">Recent Snowfall (Past 14 Days)</td></tr>`;
         }
         for (const day of resort.historical_snowfall) {
             historicalRows += `
                 <tr class="historical">
                     <td class="date">${formatDate(day.date)}</td>
                     <td class="avg">${day.snowfall_inches}"</td>
-                    <td class="source" colspan="3">Archive</td>
+                    <td class="source" colspan="${numSourceCols}">Archive</td>
                 </tr>
             `;
         }
@@ -99,16 +139,18 @@ function buildDetailContent(resort) {
     let forecastRows = '';
     if (filter === 'forecast' || filter === 'total') {
         if (filter === 'total') {
-            forecastRows = '<tr class="section-header"><td colspan="5">Upcoming Forecast</td></tr>';
+            forecastRows = `<tr class="section-header"><td colspan="${2 + numSourceCols}">Upcoming Forecast</td></tr>`;
         }
-        for (const day of resort.daily_forecasts) {
+        for (const day of resort.daily_forecasts || []) {
+            const sourceCells = sources.map(s => {
+                const val = day.sources && day.sources[s] !== undefined ? day.sources[s] : '-';
+                return `<td class="source">${val !== '-' ? val + '"' : val}</td>`;
+            }).join('');
             forecastRows += `
                 <tr>
                     <td class="date">${formatDate(day.date)}</td>
                     <td class="avg">${day.avg_inches}"</td>
-                    <td class="source">${day.sources['Open-Meteo']}"</td>
-                    <td class="source">${day.sources['NWS']}"</td>
-                    <td class="source">${day.sources['ECMWF']}"</td>
+                    ${sourceCells}
                 </tr>
             `;
         }
@@ -118,7 +160,7 @@ function buildDetailContent(resort) {
         <div class="detail-header">
             <h2>${resort.name}</h2>
             <div class="detail-meta">
-                <span>${resort.state}</span>
+                <span>${region}${region ? ', ' : ''}${countryName}</span>
                 <span>${resort.elevation_ft.toLocaleString()}' elevation</span>
                 <span>${passDisplay}</span>
             </div>
@@ -132,9 +174,7 @@ function buildDetailContent(resort) {
                 <tr>
                     <th>Date</th>
                     <th>Snow</th>
-                    <th>GFS</th>
-                    <th>NWS</th>
-                    <th>ECMWF</th>
+                    ${sourceHeaders}
                 </tr>
             </thead>
             <tbody>
@@ -161,21 +201,70 @@ function hideDetail() {
     panel.classList.add('hidden');
 }
 
+// Center map on resort and open detail panel
+function focusResort(resort) {
+    map.setView([resort.latitude, resort.longitude], 10);
+    showDetail(resort);
+}
+
+// Get filtered resorts based on current filters
+function getFilteredResorts() {
+    const countryFilter = document.getElementById('country-filter').value;
+    const regionFilter = document.getElementById('region-filter').value;
+    const passFilter = document.getElementById('pass-filter').value;
+
+    return resortData.filter(resort => {
+        if (countryFilter && resort.country !== countryFilter) return false;
+        const region = resort.region || resort.state || '';
+        if (regionFilter && region !== regionFilter) return false;
+        if (passFilter === 'none' && resort.pass_type) return false;
+        if (passFilter && passFilter !== 'none' && resort.pass_type !== passFilter) return false;
+        return true;
+    });
+}
+
+// Update Top 10 sidebar
+function updateTop10() {
+    const filtered = getFilteredResorts();
+
+    // Sort by snowfall based on current filter
+    const sorted = [...filtered].sort((a, b) => {
+        return getSnowfallForFilter(b) - getSnowfallForFilter(a);
+    });
+
+    const top10 = sorted.slice(0, 10);
+    const container = document.getElementById('top-resorts-list');
+    container.innerHTML = '';
+
+    top10.forEach((resort, index) => {
+        const snowfall = getSnowfallForFilter(resort);
+        const region = resort.region || resort.state || '';
+        const countryName = getCountryName(resort.country);
+
+        const item = document.createElement('div');
+        item.className = 'top-resort-item';
+        item.innerHTML = `
+            <div class="rank">#${index + 1}</div>
+            <div class="name">${resort.name}</div>
+            <div class="info">
+                <span>${region ? region + ', ' : ''}${countryName}</span>
+                <span class="snowfall">${snowfall.toFixed(1)}"</span>
+            </div>
+        `;
+        item.addEventListener('click', () => focusResort(resort));
+        container.appendChild(item);
+    });
+}
+
 // Create markers for all resorts
 function createMarkers() {
     // Clear existing markers
     markers.forEach(m => map.removeLayer(m.marker));
     markers = [];
 
-    const stateFilter = document.getElementById('state-filter').value;
-    const passFilter = document.getElementById('pass-filter').value;
+    const filtered = getFilteredResorts();
 
-    for (const resort of resortData) {
-        // Apply filters
-        if (stateFilter && resort.state !== stateFilter) continue;
-        if (passFilter === 'none' && resort.pass_type) continue;
-        if (passFilter && passFilter !== 'none' && resort.pass_type !== passFilter) continue;
-
+    for (const resort of filtered) {
         const snowfall = getSnowfallForFilter(resort);
         const radius = getRadius(snowfall);
 
@@ -197,24 +286,86 @@ function createMarkers() {
         marker.addTo(map);
         markers.push({ marker, resort });
     }
+
+    // Update Top 10 sidebar when markers change
+    updateTop10();
 }
 
-// Populate state filter dropdown
-function populateStateFilter() {
-    const states = [...new Set(resortData.map(r => r.state))].sort();
-    const select = document.getElementById('state-filter');
+// Populate country filter dropdown
+function populateCountryFilter() {
+    const countries = [...new Set(resortData.map(r => r.country))].sort();
+    const select = document.getElementById('country-filter');
 
-    for (const state of states) {
+    // Clear existing options except "All Countries"
+    select.innerHTML = '<option value="">All Countries</option>';
+
+    for (const country of countries) {
         const option = document.createElement('option');
-        option.value = state;
-        option.textContent = state;
+        option.value = country;
+        option.textContent = getCountryName(country);
         select.appendChild(option);
+    }
+}
+
+// Populate region filter dropdown based on selected country
+function populateRegionFilter() {
+    const countryFilter = document.getElementById('country-filter').value;
+    const select = document.getElementById('region-filter');
+
+    // Clear existing options
+    select.innerHTML = '<option value="">All Regions</option>';
+
+    let regions;
+    if (countryFilter) {
+        // Only regions for selected country
+        regions = [...new Set(
+            resortData
+                .filter(r => r.country === countryFilter)
+                .map(r => r.region || r.state || '')
+                .filter(r => r)
+        )].sort();
+    } else {
+        // All regions
+        regions = [...new Set(
+            resortData
+                .map(r => r.region || r.state || '')
+                .filter(r => r)
+        )].sort();
+    }
+
+    for (const region of regions) {
+        const option = document.createElement('option');
+        option.value = region;
+        option.textContent = region;
+        select.appendChild(option);
+    }
+}
+
+// Handle country filter change
+function onCountryChange() {
+    populateRegionFilter();
+    createMarkers();
+
+    // Fit map to selected country's resorts
+    const countryFilter = document.getElementById('country-filter').value;
+    if (countryFilter) {
+        const countryResorts = resortData.filter(r => r.country === countryFilter);
+        if (countryResorts.length > 0) {
+            const bounds = L.latLngBounds(
+                countryResorts.map(r => [r.latitude, r.longitude])
+            );
+            map.fitBounds(bounds, { padding: [50, 50] });
+        }
+    } else {
+        // Reset to world view
+        map.setView([30, 0], 2);
     }
 }
 
 // Set up event listeners
 function setupEventListeners() {
-    document.getElementById('state-filter').addEventListener('change', createMarkers);
+    document.getElementById('country-filter').addEventListener('change', onCountryChange);
+    document.getElementById('region-filter').addEventListener('change', createMarkers);
     document.getElementById('pass-filter').addEventListener('change', createMarkers);
     document.getElementById('snow-filter').addEventListener('change', createMarkers);
     document.getElementById('close-panel').addEventListener('click', hideDetail);
@@ -242,7 +393,8 @@ async function init() {
         const data = await response.json();
         resortData = data.resorts;
 
-        populateStateFilter();
+        populateCountryFilter();
+        populateRegionFilter();
         createMarkers();
 
         console.log(`Loaded ${resortData.length} resorts, generated at ${data.generated_at}`);

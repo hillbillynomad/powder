@@ -1,7 +1,7 @@
-"""ECMWF weather model provider via Open-Meteo API (free, no API key required).
+"""JMA (Japan Meteorological Agency) weather model provider via Open-Meteo API.
 
-Uses the ECMWF IFS (Integrated Forecasting System) model, which is consistently
-rated as the most accurate global weather model. See MODELS.md for details.
+Uses the JMA GSM model which provides good resolution (20km) for Japan
+and surrounding regions. Best for Japanese ski resort forecasts.
 """
 
 from datetime import datetime
@@ -12,21 +12,21 @@ from ..resorts import SkiResort
 from .base import ForecastProvider
 
 
-class ECMWFProvider(ForecastProvider):
-    """Forecast provider using ECMWF model via Open-Meteo API."""
+class JMAProvider(ForecastProvider):
+    """Forecast provider using JMA model via Open-Meteo API."""
 
-    BASE_URL = "https://api.open-meteo.com/v1/ecmwf"
+    BASE_URL = "https://api.open-meteo.com/v1/jma"
 
     @property
     def name(self) -> str:
-        return "ECMWF"
+        return "JMA"
 
     def get_snowfall_forecast(
         self, resort: SkiResort, days: int = 7
     ) -> list[DailyForecast]:
-        """Fetch snowfall forecast from ECMWF model via Open-Meteo."""
-        # ECMWF endpoint supports up to 10 days
-        forecast_days = min(days, 10)
+        """Fetch snowfall forecast from JMA model via Open-Meteo."""
+        # JMA endpoint supports up to 7 days
+        forecast_days = min(days, 7)
 
         params = {
             "latitude": resort.latitude,

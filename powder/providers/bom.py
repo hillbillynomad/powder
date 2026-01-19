@@ -1,7 +1,7 @@
-"""ECMWF weather model provider via Open-Meteo API (free, no API key required).
+"""BOM (Bureau of Meteorology) weather model provider via Open-Meteo API.
 
-Uses the ECMWF IFS (Integrated Forecasting System) model, which is consistently
-rated as the most accurate global weather model. See MODELS.md for details.
+Uses the Australian Bureau of Meteorology ACCESS model which provides
+excellent resolution (6km) for Australia and New Zealand ski regions.
 """
 
 from datetime import datetime
@@ -12,21 +12,21 @@ from ..resorts import SkiResort
 from .base import ForecastProvider
 
 
-class ECMWFProvider(ForecastProvider):
-    """Forecast provider using ECMWF model via Open-Meteo API."""
+class BOMProvider(ForecastProvider):
+    """Forecast provider using BOM ACCESS model via Open-Meteo API."""
 
-    BASE_URL = "https://api.open-meteo.com/v1/ecmwf"
+    BASE_URL = "https://api.open-meteo.com/v1/bom"
 
     @property
     def name(self) -> str:
-        return "ECMWF"
+        return "BOM"
 
     def get_snowfall_forecast(
         self, resort: SkiResort, days: int = 7
     ) -> list[DailyForecast]:
-        """Fetch snowfall forecast from ECMWF model via Open-Meteo."""
-        # ECMWF endpoint supports up to 10 days
-        forecast_days = min(days, 10)
+        """Fetch snowfall forecast from BOM model via Open-Meteo."""
+        # BOM endpoint supports up to 7 days
+        forecast_days = min(days, 7)
 
         params = {
             "latitude": resort.latitude,

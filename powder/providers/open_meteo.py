@@ -26,7 +26,7 @@ class OpenMeteoProvider(ForecastProvider):
             "latitude": resort.latitude,
             "longitude": resort.longitude,
             "daily": "snowfall_sum",
-            "timezone": "America/Denver",
+            "timezone": resort.timezone if hasattr(resort, 'timezone') else "UTC",
             "forecast_days": days,
         }
 
@@ -78,7 +78,7 @@ class OpenMeteoProvider(ForecastProvider):
             "latitude": resort.latitude,
             "longitude": resort.longitude,
             "daily": "snowfall_sum",
-            "timezone": "America/Denver",
+            "timezone": resort.timezone if hasattr(resort, 'timezone') else "UTC",
             "start_date": start_date.isoformat(),
             "end_date": end_date.isoformat(),
         }
