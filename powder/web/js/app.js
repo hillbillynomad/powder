@@ -4,6 +4,9 @@ const BUBBLE_COLOR = '#3b82f6';
 const BUBBLE_FILL_OPACITY = 0.6;
 const MIN_RADIUS = 5;
 
+// Touch device detection - skip hover popups on mobile
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 let map;
 let markers = [];
 let resortData = [];
@@ -283,15 +286,39 @@ function positionHoverPopup(marker) {
     
     const popupWidth = 300;
     const popupHeight = 220;
+    const margin = 10; // Minimum margin from viewport edges
     
-    let left = mapRect.left + point.x + 15;
-    let top = mapRect.top + point.y - popupHeight - 10;
+    // Calculate marker position in viewport coordinates
+    const markerX = mapRect.left + point.x;
+    const markerY = mapRect.top + point.y;
     
-    if (left + popupWidth > window.innerWidth) {
-        left = mapRect.left + point.x - popupWidth - 15;
+    // Try positioning to the right of the marker first
+    let left = markerX + 15;
+    let top = markerY - popupHeight - 10;
+    
+    // Check right edge - if popup goes off right, position to the left of marker
+    if (left + popupWidth > window.innerWidth - margin) {
+        left = markerX - popupWidth - 15;
     }
-    if (top < 0) {
-        top = mapRect.top + point.y + 20;
+    
+    // Check left edge - ensure popup doesn't go off left side
+    if (left < margin) {
+        left = margin;
+    }
+    
+    // Check top edge - if popup goes off top, position below marker
+    if (top < margin) {
+        top = markerY + 20;
+    }
+    
+    // Check bottom edge - ensure popup doesn't go off bottom
+    if (top + popupHeight > window.innerHeight - margin) {
+        top = window.innerHeight - popupHeight - margin;
+    }
+    
+    // Final safety check - if screen is too narrow, center horizontally
+    if (window.innerWidth < popupWidth + margin * 2) {
+        left = (window.innerWidth - popupWidth) / 2;
     }
     
     hoverPopup.style.left = `${left}px`;
@@ -573,9 +600,18 @@ function createMarkers() {
             weight: 2,
         });
 
-        marker.on('mouseover', () => showHoverPopup(resort, marker));
-        marker.on('mouseout', () => scheduleHideHoverPopup());
-        marker.on('click', () => toggleDetail(resort));
+        // Only add hover events on non-touch devices
+        if (!isTouchDevice) {
+            marker.on('mouseover', () => showHoverPopup(resort, marker));
+            marker.on('mouseout', () => scheduleHideHoverPopup());
+        }
+        
+        marker.on('click', () => {
+            if (isTouchDevice) {
+                hideHoverPopup(); // Ensure hover popup is hidden on touch devices
+            }
+            toggleDetail(resort);
+        });
 
         marker.addTo(map);
         markers.push({ marker, resort });
