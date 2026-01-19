@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-19T12:43:09.955579Z",
+  "generated_at": "2026-01-19T18:28:32.240938Z",
   "resorts": [
     {
       "name": "Park City Mountain",
@@ -8,7 +8,7 @@
       "longitude": -111.508,
       "elevation_ft": 6900,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 0.4,
+      "total_snowfall_inches": 0.6,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -48,11 +48,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.3,
+          "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.3,
-            "ECMWF": 0.5
+            "ECMWF": 0.1
           }
         },
         {
@@ -102,18 +102,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -222,7 +222,7 @@
       "longitude": -111.4783,
       "elevation_ft": 6570,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.5,
+      "total_snowfall_inches": 0.3,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -262,11 +262,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.4,
-            "ECMWF": 0.5
+            "ECMWF": 0.1
           }
         },
         {
@@ -436,7 +436,7 @@
       "longitude": -111.6538,
       "elevation_ft": 7760,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.0,
+      "total_snowfall_inches": 1.3,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -476,11 +476,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.6,
+          "avg_inches": 0.5,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.5,
-            "ECMWF": 0.2
+            "ECMWF": 0.1
           }
         },
         {
@@ -530,18 +530,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -650,7 +650,7 @@
       "longitude": -111.6386,
       "elevation_ft": 8530,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.0,
+      "total_snowfall_inches": 1.2,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -694,7 +694,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.4,
-            "ECMWF": 0.2
+            "ECMWF": 0.1
           }
         },
         {
@@ -744,18 +744,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -864,7 +864,7 @@
       "longitude": -111.5832,
       "elevation_ft": 8755,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.1,
+      "total_snowfall_inches": 0.9,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -904,11 +904,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.7,
+          "avg_inches": 0.5,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.1,
-            "ECMWF": 1.0
+            "ECMWF": 0.4
           }
         },
         {
@@ -1078,7 +1078,7 @@
       "longitude": -111.5919,
       "elevation_ft": 7988,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.1,
+      "total_snowfall_inches": 0.9,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -1118,11 +1118,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.7,
+          "avg_inches": 0.5,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.1,
-            "ECMWF": 1.0
+            "ECMWF": 0.4
           }
         },
         {
@@ -1336,7 +1336,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.2,
-            "ECMWF": 0.2
+            "ECMWF": 0.1
           }
         },
         {
@@ -1506,14 +1506,14 @@
       "longitude": -106.3742,
       "elevation_ft": 8120,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 1.8,
+      "total_snowfall_inches": 2.1,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.0,
-            "NWS": 0.4,
+            "NWS": 0.3,
             "ECMWF": 0.4
           }
         },
@@ -1548,18 +1548,18 @@
           "date": "2026-01-23",
           "avg_inches": 0.6,
           "sources": {
-            "Open-Meteo": 0.6,
+            "Open-Meteo": 0.4,
             "NWS": 0.6,
-            "ECMWF": 0.6
+            "ECMWF": 0.8
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.6,
+          "avg_inches": 0.8,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.6,
-            "ECMWF": 0.2
+            "ECMWF": 0.9
           }
         },
         {
@@ -1600,18 +1600,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.4,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -1720,14 +1720,14 @@
       "longitude": -106.5165,
       "elevation_ft": 8100,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 1.3,
+      "total_snowfall_inches": 1.2,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
           "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.0,
-            "NWS": 0.2,
+            "NWS": 0.1,
             "ECMWF": 0.2
           }
         },
@@ -1760,20 +1760,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.6,
+          "avg_inches": 0.5,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.2,
             "NWS": 0.4,
-            "ECMWF": 1.2
+            "ECMWF": 1.0
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.2,
+          "avg_inches": 0.4,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.3,
-            "ECMWF": 0.3
+            "ECMWF": 0.9
           }
         },
         {
@@ -1814,18 +1814,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -1938,11 +1938,11 @@
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.4,
+          "avg_inches": 0.5,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.8,
-            "ECMWF": 0.5
+            "ECMWF": 0.6
           }
         },
         {
@@ -1974,20 +1974,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.7,
+          "avg_inches": 0.6,
           "sources": {
             "Open-Meteo": 0.4,
             "NWS": 0.4,
-            "ECMWF": 1.4
+            "ECMWF": 0.9
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.2,
+          "avg_inches": 0.4,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.4,
-            "ECMWF": 0.3
+            "ECMWF": 0.8
           }
         },
         {
@@ -2028,18 +2028,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -2148,7 +2148,7 @@
       "longitude": -105.9497,
       "elevation_ft": 9280,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 2.0,
+      "total_snowfall_inches": 2.2,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -2156,7 +2156,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.5,
-            "ECMWF": 0.5
+            "ECMWF": 0.6
           }
         },
         {
@@ -2188,20 +2188,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.8,
+          "avg_inches": 0.7,
           "sources": {
             "Open-Meteo": 0.6,
             "NWS": 0.5,
-            "ECMWF": 1.4
+            "ECMWF": 0.9
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.3,
+          "avg_inches": 0.5,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.7,
-            "ECMWF": 0.3
+            "ECMWF": 0.8
           }
         },
         {
@@ -2242,18 +2242,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.3,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -2362,7 +2362,7 @@
       "longitude": -106.9658,
       "elevation_ft": 9375,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 2.9,
+      "total_snowfall_inches": 2.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -2402,20 +2402,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 1.6,
+          "avg_inches": 0.9,
           "sources": {
-            "Open-Meteo": 0.6,
+            "Open-Meteo": 0.1,
             "NWS": 1.1,
-            "ECMWF": 3.2
+            "ECMWF": 1.6
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.6,
+          "avg_inches": 1.1,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.8,
-            "ECMWF": 0.1
+            "ECMWF": 1.4
           }
         },
         {
@@ -2447,27 +2447,27 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.5,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.5,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -2576,7 +2576,7 @@
       "longitude": -106.8045,
       "elevation_ft": 6900,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.9,
+      "total_snowfall_inches": 0.8,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -2584,7 +2584,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.1,
-            "ECMWF": 0.2
+            "ECMWF": 0.1
           }
         },
         {
@@ -2616,20 +2616,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.6,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.8,
+            "Open-Meteo": 0.2,
             "NWS": 0.2,
             "ECMWF": 0.7
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.1,
-            "ECMWF": 0.0
+            "ECMWF": 0.1
           }
         },
         {
@@ -2670,18 +2670,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.3,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -2790,7 +2790,7 @@
       "longitude": -105.7627,
       "elevation_ft": 9000,
       "pass_type": "IKON",
-      "total_snowfall_inches": 3.9,
+      "total_snowfall_inches": 3.6,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -2832,18 +2832,18 @@
           "date": "2026-01-23",
           "avg_inches": 0.9,
           "sources": {
-            "Open-Meteo": 1.1,
+            "Open-Meteo": 0.5,
             "NWS": 1.3,
-            "ECMWF": 0.4
+            "ECMWF": 0.8
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.9,
+          "avg_inches": 1.1,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 2.6,
-            "ECMWF": 0.2
+            "ECMWF": 0.6
           }
         },
         {
@@ -2875,27 +2875,27 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.5,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.5,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -3004,7 +3004,7 @@
       "longitude": -106.1497,
       "elevation_ft": 9712,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.8,
+      "total_snowfall_inches": 2.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -3044,20 +3044,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.9,
+          "avg_inches": 0.8,
           "sources": {
             "Open-Meteo": 0.6,
             "NWS": 0.8,
-            "ECMWF": 1.2
+            "ECMWF": 0.9
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.4,
+          "avg_inches": 0.6,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 1.1,
-            "ECMWF": 0.2
+            "ECMWF": 0.6
           }
         },
         {
@@ -3098,18 +3098,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -3218,7 +3218,7 @@
       "longitude": -106.8178,
       "elevation_ft": 7945,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.9,
+      "total_snowfall_inches": 1.7,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -3258,20 +3258,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.8,
+          "avg_inches": 0.9,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.5,
             "NWS": 0.3,
-            "ECMWF": 1.7
+            "ECMWF": 1.8
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.2,
+          "avg_inches": 0.5,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.2,
-            "ECMWF": 0.4
+            "ECMWF": 1.2
           }
         },
         {
@@ -3294,36 +3294,36 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.7,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.7,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.3,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -3432,7 +3432,7 @@
       "longitude": -106.8556,
       "elevation_ft": 8040,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.9,
+      "total_snowfall_inches": 1.7,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -3472,20 +3472,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.8,
+          "avg_inches": 0.9,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.5,
             "NWS": 0.4,
-            "ECMWF": 1.7
+            "ECMWF": 1.8
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.2,
+          "avg_inches": 0.5,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.2,
-            "ECMWF": 0.4
+            "ECMWF": 1.2
           }
         },
         {
@@ -3508,36 +3508,36 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.7,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.7,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.3,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -3686,20 +3686,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.9,
+          "avg_inches": 0.8,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0.5,
-            "ECMWF": 2.1
+            "ECMWF": 1.7
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.3,
+          "avg_inches": 0.6,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.6,
-            "ECMWF": 0.4
+            "ECMWF": 1.3
           }
         },
         {
@@ -3722,36 +3722,36 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -3860,7 +3860,7 @@
       "longitude": -107.8123,
       "elevation_ft": 8725,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 3.8,
+      "total_snowfall_inches": 3.5,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -3900,29 +3900,29 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 1.9,
+          "avg_inches": 1.8,
           "sources": {
-            "Open-Meteo": 2.2,
+            "Open-Meteo": 2.0,
             "NWS": 1.4,
-            "ECMWF": 2.0
+            "ECMWF": 1.9
           }
         },
         {
           "date": "2026-01-24",
           "avg_inches": 1.3,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.1,
             "NWS": 2.4,
-            "ECMWF": 1.4
+            "ECMWF": 1.3
           }
         },
         {
           "date": "2026-01-25",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.2
+            "ECMWF": 0.0
           }
         },
         {
@@ -3945,27 +3945,27 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.4,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
+          "avg_inches": 0.5,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.5,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -4074,7 +4074,7 @@
       "longitude": -105.8719,
       "elevation_ft": 10780,
       "pass_type": "IKON",
-      "total_snowfall_inches": 3.0,
+      "total_snowfall_inches": 2.9,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -4114,20 +4114,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.8,
+          "avg_inches": 0.7,
           "sources": {
             "Open-Meteo": 0.5,
             "NWS": 1.1,
-            "ECMWF": 0.8
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.8,
+          "avg_inches": 0.9,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 2.2,
-            "ECMWF": 0.1
+            "ECMWF": 0.4
           }
         },
         {
@@ -4168,18 +4168,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -4288,7 +4288,7 @@
       "longitude": -107.8142,
       "elevation_ft": 8793,
       "pass_type": "IKON",
-      "total_snowfall_inches": 3.0,
+      "total_snowfall_inches": 2.5,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -4328,29 +4328,29 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 1.0,
+          "avg_inches": 1.1,
           "sources": {
-            "Open-Meteo": 1.5,
+            "Open-Meteo": 2.0,
             "NWS": 0.8,
-            "ECMWF": 0.8
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 1.7,
+          "avg_inches": 1.3,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 2.7,
-            "ECMWF": 2.4
+            "ECMWF": 1.3
           }
         },
         {
           "date": "2026-01-25",
-          "avg_inches": 0.2,
+          "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.1,
-            "ECMWF": 0.4
+            "ECMWF": 0.1
           }
         },
         {
@@ -4382,9 +4382,9 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -4502,7 +4502,7 @@
       "longitude": -119.0326,
       "elevation_ft": 7953,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.5,
+      "total_snowfall_inches": 0.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -4542,11 +4542,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.4
+            "ECMWF": 0.0
           }
         },
         {
@@ -4587,9 +4587,9 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.3,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.6,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -4716,7 +4716,7 @@
       "longitude": -120.2358,
       "elevation_ft": 6200,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.1,
+      "total_snowfall_inches": 0.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -4792,9 +4792,9 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -4974,7 +4974,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.3
+            "ECMWF": 0.2
           }
         },
         {
@@ -4983,7 +4983,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.0
+            "ECMWF": 0.1
           }
         },
         {
@@ -5006,9 +5006,9 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -5144,7 +5144,7 @@
       "longitude": -120.1211,
       "elevation_ft": 6330,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 0.1,
+      "total_snowfall_inches": 0.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -5188,7 +5188,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.1
+            "ECMWF": 0.0
           }
         },
         {
@@ -5220,9 +5220,9 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -5358,7 +5358,7 @@
       "longitude": -120.0653,
       "elevation_ft": 7800,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 0.4,
+      "total_snowfall_inches": 0.1,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -5398,11 +5398,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.2
+            "ECMWF": 0.1
           }
         },
         {
@@ -5411,7 +5411,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.0
+            "ECMWF": 0.1
           }
         },
         {
@@ -5434,18 +5434,18 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -5572,7 +5572,7 @@
       "longitude": -116.8912,
       "elevation_ft": 7140,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.6,
+      "total_snowfall_inches": 0.3,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -5612,20 +5612,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.0,
+          "avg_inches": 0.3,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.1
+            "ECMWF": 0.9
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.6,
+          "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 1.7
+            "ECMWF": 0.0
           }
         },
         {
@@ -5826,11 +5826,11 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.4,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.6,
+            "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.6
+            "ECMWF": 0.0
           }
         },
         {
@@ -5847,7 +5847,7 @@
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
-            "NWS": 0.1,
+            "NWS": 0.0,
             "ECMWF": 0.0
           }
         },
@@ -5889,9 +5889,9 @@
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.4,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -6000,7 +6000,7 @@
       "longitude": -111.4019,
       "elevation_ft": 7500,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.4,
+      "total_snowfall_inches": 1.2,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -6040,9 +6040,9 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
             "NWS": 0.0,
             "ECMWF": 0.0
           }
@@ -6094,18 +6094,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
+          "avg_inches": 0.7,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.7,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -6121,9 +6121,9 @@
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -6214,7 +6214,7 @@
       "longitude": -114.3492,
       "elevation_ft": 4464,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.0,
+      "total_snowfall_inches": 1.7,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -6281,9 +6281,9 @@
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.5,
+          "avg_inches": 0.8,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.7,
             "NWS": 0,
             "ECMWF": 1.0
           }
@@ -6308,18 +6308,18 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.4,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.2,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -6335,9 +6335,9 @@
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -6642,7 +6642,7 @@
       "longitude": -105.4544,
       "elevation_ft": 9207,
       "pass_type": "IKON",
-      "total_snowfall_inches": 7.9,
+      "total_snowfall_inches": 5.3,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -6682,20 +6682,20 @@
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 2.0,
+          "avg_inches": 1.5,
           "sources": {
-            "Open-Meteo": 1.3,
-            "NWS": 1.6,
-            "ECMWF": 3.1
+            "Open-Meteo": 2.0,
+            "NWS": 1.5,
+            "ECMWF": 0.9
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 2.4,
+          "avg_inches": 3.8,
           "sources": {
-            "Open-Meteo": 1.2,
-            "NWS": 2.3,
-            "ECMWF": 3.7
+            "Open-Meteo": 1.3,
+            "NWS": 6.2,
+            "ECMWF": 3.8
           }
         },
         {
@@ -6704,7 +6704,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.0
+            "ECMWF": 0.1
           }
         },
         {
@@ -6736,27 +6736,27 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 2.9,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 2.9,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.4,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -6856,7 +6856,7 @@
       "longitude": -121.5045,
       "elevation_ft": 4400,
       "pass_type": "IKON",
-      "total_snowfall_inches": 1.8,
+      "total_snowfall_inches": 2.2,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -6923,18 +6923,18 @@
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0.1
           }
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -6943,34 +6943,34 @@
           "date": "2026-01-28",
           "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.3,
+          "avg_inches": 0.7,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.7,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -7070,7 +7070,7 @@
       "longitude": -121.089,
       "elevation_ft": 4061,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 1.9,
+      "total_snowfall_inches": 2.1,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -7137,9 +7137,9 @@
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.1,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.5,
             "NWS": 0,
             "ECMWF": 0.2
           }
@@ -7155,9 +7155,9 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -7182,18 +7182,18 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -7284,7 +7284,7 @@
       "longitude": -121.6886,
       "elevation_ft": 6300,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.1,
+      "total_snowfall_inches": 0.6,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -7315,20 +7315,20 @@
         },
         {
           "date": "2026-01-22",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.0
+            "ECMWF": 0.6
           }
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.1
+            "ECMWF": 0.3
           }
         },
         {
@@ -7378,9 +7378,9 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -7396,9 +7396,9 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -7498,23 +7498,23 @@
       "longitude": -72.8201,
       "elevation_ft": 4241,
       "pass_type": "IKON",
-      "total_snowfall_inches": 2.6,
+      "total_snowfall_inches": 3.7,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
           "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.1,
-            "NWS": 0.7,
-            "ECMWF": 0.2
+            "Open-Meteo": 0.3,
+            "NWS": 0.3,
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-20",
-          "avg_inches": 0.2,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
-            "NWS": 0.3,
+            "Open-Meteo": 0.2,
+            "NWS": 0.4,
             "ECMWF": 0.2
           }
         },
@@ -7524,23 +7524,23 @@
           "sources": {
             "Open-Meteo": 0.1,
             "NWS": 0.0,
-            "ECMWF": 0.5
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-22",
           "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.3,
             "NWS": 0.0,
-            "ECMWF": 0.3
+            "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-23",
           "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0.1
           }
@@ -7565,9 +7565,9 @@
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0.2
           }
@@ -7601,33 +7601,6 @@
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
-          "sources": {
-            "Open-Meteo": 0.1,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-01-31",
-          "avg_inches": 0.7,
-          "sources": {
-            "Open-Meteo": 0.7,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-01",
-          "avg_inches": 0.2,
-          "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-02",
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
@@ -7636,10 +7609,37 @@
           }
         },
         {
-          "date": "2026-02-03",
-          "avg_inches": 0.2,
+          "date": "2026-01-31",
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-01",
+          "avg_inches": 2.1,
+          "sources": {
+            "Open-Meteo": 2.1,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-02",
+          "avg_inches": 0.1,
+          "sources": {
+            "Open-Meteo": 0.1,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-03",
+          "avg_inches": 0.1,
+          "sources": {
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -7712,51 +7712,51 @@
       "longitude": -72.7814,
       "elevation_ft": 3625,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 3.5,
+      "total_snowfall_inches": 4.4,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.1,
-            "NWS": 0.6,
+            "NWS": 0.3,
             "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-20",
-          "avg_inches": 0.3,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0.7,
+            "Open-Meteo": 0.1,
+            "NWS": 0.0,
             "ECMWF": 0.1
           }
         },
         {
           "date": "2026-01-21",
-          "avg_inches": 0.2,
+          "avg_inches": 0.3,
           "sources": {
             "Open-Meteo": 0.0,
-            "NWS": 0.3,
-            "ECMWF": 0.4
+            "NWS": 0.6,
+            "ECMWF": 0.3
           }
         },
         {
           "date": "2026-01-22",
-          "avg_inches": 0.3,
+          "avg_inches": 0.6,
           "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0.4,
-            "ECMWF": 0.4
+            "Open-Meteo": 0.4,
+            "NWS": 1.2,
+            "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.3,
+          "avg_inches": 0.5,
           "sources": {
-            "Open-Meteo": 0.5,
+            "Open-Meteo": 0.7,
             "NWS": 0,
-            "ECMWF": 0.2
+            "ECMWF": 0.3
           }
         },
         {
@@ -7765,7 +7765,7 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0,
-            "ECMWF": 0.2
+            "ECMWF": 0.3
           }
         },
         {
@@ -7797,51 +7797,33 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.2,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.2,
-          "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-01",
-          "avg_inches": 0.9,
-          "sources": {
-            "Open-Meteo": 0.9,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-02",
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
@@ -7850,10 +7832,28 @@
           }
         },
         {
-          "date": "2026-02-03",
-          "avg_inches": 0.2,
+          "date": "2026-02-01",
+          "avg_inches": 1.7,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 1.7,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-02",
+          "avg_inches": 0.1,
+          "sources": {
+            "Open-Meteo": 0.1,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-03",
+          "avg_inches": 0.0,
+          "sources": {
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -7926,37 +7926,28 @@
       "longitude": -72.8994,
       "elevation_ft": 2600,
       "pass_type": "IKON",
-      "total_snowfall_inches": 2.8,
+      "total_snowfall_inches": 3.6,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.3,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0.4,
-            "ECMWF": 0.2
+            "Open-Meteo": 0.0,
+            "NWS": 0.3,
+            "ECMWF": 0.1
           }
         },
         {
           "date": "2026-01-20",
-          "avg_inches": 0.3,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0.8,
-            "ECMWF": 0.0
+            "Open-Meteo": 0.1,
+            "NWS": 0.1,
+            "ECMWF": 0.1
           }
         },
         {
           "date": "2026-01-21",
-          "avg_inches": 0.1,
-          "sources": {
-            "Open-Meteo": 0.1,
-            "NWS": 0.0,
-            "ECMWF": 0.2
-          }
-        },
-        {
-          "date": "2026-01-22",
           "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.0,
@@ -7965,10 +7956,19 @@
           }
         },
         {
-          "date": "2026-01-23",
-          "avg_inches": 0.4,
+          "date": "2026-01-22",
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.6,
+            "Open-Meteo": 0.3,
+            "NWS": 0.2,
+            "ECMWF": 0.2
+          }
+        },
+        {
+          "date": "2026-01-23",
+          "avg_inches": 0.3,
+          "sources": {
+            "Open-Meteo": 0.4,
             "NWS": 0,
             "ECMWF": 0.2
           }
@@ -8020,42 +8020,15 @@
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
-          "sources": {
-            "Open-Meteo": 0.1,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-01-31",
-          "avg_inches": 0.3,
-          "sources": {
-            "Open-Meteo": 0.3,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-01",
-          "avg_inches": 0.5,
-          "sources": {
-            "Open-Meteo": 0.5,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-02",
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
@@ -8064,10 +8037,37 @@
           }
         },
         {
-          "date": "2026-02-03",
-          "avg_inches": 0.1,
+          "date": "2026-01-31",
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-01",
+          "avg_inches": 1.8,
+          "sources": {
+            "Open-Meteo": 1.8,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-02",
+          "avg_inches": 0.2,
+          "sources": {
+            "Open-Meteo": 0.2,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-03",
+          "avg_inches": 0.0,
+          "sources": {
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -8140,42 +8140,42 @@
       "longitude": -72.717,
       "elevation_ft": 1144,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 3.0,
+      "total_snowfall_inches": 3.5,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.2,
-            "NWS": 0.6,
-            "ECMWF": 0.2
+            "NWS": 0.0,
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-20",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
-            "NWS": 0.1,
+            "Open-Meteo": 0.1,
+            "NWS": 0.2,
             "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-21",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.3,
             "NWS": 0.0,
-            "ECMWF": 0.5
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-22",
           "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.3,
-            "NWS": 0.0,
-            "ECMWF": 0.3
+            "Open-Meteo": 0.2,
+            "NWS": 0.2,
+            "ECMWF": 0.2
           }
         },
         {
@@ -8243,33 +8243,6 @@
         },
         {
           "date": "2026-01-30",
-          "avg_inches": 0.1,
-          "sources": {
-            "Open-Meteo": 0.1,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-01-31",
-          "avg_inches": 1.0,
-          "sources": {
-            "Open-Meteo": 1.0,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-01",
-          "avg_inches": 0.2,
-          "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-02",
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
@@ -8278,10 +8251,37 @@
           }
         },
         {
-          "date": "2026-02-03",
-          "avg_inches": 0.3,
+          "date": "2026-01-31",
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-01",
+          "avg_inches": 2.1,
+          "sources": {
+            "Open-Meteo": 2.1,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-02",
+          "avg_inches": 0.1,
+          "sources": {
+            "Open-Meteo": 0.1,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-03",
+          "avg_inches": 0.0,
+          "sources": {
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -8354,51 +8354,51 @@
       "longitude": -72.9084,
       "elevation_ft": 1872,
       "pass_type": "IKON",
-      "total_snowfall_inches": 3.1,
+      "total_snowfall_inches": 4.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
           "avg_inches": 0.5,
           "sources": {
-            "Open-Meteo": 0.3,
-            "NWS": 0.8,
+            "Open-Meteo": 0.4,
+            "NWS": 0.6,
             "ECMWF": 0.5
           }
         },
         {
           "date": "2026-01-20",
-          "avg_inches": 0.2,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0.2,
+            "Open-Meteo": 0.0,
+            "NWS": 0.8,
             "ECMWF": 0.1
           }
         },
         {
           "date": "2026-01-21",
-          "avg_inches": 0.2,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.5,
+            "Open-Meteo": 0.6,
             "NWS": 0.0,
             "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-22",
-          "avg_inches": 0.3,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.5,
-            "NWS": 0.2,
-            "ECMWF": 0.2
+            "Open-Meteo": 0.3,
+            "NWS": 0.5,
+            "ECMWF": 0.3
           }
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.2,
             "NWS": 0,
-            "ECMWF": 0.4
+            "ECMWF": 0.1
           }
         },
         {
@@ -8466,24 +8466,6 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.8,
-          "sources": {
-            "Open-Meteo": 0.8,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-01",
-          "avg_inches": 0.2,
-          "sources": {
-            "Open-Meteo": 0.2,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-02",
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
@@ -8492,10 +8474,28 @@
           }
         },
         {
-          "date": "2026-02-03",
-          "avg_inches": 0.4,
+          "date": "2026-02-01",
+          "avg_inches": 2.2,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 2.2,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-02",
+          "avg_inches": 0.1,
+          "sources": {
+            "Open-Meteo": 0.1,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-03",
+          "avg_inches": 0.0,
+          "sources": {
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -8568,60 +8568,60 @@
       "longitude": -71.6217,
       "elevation_ft": 2733,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 3.4,
+      "total_snowfall_inches": 2.7,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.3,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.2,
             "NWS": 0.4,
             "ECMWF": 0.5
           }
         },
         {
           "date": "2026-01-20",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0.0,
-            "ECMWF": 0.1
+            "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-21",
-          "avg_inches": 0.4,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.8,
+            "Open-Meteo": 0.7,
             "NWS": 0.0,
-            "ECMWF": 0.4
+            "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-22",
-          "avg_inches": 0.3,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.5,
             "NWS": 0.2,
             "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.5,
+          "avg_inches": 0.4,
           "sources": {
             "Open-Meteo": 0.4,
             "NWS": 0,
-            "ECMWF": 0.5
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0,
-            "ECMWF": 0.0
+            "ECMWF": 0.1
           }
         },
         {
@@ -8680,18 +8680,18 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.8,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.8,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.5,
+          "avg_inches": 1.0,
           "sources": {
-            "Open-Meteo": 0.5,
+            "Open-Meteo": 1.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -8707,9 +8707,9 @@
         },
         {
           "date": "2026-02-03",
-          "avg_inches": 0.3,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -8782,14 +8782,14 @@
       "longitude": -70.8567,
       "elevation_ft": 800,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 3.0,
+      "total_snowfall_inches": 2.8,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
           "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
-            "NWS": 0.1,
+            "Open-Meteo": 0.2,
+            "NWS": 0.0,
             "ECMWF": 0.7
           }
         },
@@ -8813,20 +8813,20 @@
         },
         {
           "date": "2026-01-22",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.1,
             "NWS": 0.4,
-            "ECMWF": 0.2
+            "ECMWF": 0.1
           }
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.2,
+          "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.2,
             "NWS": 0,
-            "ECMWF": 0.1
+            "ECMWF": 0.0
           }
         },
         {
@@ -8894,27 +8894,27 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.8,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.8,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 1.1,
+          "avg_inches": 1.7,
           "sources": {
-            "Open-Meteo": 1.1,
+            "Open-Meteo": 1.7,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-02",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -8996,15 +8996,15 @@
       "longitude": -70.3131,
       "elevation_ft": 2820,
       "pass_type": "IKON",
-      "total_snowfall_inches": 3.8,
+      "total_snowfall_inches": 3.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.4,
+          "avg_inches": 0.5,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.5,
             "NWS": 0.5,
-            "ECMWF": 0.5
+            "ECMWF": 0.6
           }
         },
         {
@@ -9018,27 +9018,27 @@
         },
         {
           "date": "2026-01-21",
-          "avg_inches": 0.2,
+          "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.2,
             "NWS": 0.0,
-            "ECMWF": 0.3
+            "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-22",
           "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.4,
             "NWS": 0.2,
-            "ECMWF": 0.4
+            "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0.1
           }
@@ -9108,24 +9108,6 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.4,
-          "sources": {
-            "Open-Meteo": 0.4,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-01",
-          "avg_inches": 2.1,
-          "sources": {
-            "Open-Meteo": 2.1,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-02",
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
@@ -9134,10 +9116,28 @@
           }
         },
         {
-          "date": "2026-02-03",
+          "date": "2026-02-01",
+          "avg_inches": 1.5,
+          "sources": {
+            "Open-Meteo": 1.5,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-02",
           "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.2,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-03",
+          "avg_inches": 0.0,
+          "sources": {
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -9210,7 +9210,7 @@
       "longitude": -122.95,
       "elevation_ft": 2140,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 7.0,
+      "total_snowfall_inches": 6.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -9277,36 +9277,36 @@
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.8,
+          "avg_inches": 0.9,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.4,
             "NWS": 0,
             "ECMWF": 1.5
           }
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.0,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.3,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 1.1,
+          "avg_inches": 1.0,
           "sources": {
-            "Open-Meteo": 1.0,
+            "Open-Meteo": 0.7,
             "NWS": 0,
             "ECMWF": 1.3
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 2.1,
+          "avg_inches": 0.6,
           "sources": {
-            "Open-Meteo": 2.1,
+            "Open-Meteo": 0.6,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -9322,36 +9322,36 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.7,
+          "avg_inches": 1.0,
           "sources": {
-            "Open-Meteo": 0.7,
+            "Open-Meteo": 1.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-02",
-          "avg_inches": 0.4,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-03",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -9424,15 +9424,15 @@
       "longitude": -74.5962,
       "elevation_ft": 755,
       "pass_type": "IKON",
-      "total_snowfall_inches": 3.8,
+      "total_snowfall_inches": 3.2,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
-          "avg_inches": 0.7,
+          "avg_inches": 0.6,
           "sources": {
-            "Open-Meteo": 0.9,
+            "Open-Meteo": 0.5,
             "NWS": 0,
-            "ECMWF": 0.5
+            "ECMWF": 0.6
           }
         },
         {
@@ -9455,11 +9455,11 @@
         },
         {
           "date": "2026-01-22",
-          "avg_inches": 1.2,
+          "avg_inches": 0.9,
           "sources": {
             "Open-Meteo": 1.0,
             "NWS": 0,
-            "ECMWF": 1.5
+            "ECMWF": 0.9
           }
         },
         {
@@ -9563,9 +9563,9 @@
         },
         {
           "date": "2026-02-03",
-          "avg_inches": 0.2,
+          "avg_inches": 0.1,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -9638,7 +9638,7 @@
       "longitude": -116.1622,
       "elevation_ft": 5400,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.6,
+      "total_snowfall_inches": 0.5,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -9687,11 +9687,11 @@
         },
         {
           "date": "2026-01-24",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0,
-            "ECMWF": 0.1
+            "ECMWF": 0.0
           }
         },
         {
@@ -9777,9 +9777,9 @@
         },
         {
           "date": "2026-02-03",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -9852,7 +9852,7 @@
       "longitude": -119.8859,
       "elevation_ft": 4116,
       "pass_type": "IKON",
-      "total_snowfall_inches": 0.9,
+      "total_snowfall_inches": 1.2,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -9914,14 +9914,14 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0,
-            "ECMWF": 0.7
+            "ECMWF": 0.6
           }
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.2,
+          "avg_inches": 0.3,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0.4
           }
@@ -9937,9 +9937,9 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -9973,9 +9973,9 @@
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.0,
+          "avg_inches": 0.6,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.6,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -9991,9 +9991,9 @@
         },
         {
           "date": "2026-02-03",
-          "avg_inches": 0.3,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -10205,9 +10205,9 @@
         },
         {
           "date": "2026-02-03",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -10280,7 +10280,7 @@
       "longitude": -118.9266,
       "elevation_ft": 4950,
       "pass_type": null,
-      "total_snowfall_inches": 0.8,
+      "total_snowfall_inches": 1.1,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -10342,14 +10342,14 @@
           "sources": {
             "Open-Meteo": 0.0,
             "NWS": 0,
-            "ECMWF": 0.5
+            "ECMWF": 0.4
           }
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.2,
+          "avg_inches": 0.5,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.4,
             "NWS": 0,
             "ECMWF": 0.5
           }
@@ -10365,18 +10365,18 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -10392,24 +10392,6 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.0,
-          "sources": {
-            "Open-Meteo": 0.0,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-01",
-          "avg_inches": 0.0,
-          "sources": {
-            "Open-Meteo": 0.0,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-02-02",
           "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.1,
@@ -10418,10 +10400,28 @@
           }
         },
         {
-          "date": "2026-02-03",
+          "date": "2026-02-01",
+          "avg_inches": 0.2,
+          "sources": {
+            "Open-Meteo": 0.2,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-02",
           "avg_inches": 0.0,
           "sources": {
             "Open-Meteo": 0.0,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-02-03",
+          "avg_inches": 0.1,
+          "sources": {
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -10494,31 +10494,31 @@
       "longitude": -80.312,
       "elevation_ft": 755,
       "pass_type": "IKON",
-      "total_snowfall_inches": 5.8,
+      "total_snowfall_inches": 5.0,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
           "avg_inches": 1.1,
           "sources": {
-            "Open-Meteo": 1.6,
+            "Open-Meteo": 1.5,
             "NWS": 0,
             "ECMWF": 0.6
           }
         },
         {
           "date": "2026-01-20",
-          "avg_inches": 1.2,
+          "avg_inches": 1.1,
           "sources": {
-            "Open-Meteo": 1.8,
+            "Open-Meteo": 1.5,
             "NWS": 0,
-            "ECMWF": 0.6
+            "ECMWF": 0.7
           }
         },
         {
           "date": "2026-01-21",
           "avg_inches": 0.6,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0.9
           }
@@ -10527,18 +10527,18 @@
           "date": "2026-01-22",
           "avg_inches": 0.6,
           "sources": {
-            "Open-Meteo": 0.5,
+            "Open-Meteo": 0.6,
             "NWS": 0,
-            "ECMWF": 0.7
+            "ECMWF": 0.5
           }
         },
         {
           "date": "2026-01-23",
-          "avg_inches": 0.8,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.5,
+            "Open-Meteo": 0.3,
             "NWS": 0,
-            "ECMWF": 1.1
+            "ECMWF": 0.6
           }
         },
         {
@@ -10547,56 +10547,47 @@
           "sources": {
             "Open-Meteo": 0.1,
             "NWS": 0,
-            "ECMWF": 0.5
+            "ECMWF": 0.6
           }
         },
         {
           "date": "2026-01-25",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.3,
+          "avg_inches": 0.4,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0.7
           }
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.3,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.4,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0.3
           }
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.1,
             "NWS": 0,
             "ECMWF": 0.2
           }
         },
         {
           "date": "2026-01-29",
-          "avg_inches": 0.0,
-          "sources": {
-            "Open-Meteo": 0.0,
-            "NWS": 0,
-            "ECMWF": 0
-          }
-        },
-        {
-          "date": "2026-01-30",
           "avg_inches": 0.2,
           "sources": {
             "Open-Meteo": 0.2,
@@ -10605,10 +10596,19 @@
           }
         },
         {
-          "date": "2026-01-31",
-          "avg_inches": 0.1,
+          "date": "2026-01-30",
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
+            "NWS": 0,
+            "ECMWF": 0
+          }
+        },
+        {
+          "date": "2026-01-31",
+          "avg_inches": 0.0,
+          "sources": {
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -10624,9 +10624,9 @@
         },
         {
           "date": "2026-02-02",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.1,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -10922,7 +10922,7 @@
       "longitude": -115.0866,
       "elevation_ft": 3500,
       "pass_type": "EPIC",
-      "total_snowfall_inches": 1.5,
+      "total_snowfall_inches": 0.9,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -10998,15 +10998,6 @@
         },
         {
           "date": "2026-01-27",
-          "avg_inches": 0.0,
-          "sources": {
-            "Open-Meteo": 0.0,
-            "NWS": 0,
-            "ECMWF": 0.0
-          }
-        },
-        {
-          "date": "2026-01-28",
           "avg_inches": 0.1,
           "sources": {
             "Open-Meteo": 0.1,
@@ -11015,10 +11006,19 @@
           }
         },
         {
-          "date": "2026-01-29",
-          "avg_inches": 0.3,
+          "date": "2026-01-28",
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
+            "NWS": 0,
+            "ECMWF": 0.0
+          }
+        },
+        {
+          "date": "2026-01-29",
+          "avg_inches": 0.0,
+          "sources": {
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -11034,18 +11034,18 @@
         },
         {
           "date": "2026-01-31",
-          "avg_inches": 0.2,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -11061,9 +11061,9 @@
         },
         {
           "date": "2026-02-03",
-          "avg_inches": 0.3,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.3,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0
           }
@@ -11136,7 +11136,7 @@
       "longitude": -119.061,
       "elevation_ft": 3780,
       "pass_type": null,
-      "total_snowfall_inches": 0.5,
+      "total_snowfall_inches": 0.8,
       "daily_forecasts": [
         {
           "date": "2026-01-19",
@@ -11203,9 +11203,9 @@
         },
         {
           "date": "2026-01-26",
-          "avg_inches": 0.2,
+          "avg_inches": 0.5,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.4,
             "NWS": 0,
             "ECMWF": 0.5
           }
@@ -11221,9 +11221,9 @@
         },
         {
           "date": "2026-01-28",
-          "avg_inches": 0.1,
+          "avg_inches": 0.0,
           "sources": {
-            "Open-Meteo": 0.2,
+            "Open-Meteo": 0.0,
             "NWS": 0,
             "ECMWF": 0.0
           }
@@ -11257,9 +11257,9 @@
         },
         {
           "date": "2026-02-01",
-          "avg_inches": 0.0,
+          "avg_inches": 0.2,
           "sources": {
-            "Open-Meteo": 0.0,
+            "Open-Meteo": 0.2,
             "NWS": 0,
             "ECMWF": 0
           }
