@@ -2,8 +2,7 @@
 
 from datetime import date, datetime
 
-import requests
-
+from ..cache import get_session
 from ..forecast import DailyForecast
 from ..resorts import SkiResort
 from .base import ForecastProvider
@@ -26,7 +25,8 @@ class NWSProvider(ForecastProvider):
         """Get NWS grid point for coordinates."""
         url = f"{self.BASE_URL}/points/{lat},{lon}"
         try:
-            response = requests.get(url, headers=self.HEADERS, timeout=10)
+            session = get_session()
+            response = session.get(url, headers=self.HEADERS, timeout=10)
             response.raise_for_status()
             data = response.json()
             props = data.get("properties", {})
@@ -35,7 +35,7 @@ class NWSProvider(ForecastProvider):
                 props.get("gridX"),
                 props.get("gridY"),
             )
-        except requests.RequestException as e:
+        except Exception as e:
             print(f"[{self.name}] Error getting grid point: {e}")
             return None
 
@@ -51,10 +51,11 @@ class NWSProvider(ForecastProvider):
         url = f"{self.BASE_URL}/gridpoints/{grid_id}/{grid_x},{grid_y}"
 
         try:
-            response = requests.get(url, headers=self.HEADERS, timeout=10)
+            session = get_session()
+            response = session.get(url, headers=self.HEADERS, timeout=10)
             response.raise_for_status()
             data = response.json()
-        except requests.RequestException as e:
+        except Exception as e:
             print(f"[{self.name}] Error fetching forecast: {e}")
             return []
 

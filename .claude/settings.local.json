@@ -11,7 +11,8 @@
       "Bash(export PYENV_ROOT=\"$HOME/.pyenv\")",
       "Bash(export PATH=\"$PYENV_ROOT/bin:$PATH\")",
       "Bash(pyenv install:*)",
-      "Bash(python -m pip install:*)"
+      "Bash(python -m pip install:*)",
+      "Bash(poetry run powder:*)"
     ]
   }
 }

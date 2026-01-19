@@ -1,13 +1,17 @@
-"""Weather forecast providers."""
+"""Weather forecast providers.
+
+See MODELS.md for documentation on the underlying weather models,
+their strengths, weaknesses, and optimal use cases.
+"""
 
 from .base import ForecastProvider
-from .open_meteo import OpenMeteoProvider
+from .ecmwf import ECMWFProvider
 from .nws import NWSProvider
-from .weatherapi import WeatherAPIProvider
+from .open_meteo import OpenMeteoProvider
 
 __all__ = [
     "ForecastProvider",
-    "OpenMeteoProvider",
+    "ECMWFProvider",
     "NWSProvider",
-    "WeatherAPIProvider",
+    "OpenMeteoProvider",
 ]

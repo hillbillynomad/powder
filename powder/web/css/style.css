@@ -1,0 +1,306 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: #1a1a2e;
+    color: #eee;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: #16213e;
+    padding: 12px 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 1px solid #0f3460;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #3b82f6;
+}
+
+header .subtitle {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.controls {
+    background: #16213e;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #0f3460;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.filter-group select {
+    background: #0f3460;
+    color: #eee;
+    border: 1px solid #3b82f6;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: #60a5fa;
+}
+
+.legend {
+    display: flex;
+    gap: 16px;
+    margin-left: auto;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.bubble {
+    display: inline-block;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.6);
+    border: 2px solid #3b82f6;
+}
+
+.bubble.small {
+    width: 12px;
+    height: 12px;
+}
+
+.bubble.medium {
+    width: 20px;
+    height: 20px;
+}
+
+.bubble.large {
+    width: 30px;
+    height: 30px;
+}
+
+#map {
+    flex: 1;
+    min-height: 500px;
+}
+
+/* Leaflet tooltip customization */
+.leaflet-tooltip {
+    background: #16213e;
+    border: 1px solid #3b82f6;
+    color: #eee;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.leaflet-tooltip::before {
+    border-top-color: #3b82f6;
+}
+
+.tooltip-name {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.tooltip-info {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.tooltip-total {
+    margin-top: 4px;
+    color: #3b82f6;
+    font-weight: 500;
+}
+
+/* Detail panel */
+#detail-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    max-width: 90vw;
+    height: 100vh;
+    background: #16213e;
+    border-left: 1px solid #0f3460;
+    padding: 20px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+#detail-panel.visible {
+    transform: translateX(0);
+}
+
+#detail-panel.hidden {
+    transform: translateX(100%);
+}
+
+#close-panel {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+#close-panel:hover {
+    color: #eee;
+}
+
+.detail-header {
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #0f3460;
+}
+
+.detail-header h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: #eee;
+}
+
+.detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.detail-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.detail-total {
+    background: #0f3460;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.detail-total .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3b82f6;
+}
+
+.detail-total .label {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+.forecast-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.forecast-table th {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #0f3460;
+    color: #888;
+    font-weight: 500;
+}
+
+.forecast-table td {
+    padding: 8px;
+    border-bottom: 1px solid #0f3460;
+}
+
+.forecast-table tr:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.forecast-table .date {
+    font-weight: 500;
+}
+
+.forecast-table .avg {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.forecast-table .source {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+/* Section headers in detail table */
+.forecast-table .section-header td {
+    background: #0f3460;
+    font-weight: 600;
+    color: #3b82f6;
+    padding: 10px 8px;
+    font-size: 0.9rem;
+}
+
+/* Historical data rows */
+.forecast-table tr.historical {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.forecast-table tr.historical:hover {
+    background: rgba(59, 130, 246, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .legend {
+        margin-left: 0;
+    }
+
+    #detail-panel {
+        width: 100%;
+    }
+}

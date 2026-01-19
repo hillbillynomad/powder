@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 from datetime import date
-from statistics import median
+from statistics import mean
 from typing import Optional
 
 
@@ -16,10 +16,10 @@ class DailyForecast:
 
 @dataclass
 class ForecastResult:
-    """Aggregated forecast result with median calculation."""
+    """Aggregated forecast result with average calculation."""
     date: date
     forecasts: list[DailyForecast]
-    median_snowfall_inches: float
+    avg_snowfall_inches: float
 
     @classmethod
     def from_forecasts(cls, target_date: date, forecasts: list[DailyForecast]) -> Optional["ForecastResult"]:
@@ -28,19 +28,19 @@ class ForecastResult:
             return None
 
         snowfall_values = [f.snowfall_inches for f in forecasts]
-        median_value = median(snowfall_values)
+        avg_value = mean(snowfall_values)
 
         return cls(
             date=target_date,
             forecasts=forecasts,
-            median_snowfall_inches=median_value,
+            avg_snowfall_inches=avg_value,
         )
 
 
-def calculate_median_forecasts(
+def calculate_avg_forecasts(
     all_forecasts: dict[date, list[DailyForecast]]
 ) -> list[ForecastResult]:
-    """Calculate median forecasts across all sources for each date."""
+    """Calculate average forecasts across all sources for each date."""
     results = []
     for target_date in sorted(all_forecasts.keys()):
         forecasts = all_forecasts[target_date]

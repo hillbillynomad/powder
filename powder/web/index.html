@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Powder - Snowfall Forecast</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Powder</h1>
+        <p class="subtitle">Ski Resort Snowfall Forecast</p>
+    </header>
+
+    <div class="controls">
+        <div class="filter-group">
+            <label for="state-filter">State</label>
+            <select id="state-filter">
+                <option value="">All States</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="pass-filter">Pass</label>
+            <select id="pass-filter">
+                <option value="">All Passes</option>
+                <option value="EPIC">EPIC</option>
+                <option value="IKON">IKON</option>
+                <option value="none">Independent</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label for="snow-filter">View</label>
+            <select id="snow-filter">
+                <option value="forecast">Powder on the Way</option>
+                <option value="historical">Recent Powder</option>
+                <option value="total">Total Recent + Forecast</option>
+            </select>
+        </div>
+        <div class="legend">
+            <span class="legend-item">
+                <span class="bubble small"></span> 1-5"
+            </span>
+            <span class="legend-item">
+                <span class="bubble medium"></span> 6-12"
+            </span>
+            <span class="legend-item">
+                <span class="bubble large"></span> 13"+
+            </span>
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="detail-panel" class="hidden">
+        <button id="close-panel">&times;</button>
+        <div id="detail-content"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

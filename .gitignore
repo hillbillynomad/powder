@@ -17,3 +17,6 @@ build/
 # IDE
 .vscode/
 .idea/
+
+# Generated data
+powder/web/data/forecasts.json
