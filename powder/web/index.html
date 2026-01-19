@@ -8,49 +8,60 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
+    <!-- Desktop header (hidden on mobile) -->
+    <header class="desktop-header">
         <h1>Powder</h1>
         <p class="subtitle">Global Ski Resort Snowfall Forecast</p>
     </header>
 
-    <div class="main-container">
-        <aside id="sidebar-left" class="sidebar-left">
-            <h3>Top 10</h3>
-            <div id="top-resorts-list"></div>
-        </aside>
+    <!-- Mobile header with menu toggle (hidden on desktop) -->
+    <header class="mobile-header">
+        <div class="mobile-header-content">
+            <h1>Powder</h1>
+            <button id="menu-toggle" class="menu-toggle">
+                Menu <span id="filter-badge" class="filter-badge hidden">0</span>
+            </button>
+        </div>
+    </header>
 
-        <div class="map-container">
-            <div class="controls">
-                <div class="filter-group">
-                    <label for="country-filter">Country</label>
-                    <select id="country-filter">
+    <!-- Mobile drawer (hidden on desktop) -->
+    <div id="mobile-drawer" class="mobile-drawer hidden">
+        <div class="drawer-tabs">
+            <button class="drawer-tab active" data-tab="filters">Filters</button>
+            <button class="drawer-tab" data-tab="top10">Top 10</button>
+        </div>
+        <div class="drawer-content">
+            <div id="drawer-filters" class="drawer-panel">
+                <div class="drawer-filter-group">
+                    <label for="mobile-country-filter">Country</label>
+                    <select id="mobile-country-filter" class="country-filter">
                         <option value="">All Countries</option>
                     </select>
                 </div>
-                <div class="filter-group">
-                    <label for="region-filter">Region</label>
-                    <select id="region-filter">
+                <div class="drawer-filter-group">
+                    <label for="mobile-region-filter">Region</label>
+                    <select id="mobile-region-filter" class="region-filter">
                         <option value="">All Regions</option>
                     </select>
                 </div>
-                <div class="filter-group">
-                    <label for="pass-filter">Pass</label>
-                    <select id="pass-filter">
+                <div class="drawer-filter-group">
+                    <label for="mobile-pass-filter">Pass</label>
+                    <select id="mobile-pass-filter" class="pass-filter">
                         <option value="">All Passes</option>
                         <option value="EPIC">EPIC</option>
                         <option value="IKON">IKON</option>
                         <option value="none">Independent</option>
                     </select>
                 </div>
-                <div class="filter-group">
-                    <label for="snow-filter">Snowfall</label>
-                    <select id="snow-filter">
+                <div class="drawer-filter-group">
+                    <label for="mobile-snow-filter">Snowfall</label>
+                    <select id="mobile-snow-filter" class="snow-filter">
                         <option value="forecast">Powder on the Way</option>
                         <option value="historical">Recent Powder</option>
                         <option value="total">Total Recent + Forecast</option>
                     </select>
                 </div>
-                <div class="legend">
+                <div class="drawer-legend">
                     <span class="legend-item">
                         <span class="bubble small"></span> 1-5"
                     </span>
@@ -62,14 +73,79 @@
                     </span>
                 </div>
             </div>
-
-            <div id="map"></div>
+            <div id="drawer-top10" class="drawer-panel hidden">
+                <div id="mobile-top-resorts-list" class="top-resorts-list"></div>
+            </div>
         </div>
     </div>
 
-    <div id="detail-panel" class="hidden">
-        <button id="close-panel">&times;</button>
-        <div id="detail-content"></div>
+    <div class="main-container">
+        <!-- Desktop controls bar (hidden on mobile) -->
+        <div class="controls desktop-controls">
+            <div class="filter-group">
+                <label for="country-filter">Country</label>
+                <select id="country-filter" class="country-filter">
+                    <option value="">All Countries</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="region-filter">Region</label>
+                <select id="region-filter" class="region-filter">
+                    <option value="">All Regions</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="pass-filter">Pass</label>
+                <select id="pass-filter" class="pass-filter">
+                    <option value="">All Passes</option>
+                    <option value="EPIC">EPIC</option>
+                    <option value="IKON">IKON</option>
+                    <option value="none">Independent</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="snow-filter">Snowfall</label>
+                <select id="snow-filter" class="snow-filter">
+                    <option value="forecast">Powder on the Way</option>
+                    <option value="historical">Recent Powder</option>
+                    <option value="total">Total Recent + Forecast</option>
+                </select>
+            </div>
+            <div class="legend">
+                <span class="legend-item">
+                    <span class="bubble small"></span> 1-5"
+                </span>
+                <span class="legend-item">
+                    <span class="bubble medium"></span> 6-12"
+                </span>
+                <span class="legend-item">
+                    <span class="bubble large"></span> 13"+
+                </span>
+            </div>
+        </div>
+
+        <div class="map-wrapper">
+            <div id="map"></div>
+        </div>
+
+        <!-- Unified side panel (desktop only) -->
+        <aside id="side-panel" class="side-panel">
+            <div class="panel-header">
+                <div class="panel-tabs">
+                    <button class="panel-tab active" data-tab="top10">Top 10</button>
+                    <button class="panel-tab" data-tab="details">Details</button>
+                </div>
+                <button id="panel-collapse" class="panel-collapse" title="Collapse panel">◀</button>
+            </div>
+            <div class="panel-content">
+                <div id="top10-content" class="tab-content">
+                    <div id="top-resorts-list" class="top-resorts-list"></div>
+                </div>
+                <div id="details-content" class="tab-content hidden">
+                    <div id="detail-content"></div>
+                </div>
+            </div>
+        </aside>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
