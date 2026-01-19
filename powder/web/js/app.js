@@ -10,7 +10,11 @@ let resortData = [];
 
 // Initialize the map
 function initMap() {
-    map = L.map('map').setView([39.5, -98.5], 4);
+    map = L.map('map', {
+        minZoom: 3,
+        maxBoundsViscosity: 1.0,
+        maxBounds: [[-90, -180], [90, 180]]
+    }).setView([39.5, -98.5], 4);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
