@@ -1,4 +1,4 @@
-name: Update Forecasts & Deploy
+name: Deploy Forecasts
 
 on:
   # Run every 6 hours
@@ -11,50 +11,38 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
   pages: write
   id-token: write
 
-jobs:
-  update-forecasts:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      
-      - name: Install Poetry
-        run: |
-          pip install poetry
-          poetry --version
-      
-      - name: Install dependencies
-        run: poetry install --no-interaction
-      
-      - name: Generate forecast data
-        run: poetry run powder --export-json --no-cache
-      
-      - name: Commit updated forecasts
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add powder/web/data/forecasts.json
-          git diff --staged --quiet || git commit -m "Update forecast data [automated]"
-          git push
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
+jobs:
   deploy:
-    needs: update-forecasts
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          ref: main  # Get the latest with updated forecasts
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          poetry --version
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Generate forecast data
+        run: poetry run powder --export-json --no-cache
+
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -21,3 +21,6 @@ build/
 # Misc
 .token
 
+# Generated forecast data (generated fresh on deploy)
+powder/web/data/forecasts.json
+
