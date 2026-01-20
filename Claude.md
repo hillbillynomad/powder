@@ -44,7 +44,7 @@ powder/
 ├── cache.py        # HTTP caching (12hr TTL)
 ├── providers/      # Forecast data sources (see providers/MODELS.md)
 │   ├── base.py     # Abstract ForecastProvider
-│   ├── open_meteo.py   # GFS model (16 days) + Historical Archive (14 days)
+│   ├── open_meteo.py   # GFS model (16 days forecast + 14 days historical via past_days)
 │   ├── ecmwf.py        # ECMWF IFS (10 days) - Global
 │   ├── nws.py          # NWS Blend (7 days) - US only
 │   ├── icon.py         # DWD ICON (7 days) - Europe

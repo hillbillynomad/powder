@@ -8,7 +8,6 @@ from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 from powder.cli import (
-    fetch_historical_snowfall,
     fetch_all_forecasts,
     display_forecasts,
     build_resort_forecast_data,
@@ -24,13 +23,6 @@ SAMPLE_FORECAST_RESPONSE = {
     "daily": {
         "time": ["2024-01-15", "2024-01-16", "2024-01-17"],
         "snowfall_sum": [5.0, 0.0, 2.5],
-    }
-}
-
-SAMPLE_HISTORICAL_RESPONSE = {
-    "daily": {
-        "time": ["2024-01-01", "2024-01-02", "2024-01-03"],
-        "snowfall_sum": [10.0, 5.0, 0.0],
     }
 }
 
@@ -55,18 +47,11 @@ NWS_FORECAST_RESPONSE = {
 
 def mock_all_api_endpoints():
     """Add mock responses for all API endpoints."""
-    # Open-Meteo forecast
+    # Open-Meteo forecast (includes past_days for historical data)
     responses.add(
         responses.GET,
         "https://api.open-meteo.com/v1/forecast",
         json=SAMPLE_FORECAST_RESPONSE,
-        status=200,
-    )
-    # Open-Meteo archive
-    responses.add(
-        responses.GET,
-        "https://archive-api.open-meteo.com/v1/archive",
-        json=SAMPLE_HISTORICAL_RESPONSE,
         status=200,
     )
     # ECMWF
@@ -110,27 +95,6 @@ def mock_all_api_endpoints():
         json=SAMPLE_FORECAST_RESPONSE,
         status=200,
     )
-
-
-@pytest.mark.integration
-@pytest.mark.cli
-class TestFetchHistoricalSnowfall:
-    """Tests for fetch_historical_snowfall function."""
-
-    @responses.activate
-    def test_fetches_from_open_meteo_archive(self, sample_resort):
-        """Test that historical data is fetched from Open-Meteo archive."""
-        responses.add(
-            responses.GET,
-            "https://archive-api.open-meteo.com/v1/archive",
-            json=SAMPLE_HISTORICAL_RESPONSE,
-            status=200,
-        )
-
-        historical = fetch_historical_snowfall(sample_resort)
-
-        assert len(historical) == 3
-        assert all(h.source == "Open-Meteo-Archive" for h in historical)
 
 
 @pytest.mark.integration

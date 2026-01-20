@@ -21,17 +21,6 @@ from .providers import (
 from .resorts import SkiResort, filter_resorts, load_resorts
 
 
-def fetch_historical_snowfall(resort: SkiResort) -> list[DailyForecast]:
-    """Fetch 14-day historical snowfall for a resort.
-
-    Uses only Open-Meteo Archive API (no averaging needed since it's
-    actual measured data, not forecasts).
-    """
-    provider = OpenMeteoProvider()
-    print(f"Fetching historical data from {provider.name} Archive...")
-    return provider.get_historical_snowfall(resort, days=14)
-
-
 def fetch_all_forecasts(resort: SkiResort) -> dict[date, list[DailyForecast]]:
     """Fetch forecasts from all providers and organize by date.
 
@@ -134,35 +123,42 @@ def display_forecasts(resort: SkiResort) -> None:
 
 
 def build_resort_forecast_data(resort: SkiResort) -> dict:
-    """Build forecast data for a single resort in JSON-serializable format."""
+    """Build forecast data for a single resort in JSON-serializable format.
+    
+    The forecast API with past_days=14 returns both historical and future data.
+    We split the results into historical (before today) and forecast (today+future).
+    """
     all_forecasts = fetch_all_forecasts(resort)
     results = calculate_avg_forecasts(all_forecasts)
-
-    daily_forecasts = []
-    for result in results:
-        source_values = {f.source: f.snowfall_inches for f in result.forecasts}
-        # Include all sources that were used for this resort
-        sources = {}
-        for source_name in ["Open-Meteo", "ECMWF", "NWS", "ICON", "JMA", "BOM"]:
-            if source_name in source_values:
-                sources[source_name] = round(source_values[source_name], 1)
-        daily_forecasts.append({
-            "date": result.date.isoformat(),
-            "avg_inches": round(result.avg_snowfall_inches, 1),
-            "sources": sources,
-        })
-
-    # Fetch historical data
-    historical = fetch_historical_snowfall(resort)
+    
+    today = date.today()
+    
+    # Split into historical (past) and forecast (today+future)
     historical_data = []
-    for h in historical:
-        historical_data.append({
-            "date": h.date.isoformat(),
-            "snowfall_inches": h.snowfall_inches,
-        })
+    daily_forecasts = []
+    
+    for result in results:
+        if result.date < today:
+            # Historical day - simpler format without per-source breakdown
+            historical_data.append({
+                "date": result.date.isoformat(),
+                "snowfall_inches": round(result.avg_snowfall_inches, 1),
+            })
+        else:
+            # Forecast day (today and future) - include source breakdown
+            source_values = {f.source: f.snowfall_inches for f in result.forecasts}
+            sources = {}
+            for source_name in ["Open-Meteo", "ECMWF", "NWS", "ICON", "JMA", "BOM"]:
+                if source_name in source_values:
+                    sources[source_name] = round(source_values[source_name], 1)
+            daily_forecasts.append({
+                "date": result.date.isoformat(),
+                "avg_inches": round(result.avg_snowfall_inches, 1),
+                "sources": sources,
+            })
 
-    total_forecast = sum(r.avg_snowfall_inches for r in results)
-    total_historical = sum(h.snowfall_inches for h in historical)
+    total_forecast = sum(d["avg_inches"] for d in daily_forecasts)
+    total_historical = sum(h["snowfall_inches"] for h in historical_data)
 
     return {
         "name": resort.name,

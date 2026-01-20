@@ -3,7 +3,6 @@
 import pytest
 import responses
 from datetime import date
-from freezegun import freeze_time
 
 from powder.providers.open_meteo import OpenMeteoProvider
 from powder.resorts import SkiResort
@@ -209,84 +208,20 @@ class TestOpenMeteoProvider:
 
 @pytest.mark.unit
 @pytest.mark.providers
-class TestOpenMeteoHistorical:
-    """Tests for OpenMeteoProvider historical data."""
+class TestOpenMeteoWithPastDays:
+    """Tests for OpenMeteoProvider with past_days parameter."""
 
     @responses.activate
-    @freeze_time("2024-01-20")
-    def test_get_historical_snowfall_success(self, provider, sample_resort):
-        """Test successful historical data fetch."""
+    def test_includes_past_days_parameter(self, provider, sample_resort):
+        """Test that past_days=14 is included in API request."""
         responses.add(
             responses.GET,
-            "https://archive-api.open-meteo.com/v1/archive",
-            json={
-                "daily": {
-                    "time": [
-                        "2024-01-01",
-                        "2024-01-02",
-                        "2024-01-03",
-                    ],
-                    "snowfall_sum": [5.0, 3.0, 10.0],
-                }
-            },
-            status=200,
-        )
-
-        historical = provider.get_historical_snowfall(sample_resort, days=14)
-
-        assert len(historical) == 3
-        assert all(h.source == "Open-Meteo-Archive" for h in historical)
-
-    @responses.activate
-    @freeze_time("2024-01-20")
-    def test_historical_date_calculation(self, provider, sample_resort):
-        """Test that historical dates are correctly calculated (5-day delay)."""
-        responses.add(
-            responses.GET,
-            "https://archive-api.open-meteo.com/v1/archive",
+            "https://api.open-meteo.com/v1/forecast",
             json={"daily": {"time": [], "snowfall_sum": []}},
             status=200,
         )
 
-        provider.get_historical_snowfall(sample_resort, days=14)
+        provider.get_snowfall_forecast(sample_resort, days=16)
 
         request = responses.calls[0].request
-        # With freeze_time at 2024-01-20, end_date should be 2024-01-15 (5 days ago)
-        # start_date should be 2024-01-02 (14 days before end_date + 1)
-        assert "end_date=2024-01-15" in request.url
-        assert "start_date=2024-01-02" in request.url
-
-    @responses.activate
-    def test_historical_handles_api_error(self, provider, sample_resort):
-        """Test historical data handles API errors gracefully."""
-        responses.add(
-            responses.GET,
-            "https://archive-api.open-meteo.com/v1/archive",
-            status=500,
-        )
-
-        historical = provider.get_historical_snowfall(sample_resort, days=14)
-
-        assert historical == []
-
-    @responses.activate
-    @freeze_time("2024-01-20")
-    def test_historical_source_attribution(self, provider, sample_resort):
-        """Test that historical data has correct source attribution."""
-        responses.add(
-            responses.GET,
-            "https://archive-api.open-meteo.com/v1/archive",
-            json={
-                "daily": {
-                    "time": ["2024-01-10"],
-                    "snowfall_sum": [5.0],
-                }
-            },
-            status=200,
-        )
-
-        historical = provider.get_historical_snowfall(sample_resort, days=14)
-
-        assert len(historical) == 1
-        assert historical[0].source == "Open-Meteo-Archive"
-        # NOT "Open-Meteo" - important distinction
+        assert "past_days=14" in request.url

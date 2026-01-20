@@ -80,15 +80,14 @@ class TestOpenMeteoLive:
         assert all(f.snowfall_inches >= 0 for f in forecasts)
         assert all(isinstance(f.date, date) for f in forecasts)
 
-    def test_historical_returns_data(self):
-        """Test that Open-Meteo Archive returns historical data."""
+    def test_forecast_includes_past_days(self):
+        """Test that Open-Meteo returns historical data via past_days parameter."""
         provider = OpenMeteoProvider()
-        historical = provider.get_historical_snowfall(PARK_CITY, days=7)
+        forecasts = provider.get_snowfall_forecast(PARK_CITY, days=7)
 
-        # May be empty if no snow in the period
-        if historical:
-            assert all(h.source == "Open-Meteo-Archive" for h in historical)
-            assert all(h.snowfall_inches >= 0 for h in historical)
+        # With past_days=14, we should get more days than just the forecast_days
+        # The response should include both historical (past) and forecast (future) data
+        assert len(forecasts) > 7  # Should include 14 past days + 7 forecast days
 
 
 @pytest.mark.e2e

@@ -7,17 +7,16 @@ application, their strengths, weaknesses, and optimal use cases for ski resort s
 
 ### Global Models (Used for All Resorts)
 
-#### 1. Open-Meteo (GFS Model + Historical Archive)
+#### 1. Open-Meteo (GFS Model)
 **File:** `open_meteo.py`
-**Model:** NOAA GFS (Global Forecast System) for forecasts, ERA5 reanalysis for historical
+**Model:** NOAA GFS (Global Forecast System)
 **API:** https://open-meteo.com/en/docs
-
-##### Forecast Data
 
 | Attribute | Value |
 |-----------|-------|
 | Resolution | 0.25° (~25km) |
 | Forecast Range | Up to 16 days |
+| Historical Range | 14 days (via `past_days` parameter) |
 | Update Frequency | Every 6 hours |
 | Coverage | Global |
 
@@ -26,6 +25,7 @@ application, their strengths, weaknesses, and optimal use cases for ski resort s
 - Frequent updates (4x daily)
 - Good for overall snow trends and 7-10 day planning
 - Free, no API key required
+- Single API call provides both historical and forecast data (no gaps)
 
 **Weaknesses:**
 - Coarse resolution struggles with mountain topography
@@ -34,27 +34,15 @@ application, their strengths, weaknesses, and optimal use cases for ski resort s
 
 **Best For:** Days 4-10 forecasts, general trend identification
 
-##### Historical Data (Archive API)
+##### Historical Data via past_days
 
-| Attribute | Value |
-|-----------|-------|
-| Resolution | 9km (0.1°) |
-| Data Range | 14 days (configurable) |
-| Data Delay | ~5 days |
-| Coverage | Global |
-| API Endpoint | `https://archive-api.open-meteo.com/v1/archive` |
+The Forecast API supports a `past_days` parameter (up to 16 days) that returns recent historical
+data alongside the forecast. Powder uses `past_days=14` to provide 14 days of historical snowfall
+in the same API call as the forecast data. This approach:
 
-**Strengths:**
-- Based on ERA5 reanalysis (actual measured/assimilated data, not forecasts)
-- Higher resolution than GFS forecasts
-- Same API interface as forecast endpoint
-- Free, no API key required
-
-**Weaknesses:**
-- ~5 day delay in data availability
-- Reanalysis may differ from ground truth in complex terrain
-
-**Best For:** "Recent Powder" view showing past snowfall
+- Eliminates gaps between historical and forecast data
+- Reduces API calls (one request instead of two)
+- Provides continuous 30-day coverage (-14 days to +16 days)
 
 ---
 

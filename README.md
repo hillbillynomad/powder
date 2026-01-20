@@ -8,7 +8,7 @@ Ski resort snowfall forecast tracker. Aggregates forecasts from multiple weather
 - **Web UI** - Interactive world map with bubble visualization and Top 10 sidebar
 - **165 Resorts** - Ski resorts across 25 countries (10+ lifts each)
 - **Regional Weather Models** - Best-in-class models for each region
-- **Historical Data** - 14 days of past snowfall from Open-Meteo Archive
+- **Historical Data** - 14 days of past snowfall via Open-Meteo's past_days parameter
 - **No API Keys** - All data sources are free and open
 
 ## Installation
@@ -168,9 +168,7 @@ The average of all available models is used as the final forecast. This reduces 
 
 ### Historical Data
 
-| Source | Range | Resolution | Delay |
-|--------|-------|------------|-------|
-| Open-Meteo Archive | 14 days | 9km | ~5 days |
+Historical snowfall is retrieved using the Forecast API's `past_days=14` parameter, providing 14 days of recent snowfall data alongside the 16-day forecast in a single API call. This eliminates gaps between historical and forecast data.
 
 See [providers/MODELS.md](powder/providers/MODELS.md) for detailed model documentation.
 
