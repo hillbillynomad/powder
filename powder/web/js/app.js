@@ -261,7 +261,7 @@ function buildHoverPopupContent(resort) {
 // Create hover popup element
 function createHoverPopup() {
     if (hoverPopup) return;
-    
+
     hoverPopup = document.createElement('div');
     hoverPopup.id = 'hover-popup';
     hoverPopup.className = 'hover-popup';
@@ -497,7 +497,9 @@ function showDetail(resort) {
     switchPanelTab('details');
     document.getElementById('side-panel').classList.remove('collapsed');
     currentDetailResort = resort;
-    
+    // Tell Leaflet to recalculate map size after CSS transition (300ms)
+    setTimeout(() => map.invalidateSize(), 350);
+
     requestAnimationFrame(() => {
         requestAnimationFrame(() => renderDetailChart(resort));
     });
@@ -508,6 +510,8 @@ function hideDetail() {
     document.getElementById('side-panel').classList.add('collapsed');
     switchPanelTab('top10');
     currentDetailResort = null;
+    // Tell Leaflet to recalculate map size after CSS transition (300ms)
+    setTimeout(() => map.invalidateSize(), 350);
 }
 
 // Toggle detail for a resort
@@ -703,6 +707,8 @@ function onFilterChange() {
 // Toggle panel collapse
 function togglePanelCollapse() {
     document.getElementById('side-panel').classList.toggle('collapsed');
+    // Tell Leaflet to recalculate map size after CSS transition (300ms)
+    setTimeout(() => map.invalidateSize(), 350);
 }
 
 // Set up event listeners
