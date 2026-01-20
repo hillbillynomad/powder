@@ -24,3 +24,7 @@ build/
 # Generated forecast data (generated fresh on deploy)
 powder/web/data/forecasts.json
 
+# Node modules (web tests)
+tests/web/node_modules/
+tests/web/test-results/
+

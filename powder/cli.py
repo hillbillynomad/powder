@@ -4,7 +4,7 @@ import argparse
 import json
 import sys
 from collections import defaultdict
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from .cache import set_cache_enabled
@@ -194,7 +194,7 @@ def export_json(resorts: list[SkiResort], output_path: Path) -> None:
         resort_data.append(build_resort_forecast_data(resort))
 
     output = {
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "resorts": resort_data,
     }
 

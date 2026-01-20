@@ -1,0 +1,25 @@
+{
+  "latitude": 40.625,
+  "longitude": -111.5,
+  "generationtime_ms": 0.5,
+  "utc_offset_seconds": -25200,
+  "timezone": "America/Denver",
+  "timezone_abbreviation": "MST",
+  "elevation": 2072.0,
+  "daily_units": {
+    "time": "iso8601",
+    "snowfall_sum": "cm"
+  },
+  "daily": {
+    "time": [
+      "2024-01-15",
+      "2024-01-16",
+      "2024-01-17",
+      "2024-01-18",
+      "2024-01-19",
+      "2024-01-20",
+      "2024-01-21"
+    ],
+    "snowfall_sum": [5.0, 0.0, 2.5, 10.0, 0.0, 1.5, 0.0]
+  }
+}

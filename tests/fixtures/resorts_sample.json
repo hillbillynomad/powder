@@ -1,0 +1,65 @@
+{
+  "resorts": [
+    {
+      "name": "Test Mountain",
+      "country": "US",
+      "region": "UT",
+      "latitude": 40.6514,
+      "longitude": -111.5080,
+      "elevation_base_ft": 6800,
+      "elevation_peak_ft": 10026,
+      "lift_count": 41,
+      "avg_snowfall_inches": 355,
+      "pass_type": "EPIC",
+      "timezone": "America/Denver"
+    },
+    {
+      "name": "Chamonix",
+      "country": "FR",
+      "region": "Haute-Savoie",
+      "latitude": 45.9237,
+      "longitude": 6.8694,
+      "elevation_base_ft": 3396,
+      "elevation_peak_ft": 12605,
+      "lift_count": 49,
+      "pass_type": null,
+      "timezone": "Europe/Paris"
+    },
+    {
+      "name": "Niseko",
+      "country": "JP",
+      "region": "Hokkaido",
+      "latitude": 42.8048,
+      "longitude": 140.6874,
+      "elevation_base_ft": 656,
+      "elevation_peak_ft": 4291,
+      "lift_count": 38,
+      "pass_type": "EPIC",
+      "timezone": "Asia/Tokyo"
+    },
+    {
+      "name": "Vail",
+      "country": "US",
+      "region": "CO",
+      "latitude": 39.6403,
+      "longitude": -106.3742,
+      "elevation_base_ft": 8120,
+      "elevation_peak_ft": 11570,
+      "lift_count": 31,
+      "pass_type": "EPIC",
+      "timezone": "America/Denver"
+    },
+    {
+      "name": "Deer Valley",
+      "country": "US",
+      "region": "UT",
+      "latitude": 40.6375,
+      "longitude": -111.4783,
+      "elevation_base_ft": 6570,
+      "elevation_peak_ft": 9570,
+      "lift_count": 21,
+      "pass_type": "IKON",
+      "timezone": "America/Denver"
+    }
+  ]
+}

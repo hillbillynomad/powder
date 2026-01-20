@@ -1,0 +1,33 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[[-111.5, 40.65], [-111.5, 40.66], [-111.51, 40.66], [-111.51, 40.65], [-111.5, 40.65]]]
+  },
+  "properties": {
+    "@id": "https://api.weather.gov/gridpoints/SLC/97,175",
+    "@type": "wx:Gridpoint",
+    "updateTime": "2024-01-15T06:00:00+00:00",
+    "snowfallAmount": {
+      "uom": "wmoUnit:mm",
+      "values": [
+        {"validTime": "2024-01-15T06:00:00+00:00/PT6H", "value": 10.0},
+        {"validTime": "2024-01-15T12:00:00+00:00/PT6H", "value": 15.0},
+        {"validTime": "2024-01-15T18:00:00+00:00/PT6H", "value": 5.0},
+        {"validTime": "2024-01-16T00:00:00+00:00/PT6H", "value": 0.0},
+        {"validTime": "2024-01-16T06:00:00+00:00/PT6H", "value": 25.0},
+        {"validTime": "2024-01-16T12:00:00+00:00/PT6H", "value": 12.0},
+        {"validTime": "2024-01-16T18:00:00+00:00/PT6H", "value": 0.0},
+        {"validTime": "2024-01-17T00:00:00+00:00/PT6H", "value": 0.0},
+        {"validTime": "2024-01-17T06:00:00+00:00/PT6H", "value": 50.0},
+        {"validTime": "2024-01-17T12:00:00+00:00/PT6H", "value": 30.0}
+      ]
+    },
+    "temperature": {
+      "uom": "wmoUnit:degC",
+      "values": [
+        {"validTime": "2024-01-15T06:00:00+00:00/PT6H", "value": -5.0}
+      ]
+    }
+  }
+}

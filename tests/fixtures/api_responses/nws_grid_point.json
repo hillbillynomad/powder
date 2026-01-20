@@ -1,0 +1,27 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [-111.508, 40.6514]
+  },
+  "properties": {
+    "@id": "https://api.weather.gov/points/40.6514,-111.508",
+    "@type": "wx:Point",
+    "cwa": "SLC",
+    "forecastOffice": "https://api.weather.gov/offices/SLC",
+    "gridId": "SLC",
+    "gridX": 97,
+    "gridY": 175,
+    "forecast": "https://api.weather.gov/gridpoints/SLC/97,175/forecast",
+    "forecastHourly": "https://api.weather.gov/gridpoints/SLC/97,175/forecast/hourly",
+    "observationStations": "https://api.weather.gov/gridpoints/SLC/97,175/stations",
+    "relativeLocation": {
+      "type": "Feature",
+      "properties": {
+        "city": "Park City",
+        "state": "UT"
+      }
+    },
+    "timeZone": "America/Denver"
+  }
+}

@@ -133,6 +133,17 @@ powder/
     ├── css/style.css   # Styling
     ├── js/app.js       # Leaflet map + interactions
     └── data/           # Generated forecast JSON
+
+tests/
+├── conftest.py         # Shared pytest fixtures
+├── fixtures/           # Mock API responses, sample data
+├── unit/               # Python unit tests (pytest)
+├── integration/        # Python integration tests (pytest)
+├── e2e/                # Python live API tests (pytest)
+└── web/                # Web UI tests (Vitest + Playwright)
+
+docs/
+└── TESTING.md          # Complete testing documentation
 ```
 
 ## Weather Models
@@ -162,6 +173,44 @@ The average of all available models is used as the final forecast. This reduces 
 | Open-Meteo Archive | 14 days | 9km | ~5 days |
 
 See [providers/MODELS.md](powder/providers/MODELS.md) for detailed model documentation.
+
+## Testing
+
+Powder has comprehensive test coverage with 75% minimum threshold enforced.
+
+### Quick Start
+
+```bash
+# Run all Python tests
+poetry run pytest
+
+# Run tests in parallel
+poetry run pytest -n auto
+
+# Run with coverage report
+poetry run pytest --cov=powder --cov-report=html
+```
+
+### Test Categories
+
+| Category | Command | Description |
+|----------|---------|-------------|
+| Unit | `pytest -m unit` | Fast, isolated tests |
+| Integration | `pytest -m integration` | Component interaction |
+| E2E (Live API) | `pytest -m e2e` | Tests against real APIs |
+| Providers | `pytest -m providers` | Weather API providers |
+| Skip Slow | `pytest -m "not slow"` | Skip live API tests |
+
+### Web UI Tests
+
+```bash
+cd tests/web
+npm install
+npm test                 # Unit tests (Vitest)
+npm run test:e2e        # E2E tests (Playwright)
+```
+
+See [docs/TESTING.md](docs/TESTING.md) for complete testing documentation.
 
 ## Caching
 

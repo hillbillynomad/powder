@@ -12,7 +12,16 @@
       "Bash(export PATH=\"$PYENV_ROOT/bin:$PATH\")",
       "Bash(pyenv install:*)",
       "Bash(python -m pip install:*)",
-      "Bash(poetry run powder:*)"
+      "Bash(poetry run powder:*)",
+      "Bash(poetry run pytest:*)",
+      "Bash(npm install:*)",
+      "Bash(/usr/local/bin/npm --version)",
+      "Bash(/opt/homebrew/bin/npm --version)",
+      "Bash(/opt/homebrew/bin/npm test)",
+      "Bash(export PATH=\"/opt/homebrew/bin:$PATH\")",
+      "Bash(npm test:*)",
+      "Bash(npx playwright install)",
+      "Bash(npm run test:e2e:*)"
     ]
   }
 }
