@@ -87,7 +87,10 @@ def display_forecasts(resort: SkiResort) -> None:
     print(f"\n{'=' * 60}")
     location = f"{resort.name}, {resort.region}, {resort.country}"
     print(f"  Snowfall Forecast: {location}")
-    print(f"  Elevation: {resort.elevation_ft:,} ft")
+    if resort.elevation_peak_ft:
+        print(f"  Elevation: {resort.elevation_base_ft:,} - {resort.elevation_peak_ft:,} ft ({resort.vertical_drop_ft:,}' vert)")
+    else:
+        print(f"  Elevation: {resort.elevation_base_ft:,} ft")
     print(f"{'=' * 60}\n")
 
     all_forecasts = fetch_all_forecasts(resort)
@@ -167,7 +170,10 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
         "region": resort.region,
         "latitude": resort.latitude,
         "longitude": resort.longitude,
-        "elevation_ft": resort.elevation_ft,
+        "elevation_base_ft": resort.elevation_base_ft,
+        "elevation_peak_ft": resort.elevation_peak_ft,
+        "vertical_drop_ft": resort.vertical_drop_ft,
+        "elevation_ft": resort.elevation_base_ft,  # backward compatibility
         "lift_count": getattr(resort, 'lift_count', 0),
         "pass_type": resort.pass_type,
         "timezone": getattr(resort, 'timezone', 'UTC'),

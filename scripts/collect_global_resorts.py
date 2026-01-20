@@ -72,8 +72,9 @@ class ResortData:
     region: str
     latitude: float
     longitude: float
-    elevation_ft: int
-    lift_count: int
+    elevation_base_ft: int
+    elevation_peak_ft: int | None = None
+    lift_count: int = 0
     avg_snowfall_inches: int | None = None
     pass_type: str | None = None
     timezone: str = "UTC"
@@ -270,181 +271,184 @@ def collect_resorts_for_country(country_code: str, bounds: tuple, min_lifts: int
 
 
 def load_known_resorts() -> dict:
-    """Load manually curated resort data as fallback."""
-    # These are well-known major resorts that might not be fully mapped in OSM
-    # but have verifiable data from official sources
+    """Load manually curated resort data with verified base and peak elevations.
+
+    Elevation data sourced from official resort websites and verified sources.
+    base_elev = base/village elevation in feet
+    peak_elev = summit/peak elevation in feet
+    """
     known_resorts = {
         # France - Major resorts
         "FR": [
-            {"name": "Les 3 Vallées", "lat": 45.3167, "lon": 6.5833, "lifts": 169, "region": "Savoie"},
-            {"name": "Portes du Soleil", "lat": 46.1833, "lon": 6.75, "lifts": 196, "region": "Haute-Savoie"},
-            {"name": "Paradiski", "lat": 45.5167, "lon": 6.8833, "lifts": 141, "region": "Savoie"},
-            {"name": "Tignes/Val d'Isère", "lat": 45.4667, "lon": 6.9, "lifts": 79, "region": "Savoie"},
-            {"name": "Chamonix Mont-Blanc", "lat": 45.9237, "lon": 6.8694, "lifts": 47, "region": "Haute-Savoie"},
-            {"name": "Alpe d'Huez", "lat": 45.0917, "lon": 6.0667, "lifts": 81, "region": "Isère"},
-            {"name": "Les 2 Alpes", "lat": 45.0167, "lon": 6.1333, "lifts": 47, "region": "Isère"},
-            {"name": "Serre Chevalier", "lat": 44.9333, "lon": 6.5833, "lifts": 61, "region": "Hautes-Alpes"},
-            {"name": "La Plagne", "lat": 45.5, "lon": 6.7, "lifts": 79, "region": "Savoie"},
-            {"name": "Les Arcs", "lat": 45.5667, "lon": 6.8167, "lifts": 54, "region": "Savoie"},
-            {"name": "Megève/Saint-Gervais", "lat": 45.8567, "lon": 6.6178, "lifts": 84, "region": "Haute-Savoie"},
-            {"name": "Flaine/Grand Massif", "lat": 46.0058, "lon": 6.6897, "lifts": 64, "region": "Haute-Savoie"},
-            {"name": "La Clusaz", "lat": 45.9042, "lon": 6.4239, "lifts": 49, "region": "Haute-Savoie"},
-            {"name": "Avoriaz", "lat": 46.1906, "lon": 6.7739, "lifts": 34, "region": "Haute-Savoie"},
+            {"name": "Les 3 Vallées", "lat": 45.3167, "lon": 6.5833, "lifts": 169, "region": "Savoie", "base_elev": 4265, "peak_elev": 10597},
+            {"name": "Portes du Soleil", "lat": 46.1833, "lon": 6.75, "lifts": 196, "region": "Haute-Savoie", "base_elev": 3280, "peak_elev": 7546},
+            {"name": "Paradiski", "lat": 45.5167, "lon": 6.8833, "lifts": 141, "region": "Savoie", "base_elev": 4101, "peak_elev": 10663},
+            {"name": "Tignes/Val d'Isère", "lat": 45.4667, "lon": 6.9, "lifts": 79, "region": "Savoie", "base_elev": 5085, "peak_elev": 11339},
+            {"name": "Chamonix Mont-Blanc", "lat": 45.9237, "lon": 6.8694, "lifts": 47, "region": "Haute-Savoie", "base_elev": 3396, "peak_elev": 12605},
+            {"name": "Alpe d'Huez", "lat": 45.0917, "lon": 6.0667, "lifts": 81, "region": "Isère", "base_elev": 4101, "peak_elev": 10925},
+            {"name": "Les 2 Alpes", "lat": 45.0167, "lon": 6.1333, "lifts": 47, "region": "Isère", "base_elev": 5413, "peak_elev": 11811},
+            {"name": "Serre Chevalier", "lat": 44.9333, "lon": 6.5833, "lifts": 61, "region": "Hautes-Alpes", "base_elev": 4265, "peak_elev": 9186},
+            {"name": "La Plagne", "lat": 45.5, "lon": 6.7, "lifts": 79, "region": "Savoie", "base_elev": 3937, "peak_elev": 10663},
+            {"name": "Les Arcs", "lat": 45.5667, "lon": 6.8167, "lifts": 54, "region": "Savoie", "base_elev": 3937, "peak_elev": 10663},
+            {"name": "Megève/Saint-Gervais", "lat": 45.8567, "lon": 6.6178, "lifts": 84, "region": "Haute-Savoie", "base_elev": 3609, "peak_elev": 6562},
+            {"name": "Flaine/Grand Massif", "lat": 46.0058, "lon": 6.6897, "lifts": 64, "region": "Haute-Savoie", "base_elev": 2297, "peak_elev": 8202},
+            {"name": "La Clusaz", "lat": 45.9042, "lon": 6.4239, "lifts": 49, "region": "Haute-Savoie", "base_elev": 3412, "peak_elev": 8038},
+            {"name": "Avoriaz", "lat": 46.1906, "lon": 6.7739, "lifts": 34, "region": "Haute-Savoie", "base_elev": 5906, "peak_elev": 7546},
         ],
         # Switzerland
         "CH": [
-            {"name": "Zermatt", "lat": 46.0207, "lon": 7.7491, "lifts": 52, "region": "Valais"},
-            {"name": "Verbier", "lat": 46.0967, "lon": 7.2283, "lifts": 82, "region": "Valais"},
-            {"name": "St. Moritz", "lat": 46.4908, "lon": 9.8355, "lifts": 56, "region": "Graubünden"},
-            {"name": "Davos Klosters", "lat": 46.8027, "lon": 9.8360, "lifts": 55, "region": "Graubünden"},
-            {"name": "Laax/Flims", "lat": 46.8419, "lon": 9.2594, "lifts": 28, "region": "Graubünden"},
-            {"name": "Saas-Fee", "lat": 46.1086, "lon": 7.9283, "lifts": 22, "region": "Valais"},
-            {"name": "Crans-Montana", "lat": 46.3108, "lon": 7.4819, "lifts": 27, "region": "Valais"},
-            {"name": "Arosa Lenzerheide", "lat": 46.7833, "lon": 9.6667, "lifts": 43, "region": "Graubünden"},
-            {"name": "Grindelwald", "lat": 46.6244, "lon": 8.0414, "lifts": 26, "region": "Bern"},
-            {"name": "Wengen/Jungfrau", "lat": 46.6083, "lon": 7.9222, "lifts": 44, "region": "Bern"},
-            {"name": "Adelboden-Lenk", "lat": 46.4922, "lon": 7.5606, "lifts": 56, "region": "Bern"},
-            {"name": "Engelberg-Titlis", "lat": 46.8214, "lon": 8.4072, "lifts": 25, "region": "Obwalden"},
+            {"name": "Zermatt", "lat": 46.0207, "lon": 7.7491, "lifts": 52, "region": "Valais", "base_elev": 5315, "peak_elev": 12739},
+            {"name": "Verbier", "lat": 46.0967, "lon": 7.2283, "lifts": 82, "region": "Valais", "base_elev": 4921, "peak_elev": 10925},
+            {"name": "St. Moritz", "lat": 46.4908, "lon": 9.8355, "lifts": 56, "region": "Graubünden", "base_elev": 5748, "peak_elev": 10837},
+            {"name": "Davos Klosters", "lat": 46.8027, "lon": 9.8360, "lifts": 55, "region": "Graubünden", "base_elev": 4856, "peak_elev": 9331},
+            {"name": "Laax/Flims", "lat": 46.8419, "lon": 9.2594, "lifts": 28, "region": "Graubünden", "base_elev": 3543, "peak_elev": 9843},
+            {"name": "Saas-Fee", "lat": 46.1086, "lon": 7.9283, "lifts": 22, "region": "Valais", "base_elev": 5906, "peak_elev": 11811},
+            {"name": "Crans-Montana", "lat": 46.3108, "lon": 7.4819, "lifts": 27, "region": "Valais", "base_elev": 4921, "peak_elev": 9842},
+            {"name": "Arosa Lenzerheide", "lat": 46.7833, "lon": 9.6667, "lifts": 43, "region": "Graubünden", "base_elev": 4265, "peak_elev": 9186},
+            {"name": "Grindelwald", "lat": 46.6244, "lon": 8.0414, "lifts": 26, "region": "Bern", "base_elev": 3445, "peak_elev": 9748},
+            {"name": "Wengen/Jungfrau", "lat": 46.6083, "lon": 7.9222, "lifts": 44, "region": "Bern", "base_elev": 3445, "peak_elev": 9748},
+            {"name": "Adelboden-Lenk", "lat": 46.4922, "lon": 7.5606, "lifts": 56, "region": "Bern", "base_elev": 4429, "peak_elev": 7546},
+            {"name": "Engelberg-Titlis", "lat": 46.8214, "lon": 8.4072, "lifts": 25, "region": "Obwalden", "base_elev": 3281, "peak_elev": 9908},
         ],
         # Austria
         "AT": [
-            {"name": "Ski Arlberg", "lat": 47.1289, "lon": 10.2106, "lifts": 88, "region": "Tirol/Vorarlberg"},
-            {"name": "SkiWelt Wilder Kaiser", "lat": 47.4667, "lon": 12.1167, "lifts": 90, "region": "Tirol"},
-            {"name": "Saalbach Hinterglemm", "lat": 47.3906, "lon": 12.6361, "lifts": 70, "region": "Salzburg"},
-            {"name": "Ischgl/Samnaun", "lat": 46.9689, "lon": 10.2906, "lifts": 45, "region": "Tirol"},
-            {"name": "Kitzbühel", "lat": 47.4492, "lon": 12.3919, "lifts": 57, "region": "Tirol"},
-            {"name": "Sölden", "lat": 46.9667, "lon": 10.8667, "lifts": 31, "region": "Tirol"},
-            {"name": "Zillertal Arena", "lat": 47.1667, "lon": 11.8833, "lifts": 52, "region": "Tirol"},
-            {"name": "Obertauern", "lat": 47.2500, "lon": 13.5667, "lifts": 26, "region": "Salzburg"},
-            {"name": "Schladming", "lat": 47.3942, "lon": 13.6875, "lifts": 44, "region": "Steiermark"},
-            {"name": "Mayrhofen", "lat": 47.1667, "lon": 11.8667, "lifts": 44, "region": "Tirol"},
-            {"name": "Obergurgl-Hochgurgl", "lat": 46.8667, "lon": 11.0167, "lifts": 25, "region": "Tirol"},
-            {"name": "Bad Gastein", "lat": 47.1167, "lon": 13.1333, "lifts": 50, "region": "Salzburg"},
-            {"name": "Stubaier Gletscher", "lat": 47.0, "lon": 11.1167, "lifts": 26, "region": "Tirol"},
-            {"name": "Hintertux Glacier", "lat": 47.0667, "lon": 11.6667, "lifts": 21, "region": "Tirol"},
+            {"name": "Ski Arlberg", "lat": 47.1289, "lon": 10.2106, "lifts": 88, "region": "Tirol/Vorarlberg", "base_elev": 4265, "peak_elev": 9222},
+            {"name": "SkiWelt Wilder Kaiser", "lat": 47.4667, "lon": 12.1167, "lifts": 90, "region": "Tirol", "base_elev": 2034, "peak_elev": 6201},
+            {"name": "Saalbach Hinterglemm", "lat": 47.3906, "lon": 12.6361, "lifts": 70, "region": "Salzburg", "base_elev": 3281, "peak_elev": 6890},
+            {"name": "Ischgl/Samnaun", "lat": 46.9689, "lon": 10.2906, "lifts": 45, "region": "Tirol", "base_elev": 4593, "peak_elev": 9518},
+            {"name": "Kitzbühel", "lat": 47.4492, "lon": 12.3919, "lifts": 57, "region": "Tirol", "base_elev": 2625, "peak_elev": 6562},
+            {"name": "Sölden", "lat": 46.9667, "lon": 10.8667, "lifts": 31, "region": "Tirol", "base_elev": 4429, "peak_elev": 10958},
+            {"name": "Zillertal Arena", "lat": 47.1667, "lon": 11.8833, "lifts": 52, "region": "Tirol", "base_elev": 1804, "peak_elev": 7956},
+            {"name": "Obertauern", "lat": 47.2500, "lon": 13.5667, "lifts": 26, "region": "Salzburg", "base_elev": 5577, "peak_elev": 7218},
+            {"name": "Schladming", "lat": 47.3942, "lon": 13.6875, "lifts": 44, "region": "Steiermark", "base_elev": 2461, "peak_elev": 6201},
+            {"name": "Mayrhofen", "lat": 47.1667, "lon": 11.8667, "lifts": 44, "region": "Tirol", "base_elev": 2034, "peak_elev": 8202},
+            {"name": "Obergurgl-Hochgurgl", "lat": 46.8667, "lon": 11.0167, "lifts": 25, "region": "Tirol", "base_elev": 6201, "peak_elev": 10827},
+            {"name": "Bad Gastein", "lat": 47.1167, "lon": 13.1333, "lifts": 50, "region": "Salzburg", "base_elev": 2789, "peak_elev": 8497},
+            {"name": "Stubaier Gletscher", "lat": 47.0, "lon": 11.1167, "lifts": 26, "region": "Tirol", "base_elev": 4593, "peak_elev": 10531},
+            {"name": "Hintertux Glacier", "lat": 47.0667, "lon": 11.6667, "lifts": 21, "region": "Tirol", "base_elev": 4921, "peak_elev": 10663},
         ],
         # Italy
         "IT": [
-            {"name": "Dolomiti Superski", "lat": 46.5333, "lon": 11.8667, "lifts": 450, "region": "Trentino-Alto Adige"},
-            {"name": "Livigno", "lat": 46.5386, "lon": 10.1356, "lifts": 31, "region": "Lombardia"},
-            {"name": "Cervinia", "lat": 45.9333, "lon": 7.6333, "lifts": 21, "region": "Valle d'Aosta"},
-            {"name": "Cortina d'Ampezzo", "lat": 46.5369, "lon": 12.1356, "lifts": 37, "region": "Veneto"},
-            {"name": "Sestriere/Via Lattea", "lat": 44.9583, "lon": 6.8792, "lifts": 92, "region": "Piemonte"},
-            {"name": "Madonna di Campiglio", "lat": 46.2292, "lon": 10.8269, "lifts": 24, "region": "Trentino"},
-            {"name": "Bormio", "lat": 46.4669, "lon": 10.3711, "lifts": 14, "region": "Lombardia"},
-            {"name": "Val Gardena", "lat": 46.5583, "lon": 11.7556, "lifts": 83, "region": "Trentino-Alto Adige"},
-            {"name": "Alta Badia", "lat": 46.55, "lon": 11.8833, "lifts": 53, "region": "Trentino-Alto Adige"},
-            {"name": "Kronplatz", "lat": 46.7417, "lon": 11.9583, "lifts": 32, "region": "Trentino-Alto Adige"},
-            {"name": "Courmayeur", "lat": 45.7911, "lon": 6.9686, "lifts": 18, "region": "Valle d'Aosta"},
+            {"name": "Dolomiti Superski", "lat": 46.5333, "lon": 11.8667, "lifts": 450, "region": "Trentino-Alto Adige", "base_elev": 3937, "peak_elev": 10341},
+            {"name": "Livigno", "lat": 46.5386, "lon": 10.1356, "lifts": 31, "region": "Lombardia", "base_elev": 5971, "peak_elev": 9514},
+            {"name": "Cervinia", "lat": 45.9333, "lon": 7.6333, "lifts": 21, "region": "Valle d'Aosta", "base_elev": 6726, "peak_elev": 11417},
+            {"name": "Cortina d'Ampezzo", "lat": 46.5369, "lon": 12.1356, "lifts": 37, "region": "Veneto", "base_elev": 4101, "peak_elev": 10643},
+            {"name": "Sestriere/Via Lattea", "lat": 44.9583, "lon": 6.8792, "lifts": 92, "region": "Piemonte", "base_elev": 4593, "peak_elev": 9514},
+            {"name": "Madonna di Campiglio", "lat": 46.2292, "lon": 10.8269, "lifts": 24, "region": "Trentino", "base_elev": 4921, "peak_elev": 8858},
+            {"name": "Bormio", "lat": 46.4669, "lon": 10.3711, "lifts": 14, "region": "Lombardia", "base_elev": 3904, "peak_elev": 10466},
+            {"name": "Val Gardena", "lat": 46.5583, "lon": 11.7556, "lifts": 83, "region": "Trentino-Alto Adige", "base_elev": 4101, "peak_elev": 8202},
+            {"name": "Alta Badia", "lat": 46.55, "lon": 11.8833, "lifts": 53, "region": "Trentino-Alto Adige", "base_elev": 4101, "peak_elev": 8858},
+            {"name": "Kronplatz", "lat": 46.7417, "lon": 11.9583, "lifts": 32, "region": "Trentino-Alto Adige", "base_elev": 3117, "peak_elev": 7462},
+            {"name": "Courmayeur", "lat": 45.7911, "lon": 6.9686, "lifts": 18, "region": "Valle d'Aosta", "base_elev": 3937, "peak_elev": 9186},
         ],
         # Germany
         "DE": [
-            {"name": "Garmisch-Partenkirchen", "lat": 47.4917, "lon": 11.0958, "lifts": 33, "region": "Bayern"},
-            {"name": "Oberstdorf", "lat": 47.4083, "lon": 10.2792, "lifts": 45, "region": "Bayern"},
-            {"name": "Zugspitze", "lat": 47.4211, "lon": 10.9853, "lifts": 10, "region": "Bayern"},
-            {"name": "Winterberg", "lat": 51.1942, "lon": 8.5333, "lifts": 26, "region": "Nordrhein-Westfalen"},
-            {"name": "Feldberg", "lat": 47.8583, "lon": 8.0333, "lifts": 14, "region": "Baden-Württemberg"},
+            {"name": "Garmisch-Partenkirchen", "lat": 47.4917, "lon": 11.0958, "lifts": 33, "region": "Bayern", "base_elev": 2362, "peak_elev": 9718},
+            {"name": "Oberstdorf", "lat": 47.4083, "lon": 10.2792, "lifts": 45, "region": "Bayern", "base_elev": 2690, "peak_elev": 7218},
+            {"name": "Zugspitze", "lat": 47.4211, "lon": 10.9853, "lifts": 10, "region": "Bayern", "base_elev": 7635, "peak_elev": 9718},
+            {"name": "Winterberg", "lat": 51.1942, "lon": 8.5333, "lifts": 26, "region": "Nordrhein-Westfalen", "base_elev": 1804, "peak_elev": 2789},
+            {"name": "Feldberg", "lat": 47.8583, "lon": 8.0333, "lifts": 14, "region": "Baden-Württemberg", "base_elev": 3117, "peak_elev": 4757},
         ],
         # Japan
         "JP": [
-            {"name": "Niseko United", "lat": 42.8625, "lon": 140.6869, "lifts": 38, "region": "Hokkaido"},
-            {"name": "Hakuba Valley", "lat": 36.6983, "lon": 137.8322, "lifts": 135, "region": "Nagano"},
-            {"name": "Shiga Kogen", "lat": 36.6861, "lon": 138.4831, "lifts": 51, "region": "Nagano"},
-            {"name": "Nozawa Onsen", "lat": 36.9231, "lon": 138.4408, "lifts": 21, "region": "Nagano"},
-            {"name": "Rusutsu", "lat": 42.7333, "lon": 140.8833, "lifts": 18, "region": "Hokkaido"},
-            {"name": "Furano", "lat": 43.3433, "lon": 142.3819, "lifts": 11, "region": "Hokkaido"},
-            {"name": "Myoko Kogen", "lat": 36.8833, "lon": 138.1833, "lifts": 28, "region": "Niigata"},
-            {"name": "Zao Onsen", "lat": 38.1667, "lon": 140.4167, "lifts": 32, "region": "Yamagata"},
-            {"name": "Naeba", "lat": 36.8167, "lon": 138.7167, "lifts": 27, "region": "Niigata"},
-            {"name": "Appi Kogen", "lat": 39.9333, "lon": 140.9333, "lifts": 21, "region": "Iwate"},
-            {"name": "Madarao Kogen", "lat": 36.8667, "lon": 138.3167, "lifts": 18, "region": "Nagano"},
-            {"name": "Kiroro", "lat": 43.0833, "lon": 140.9833, "lifts": 10, "region": "Hokkaido"},
+            {"name": "Niseko United", "lat": 42.8625, "lon": 140.6869, "lifts": 38, "region": "Hokkaido", "base_elev": 787, "peak_elev": 4101},
+            {"name": "Hakuba Valley", "lat": 36.6983, "lon": 137.8322, "lifts": 135, "region": "Nagano", "base_elev": 2526, "peak_elev": 5905},
+            {"name": "Shiga Kogen", "lat": 36.6861, "lon": 138.4831, "lifts": 51, "region": "Nagano", "base_elev": 4593, "peak_elev": 7218},
+            {"name": "Nozawa Onsen", "lat": 36.9231, "lon": 138.4408, "lifts": 21, "region": "Nagano", "base_elev": 1706, "peak_elev": 5413},
+            {"name": "Rusutsu", "lat": 42.7333, "lon": 140.8833, "lifts": 18, "region": "Hokkaido", "base_elev": 656, "peak_elev": 3281},
+            {"name": "Furano", "lat": 43.3433, "lon": 142.3819, "lifts": 11, "region": "Hokkaido", "base_elev": 755, "peak_elev": 3707},
+            {"name": "Myoko Kogen", "lat": 36.8833, "lon": 138.1833, "lifts": 28, "region": "Niigata", "base_elev": 2461, "peak_elev": 5413},
+            {"name": "Zao Onsen", "lat": 38.1667, "lon": 140.4167, "lifts": 32, "region": "Yamagata", "base_elev": 2625, "peak_elev": 5577},
+            {"name": "Naeba", "lat": 36.8167, "lon": 138.7167, "lifts": 27, "region": "Niigata", "base_elev": 2953, "peak_elev": 5413},
+            {"name": "Appi Kogen", "lat": 39.9333, "lon": 140.9333, "lifts": 21, "region": "Iwate", "base_elev": 1969, "peak_elev": 4593},
+            {"name": "Madarao Kogen", "lat": 36.8667, "lon": 138.3167, "lifts": 18, "region": "Nagano", "base_elev": 2953, "peak_elev": 4429},
+            {"name": "Kiroro", "lat": 43.0833, "lon": 140.9833, "lifts": 10, "region": "Hokkaido", "base_elev": 1640, "peak_elev": 3871},
         ],
         # Scandinavia
         "NO": [
-            {"name": "Trysil", "lat": 61.3133, "lon": 12.2603, "lifts": 32, "region": "Innlandet"},
-            {"name": "Hemsedal", "lat": 60.8658, "lon": 8.5697, "lifts": 21, "region": "Viken"},
-            {"name": "Geilo", "lat": 60.5333, "lon": 8.2, "lifts": 20, "region": "Viken"},
-            {"name": "Hafjell", "lat": 61.2333, "lon": 10.4333, "lifts": 14, "region": "Innlandet"},
-            {"name": "Kvitfjell", "lat": 61.4667, "lon": 10.1333, "lifts": 11, "region": "Innlandet"},
+            {"name": "Trysil", "lat": 61.3133, "lon": 12.2603, "lifts": 32, "region": "Innlandet", "base_elev": 1312, "peak_elev": 3609},
+            {"name": "Hemsedal", "lat": 60.8658, "lon": 8.5697, "lifts": 21, "region": "Viken", "base_elev": 2132, "peak_elev": 5905},
+            {"name": "Geilo", "lat": 60.5333, "lon": 8.2, "lifts": 20, "region": "Viken", "base_elev": 2625, "peak_elev": 3773},
+            {"name": "Hafjell", "lat": 61.2333, "lon": 10.4333, "lifts": 14, "region": "Innlandet", "base_elev": 656, "peak_elev": 3609},
+            {"name": "Kvitfjell", "lat": 61.4667, "lon": 10.1333, "lifts": 11, "region": "Innlandet", "base_elev": 1640, "peak_elev": 3707},
         ],
         "SE": [
-            {"name": "Åre", "lat": 63.3983, "lon": 13.0778, "lifts": 42, "region": "Jämtland"},
-            {"name": "Sälen", "lat": 61.1667, "lon": 13.2667, "lifts": 99, "region": "Dalarna"},
-            {"name": "Vemdalen", "lat": 62.4333, "lon": 13.9167, "lifts": 21, "region": "Härjedalen"},
+            {"name": "Åre", "lat": 63.3983, "lon": 13.0778, "lifts": 42, "region": "Jämtland", "base_elev": 1247, "peak_elev": 4429},
+            {"name": "Sälen", "lat": 61.1667, "lon": 13.2667, "lifts": 99, "region": "Dalarna", "base_elev": 1640, "peak_elev": 3445},
+            {"name": "Vemdalen", "lat": 62.4333, "lon": 13.9167, "lifts": 21, "region": "Härjedalen", "base_elev": 1969, "peak_elev": 3281},
         ],
         "FI": [
-            {"name": "Levi", "lat": 67.8, "lon": 24.8167, "lifts": 26, "region": "Lapland"},
-            {"name": "Ylläs", "lat": 67.55, "lon": 24.25, "lifts": 29, "region": "Lapland"},
-            {"name": "Ruka", "lat": 66.1667, "lon": 29.1333, "lifts": 21, "region": "Lapland"},
+            {"name": "Levi", "lat": 67.8, "lon": 24.8167, "lifts": 26, "region": "Lapland", "base_elev": 656, "peak_elev": 1706},
+            {"name": "Ylläs", "lat": 67.55, "lon": 24.25, "lifts": 29, "region": "Lapland", "base_elev": 656, "peak_elev": 2297},
+            {"name": "Ruka", "lat": 66.1667, "lon": 29.1333, "lifts": 21, "region": "Lapland", "base_elev": 656, "peak_elev": 1640},
         ],
         # Australia/New Zealand
         "AU": [
-            {"name": "Perisher", "lat": -36.4, "lon": 148.4167, "lifts": 47, "region": "New South Wales"},
-            {"name": "Thredbo", "lat": -36.5, "lon": 148.3, "lifts": 14, "region": "New South Wales"},
-            {"name": "Falls Creek", "lat": -36.8667, "lon": 147.2833, "lifts": 14, "region": "Victoria"},
-            {"name": "Mount Hotham", "lat": -37.0833, "lon": 147.1333, "lifts": 13, "region": "Victoria"},
-            {"name": "Mount Buller", "lat": -37.15, "lon": 146.4333, "lifts": 22, "region": "Victoria"},
+            {"name": "Perisher", "lat": -36.4, "lon": 148.4167, "lifts": 47, "region": "New South Wales", "base_elev": 5577, "peak_elev": 6890},
+            {"name": "Thredbo", "lat": -36.5, "lon": 148.3, "lifts": 14, "region": "New South Wales", "base_elev": 4593, "peak_elev": 6726},
+            {"name": "Falls Creek", "lat": -36.8667, "lon": 147.2833, "lifts": 14, "region": "Victoria", "base_elev": 4921, "peak_elev": 6033},
+            {"name": "Mount Hotham", "lat": -37.0833, "lon": 147.1333, "lifts": 13, "region": "Victoria", "base_elev": 4921, "peak_elev": 6102},
+            {"name": "Mount Buller", "lat": -37.15, "lon": 146.4333, "lifts": 22, "region": "Victoria", "base_elev": 4921, "peak_elev": 5905},
         ],
         "NZ": [
-            {"name": "Queenstown (Remarkables + Coronet Peak)", "lat": -45.0378, "lon": 168.6617, "lifts": 15, "region": "Otago"},
-            {"name": "Whakapapa", "lat": -39.2333, "lon": 175.55, "lifts": 14, "region": "Manawatu-Wanganui"},
-            {"name": "Treble Cone", "lat": -44.6333, "lon": 168.9, "lifts": 4, "region": "Otago"},
-            {"name": "Cardrona", "lat": -44.8667, "lon": 168.9333, "lifts": 7, "region": "Otago"},
+            {"name": "Queenstown (Remarkables + Coronet Peak)", "lat": -45.0378, "lon": 168.6617, "lifts": 15, "region": "Otago", "base_elev": 3609, "peak_elev": 6201},
+            {"name": "Whakapapa", "lat": -39.2333, "lon": 175.55, "lifts": 14, "region": "Manawatu-Wanganui", "base_elev": 5085, "peak_elev": 7546},
+            {"name": "Treble Cone", "lat": -44.6333, "lon": 168.9, "lifts": 4, "region": "Otago", "base_elev": 4429, "peak_elev": 6890},
+            {"name": "Cardrona", "lat": -44.8667, "lon": 168.9333, "lifts": 7, "region": "Otago", "base_elev": 4921, "peak_elev": 6201},
         ],
         # South America
         "CL": [
-            {"name": "Valle Nevado", "lat": -33.3833, "lon": -70.2833, "lifts": 14, "region": "Metropolitana"},
-            {"name": "Portillo", "lat": -32.8333, "lon": -70.1333, "lifts": 14, "region": "Valparaíso"},
+            {"name": "Valle Nevado", "lat": -33.3833, "lon": -70.2833, "lifts": 14, "region": "Metropolitana", "base_elev": 9842, "peak_elev": 12303},
+            {"name": "Portillo", "lat": -32.8333, "lon": -70.1333, "lifts": 14, "region": "Valparaíso", "base_elev": 9186, "peak_elev": 10925},
         ],
         "AR": [
-            {"name": "Las Leñas", "lat": -35.15, "lon": -70.0833, "lifts": 14, "region": "Mendoza"},
-            {"name": "Cerro Catedral", "lat": -41.1667, "lon": -71.4333, "lifts": 39, "region": "Río Negro"},
-            {"name": "Chapelco", "lat": -40.2, "lon": -71.25, "lifts": 12, "region": "Neuquén"},
+            {"name": "Las Leñas", "lat": -35.15, "lon": -70.0833, "lifts": 14, "region": "Mendoza", "base_elev": 7546, "peak_elev": 11253},
+            {"name": "Cerro Catedral", "lat": -41.1667, "lon": -71.4333, "lifts": 39, "region": "Río Negro", "base_elev": 3445, "peak_elev": 6890},
+            {"name": "Chapelco", "lat": -40.2, "lon": -71.25, "lifts": 12, "region": "Neuquén", "base_elev": 3773, "peak_elev": 6201},
         ],
         # Other European
         "AD": [
-            {"name": "Grandvalira", "lat": 42.5667, "lon": 1.7, "lifts": 67, "region": "Andorra"},
-            {"name": "Vallnord", "lat": 42.5833, "lon": 1.5333, "lifts": 30, "region": "Andorra"},
+            {"name": "Grandvalira", "lat": 42.5667, "lon": 1.7, "lifts": 67, "region": "Andorra", "base_elev": 5906, "peak_elev": 8858},
+            {"name": "Vallnord", "lat": 42.5833, "lon": 1.5333, "lifts": 30, "region": "Andorra", "base_elev": 5249, "peak_elev": 8530},
         ],
         "ES": [
-            {"name": "Baqueira-Beret", "lat": 42.6967, "lon": 0.9433, "lifts": 36, "region": "Cataluña"},
-            {"name": "Sierra Nevada", "lat": 37.0958, "lon": -3.3958, "lifts": 24, "region": "Andalucía"},
-            {"name": "Formigal-Panticosa", "lat": 42.7667, "lon": -0.35, "lifts": 37, "region": "Aragón"},
+            {"name": "Baqueira-Beret", "lat": 42.6967, "lon": 0.9433, "lifts": 36, "region": "Cataluña", "base_elev": 4921, "peak_elev": 8366},
+            {"name": "Sierra Nevada", "lat": 37.0958, "lon": -3.3958, "lifts": 24, "region": "Andalucía", "base_elev": 6890, "peak_elev": 11155},
+            {"name": "Formigal-Panticosa", "lat": 42.7667, "lon": -0.35, "lifts": 37, "region": "Aragón", "base_elev": 4921, "peak_elev": 7546},
         ],
         "PL": [
-            {"name": "Zakopane (Kasprowy Wierch)", "lat": 49.2333, "lon": 19.9833, "lifts": 17, "region": "Małopolska"},
-            {"name": "Szczyrk", "lat": 49.7167, "lon": 19.0333, "lifts": 28, "region": "Śląskie"},
+            {"name": "Zakopane (Kasprowy Wierch)", "lat": 49.2333, "lon": 19.9833, "lifts": 17, "region": "Małopolska", "base_elev": 3281, "peak_elev": 6453},
+            {"name": "Szczyrk", "lat": 49.7167, "lon": 19.0333, "lifts": 28, "region": "Śląskie", "base_elev": 1640, "peak_elev": 4101},
         ],
         "CZ": [
-            {"name": "Špindlerův Mlýn", "lat": 50.7333, "lon": 15.6167, "lifts": 25, "region": "Hradec Králové"},
+            {"name": "Špindlerův Mlýn", "lat": 50.7333, "lon": 15.6167, "lifts": 25, "region": "Hradec Králové", "base_elev": 2297, "peak_elev": 4265},
         ],
         "SK": [
-            {"name": "Jasná", "lat": 48.9833, "lon": 19.5833, "lifts": 30, "region": "Žilina"},
+            {"name": "Jasná", "lat": 48.9833, "lon": 19.5833, "lifts": 30, "region": "Žilina", "base_elev": 3609, "peak_elev": 6890},
         ],
         "SI": [
-            {"name": "Kranjska Gora", "lat": 46.4833, "lon": 13.7833, "lifts": 18, "region": "Gorenjska"},
-            {"name": "Vogel", "lat": 46.2667, "lon": 13.8333, "lifts": 8, "region": "Gorenjska"},
+            {"name": "Kranjska Gora", "lat": 46.4833, "lon": 13.7833, "lifts": 18, "region": "Gorenjska", "base_elev": 2625, "peak_elev": 5577},
+            {"name": "Vogel", "lat": 46.2667, "lon": 13.8333, "lifts": 8, "region": "Gorenjska", "base_elev": 4101, "peak_elev": 5577},
         ],
         "BG": [
-            {"name": "Bansko", "lat": 41.8167, "lon": 23.4833, "lifts": 14, "region": "Blagoevgrad"},
-            {"name": "Borovets", "lat": 42.2667, "lon": 23.6, "lifts": 12, "region": "Sofia"},
+            {"name": "Bansko", "lat": 41.8167, "lon": 23.4833, "lifts": 14, "region": "Blagoevgrad", "base_elev": 3117, "peak_elev": 8497},
+            {"name": "Borovets", "lat": 42.2667, "lon": 23.6, "lifts": 12, "region": "Sofia", "base_elev": 4265, "peak_elev": 8530},
         ],
         "RO": [
-            {"name": "Poiana Brașov", "lat": 45.5833, "lon": 25.55, "lifts": 12, "region": "Brașov"},
+            {"name": "Poiana Brașov", "lat": 45.5833, "lon": 25.55, "lifts": 12, "region": "Brașov", "base_elev": 3281, "peak_elev": 5905},
         ],
         "KR": [
-            {"name": "Yongpyong", "lat": 37.6333, "lon": 128.6833, "lifts": 28, "region": "Gangwon-do"},
-            {"name": "Alpensia", "lat": 37.65, "lon": 128.6833, "lifts": 6, "region": "Gangwon-do"},
-            {"name": "Phoenix Park", "lat": 37.5833, "lon": 128.3167, "lifts": 21, "region": "Gangwon-do"},
-            {"name": "Jisan Forest", "lat": 37.2167, "lon": 127.3167, "lifts": 10, "region": "Gyeonggi-do"},
+            {"name": "Yongpyong", "lat": 37.6333, "lon": 128.6833, "lifts": 28, "region": "Gangwon-do", "base_elev": 2461, "peak_elev": 4921},
+            {"name": "Alpensia", "lat": 37.65, "lon": 128.6833, "lifts": 6, "region": "Gangwon-do", "base_elev": 2297, "peak_elev": 4593},
+            {"name": "Phoenix Park", "lat": 37.5833, "lon": 128.3167, "lifts": 21, "region": "Gangwon-do", "base_elev": 1969, "peak_elev": 4265},
+            {"name": "Jisan Forest", "lat": 37.2167, "lon": 127.3167, "lifts": 10, "region": "Gyeonggi-do", "base_elev": 656, "peak_elev": 1640},
         ],
         "CN": [
-            {"name": "Wanlong", "lat": 40.9, "lon": 115.4167, "lifts": 22, "region": "Hebei"},
-            {"name": "Thaiwoo", "lat": 40.95, "lon": 115.4167, "lifts": 17, "region": "Hebei"},
-            {"name": "Yabuli", "lat": 44.6167, "lon": 128.4667, "lifts": 17, "region": "Heilongjiang"},
-            {"name": "Changbaishan", "lat": 42.05, "lon": 128.0833, "lifts": 12, "region": "Jilin"},
-            {"name": "Beidahu", "lat": 43.2167, "lon": 127.4667, "lifts": 15, "region": "Jilin"},
+            {"name": "Wanlong", "lat": 40.9, "lon": 115.4167, "lifts": 22, "region": "Hebei", "base_elev": 5085, "peak_elev": 6890},
+            {"name": "Thaiwoo", "lat": 40.95, "lon": 115.4167, "lifts": 17, "region": "Hebei", "base_elev": 5413, "peak_elev": 7546},
+            {"name": "Yabuli", "lat": 44.6167, "lon": 128.4667, "lifts": 17, "region": "Heilongjiang", "base_elev": 1476, "peak_elev": 4429},
+            {"name": "Changbaishan", "lat": 42.05, "lon": 128.0833, "lifts": 12, "region": "Jilin", "base_elev": 2953, "peak_elev": 5413},
+            {"name": "Beidahu", "lat": 43.2167, "lon": 127.4667, "lifts": 15, "region": "Jilin", "base_elev": 1804, "peak_elev": 3445},
         ],
     }
     return known_resorts
@@ -464,7 +468,10 @@ def main():
                 continue
 
             timezone = get_timezone(data["lat"], data["lon"])
-            elevation = get_elevation(data["lat"], data["lon"])
+
+            # Use curated elevation data from known_resorts
+            base_elev = data.get("base_elev", 0)
+            peak_elev = data.get("peak_elev")
 
             resort = ResortData(
                 name=data["name"],
@@ -472,14 +479,14 @@ def main():
                 region=data["region"],
                 latitude=round(data["lat"], 6),
                 longitude=round(data["lon"], 6),
-                elevation_ft=elevation if elevation else 0,
+                elevation_base_ft=base_elev,
+                elevation_peak_ft=peak_elev,
                 lift_count=data["lifts"],
                 timezone=timezone,
             )
             all_resorts.append(resort)
-            print(f"  Added: {data['name']} ({data['lifts']} lifts)")
-
-            time.sleep(0.5)  # Rate limit elevation API
+            vert = peak_elev - base_elev if peak_elev else 0
+            print(f"  Added: {data['name']} ({data['lifts']} lifts, {vert}' vert)")
 
     # Sort by country, then by lift count descending
     all_resorts.sort(key=lambda r: (r.country, -r.lift_count))

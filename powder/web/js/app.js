@@ -218,6 +218,17 @@ function renderDetailChart(resort) {
     detailChart.render();
 }
 
+// Get elevation display text
+function getElevationText(resort) {
+    const base = resort.elevation_base_ft || resort.elevation_ft || 0;
+    const peak = resort.elevation_peak_ft;
+    const vert = resort.vertical_drop_ft;
+    if (peak && vert) {
+        return `${base.toLocaleString()}'-${peak.toLocaleString()}' (${vert.toLocaleString()}' vert)`;
+    }
+    return `${base.toLocaleString()}' elev`;
+}
+
 // Build hover popup content
 function buildHoverPopupContent(resort) {
     const snowfall = getSnowfallForFilter(resort);
@@ -227,11 +238,20 @@ function buildHoverPopupContent(resort) {
     const location = region ? `${region}, ${countryName}` : countryName;
     const lifts = resort.lift_count ? `${resort.lift_count} lifts` : '';
     const originalSnowfallText = `${label}: ${snowfall.toFixed(1)}"`;
-    
+
+    // Build elevation line
+    const base = resort.elevation_base_ft || resort.elevation_ft || 0;
+    const peak = resort.elevation_peak_ft;
+    const vert = resort.vertical_drop_ft;
+    const elevationLine = (peak && vert)
+        ? `${base.toLocaleString()}' base | ${peak.toLocaleString()}' peak | ${vert.toLocaleString()}' vert`
+        : `${base.toLocaleString()}' elev`;
+
     return `
         <div class="hover-popup-header">
             <h3 class="hover-popup-name">${resort.name}</h3>
-            <div class="hover-popup-meta">${location} | ${resort.elevation_ft.toLocaleString()}' elev${lifts ? ' | ' + lifts : ''}</div>
+            <div class="hover-popup-meta">${location}${lifts ? ' | ' + lifts : ''}</div>
+            <div class="hover-popup-meta">${elevationLine}</div>
         </div>
         <div class="hover-popup-snowfall" id="hover-popup-snowfall" data-original="${originalSnowfallText}">${originalSnowfallText}</div>
         <div id="hover-popup-chart"></div>
@@ -446,12 +466,14 @@ function buildDetailContent(resort) {
         }
     }
 
+    const elevationText = getElevationText(resort);
+
     return `
         <div class="detail-header">
             <h2>${resort.name}</h2>
             <div class="detail-meta">
                 <span>${region}${region ? ', ' : ''}${countryName}</span>
-                <span>${resort.elevation_ft.toLocaleString()}' elevation</span>
+                <span>${elevationText}</span>
                 ${lifts ? `<span>${lifts}</span>` : ''}
                 <span>${passDisplay}</span>
             </div>

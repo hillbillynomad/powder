@@ -95,13 +95,18 @@ def main():
         lat = resort["latitude"]
         lon = resort["longitude"]
 
+        # Support both old and new field names
+        base_elev = resort.get("elevation_base_ft") or resort.get("elevation_ft", 0)
+        peak_elev = resort.get("elevation_peak_ft")
+
         merged_resorts.append({
             "name": name,
             "country": country,
             "region": region,
             "latitude": lat,
             "longitude": lon,
-            "elevation_ft": resort["elevation_ft"],
+            "elevation_base_ft": base_elev,
+            "elevation_peak_ft": peak_elev,
             "lift_count": US_CA_LIFTS.get(name, 10),
             "avg_snowfall_inches": resort.get("avg_snowfall_inches"),
             "pass_type": resort.get("pass_type"),

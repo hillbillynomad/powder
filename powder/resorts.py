@@ -13,11 +13,24 @@ class SkiResort:
     region: str  # State/province/region (e.g., "Utah", "Savoie", "Hokkaido")
     latitude: float
     longitude: float
-    elevation_ft: int
+    elevation_base_ft: int  # Base elevation in feet
+    elevation_peak_ft: int | None = None  # Peak/summit elevation in feet
     lift_count: int = 0  # Total lifts (chairs, gondolas, trams, T-bars)
     avg_snowfall_inches: int | None = None
     pass_type: str | None = None  # "EPIC", "IKON", or None
     timezone: str = "UTC"  # IANA timezone (e.g., "America/Denver", "Europe/Paris")
+
+    @property
+    def vertical_drop_ft(self) -> int | None:
+        """Calculate vertical drop (peak - base). Returns None if peak is unknown."""
+        if self.elevation_peak_ft is None:
+            return None
+        return self.elevation_peak_ft - self.elevation_base_ft
+
+    @property
+    def elevation_ft(self) -> int:
+        """Backward compatibility alias for base elevation."""
+        return self.elevation_base_ft
 
     @property
     def state(self) -> str:
@@ -61,7 +74,9 @@ def load_resorts(config_path: Path | None = None) -> list[SkiResort]:
             region=region,
             latitude=entry["latitude"],
             longitude=entry["longitude"],
-            elevation_ft=entry["elevation_ft"],
+            # Support both old (elevation_ft) and new (elevation_base_ft) field names
+            elevation_base_ft=entry.get("elevation_base_ft") or entry.get("elevation_ft", 0),
+            elevation_peak_ft=entry.get("elevation_peak_ft"),
             lift_count=entry.get("lift_count", 0),
             avg_snowfall_inches=entry.get("avg_snowfall_inches"),
             pass_type=entry.get("pass_type"),
@@ -125,7 +140,8 @@ PARK_CITY = SkiResort(
     region="UT",
     latitude=40.6514,
     longitude=-111.5080,
-    elevation_ft=6900,
+    elevation_base_ft=6800,
+    elevation_peak_ft=10026,
     lift_count=41,
     avg_snowfall_inches=355,
     pass_type="EPIC",

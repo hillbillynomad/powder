@@ -6,11 +6,12 @@
       "region": "Andorra",
       "latitude": 42.5667,
       "longitude": 1.7,
-      "elevation_ft": 8005,
       "lift_count": 67,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Andorra"
+      "timezone": "Europe/Andorra",
+      "elevation_base_ft": 5906,
+      "elevation_peak_ft": 8858
     },
     {
       "name": "Vallnord",
@@ -18,11 +19,12 @@
       "region": "Andorra",
       "latitude": 42.5833,
       "longitude": 1.5333,
-      "elevation_ft": 6046,
       "lift_count": 30,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Andorra"
+      "timezone": "Europe/Andorra",
+      "elevation_base_ft": 5249,
+      "elevation_peak_ft": 8530
     },
     {
       "name": "Cerro Catedral",
@@ -30,11 +32,12 @@
       "region": "R\u00edo Negro",
       "latitude": -41.1667,
       "longitude": -71.4333,
-      "elevation_ft": 3641,
       "lift_count": 39,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "America/Argentina/Salta"
+      "timezone": "America/Argentina/Salta",
+      "elevation_base_ft": 3445,
+      "elevation_peak_ft": 6890
     },
     {
       "name": "Las Le\u00f1as",
@@ -42,11 +45,12 @@
       "region": "Mendoza",
       "latitude": -35.15,
       "longitude": -70.0833,
-      "elevation_ft": 7470,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "America/Argentina/Mendoza"
+      "timezone": "America/Argentina/Mendoza",
+      "elevation_base_ft": 7546,
+      "elevation_peak_ft": 11253
     },
     {
       "name": "Chapelco",
@@ -54,11 +58,12 @@
       "region": "Neuqu\u00e9n",
       "latitude": -40.2,
       "longitude": -71.25,
-      "elevation_ft": 6440,
       "lift_count": 12,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "America/Argentina/Salta"
+      "timezone": "America/Argentina/Salta",
+      "elevation_base_ft": 3773,
+      "elevation_peak_ft": 6201
     },
     {
       "name": "SkiWelt Wilder Kaiser",
@@ -66,11 +71,12 @@
       "region": "Tirol",
       "latitude": 47.4667,
       "longitude": 12.1167,
-      "elevation_ft": 2936,
       "lift_count": 90,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 2034,
+      "elevation_peak_ft": 6201
     },
     {
       "name": "Ski Arlberg",
@@ -78,11 +84,12 @@
       "region": "Tirol/Vorarlberg",
       "latitude": 47.1289,
       "longitude": 10.2106,
-      "elevation_ft": 5853,
       "lift_count": 88,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 4265,
+      "elevation_peak_ft": 9222
     },
     {
       "name": "Saalbach Hinterglemm",
@@ -90,11 +97,12 @@
       "region": "Salzburg",
       "latitude": 47.3906,
       "longitude": 12.6361,
-      "elevation_ft": 3264,
       "lift_count": 70,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 3281,
+      "elevation_peak_ft": 6890
     },
     {
       "name": "Kitzb\u00fchel",
@@ -102,11 +110,12 @@
       "region": "Tirol",
       "latitude": 47.4492,
       "longitude": 12.3919,
-      "elevation_ft": 2447,
       "lift_count": 57,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 2625,
+      "elevation_peak_ft": 6562
     },
     {
       "name": "Zillertal Arena",
@@ -114,11 +123,12 @@
       "region": "Tirol",
       "latitude": 47.1667,
       "longitude": 11.8833,
-      "elevation_ft": 4150,
       "lift_count": 52,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 1804,
+      "elevation_peak_ft": 7956
     },
     {
       "name": "Bad Gastein",
@@ -126,11 +136,12 @@
       "region": "Salzburg",
       "latitude": 47.1167,
       "longitude": 13.1333,
-      "elevation_ft": 3540,
       "lift_count": 50,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 2789,
+      "elevation_peak_ft": 8497
     },
     {
       "name": "Ischgl/Samnaun",
@@ -138,11 +149,12 @@
       "region": "Tirol",
       "latitude": 46.9689,
       "longitude": 10.2906,
-      "elevation_ft": 6351,
       "lift_count": 45,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 4593,
+      "elevation_peak_ft": 9518
     },
     {
       "name": "Schladming",
@@ -150,11 +162,12 @@
       "region": "Steiermark",
       "latitude": 47.3942,
       "longitude": 13.6875,
-      "elevation_ft": 2414,
       "lift_count": 44,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 2461,
+      "elevation_peak_ft": 6201
     },
     {
       "name": "Mayrhofen",
@@ -162,11 +175,12 @@
       "region": "Tirol",
       "latitude": 47.1667,
       "longitude": 11.8667,
-      "elevation_ft": 2089,
       "lift_count": 44,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 2034,
+      "elevation_peak_ft": 8202
     },
     {
       "name": "S\u00f6lden",
@@ -174,11 +188,12 @@
       "region": "Tirol",
       "latitude": 46.9667,
       "longitude": 10.8667,
-      "elevation_ft": 5590,
       "lift_count": 31,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 4429,
+      "elevation_peak_ft": 10958
     },
     {
       "name": "Obertauern",
@@ -186,11 +201,12 @@
       "region": "Salzburg",
       "latitude": 47.25,
       "longitude": 13.5667,
-      "elevation_ft": 5875,
       "lift_count": 26,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 5577,
+      "elevation_peak_ft": 7218
     },
     {
       "name": "Stubaier Gletscher",
@@ -198,11 +214,12 @@
       "region": "Tirol",
       "latitude": 47.0,
       "longitude": 11.1167,
-      "elevation_ft": 8589,
       "lift_count": 26,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 4593,
+      "elevation_peak_ft": 10531
     },
     {
       "name": "Obergurgl-Hochgurgl",
@@ -210,11 +227,12 @@
       "region": "Tirol",
       "latitude": 46.8667,
       "longitude": 11.0167,
-      "elevation_ft": 6624,
       "lift_count": 25,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 6201,
+      "elevation_peak_ft": 10827
     },
     {
       "name": "Hintertux Glacier",
@@ -222,11 +240,12 @@
       "region": "Tirol",
       "latitude": 47.0667,
       "longitude": 11.6667,
-      "elevation_ft": 9468,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Vienna"
+      "timezone": "Europe/Vienna",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 10663
     },
     {
       "name": "Perisher",
@@ -234,11 +253,12 @@
       "region": "New South Wales",
       "latitude": -36.4,
       "longitude": 148.4167,
-      "elevation_ft": 5718,
       "lift_count": 47,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Australia/Sydney"
+      "timezone": "Australia/Sydney",
+      "elevation_base_ft": 5577,
+      "elevation_peak_ft": 6890
     },
     {
       "name": "Mount Buller",
@@ -246,11 +266,12 @@
       "region": "Victoria",
       "latitude": -37.15,
       "longitude": 146.4333,
-      "elevation_ft": 5679,
       "lift_count": 22,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Australia/Melbourne"
+      "timezone": "Australia/Melbourne",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 5905
     },
     {
       "name": "Thredbo",
@@ -258,11 +279,12 @@
       "region": "New South Wales",
       "latitude": -36.5,
       "longitude": 148.3,
-      "elevation_ft": 4996,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Australia/Sydney"
+      "timezone": "Australia/Sydney",
+      "elevation_base_ft": 4593,
+      "elevation_peak_ft": 6726
     },
     {
       "name": "Falls Creek",
@@ -270,11 +292,12 @@
       "region": "Victoria",
       "latitude": -36.8667,
       "longitude": 147.2833,
-      "elevation_ft": 5436,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Australia/Melbourne"
+      "timezone": "Australia/Melbourne",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 6033
     },
     {
       "name": "Mount Hotham",
@@ -282,11 +305,12 @@
       "region": "Victoria",
       "latitude": -37.0833,
       "longitude": 147.1333,
-      "elevation_ft": 5203,
       "lift_count": 13,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Australia/Melbourne"
+      "timezone": "Australia/Melbourne",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 6102
     },
     {
       "name": "Bansko",
@@ -294,11 +318,12 @@
       "region": "Blagoevgrad",
       "latitude": 41.8167,
       "longitude": 23.4833,
-      "elevation_ft": 3543,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Sofia"
+      "timezone": "Europe/Sofia",
+      "elevation_base_ft": 3117,
+      "elevation_peak_ft": 8497
     },
     {
       "name": "Borovets",
@@ -306,11 +331,12 @@
       "region": "Sofia",
       "latitude": 42.2667,
       "longitude": 23.6,
-      "elevation_ft": 4324,
       "lift_count": 12,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Sofia"
+      "timezone": "Europe/Sofia",
+      "elevation_base_ft": 4265,
+      "elevation_peak_ft": 8530
     },
     {
       "name": "Blue Mountain",
@@ -318,11 +344,12 @@
       "region": "ON",
       "latitude": 44.504,
       "longitude": -80.312,
-      "elevation_ft": 755,
       "lift_count": 42,
       "avg_snowfall_inches": 100,
       "pass_type": "IKON",
-      "timezone": "America/Toronto"
+      "timezone": "America/Toronto",
+      "elevation_base_ft": 755,
+      "elevation_peak_ft": 1483
     },
     {
       "name": "Whistler Blackcomb",
@@ -330,11 +357,12 @@
       "region": "BC",
       "latitude": 50.115,
       "longitude": -122.95,
-      "elevation_ft": 2140,
       "lift_count": 37,
       "avg_snowfall_inches": 458,
       "pass_type": "EPIC",
-      "timezone": "America/Vancouver"
+      "timezone": "America/Vancouver",
+      "elevation_base_ft": 2140,
+      "elevation_peak_ft": 7494
     },
     {
       "name": "Big White",
@@ -342,11 +370,12 @@
       "region": "BC",
       "latitude": 49.7216,
       "longitude": -118.9266,
-      "elevation_ft": 4950,
       "lift_count": 16,
       "avg_snowfall_inches": 295,
       "pass_type": null,
-      "timezone": "America/Vancouver"
+      "timezone": "America/Vancouver",
+      "elevation_base_ft": 4950,
+      "elevation_peak_ft": 7606
     },
     {
       "name": "Mont Tremblant",
@@ -354,11 +383,12 @@
       "region": "QC",
       "latitude": 46.1185,
       "longitude": -74.5962,
-      "elevation_ft": 755,
       "lift_count": 14,
       "avg_snowfall_inches": 165,
       "pass_type": "IKON",
-      "timezone": "America/Toronto"
+      "timezone": "America/Toronto",
+      "elevation_base_ft": 755,
+      "elevation_peak_ft": 2871
     },
     {
       "name": "Sun Peaks",
@@ -366,11 +396,12 @@
       "region": "BC",
       "latitude": 50.8844,
       "longitude": -119.8859,
-      "elevation_ft": 4116,
       "lift_count": 13,
       "avg_snowfall_inches": 177,
       "pass_type": "IKON",
-      "timezone": "America/Vancouver"
+      "timezone": "America/Vancouver",
+      "elevation_base_ft": 4116,
+      "elevation_peak_ft": 7060
     },
     {
       "name": "Banff Sunshine",
@@ -378,11 +409,12 @@
       "region": "AB",
       "latitude": 51.115,
       "longitude": -115.765,
-      "elevation_ft": 5440,
       "lift_count": 12,
       "avg_snowfall_inches": 235,
       "pass_type": "IKON",
-      "timezone": "America/Edmonton"
+      "timezone": "America/Edmonton",
+      "elevation_base_ft": 5440,
+      "elevation_peak_ft": 8954
     },
     {
       "name": "SilverStar",
@@ -390,11 +422,12 @@
       "region": "BC",
       "latitude": 50.3598,
       "longitude": -119.061,
-      "elevation_ft": 3780,
       "lift_count": 12,
       "avg_snowfall_inches": 276,
       "pass_type": null,
-      "timezone": "America/Vancouver"
+      "timezone": "America/Vancouver",
+      "elevation_base_ft": 3780,
+      "elevation_peak_ft": 6280
     },
     {
       "name": "Lake Louise",
@@ -402,11 +435,12 @@
       "region": "AB",
       "latitude": 51.4419,
       "longitude": -116.1622,
-      "elevation_ft": 5400,
       "lift_count": 10,
       "avg_snowfall_inches": 200,
       "pass_type": "IKON",
-      "timezone": "America/Edmonton"
+      "timezone": "America/Edmonton",
+      "elevation_base_ft": 5400,
+      "elevation_peak_ft": 8650
     },
     {
       "name": "Panorama",
@@ -414,11 +448,12 @@
       "region": "BC",
       "latitude": 50.4603,
       "longitude": -116.2403,
-      "elevation_ft": 3773,
       "lift_count": 10,
       "avg_snowfall_inches": 204,
       "pass_type": "IKON",
-      "timezone": "America/Edmonton"
+      "timezone": "America/Edmonton",
+      "elevation_base_ft": 3773,
+      "elevation_peak_ft": 7800
     },
     {
       "name": "Fernie Alpine Resort",
@@ -426,11 +461,12 @@
       "region": "BC",
       "latitude": 49.4639,
       "longitude": -115.0866,
-      "elevation_ft": 3500,
       "lift_count": 10,
       "avg_snowfall_inches": 345,
       "pass_type": "EPIC",
-      "timezone": "America/Edmonton"
+      "timezone": "America/Edmonton",
+      "elevation_base_ft": 3500,
+      "elevation_peak_ft": 7000
     },
     {
       "name": "Verbier",
@@ -438,11 +474,12 @@
       "region": "Valais",
       "latitude": 46.0967,
       "longitude": 7.2283,
-      "elevation_ft": 4901,
       "lift_count": 82,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 10925
     },
     {
       "name": "St. Moritz",
@@ -450,11 +487,12 @@
       "region": "Graub\u00fcnden",
       "latitude": 46.4908,
       "longitude": 9.8355,
-      "elevation_ft": 5803,
       "lift_count": 56,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 5748,
+      "elevation_peak_ft": 10837
     },
     {
       "name": "Adelboden-Lenk",
@@ -462,11 +500,12 @@
       "region": "Bern",
       "latitude": 46.4922,
       "longitude": 7.5606,
-      "elevation_ft": 4373,
       "lift_count": 56,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 4429,
+      "elevation_peak_ft": 7546
     },
     {
       "name": "Davos Klosters",
@@ -474,11 +513,12 @@
       "region": "Graub\u00fcnden",
       "latitude": 46.8027,
       "longitude": 9.836,
-      "elevation_ft": 5141,
       "lift_count": 55,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 4856,
+      "elevation_peak_ft": 9331
     },
     {
       "name": "Zermatt",
@@ -486,11 +526,12 @@
       "region": "Valais",
       "latitude": 46.0207,
       "longitude": 7.7491,
-      "elevation_ft": 5282,
       "lift_count": 52,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 5315,
+      "elevation_peak_ft": 12739
     },
     {
       "name": "Wengen/Jungfrau",
@@ -498,11 +539,12 @@
       "region": "Bern",
       "latitude": 46.6083,
       "longitude": 7.9222,
-      "elevation_ft": 4209,
       "lift_count": 44,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 3445,
+      "elevation_peak_ft": 9748
     },
     {
       "name": "Arosa Lenzerheide",
@@ -510,11 +552,12 @@
       "region": "Graub\u00fcnden",
       "latitude": 46.7833,
       "longitude": 9.6667,
-      "elevation_ft": 6666,
       "lift_count": 43,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 4265,
+      "elevation_peak_ft": 9186
     },
     {
       "name": "Laax/Flims",
@@ -522,11 +565,12 @@
       "region": "Graub\u00fcnden",
       "latitude": 46.8419,
       "longitude": 9.2594,
-      "elevation_ft": 4537,
       "lift_count": 28,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 3543,
+      "elevation_peak_ft": 9843
     },
     {
       "name": "Crans-Montana",
@@ -534,11 +578,12 @@
       "region": "Valais",
       "latitude": 46.3108,
       "longitude": 7.4819,
-      "elevation_ft": 4924,
       "lift_count": 27,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 9842
     },
     {
       "name": "Grindelwald",
@@ -546,11 +591,12 @@
       "region": "Bern",
       "latitude": 46.6244,
       "longitude": 8.0414,
-      "elevation_ft": 3451,
       "lift_count": 26,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 3445,
+      "elevation_peak_ft": 9748
     },
     {
       "name": "Engelberg-Titlis",
@@ -558,11 +604,12 @@
       "region": "Obwalden",
       "latitude": 46.8214,
       "longitude": 8.4072,
-      "elevation_ft": 3323,
       "lift_count": 25,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 3281,
+      "elevation_peak_ft": 9908
     },
     {
       "name": "Saas-Fee",
@@ -570,11 +617,12 @@
       "region": "Valais",
       "latitude": 46.1086,
       "longitude": 7.9283,
-      "elevation_ft": 5928,
       "lift_count": 22,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Zurich"
+      "timezone": "Europe/Zurich",
+      "elevation_base_ft": 5906,
+      "elevation_peak_ft": 11811
     },
     {
       "name": "Valle Nevado",
@@ -582,11 +630,12 @@
       "region": "Metropolitana",
       "latitude": -33.3833,
       "longitude": -70.2833,
-      "elevation_ft": 6017,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "America/Santiago"
+      "timezone": "America/Santiago",
+      "elevation_base_ft": 9842,
+      "elevation_peak_ft": 12303
     },
     {
       "name": "Portillo",
@@ -594,11 +643,12 @@
       "region": "Valpara\u00edso",
       "latitude": -32.8333,
       "longitude": -70.1333,
-      "elevation_ft": 9327,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "America/Santiago"
+      "timezone": "America/Santiago",
+      "elevation_base_ft": 9186,
+      "elevation_peak_ft": 10925
     },
     {
       "name": "Wanlong",
@@ -606,11 +656,12 @@
       "region": "Hebei",
       "latitude": 40.9,
       "longitude": 115.4167,
-      "elevation_ft": 5833,
       "lift_count": 22,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Shanghai"
+      "timezone": "Asia/Shanghai",
+      "elevation_base_ft": 5085,
+      "elevation_peak_ft": 6890
     },
     {
       "name": "Thaiwoo",
@@ -618,11 +669,12 @@
       "region": "Hebei",
       "latitude": 40.95,
       "longitude": 115.4167,
-      "elevation_ft": 6414,
       "lift_count": 17,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Shanghai"
+      "timezone": "Asia/Shanghai",
+      "elevation_base_ft": 5413,
+      "elevation_peak_ft": 7546
     },
     {
       "name": "Yabuli",
@@ -630,11 +682,12 @@
       "region": "Heilongjiang",
       "latitude": 44.6167,
       "longitude": 128.4667,
-      "elevation_ft": 2431,
       "lift_count": 17,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Shanghai"
+      "timezone": "Asia/Shanghai",
+      "elevation_base_ft": 1476,
+      "elevation_peak_ft": 4429
     },
     {
       "name": "Beidahu",
@@ -642,11 +695,12 @@
       "region": "Jilin",
       "latitude": 43.2167,
       "longitude": 127.4667,
-      "elevation_ft": 2099,
       "lift_count": 15,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Shanghai"
+      "timezone": "Asia/Shanghai",
+      "elevation_base_ft": 1804,
+      "elevation_peak_ft": 3445
     },
     {
       "name": "Changbaishan",
@@ -654,11 +708,12 @@
       "region": "Jilin",
       "latitude": 42.05,
       "longitude": 128.0833,
-      "elevation_ft": 6706,
       "lift_count": 12,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Shanghai"
+      "timezone": "Asia/Shanghai",
+      "elevation_base_ft": 2953,
+      "elevation_peak_ft": 5413
     },
     {
       "name": "\u0160pindler\u016fv Ml\u00fdn",
@@ -666,11 +721,12 @@
       "region": "Hradec Kr\u00e1lov\u00e9",
       "latitude": 50.7333,
       "longitude": 15.6167,
-      "elevation_ft": 3051,
       "lift_count": 25,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Prague"
+      "timezone": "Europe/Prague",
+      "elevation_base_ft": 2297,
+      "elevation_peak_ft": 4265
     },
     {
       "name": "Oberstdorf",
@@ -678,11 +734,12 @@
       "region": "Bayern",
       "latitude": 47.4083,
       "longitude": 10.2792,
-      "elevation_ft": 2687,
       "lift_count": 45,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Berlin"
+      "timezone": "Europe/Berlin",
+      "elevation_base_ft": 2690,
+      "elevation_peak_ft": 7218
     },
     {
       "name": "Garmisch-Partenkirchen",
@@ -690,11 +747,12 @@
       "region": "Bayern",
       "latitude": 47.4917,
       "longitude": 11.0958,
-      "elevation_ft": 2309,
       "lift_count": 33,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Berlin"
+      "timezone": "Europe/Berlin",
+      "elevation_base_ft": 2362,
+      "elevation_peak_ft": 9718
     },
     {
       "name": "Winterberg",
@@ -702,11 +760,12 @@
       "region": "Nordrhein-Westfalen",
       "latitude": 51.1942,
       "longitude": 8.5333,
-      "elevation_ft": 2194,
       "lift_count": 26,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Berlin"
+      "timezone": "Europe/Berlin",
+      "elevation_base_ft": 1804,
+      "elevation_peak_ft": 2789
     },
     {
       "name": "Feldberg",
@@ -714,11 +773,12 @@
       "region": "Baden-W\u00fcrttemberg",
       "latitude": 47.8583,
       "longitude": 8.0333,
-      "elevation_ft": 4114,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Berlin"
+      "timezone": "Europe/Berlin",
+      "elevation_base_ft": 3117,
+      "elevation_peak_ft": 4757
     },
     {
       "name": "Zugspitze",
@@ -726,11 +786,12 @@
       "region": "Bayern",
       "latitude": 47.4211,
       "longitude": 10.9853,
-      "elevation_ft": 9534,
       "lift_count": 10,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Berlin"
+      "timezone": "Europe/Berlin",
+      "elevation_base_ft": 7635,
+      "elevation_peak_ft": 9718
     },
     {
       "name": "Formigal-Panticosa",
@@ -738,11 +799,12 @@
       "region": "Arag\u00f3n",
       "latitude": 42.7667,
       "longitude": -0.35,
-      "elevation_ft": 4803,
       "lift_count": 37,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Madrid"
+      "timezone": "Europe/Madrid",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 7546
     },
     {
       "name": "Baqueira-Beret",
@@ -750,11 +812,12 @@
       "region": "Catalu\u00f1a",
       "latitude": 42.6967,
       "longitude": 0.9433,
-      "elevation_ft": 5866,
       "lift_count": 36,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Madrid"
+      "timezone": "Europe/Madrid",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 8366
     },
     {
       "name": "Sierra Nevada",
@@ -762,11 +825,12 @@
       "region": "Andaluc\u00eda",
       "latitude": 37.0958,
       "longitude": -3.3958,
-      "elevation_ft": 7450,
       "lift_count": 24,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Madrid"
+      "timezone": "Europe/Madrid",
+      "elevation_base_ft": 6890,
+      "elevation_peak_ft": 11155
     },
     {
       "name": "Yll\u00e4s",
@@ -774,11 +838,12 @@
       "region": "Lapland",
       "latitude": 67.55,
       "longitude": 24.25,
-      "elevation_ft": 0,
       "lift_count": 29,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Helsinki"
+      "timezone": "Europe/Helsinki",
+      "elevation_base_ft": 656,
+      "elevation_peak_ft": 2297
     },
     {
       "name": "Levi",
@@ -786,11 +851,12 @@
       "region": "Lapland",
       "latitude": 67.8,
       "longitude": 24.8167,
-      "elevation_ft": 0,
       "lift_count": 26,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Helsinki"
+      "timezone": "Europe/Helsinki",
+      "elevation_base_ft": 656,
+      "elevation_peak_ft": 1706
     },
     {
       "name": "Ruka",
@@ -798,11 +864,12 @@
       "region": "Lapland",
       "latitude": 66.1667,
       "longitude": 29.1333,
-      "elevation_ft": 0,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Helsinki"
+      "timezone": "Europe/Helsinki",
+      "elevation_base_ft": 656,
+      "elevation_peak_ft": 1640
     },
     {
       "name": "Portes du Soleil",
@@ -810,11 +877,12 @@
       "region": "Haute-Savoie",
       "latitude": 46.1833,
       "longitude": 6.75,
-      "elevation_ft": 4839,
       "lift_count": 196,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 3280,
+      "elevation_peak_ft": 7546
     },
     {
       "name": "Les 3 Vall\u00e9es",
@@ -822,11 +890,12 @@
       "region": "Savoie",
       "latitude": 45.3167,
       "longitude": 6.5833,
-      "elevation_ft": 8799,
       "lift_count": 169,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 4265,
+      "elevation_peak_ft": 10597
     },
     {
       "name": "Paradiski",
@@ -834,11 +903,12 @@
       "region": "Savoie",
       "latitude": 45.5167,
       "longitude": 6.8833,
-      "elevation_ft": 9560,
       "lift_count": 141,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 4101,
+      "elevation_peak_ft": 10663
     },
     {
       "name": "Meg\u00e8ve/Saint-Gervais",
@@ -846,11 +916,12 @@
       "region": "Haute-Savoie",
       "latitude": 45.8567,
       "longitude": 6.6178,
-      "elevation_ft": 3622,
       "lift_count": 84,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 3609,
+      "elevation_peak_ft": 6562
     },
     {
       "name": "Alpe d'Huez",
@@ -858,11 +929,12 @@
       "region": "Is\u00e8re",
       "latitude": 45.0917,
       "longitude": 6.0667,
-      "elevation_ft": 5990,
       "lift_count": 81,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 4101,
+      "elevation_peak_ft": 10925
     },
     {
       "name": "Tignes/Val d'Is\u00e8re",
@@ -870,11 +942,12 @@
       "region": "Savoie",
       "latitude": 45.4667,
       "longitude": 6.9,
-      "elevation_ft": 6938,
       "lift_count": 79,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 5085,
+      "elevation_peak_ft": 11339
     },
     {
       "name": "La Plagne",
@@ -882,11 +955,12 @@
       "region": "Savoie",
       "latitude": 45.5,
       "longitude": 6.7,
-      "elevation_ft": 7112,
       "lift_count": 79,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 3937,
+      "elevation_peak_ft": 10663
     },
     {
       "name": "Flaine/Grand Massif",
@@ -894,11 +968,12 @@
       "region": "Haute-Savoie",
       "latitude": 46.0058,
       "longitude": 6.6897,
-      "elevation_ft": 5183,
       "lift_count": 64,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 2297,
+      "elevation_peak_ft": 8202
     },
     {
       "name": "Serre Chevalier",
@@ -906,11 +981,12 @@
       "region": "Hautes-Alpes",
       "latitude": 44.9333,
       "longitude": 6.5833,
-      "elevation_ft": 4790,
       "lift_count": 61,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 4265,
+      "elevation_peak_ft": 9186
     },
     {
       "name": "Les Arcs",
@@ -918,11 +994,12 @@
       "region": "Savoie",
       "latitude": 45.5667,
       "longitude": 6.8167,
-      "elevation_ft": 7198,
       "lift_count": 54,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 3937,
+      "elevation_peak_ft": 10663
     },
     {
       "name": "La Clusaz",
@@ -930,11 +1007,12 @@
       "region": "Haute-Savoie",
       "latitude": 45.9042,
       "longitude": 6.4239,
-      "elevation_ft": 3398,
       "lift_count": 49,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 3412,
+      "elevation_peak_ft": 8038
     },
     {
       "name": "Chamonix Mont-Blanc",
@@ -942,11 +1020,12 @@
       "region": "Haute-Savoie",
       "latitude": 45.9237,
       "longitude": 6.8694,
-      "elevation_ft": 3425,
       "lift_count": 47,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 3396,
+      "elevation_peak_ft": 12605
     },
     {
       "name": "Les 2 Alpes",
@@ -954,11 +1033,12 @@
       "region": "Is\u00e8re",
       "latitude": 45.0167,
       "longitude": 6.1333,
-      "elevation_ft": 5767,
       "lift_count": 47,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 5413,
+      "elevation_peak_ft": 11811
     },
     {
       "name": "Avoriaz",
@@ -966,11 +1046,12 @@
       "region": "Haute-Savoie",
       "latitude": 46.1906,
       "longitude": 6.7739,
-      "elevation_ft": 5941,
       "lift_count": 34,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Paris"
+      "timezone": "Europe/Paris",
+      "elevation_base_ft": 5906,
+      "elevation_peak_ft": 7546
     },
     {
       "name": "Dolomiti Superski",
@@ -978,11 +1059,12 @@
       "region": "Trentino-Alto Adige",
       "latitude": 46.5333,
       "longitude": 11.8667,
-      "elevation_ft": 6227,
       "lift_count": 450,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 3937,
+      "elevation_peak_ft": 10341
     },
     {
       "name": "Sestriere/Via Lattea",
@@ -990,11 +1072,12 @@
       "region": "Piemonte",
       "latitude": 44.9583,
       "longitude": 6.8792,
-      "elevation_ft": 6679,
       "lift_count": 92,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 4593,
+      "elevation_peak_ft": 9514
     },
     {
       "name": "Val Gardena",
@@ -1002,11 +1085,12 @@
       "region": "Trentino-Alto Adige",
       "latitude": 46.5583,
       "longitude": 11.7556,
-      "elevation_ft": 5111,
       "lift_count": 83,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 4101,
+      "elevation_peak_ft": 8202
     },
     {
       "name": "Alta Badia",
@@ -1014,11 +1098,12 @@
       "region": "Trentino-Alto Adige",
       "latitude": 46.55,
       "longitude": 11.8833,
-      "elevation_ft": 6033,
       "lift_count": 53,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 4101,
+      "elevation_peak_ft": 8858
     },
     {
       "name": "Cortina d'Ampezzo",
@@ -1026,11 +1111,12 @@
       "region": "Veneto",
       "latitude": 46.5369,
       "longitude": 12.1356,
-      "elevation_ft": 3940,
       "lift_count": 37,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 4101,
+      "elevation_peak_ft": 10643
     },
     {
       "name": "Kronplatz",
@@ -1038,11 +1124,12 @@
       "region": "Trentino-Alto Adige",
       "latitude": 46.7417,
       "longitude": 11.9583,
-      "elevation_ft": 7050,
       "lift_count": 32,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 3117,
+      "elevation_peak_ft": 7462
     },
     {
       "name": "Livigno",
@@ -1050,11 +1137,12 @@
       "region": "Lombardia",
       "latitude": 46.5386,
       "longitude": 10.1356,
-      "elevation_ft": 5971,
       "lift_count": 31,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 5971,
+      "elevation_peak_ft": 9514
     },
     {
       "name": "Madonna di Campiglio",
@@ -1062,11 +1150,12 @@
       "region": "Trentino",
       "latitude": 46.2292,
       "longitude": 10.8269,
-      "elevation_ft": 4986,
       "lift_count": 24,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 4921,
+      "elevation_peak_ft": 8858
     },
     {
       "name": "Cervinia",
@@ -1074,11 +1163,12 @@
       "region": "Valle d'Aosta",
       "latitude": 45.9333,
       "longitude": 7.6333,
-      "elevation_ft": 6735,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 6726,
+      "elevation_peak_ft": 11417
     },
     {
       "name": "Courmayeur",
@@ -1086,11 +1176,12 @@
       "region": "Valle d'Aosta",
       "latitude": 45.7911,
       "longitude": 6.9686,
-      "elevation_ft": 3815,
       "lift_count": 18,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 3937,
+      "elevation_peak_ft": 9186
     },
     {
       "name": "Bormio",
@@ -1098,11 +1189,12 @@
       "region": "Lombardia",
       "latitude": 46.4669,
       "longitude": 10.3711,
-      "elevation_ft": 3966,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Rome"
+      "timezone": "Europe/Rome",
+      "elevation_base_ft": 3904,
+      "elevation_peak_ft": 10466
     },
     {
       "name": "Hakuba Valley",
@@ -1110,11 +1202,12 @@
       "region": "Nagano",
       "latitude": 36.6983,
       "longitude": 137.8322,
-      "elevation_ft": 2985,
       "lift_count": 135,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 2526,
+      "elevation_peak_ft": 5905
     },
     {
       "name": "Shiga Kogen",
@@ -1122,11 +1215,12 @@
       "region": "Nagano",
       "latitude": 36.6861,
       "longitude": 138.4831,
-      "elevation_ft": 5285,
       "lift_count": 51,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 4593,
+      "elevation_peak_ft": 7218
     },
     {
       "name": "Niseko United",
@@ -1134,11 +1228,12 @@
       "region": "Hokkaido",
       "latitude": 42.8625,
       "longitude": 140.6869,
-      "elevation_ft": 1843,
       "lift_count": 38,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 787,
+      "elevation_peak_ft": 4101
     },
     {
       "name": "Zao Onsen",
@@ -1146,11 +1241,12 @@
       "region": "Yamagata",
       "latitude": 38.1667,
       "longitude": 140.4167,
-      "elevation_ft": 4274,
       "lift_count": 32,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 2625,
+      "elevation_peak_ft": 5577
     },
     {
       "name": "Myoko Kogen",
@@ -1158,11 +1254,12 @@
       "region": "Niigata",
       "latitude": 36.8833,
       "longitude": 138.1833,
-      "elevation_ft": 2227,
       "lift_count": 28,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 2461,
+      "elevation_peak_ft": 5413
     },
     {
       "name": "Naeba",
@@ -1170,11 +1267,12 @@
       "region": "Niigata",
       "latitude": 36.8167,
       "longitude": 138.7167,
-      "elevation_ft": 3871,
       "lift_count": 27,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 2953,
+      "elevation_peak_ft": 5413
     },
     {
       "name": "Nozawa Onsen",
@@ -1182,11 +1280,12 @@
       "region": "Nagano",
       "latitude": 36.9231,
       "longitude": 138.4408,
-      "elevation_ft": 1706,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 1706,
+      "elevation_peak_ft": 5413
     },
     {
       "name": "Appi Kogen",
@@ -1194,11 +1293,12 @@
       "region": "Iwate",
       "latitude": 39.9333,
       "longitude": 140.9333,
-      "elevation_ft": 3316,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 1969,
+      "elevation_peak_ft": 4593
     },
     {
       "name": "Rusutsu",
@@ -1206,11 +1306,12 @@
       "region": "Hokkaido",
       "latitude": 42.7333,
       "longitude": 140.8833,
-      "elevation_ft": 1141,
       "lift_count": 18,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 656,
+      "elevation_peak_ft": 3281
     },
     {
       "name": "Madarao Kogen",
@@ -1218,11 +1319,12 @@
       "region": "Nagano",
       "latitude": 36.8667,
       "longitude": 138.3167,
-      "elevation_ft": 1988,
       "lift_count": 18,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 2953,
+      "elevation_peak_ft": 4429
     },
     {
       "name": "Furano",
@@ -1230,11 +1332,12 @@
       "region": "Hokkaido",
       "latitude": 43.3433,
       "longitude": 142.3819,
-      "elevation_ft": 567,
       "lift_count": 11,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 755,
+      "elevation_peak_ft": 3707
     },
     {
       "name": "Kiroro",
@@ -1242,11 +1345,12 @@
       "region": "Hokkaido",
       "latitude": 43.0833,
       "longitude": 140.9833,
-      "elevation_ft": 1830,
       "lift_count": 10,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Tokyo"
+      "timezone": "Asia/Tokyo",
+      "elevation_base_ft": 1640,
+      "elevation_peak_ft": 3871
     },
     {
       "name": "Yongpyong",
@@ -1254,11 +1358,12 @@
       "region": "Gangwon-do",
       "latitude": 37.6333,
       "longitude": 128.6833,
-      "elevation_ft": 3034,
       "lift_count": 28,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Seoul"
+      "timezone": "Asia/Seoul",
+      "elevation_base_ft": 2461,
+      "elevation_peak_ft": 4921
     },
     {
       "name": "Phoenix Park",
@@ -1266,11 +1371,12 @@
       "region": "Gangwon-do",
       "latitude": 37.5833,
       "longitude": 128.3167,
-      "elevation_ft": 2470,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Seoul"
+      "timezone": "Asia/Seoul",
+      "elevation_base_ft": 1969,
+      "elevation_peak_ft": 4265
     },
     {
       "name": "Jisan Forest",
@@ -1278,11 +1384,12 @@
       "region": "Gyeonggi-do",
       "latitude": 37.2167,
       "longitude": 127.3167,
-      "elevation_ft": 666,
       "lift_count": 10,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Asia/Seoul"
+      "timezone": "Asia/Seoul",
+      "elevation_base_ft": 656,
+      "elevation_peak_ft": 1640
     },
     {
       "name": "Trysil",
@@ -1290,11 +1397,12 @@
       "region": "Innlandet",
       "latitude": 61.3133,
       "longitude": 12.2603,
-      "elevation_ft": 0,
       "lift_count": 32,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Oslo"
+      "timezone": "Europe/Oslo",
+      "elevation_base_ft": 1312,
+      "elevation_peak_ft": 3609
     },
     {
       "name": "Hemsedal",
@@ -1302,11 +1410,12 @@
       "region": "Viken",
       "latitude": 60.8658,
       "longitude": 8.5697,
-      "elevation_ft": 0,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Oslo"
+      "timezone": "Europe/Oslo",
+      "elevation_base_ft": 2132,
+      "elevation_peak_ft": 5905
     },
     {
       "name": "Geilo",
@@ -1314,11 +1423,12 @@
       "region": "Viken",
       "latitude": 60.5333,
       "longitude": 8.2,
-      "elevation_ft": 0,
       "lift_count": 20,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Oslo"
+      "timezone": "Europe/Oslo",
+      "elevation_base_ft": 2625,
+      "elevation_peak_ft": 3773
     },
     {
       "name": "Hafjell",
@@ -1326,11 +1436,12 @@
       "region": "Innlandet",
       "latitude": 61.2333,
       "longitude": 10.4333,
-      "elevation_ft": 0,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Oslo"
+      "timezone": "Europe/Oslo",
+      "elevation_base_ft": 656,
+      "elevation_peak_ft": 3609
     },
     {
       "name": "Kvitfjell",
@@ -1338,11 +1449,12 @@
       "region": "Innlandet",
       "latitude": 61.4667,
       "longitude": 10.1333,
-      "elevation_ft": 0,
       "lift_count": 11,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Oslo"
+      "timezone": "Europe/Oslo",
+      "elevation_base_ft": 1640,
+      "elevation_peak_ft": 3707
     },
     {
       "name": "Queenstown (Remarkables + Coronet Peak)",
@@ -1350,11 +1462,12 @@
       "region": "Otago",
       "latitude": -45.0378,
       "longitude": 168.6617,
-      "elevation_ft": 1076,
       "lift_count": 15,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Pacific/Auckland"
+      "timezone": "Pacific/Auckland",
+      "elevation_base_ft": 3609,
+      "elevation_peak_ft": 6201
     },
     {
       "name": "Whakapapa",
@@ -1362,11 +1475,12 @@
       "region": "Manawatu-Wanganui",
       "latitude": -39.2333,
       "longitude": 175.55,
-      "elevation_ft": 5111,
       "lift_count": 14,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Pacific/Auckland"
+      "timezone": "Pacific/Auckland",
+      "elevation_base_ft": 5085,
+      "elevation_peak_ft": 7546
     },
     {
       "name": "Szczyrk",
@@ -1374,11 +1488,12 @@
       "region": "\u015al\u0105skie",
       "latitude": 49.7167,
       "longitude": 19.0333,
-      "elevation_ft": 1637,
       "lift_count": 28,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Warsaw"
+      "timezone": "Europe/Warsaw",
+      "elevation_base_ft": 1640,
+      "elevation_peak_ft": 4101
     },
     {
       "name": "Zakopane (Kasprowy Wierch)",
@@ -1386,11 +1501,12 @@
       "region": "Ma\u0142opolska",
       "latitude": 49.2333,
       "longitude": 19.9833,
-      "elevation_ft": 6450,
       "lift_count": 17,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Warsaw"
+      "timezone": "Europe/Warsaw",
+      "elevation_base_ft": 3281,
+      "elevation_peak_ft": 6453
     },
     {
       "name": "Poiana Bra\u0219ov",
@@ -1398,11 +1514,12 @@
       "region": "Bra\u0219ov",
       "latitude": 45.5833,
       "longitude": 25.55,
-      "elevation_ft": 3894,
       "lift_count": 12,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Bucharest"
+      "timezone": "Europe/Bucharest",
+      "elevation_base_ft": 3281,
+      "elevation_peak_ft": 5905
     },
     {
       "name": "S\u00e4len",
@@ -1410,11 +1527,12 @@
       "region": "Dalarna",
       "latitude": 61.1667,
       "longitude": 13.2667,
-      "elevation_ft": 0,
       "lift_count": 99,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Stockholm"
+      "timezone": "Europe/Stockholm",
+      "elevation_base_ft": 1640,
+      "elevation_peak_ft": 3445
     },
     {
       "name": "\u00c5re",
@@ -1422,11 +1540,12 @@
       "region": "J\u00e4mtland",
       "latitude": 63.3983,
       "longitude": 13.0778,
-      "elevation_ft": 0,
       "lift_count": 42,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Stockholm"
+      "timezone": "Europe/Stockholm",
+      "elevation_base_ft": 1247,
+      "elevation_peak_ft": 4429
     },
     {
       "name": "Vemdalen",
@@ -1434,11 +1553,12 @@
       "region": "H\u00e4rjedalen",
       "latitude": 62.4333,
       "longitude": 13.9167,
-      "elevation_ft": 0,
       "lift_count": 21,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Stockholm"
+      "timezone": "Europe/Stockholm",
+      "elevation_base_ft": 1969,
+      "elevation_peak_ft": 3281
     },
     {
       "name": "Kranjska Gora",
@@ -1446,11 +1566,12 @@
       "region": "Gorenjska",
       "latitude": 46.4833,
       "longitude": 13.7833,
-      "elevation_ft": 2670,
       "lift_count": 18,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Ljubljana"
+      "timezone": "Europe/Ljubljana",
+      "elevation_base_ft": 2625,
+      "elevation_peak_ft": 5577
     },
     {
       "name": "Jasn\u00e1",
@@ -1458,11 +1579,12 @@
       "region": "\u017dilina",
       "latitude": 48.9833,
       "longitude": 19.5833,
-      "elevation_ft": 3631,
       "lift_count": 30,
       "avg_snowfall_inches": null,
       "pass_type": null,
-      "timezone": "Europe/Bratislava"
+      "timezone": "Europe/Bratislava",
+      "elevation_base_ft": 3609,
+      "elevation_peak_ft": 6890
     },
     {
       "name": "Park City Mountain",
@@ -1470,11 +1592,12 @@
       "region": "UT",
       "latitude": 40.6514,
       "longitude": -111.508,
-      "elevation_ft": 6900,
       "lift_count": 41,
       "avg_snowfall_inches": 355,
       "pass_type": "EPIC",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 6800,
+      "elevation_peak_ft": 10026
     },
     {
       "name": "Big Sky",
@@ -1482,11 +1605,12 @@
       "region": "MT",
       "latitude": 45.2856,
       "longitude": -111.4019,
-      "elevation_ft": 7500,
       "lift_count": 36,
       "avg_snowfall_inches": 400,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 6800,
+      "elevation_peak_ft": 11166
     },
     {
       "name": "Breckenridge",
@@ -1494,11 +1618,12 @@
       "region": "CO",
       "latitude": 39.4817,
       "longitude": -106.0384,
-      "elevation_ft": 9600,
       "lift_count": 35,
       "avg_snowfall_inches": 353,
       "pass_type": "EPIC",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 9600,
+      "elevation_peak_ft": 12998
     },
     {
       "name": "Vail",
@@ -1506,11 +1631,12 @@
       "region": "CO",
       "latitude": 39.6403,
       "longitude": -106.3742,
-      "elevation_ft": 8120,
       "lift_count": 31,
       "avg_snowfall_inches": 354,
       "pass_type": "EPIC",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8120,
+      "elevation_peak_ft": 11570
     },
     {
       "name": "Palisades Tahoe",
@@ -1518,11 +1644,12 @@
       "region": "CA",
       "latitude": 39.1969,
       "longitude": -120.2358,
-      "elevation_ft": 6200,
       "lift_count": 29,
       "avg_snowfall_inches": 400,
       "pass_type": "IKON",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 6200,
+      "elevation_peak_ft": 9050
     },
     {
       "name": "Mammoth Mountain",
@@ -1530,11 +1657,12 @@
       "region": "CA",
       "latitude": 37.6308,
       "longitude": -119.0326,
-      "elevation_ft": 7953,
       "lift_count": 28,
       "avg_snowfall_inches": 400,
       "pass_type": "IKON",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 7953,
+      "elevation_peak_ft": 11053
     },
     {
       "name": "Heavenly",
@@ -1542,11 +1670,12 @@
       "region": "CA",
       "latitude": 38.9353,
       "longitude": -119.9396,
-      "elevation_ft": 6540,
       "lift_count": 28,
       "avg_snowfall_inches": 360,
       "pass_type": "EPIC",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 6540,
+      "elevation_peak_ft": 10067
     },
     {
       "name": "Big Bear Mountain",
@@ -1554,11 +1683,12 @@
       "region": "CA",
       "latitude": 34.2269,
       "longitude": -116.8912,
-      "elevation_ft": 7140,
       "lift_count": 26,
       "avg_snowfall_inches": 100,
       "pass_type": "IKON",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 7140,
+      "elevation_peak_ft": 8805
     },
     {
       "name": "Beaver Creek",
@@ -1566,11 +1696,12 @@
       "region": "CO",
       "latitude": 39.6042,
       "longitude": -106.5165,
-      "elevation_ft": 8100,
       "lift_count": 25,
       "avg_snowfall_inches": 325,
       "pass_type": "EPIC",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8100,
+      "elevation_peak_ft": 11440
     },
     {
       "name": "Winter Park",
@@ -1578,11 +1709,12 @@
       "region": "CO",
       "latitude": 39.8841,
       "longitude": -105.7627,
-      "elevation_ft": 9000,
       "lift_count": 24,
       "avg_snowfall_inches": 325,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 9000,
+      "elevation_peak_ft": 12060
     },
     {
       "name": "Copper Mountain",
@@ -1590,11 +1722,12 @@
       "region": "CO",
       "latitude": 39.5022,
       "longitude": -106.1497,
-      "elevation_ft": 9712,
       "lift_count": 24,
       "avg_snowfall_inches": 305,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 9712,
+      "elevation_peak_ft": 12313
     },
     {
       "name": "Killington",
@@ -1602,11 +1735,12 @@
       "region": "VT",
       "latitude": 43.6045,
       "longitude": -72.8201,
-      "elevation_ft": 4241,
       "lift_count": 22,
       "avg_snowfall_inches": 250,
       "pass_type": "IKON",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 1165,
+      "elevation_peak_ft": 4241
     },
     {
       "name": "Deer Valley",
@@ -1614,11 +1748,12 @@
       "region": "UT",
       "latitude": 40.6375,
       "longitude": -111.4783,
-      "elevation_ft": 6570,
       "lift_count": 21,
       "avg_snowfall_inches": 300,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 6570,
+      "elevation_peak_ft": 9570
     },
     {
       "name": "Snowmass",
@@ -1626,11 +1761,12 @@
       "region": "CO",
       "latitude": 39.213,
       "longitude": -106.9378,
-      "elevation_ft": 8104,
       "lift_count": 21,
       "avg_snowfall_inches": 300,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8104,
+      "elevation_peak_ft": 12510
     },
     {
       "name": "Keystone",
@@ -1638,11 +1774,12 @@
       "region": "CO",
       "latitude": 39.6069,
       "longitude": -105.9497,
-      "elevation_ft": 9280,
       "lift_count": 20,
       "avg_snowfall_inches": 235,
       "pass_type": "EPIC",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 9280,
+      "elevation_peak_ft": 12408
     },
     {
       "name": "Northstar",
@@ -1650,11 +1787,12 @@
       "region": "CA",
       "latitude": 39.2746,
       "longitude": -120.1211,
-      "elevation_ft": 6330,
       "lift_count": 20,
       "avg_snowfall_inches": 350,
       "pass_type": "EPIC",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 6330,
+      "elevation_peak_ft": 8610
     },
     {
       "name": "Okemo",
@@ -1662,11 +1800,12 @@
       "region": "VT",
       "latitude": 43.4012,
       "longitude": -72.717,
-      "elevation_ft": 1144,
       "lift_count": 20,
       "avg_snowfall_inches": 200,
       "pass_type": "EPIC",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 1144,
+      "elevation_peak_ft": 3344
     },
     {
       "name": "Steamboat",
@@ -1674,11 +1813,12 @@
       "region": "CO",
       "latitude": 40.4572,
       "longitude": -106.8045,
-      "elevation_ft": 6900,
       "lift_count": 18,
       "avg_snowfall_inches": 349,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 6900,
+      "elevation_peak_ft": 10568
     },
     {
       "name": "Telluride",
@@ -1686,11 +1826,12 @@
       "region": "CO",
       "latitude": 37.9375,
       "longitude": -107.8123,
-      "elevation_ft": 8725,
       "lift_count": 18,
       "avg_snowfall_inches": 309,
       "pass_type": "EPIC",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8725,
+      "elevation_peak_ft": 13150
     },
     {
       "name": "Sun Valley",
@@ -1698,11 +1839,12 @@
       "region": "ID",
       "latitude": 43.6807,
       "longitude": -114.4097,
-      "elevation_ft": 5750,
       "lift_count": 18,
       "avg_snowfall_inches": 220,
       "pass_type": "EPIC",
-      "timezone": "America/Boise"
+      "timezone": "America/Boise",
+      "elevation_base_ft": 5750,
+      "elevation_peak_ft": 9150
     },
     {
       "name": "Sunday River",
@@ -1710,11 +1852,12 @@
       "region": "ME",
       "latitude": 44.4734,
       "longitude": -70.8567,
-      "elevation_ft": 800,
       "lift_count": 18,
       "avg_snowfall_inches": 167,
       "pass_type": "EPIC",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 800,
+      "elevation_peak_ft": 3150
     },
     {
       "name": "Crested Butte",
@@ -1722,11 +1865,12 @@
       "region": "CO",
       "latitude": 38.8991,
       "longitude": -106.9658,
-      "elevation_ft": 9375,
       "lift_count": 16,
       "avg_snowfall_inches": 300,
       "pass_type": "EPIC",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 9375,
+      "elevation_peak_ft": 12162
     },
     {
       "name": "Sugarbush",
@@ -1734,11 +1878,12 @@
       "region": "VT",
       "latitude": 44.1357,
       "longitude": -72.8994,
-      "elevation_ft": 2600,
       "lift_count": 16,
       "avg_snowfall_inches": 250,
       "pass_type": "IKON",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 1483,
+      "elevation_peak_ft": 4083
     },
     {
       "name": "Kirkwood",
@@ -1746,11 +1891,12 @@
       "region": "CA",
       "latitude": 38.685,
       "longitude": -120.0653,
-      "elevation_ft": 7800,
       "lift_count": 15,
       "avg_snowfall_inches": 500,
       "pass_type": "EPIC",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 7800,
+      "elevation_peak_ft": 9800
     },
     {
       "name": "Snowbird",
@@ -1758,11 +1904,12 @@
       "region": "UT",
       "latitude": 40.583,
       "longitude": -111.6538,
-      "elevation_ft": 7760,
       "lift_count": 14,
       "avg_snowfall_inches": 500,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 7760,
+      "elevation_peak_ft": 11000
     },
     {
       "name": "Whitefish Mountain",
@@ -1770,11 +1917,12 @@
       "region": "MT",
       "latitude": 48.4819,
       "longitude": -114.3492,
-      "elevation_ft": 4464,
       "lift_count": 14,
       "avg_snowfall_inches": 300,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 4464,
+      "elevation_peak_ft": 6817
     },
     {
       "name": "Taos Ski Valley",
@@ -1782,11 +1930,12 @@
       "region": "NM",
       "latitude": 36.5969,
       "longitude": -105.4544,
-      "elevation_ft": 9207,
       "lift_count": 14,
       "avg_snowfall_inches": 305,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 9207,
+      "elevation_peak_ft": 12481
     },
     {
       "name": "Sugarloaf",
@@ -1794,11 +1943,12 @@
       "region": "ME",
       "latitude": 45.0314,
       "longitude": -70.3131,
-      "elevation_ft": 2820,
       "lift_count": 14,
       "avg_snowfall_inches": 200,
       "pass_type": "IKON",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 1417,
+      "elevation_peak_ft": 4237
     },
     {
       "name": "Jackson Hole",
@@ -1806,11 +1956,12 @@
       "region": "WY",
       "latitude": 43.5875,
       "longitude": -110.8279,
-      "elevation_ft": 6311,
       "lift_count": 13,
       "avg_snowfall_inches": 458,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 6311,
+      "elevation_peak_ft": 10450
     },
     {
       "name": "Stowe",
@@ -1818,11 +1969,12 @@
       "region": "VT",
       "latitude": 44.5303,
       "longitude": -72.7814,
-      "elevation_ft": 3625,
       "lift_count": 13,
       "avg_snowfall_inches": 333,
       "pass_type": "EPIC",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 1559,
+      "elevation_peak_ft": 4393
     },
     {
       "name": "Purgatory",
@@ -1830,11 +1982,12 @@
       "region": "CO",
       "latitude": 37.6303,
       "longitude": -107.8142,
-      "elevation_ft": 8793,
       "lift_count": 12,
       "avg_snowfall_inches": 260,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8793,
+      "elevation_peak_ft": 10822
     },
     {
       "name": "Alta",
@@ -1842,11 +1995,12 @@
       "region": "UT",
       "latitude": 40.5884,
       "longitude": -111.6386,
-      "elevation_ft": 8530,
       "lift_count": 11,
       "avg_snowfall_inches": 560,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8530,
+      "elevation_peak_ft": 10550
     },
     {
       "name": "Crystal Mountain",
@@ -1854,11 +2008,12 @@
       "region": "WA",
       "latitude": 46.9282,
       "longitude": -121.5045,
-      "elevation_ft": 4400,
       "lift_count": 11,
       "avg_snowfall_inches": 486,
       "pass_type": "IKON",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 4400,
+      "elevation_peak_ft": 7012
     },
     {
       "name": "Mt. Bachelor",
@@ -1866,11 +2021,12 @@
       "region": "OR",
       "latitude": 43.9792,
       "longitude": -121.6886,
-      "elevation_ft": 6300,
       "lift_count": 11,
       "avg_snowfall_inches": 462,
       "pass_type": "IKON",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 5700,
+      "elevation_peak_ft": 9065
     },
     {
       "name": "Stratton",
@@ -1878,11 +2034,12 @@
       "region": "VT",
       "latitude": 43.1134,
       "longitude": -72.9084,
-      "elevation_ft": 1872,
       "lift_count": 11,
       "avg_snowfall_inches": 180,
       "pass_type": "IKON",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 1872,
+      "elevation_peak_ft": 3875
     },
     {
       "name": "Snowbasin",
@@ -1890,11 +2047,12 @@
       "region": "UT",
       "latitude": 41.216,
       "longitude": -111.8569,
-      "elevation_ft": 6400,
       "lift_count": 10,
       "avg_snowfall_inches": 300,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 6400,
+      "elevation_peak_ft": 9350
     },
     {
       "name": "Stevens Pass",
@@ -1902,11 +2060,12 @@
       "region": "WA",
       "latitude": 47.7448,
       "longitude": -121.089,
-      "elevation_ft": 4061,
       "lift_count": 10,
       "avg_snowfall_inches": 460,
       "pass_type": "EPIC",
-      "timezone": "America/Los_Angeles"
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 4061,
+      "elevation_peak_ft": 5845
     },
     {
       "name": "Loon Mountain",
@@ -1914,11 +2073,12 @@
       "region": "NH",
       "latitude": 44.0364,
       "longitude": -71.6217,
-      "elevation_ft": 2733,
       "lift_count": 10,
       "avg_snowfall_inches": 130,
       "pass_type": "EPIC",
-      "timezone": "America/New_York"
+      "timezone": "America/New_York",
+      "elevation_base_ft": 950,
+      "elevation_peak_ft": 3050
     },
     {
       "name": "Arapahoe Basin",
@@ -1926,11 +2086,12 @@
       "region": "CO",
       "latitude": 39.6426,
       "longitude": -105.8719,
-      "elevation_ft": 10780,
       "lift_count": 9,
       "avg_snowfall_inches": 350,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 10780,
+      "elevation_peak_ft": 13050
     },
     {
       "name": "Solitude",
@@ -1938,11 +2099,12 @@
       "region": "UT",
       "latitude": 40.6199,
       "longitude": -111.5919,
-      "elevation_ft": 7988,
       "lift_count": 8,
       "avg_snowfall_inches": 500,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 7988,
+      "elevation_peak_ft": 10035
     },
     {
       "name": "Aspen Mountain",
@@ -1950,11 +2112,12 @@
       "region": "CO",
       "latitude": 39.1869,
       "longitude": -106.8178,
-      "elevation_ft": 7945,
       "lift_count": 8,
       "avg_snowfall_inches": 300,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 7945,
+      "elevation_peak_ft": 11212
     },
     {
       "name": "Brighton",
@@ -1962,11 +2125,12 @@
       "region": "UT",
       "latitude": 40.598,
       "longitude": -111.5832,
-      "elevation_ft": 8755,
       "lift_count": 7,
       "avg_snowfall_inches": 500,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8755,
+      "elevation_peak_ft": 10500
     },
     {
       "name": "Aspen Highlands",
@@ -1974,11 +2138,12 @@
       "region": "CO",
       "latitude": 39.1822,
       "longitude": -106.8556,
-      "elevation_ft": 8040,
       "lift_count": 5,
       "avg_snowfall_inches": 300,
       "pass_type": "IKON",
-      "timezone": "America/Denver"
+      "timezone": "America/Denver",
+      "elevation_base_ft": 8040,
+      "elevation_peak_ft": 11675
     }
   ]
 }
