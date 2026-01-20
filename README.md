@@ -51,7 +51,7 @@ poetry run powder --no-cache --resort "Niseko"
 ```
 ============================================================
   Snowfall Forecast: Chamonix Mont-Blanc, Haute-Savoie, FR
-  Elevation: 3,396 ft
+  Elevation: 3,396 - 12,605 ft (9,209' vert)
 ============================================================
 
 Date              Avg   Open-Meteo    ECMWF     ICON
@@ -178,7 +178,8 @@ Edit `powder/data/resorts.json`:
   "region": "Savoie",
   "latitude": 45.5000,
   "longitude": 6.5000,
-  "elevation_ft": 8000,
+  "elevation_base_ft": 4000,
+  "elevation_peak_ft": 10000,
   "lift_count": 25,
   "timezone": "Europe/Paris",
   "avg_snowfall_inches": 300,
@@ -186,7 +187,9 @@ Edit `powder/data/resorts.json`:
 }
 ```
 
-Required fields: `name`, `country`, `region`, `latitude`, `longitude`, `elevation_ft`
+Required fields: `name`, `country`, `region`, `latitude`, `longitude`, `elevation_base_ft`
+
+Optional: `elevation_peak_ft` (enables vertical drop calculation in UI)
 
 ## License
 

@@ -8,6 +8,7 @@ Python CLI + Web UI that tracks forecasted snowfall at ski resorts worldwide. Co
 - [x] Historical snowfall data (14 days)
 - [x] Global resort coverage (165 resorts, 25 countries)
 - [x] Regional weather providers (ICON for Europe, JMA for Japan, BOM for Australia/NZ)
+- [x] Base/peak elevation and vertical drop for all resorts
 
 ## Quick Start
 ```bash
@@ -61,6 +62,7 @@ powder/
 ## Key Files
 - `powder/providers/MODELS.md` - Weather model documentation
 - `powder/data/README.md` - Resort data schema and sources
+- `scripts/README.md` - Data collection and maintenance scripts
 
 ## Constraints
 - Python 3.12+
