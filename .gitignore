@@ -20,6 +20,7 @@ build/
 
 # Misc
 .token
+.coverage
 
 # Generated forecast data (generated fresh on deploy)
 powder/web/data/forecasts.json
@@ -27,4 +28,8 @@ powder/web/data/forecasts.json
 # Node modules (web tests)
 tests/web/node_modules/
 tests/web/test-results/
+
+# Claude Code local config and binary
+.claude/settings.local.json
+claude
 
