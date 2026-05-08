@@ -43,8 +43,8 @@ jobs:
       - name: Generate forecast data
         run: poetry run powder --export-json --no-cache
 
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: 'powder/web'
       - id: deployment
