@@ -9,7 +9,7 @@ Utilities for collecting and maintaining ski resort data.
 Collects global ski resort data and outputs a JSON file compatible with the Powder app.
 
 **What it does:**
-- Contains curated resort data with verified base/peak elevations for all 165 resorts
+- Contains curated resort data with verified base/peak elevations for all 215 resorts
 - Includes lift counts, regions, and coordinates from official sources
 - Calculates timezones from coordinates using `timezonefinder`
 - Outputs to `powder/data/resorts_global.json`
@@ -44,6 +44,16 @@ python scripts/merge_resorts.py
 ```
 
 **Output:** Overwrites `powder/data/resorts.json`
+
+### validate_export.py
+
+Sanity-checks `powder/web/data/forecasts.json` after `powder --export-json`: every resort in
+`resorts.json` must be present and no more than 3% may lack forecast/historical data. Run by the
+Deploy Forecasts workflow before publishing.
+
+```bash
+python scripts/validate_export.py
+```
 
 ## Data Schema
 

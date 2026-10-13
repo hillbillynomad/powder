@@ -224,6 +224,11 @@ def list_resorts(resorts: list[SkiResort]) -> None:
 
 def main() -> None:
     """Main entry point for the CLI."""
+    # Resort names contain non-ASCII characters; avoid crashing on legacy Windows codepages
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="replace")
+
     parser = argparse.ArgumentParser(
         description="Powder - Ski Resort Snowfall Forecast Tracker",
         formatter_class=argparse.RawDescriptionHelpFormatter,

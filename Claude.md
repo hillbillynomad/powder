@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Powder is a Python CLI + static web UI that tracks forecasted snowfall at ~165 ski resorts worldwide. It fetches forecasts from multiple weather providers, averages them per day, and also surfaces 14 days of historical snowfall.
+Powder is a Python CLI + static web UI that tracks forecasted snowfall at ~215 ski resorts worldwide. It fetches forecasts from multiple weather providers, averages them per day, and also surfaces 14 days of historical snowfall.
 
 ## Common Commands
 
@@ -53,7 +53,7 @@ powder/
 │   ├── icon.py       # DWD ICON (7d) — Europe
 │   ├── jma.py        # JMA (7d) — Japan
 │   └── bom.py        # BOM (7d) — Australia/NZ
-├── data/resorts.json # 165 resorts; schema in data/README.md
+├── data/resorts.json # 215 resorts; schema in data/README.md
 └── web/              # Static Leaflet UI; web/data/ is gitignored (generated)
 ```
 

@@ -157,3 +157,24 @@ class TestClearCache:
         clear_cache()
 
         mock_session.cache.clear.assert_called_once()
+
+
+@pytest.mark.unit
+@pytest.mark.cache
+class TestRetryPolicy:
+    """Tests for the 429/5xx retry adapter mounted on the session."""
+
+    def test_retry_adapter_retries_rate_limits(self):
+        from powder.cache import RETRY_STATUS_CODES, _build_retry_adapter
+
+        retry = _build_retry_adapter().max_retries
+        assert 429 in RETRY_STATUS_CODES
+        assert retry.total >= 3
+        assert retry.respect_retry_after_header is True
+        assert 429 in retry.status_forcelist
+
+    def test_session_mounts_retry_adapter(self):
+        set_cache_enabled(False)
+        session = get_session()
+        adapter = session.get_adapter("https://api.open-meteo.com/v1/forecast")
+        assert 429 in adapter.max_retries.status_forcelist

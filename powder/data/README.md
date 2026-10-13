@@ -38,16 +38,16 @@
 | vertical_drop_ft | `elevation_peak_ft - elevation_base_ft` (calculated at runtime, not stored) |
 
 ## Selection Criteria
-- Ski resorts with 10+ lifts (chairs, gondolas, trams, T-bars)
-- 165 resorts across 25 countries
+- Ski resorts with 10+ lifts (chairs, gondolas, trams, T-bars) **or** 4,000+ ft of vertical drop
+- 215 resorts across 26 countries
 
 ## Coverage by Region
 
 | Region | Countries | Resort Count |
 |--------|-----------|--------------|
-| North America | US, CA | 53 |
-| Europe | FR, AT, CH, IT, DE, NO, ES, FI, SE, AD, BG, PL, CZ, RO, SI, SK | 73 |
-| Asia | JP, KR, CN | 20 |
+| North America | US, CA | 72 |
+| Europe | FR, AT, CH, IT, DE, NO, ES, FI, SE, AD, BG, PL, CZ, RO, SI, SK | 107 |
+| Asia | JP, KR, CN, IN | 21 |
 | Oceania | AU, NZ | 7 |
 | South America | AR, CL | 5 |
 
@@ -68,6 +68,7 @@
 | ES | Spain |
 | FI | Finland |
 | FR | France |
+| IN | India |
 | IT | Italy |
 | JP | Japan |
 | KR | South Korea |

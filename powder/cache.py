@@ -3,6 +3,8 @@
 from pathlib import Path
 
 import requests_cache
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 # Cache location: ~/.cache/powder/http_cache.sqlite
 CACHE_DIR = Path.home() / ".cache" / "powder"
@@ -10,6 +12,25 @@ CACHE_PATH = CACHE_DIR / "http_cache"
 
 # Default TTL: 12 hours (weather data updates every 6-12 hours)
 DEFAULT_TTL_HOURS = 12
+
+# Transient-failure retry policy (rate limits and upstream hiccups).
+# Honors Retry-After when the server sends it; otherwise exponential backoff.
+RETRY_STATUS_CODES = (429, 500, 502, 503, 504)
+RETRY_TOTAL = 5
+RETRY_BACKOFF_FACTOR = 2.0  # sleeps ~2s, 4s, 8s, 16s, 32s
+
+
+def _build_retry_adapter() -> HTTPAdapter:
+    """Create an HTTPAdapter that retries 429/5xx responses with backoff."""
+    retry = Retry(
+        total=RETRY_TOTAL,
+        backoff_factor=RETRY_BACKOFF_FACTOR,
+        status_forcelist=RETRY_STATUS_CODES,
+        allowed_methods=("GET", "HEAD"),
+        respect_retry_after_header=True,
+    )
+    return HTTPAdapter(max_retries=retry)
+
 
 # Module-level session (initialized lazily)
 _session: requests_cache.CachedSession | None = None
@@ -51,6 +72,10 @@ def get_session() -> requests_cache.CachedSession:
             )
             # Clear any existing cache entries for this request
             _session.settings.disabled = True
+
+        adapter = _build_retry_adapter()
+        _session.mount("https://", adapter)
+        _session.mount("http://", adapter)
 
     return _session
 

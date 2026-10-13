@@ -1,8 +1,11 @@
 // Powder Web UI - Interactive Snowfall Map
 
 const BUBBLE_COLOR = '#3b82f6';
-const BUBBLE_FILL_OPACITY = 0.6;
+const BUBBLE_FILL_OPACITY = 0.75;
 const MIN_RADIUS = 5;
+const NO_SNOW_THRESHOLD = 1; // inches; below this a resort is drawn as a hollow ring
+const MIN_ZOOM = 2;
+const ZOOM_SCALE_RATE = 0.1; // markers grow at 0.1x the map's zoom rate
 
 // Touch device detection - skip hover popups on mobile
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -22,9 +25,9 @@ const HOVER_HIDE_DELAY = 150;
 // Country code to name mapping
 const COUNTRY_NAMES = {
     'AD': 'Andorra', 'AR': 'Argentina', 'AT': 'Austria', 'AU': 'Australia',
-    'BG': 'Bulgaria', 'CA': 'Canada', 'CH': 'Switzerland', 'CL': 'Chile',
+    'BG': 'Bulgaria', 'CA': 'Canada', 'CH': 'Switzerland', 'CL': 'Chile', 'CN': 'China',
     'CZ': 'Czech Republic', 'DE': 'Germany', 'ES': 'Spain', 'FI': 'Finland',
-    'FR': 'France', 'IT': 'Italy', 'JP': 'Japan', 'KR': 'South Korea',
+    'FR': 'France', 'IN': 'India', 'IT': 'Italy', 'JP': 'Japan', 'KR': 'South Korea',
     'NO': 'Norway', 'NZ': 'New Zealand', 'PL': 'Poland', 'RO': 'Romania',
     'SE': 'Sweden', 'SI': 'Slovenia', 'SK': 'Slovakia', 'US': 'United States'
 };
@@ -32,7 +35,7 @@ const COUNTRY_NAMES = {
 // Initialize the map
 function initMap() {
     map = L.map('map', {
-        minZoom: 2,
+        minZoom: MIN_ZOOM,
         maxBoundsViscosity: 1.0,
         maxBounds: [[-90, -180], [90, 180]],
         zoomControl: false
@@ -44,12 +47,24 @@ function initMap() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 18,
     }).addTo(map);
+
+    map.on('zoomend', updateMarkerRadii);
 }
 
-// Calculate bubble radius based on total snowfall
+// Base bubble radius (at min zoom) based on total snowfall
 function getRadius(totalInches) {
-    if (totalInches <= 0) return MIN_RADIUS;
     return MIN_RADIUS + (totalInches / 2);
+}
+
+// Markers scale at ZOOM_SCALE_RATE of the map's own (exponential) zoom rate
+function getZoomScale() {
+    const zoom = map ? map.getZoom() : MIN_ZOOM;
+    return Math.pow(2, ZOOM_SCALE_RATE * (zoom - MIN_ZOOM));
+}
+
+function updateMarkerRadii() {
+    const scale = getZoomScale();
+    markers.forEach(m => m.marker.setRadius(m.baseRadius * scale));
 }
 
 // Get snowfall value based on current filter selection
@@ -616,12 +631,13 @@ function createMarkers() {
 
     for (const resort of filtered) {
         const snowfall = getSnowfallForFilter(resort);
-        const radius = getRadius(snowfall);
+        const isRing = snowfall < NO_SNOW_THRESHOLD;
+        const baseRadius = isRing ? MIN_RADIUS : getRadius(snowfall);
 
         const marker = L.circleMarker([resort.latitude, resort.longitude], {
-            radius: radius,
+            radius: baseRadius * getZoomScale(),
             fillColor: BUBBLE_COLOR,
-            fillOpacity: BUBBLE_FILL_OPACITY,
+            fillOpacity: isRing ? 0 : BUBBLE_FILL_OPACITY,
             color: BUBBLE_COLOR,
             weight: 2,
         });
@@ -640,7 +656,7 @@ function createMarkers() {
         });
 
         marker.addTo(map);
-        markers.push({ marker, resort });
+        markers.push({ marker, resort, baseRadius });
     }
 
     updateTop10();
