@@ -64,9 +64,9 @@
 
     <div class="main-container">
         <div class="content-wrapper">
-            <aside id="side-panel" class="side-panel">
+            <aside id="side-panel" class="side-panel" data-snap="peek">
                 <div class="panel-header">
-                    <button id="panel-collapse" class="panel-collapse" title="Collapse panel">◀</button>
+                    <button id="panel-collapse" class="panel-collapse" title="Collapse panel" aria-label="Collapse panel" aria-expanded="true">◀</button>
                     <div class="panel-tabs">
                         <button class="panel-tab active" data-tab="top10">Top 10</button>
                         <button class="panel-tab" data-tab="details">Details</button>
@@ -84,6 +84,7 @@
 
             <div class="map-wrapper">
                 <div id="map"></div>
+                <button id="panel-reopen" class="panel-reopen" title="Show panel" aria-label="Show panel" aria-expanded="false" hidden><span class="chev">▶</span></button>
             </div>
         </div>
     </div>

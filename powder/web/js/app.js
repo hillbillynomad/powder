@@ -6,6 +6,15 @@ const MIN_RADIUS = 5;
 const NO_SNOW_THRESHOLD = 1; // inches; below this a resort is drawn as a hollow ring
 const MIN_ZOOM = 2;
 const ZOOM_SCALE_RATE = 0.1; // markers grow at 0.1x the map's zoom rate
+const MAX_LATITUDE = 85.05; // Web Mercator limit
+const TILE_SIZE = 256;
+
+// Side panel: 'collapsed' | 'peek' | 'full'. 'full' is kept only so previously saved
+// state still loads; peek and full are both simply "open" in either layout.
+const BOTTOM_PANEL_QUERY = '(max-width: 700px), (max-aspect-ratio: 1/1)'; // keep in sync with style.css
+const PANEL_STATE_KEY = 'powder.panelState';
+let panelState = 'peek';
+let lastOpenPanelState = 'peek';
 
 // Touch device detection - skip hover popups on mobile
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -36,8 +45,10 @@ const COUNTRY_NAMES = {
 function initMap() {
     map = L.map('map', {
         minZoom: MIN_ZOOM,
+        zoomSnap: 0.5,
         maxBoundsViscosity: 1.0,
-        maxBounds: [[-90, -180], [90, 180]],
+        // Web Mercator ends at ~85.05 degrees; bounds beyond that cause grey bands and pan bounce-back
+        maxBounds: [[-MAX_LATITUDE, -180], [MAX_LATITUDE, 180]],
         zoomControl: false
     }).setView([30, 0], 2);
 
@@ -46,9 +57,57 @@ function initMap() {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 18,
+        noWrap: true,
     }).addTo(map);
 
     map.on('zoomend', updateMarkerRadii);
+    window.__map = map; // exposed for e2e tests / debugging
+    syncMapSize();
+}
+
+// Smallest zoom at which the world still covers a width x height viewport (0.5 steps)
+function computeMinZoom(width, height) {
+    const size = Math.max(width, height);
+    if (!(size > 0)) return MIN_ZOOM;
+    return Math.max(0, Math.ceil(Math.log2(size / TILE_SIZE) * 2) / 2);
+}
+
+// Re-measure the map after any container resize and keep minZoom in step with it
+function syncMapSize() {
+    if (!map) return;
+    map.invalidateSize({ pan: false });
+    const size = map.getSize();
+    map.setMinZoom(computeMinZoom(size.x, size.y));
+}
+
+// Keep Leaflet's idea of its size in sync with what is actually on screen
+function watchMapSize() {
+    let pending = false;
+    const schedule = () => {
+        if (pending) return;
+        pending = true;
+        requestAnimationFrame(() => { pending = false; syncMapSize(); });
+    };
+    if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(schedule).observe(document.getElementById('map'));
+    }
+    window.addEventListener('resize', schedule);
+    window.addEventListener('orientationchange', schedule);
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', schedule);
+}
+
+// The app shell must never scroll; undo any scroll the browser applies to it.
+const NON_SCROLLING_CLASSES = ['main-container', 'content-wrapper', 'map-wrapper', 'side-panel', 'leaflet-container'];
+function installScrollGuard() {
+    document.addEventListener('scroll', (e) => {
+        const t = e.target;
+        if (t === document || t === document.documentElement || t === document.body) {
+            if (window.scrollX || window.scrollY) window.scrollTo(0, 0);
+        } else if (t.classList && NON_SCROLLING_CLASSES.some(c => t.classList.contains(c))) {
+            t.scrollLeft = 0;
+            t.scrollTop = 0;
+        }
+    }, true);
 }
 
 // Base bubble radius (at min zoom) based on total snowfall
@@ -506,27 +565,66 @@ function buildDetailContent(resort) {
     `;
 }
 
+function isBottomPanelLayout() {
+    return typeof window !== 'undefined' && !!window.matchMedia &&
+        window.matchMedia(BOTTOM_PANEL_QUERY).matches;
+}
+
+// Next state when the user taps the collapse/expand control. Open and collapsed only:
+// the bottom sheet has a single open height, so peek and full look identical.
+function nextPanelState(state) {
+    return state === 'collapsed' ? (lastOpenPanelState || 'peek') : 'collapsed';
+}
+
+// Single source of truth for panel state: class, data-snap, aria and reopen handle
+function setPanelState(state) {
+    if (!['collapsed', 'peek', 'full'].includes(state)) state = 'peek';
+    panelState = state;
+    if (state !== 'collapsed') lastOpenPanelState = state;
+
+    const panel = document.getElementById('side-panel');
+    const collapseBtn = document.getElementById('panel-collapse');
+    const reopenBtn = document.getElementById('panel-reopen');
+    const collapsed = state === 'collapsed';
+
+    panel.classList.toggle('collapsed', collapsed);
+    panel.dataset.snap = state;
+    if (collapseBtn) collapseBtn.setAttribute('aria-expanded', String(!collapsed));
+    if (reopenBtn) {
+        reopenBtn.hidden = !collapsed;
+        reopenBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    try { localStorage.setItem(PANEL_STATE_KEY, state); } catch (e) { /* storage unavailable */ }
+}
+
+function restorePanelState() {
+    let saved = null;
+    try { saved = localStorage.getItem(PANEL_STATE_KEY); } catch (e) { /* storage unavailable */ }
+    if (saved === 'collapsed' || saved === 'peek' || saved === 'full') {
+        if (saved !== 'collapsed') lastOpenPanelState = saved;
+        setPanelState(saved);
+    } else {
+        setPanelState('peek');
+    }
+}
+
 // Show detail panel for a resort
 function showDetail(resort) {
     document.getElementById('detail-content').innerHTML = buildDetailContent(resort);
     switchPanelTab('details');
-    document.getElementById('side-panel').classList.remove('collapsed');
+    if (panelState === 'collapsed') setPanelState(lastOpenPanelState);
     currentDetailResort = resort;
-    // Tell Leaflet to recalculate map size after CSS transition (300ms)
-    setTimeout(() => map.invalidateSize(), 350);
 
     requestAnimationFrame(() => {
         requestAnimationFrame(() => renderDetailChart(resort));
     });
 }
 
-// Hide detail panel
+// Deselect the resort and go back to Top 10. Collapsing is always an explicit user action.
 function hideDetail() {
-    document.getElementById('side-panel').classList.add('collapsed');
     switchPanelTab('top10');
     currentDetailResort = null;
-    // Tell Leaflet to recalculate map size after CSS transition (300ms)
-    setTimeout(() => map.invalidateSize(), 350);
 }
 
 // Toggle detail for a resort
@@ -711,7 +809,7 @@ function onCountryChange() {
             map.fitBounds(bounds, { padding: [50, 50] });
         }
     } else {
-        map.setView([30, 0], 2);
+        map.setView([30, 0], Math.max(MIN_ZOOM, map.getMinZoom()));
     }
 }
 
@@ -720,11 +818,14 @@ function onFilterChange() {
     createMarkers();
 }
 
-// Toggle panel collapse
+// Collapse / expand control inside the panel (cycles snaps on the bottom sheet)
 function togglePanelCollapse() {
-    document.getElementById('side-panel').classList.toggle('collapsed');
-    // Tell Leaflet to recalculate map size after CSS transition (300ms)
-    setTimeout(() => map.invalidateSize(), 350);
+    setPanelState(nextPanelState(panelState));
+}
+
+// Reopen handle shown on the map edge while collapsed
+function reopenPanel() {
+    setPanelState(lastOpenPanelState || 'peek');
 }
 
 // Set up event listeners
@@ -742,6 +843,7 @@ function setupEventListeners() {
 
     // Controls
     document.getElementById('panel-collapse').addEventListener('click', togglePanelCollapse);
+    document.getElementById('panel-reopen').addEventListener('click', reopenPanel);
     document.getElementById('menu-toggle').addEventListener('click', toggleFilterDrawer);
 
     // Close details when clicking on map
@@ -756,7 +858,10 @@ function setupEventListeners() {
 
 // Initialize
 async function init() {
+    installScrollGuard();
     initMap();
+    watchMapSize();
+    restorePanelState();
     createHoverPopup();
     setupEventListeners();
 
@@ -777,4 +882,13 @@ async function init() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', init);
+if (typeof module !== 'undefined' && module.exports) {
+    // Test environment: expose logic without booting the app
+    module.exports = {
+        computeMinZoom, nextPanelState, setPanelState, restorePanelState,
+        showDetail, hideDetail, togglePanelCollapse, reopenPanel,
+        getPanelState: () => panelState,
+    };
+} else {
+    document.addEventListener('DOMContentLoaded', init);
+}
