@@ -95,7 +95,7 @@ thresholds: {
 
 | File | Tests | Description |
 |------|-------|-------------|
-| `map.spec.ts` | 7 | Map loading, markers, panel toggle |
+| `map.spec.ts` | 12 | Map loading, markers, globe projection, layer switcher, terrain/3D toggles |
 | `filters.spec.ts` | 8 | Filter controls and functionality |
 | `detail_panel.spec.ts` | 10 | Side panel, tabs, resort details |
 | `mobile.spec.ts` | 7 | Mobile/tablet layouts and touch |
@@ -178,6 +178,7 @@ tests/web/
 │   ├── setup.js           # Test setup (injects globals)
 │   └── app.test.js        # Unit tests
 └── e2e/
+    ├── helpers.ts         # Shared map helpers (window.__powder hooks)
     ├── map.spec.ts        # Map functionality tests
     ├── filters.spec.ts    # Filter control tests
     ├── detail_panel.spec.ts # Detail panel tests
@@ -243,3 +244,9 @@ test.describe('New Feature', () => {
   });
 });
 ```
+
+## Map notes (MapLibre globe)
+
+- Resort bubbles are drawn on a WebGL canvas, so there are no DOM nodes to select. Use the helpers in `e2e/helpers.ts` (`waitForMarkers`, `markerCount`, `clickFirstMarker`), which go through `window.__powder`; `window.__map` is the MapLibre map.
+- The globe needs WebGL. Chromium is launched with SwiftShader flags in `playwright.config.ts`; where WebGL is unavailable the map specs skip rather than fail.
+- The service worker (`sw.js`) is not registered under automated browsers unless the page is opened with `?sw=1`, so cached tiles never leak between tests.

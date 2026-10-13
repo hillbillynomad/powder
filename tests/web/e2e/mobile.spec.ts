@@ -2,6 +2,7 @@
  * E2E tests for mobile responsiveness (iPhone 13)
  */
 import { test, expect, devices } from '@playwright/test';
+import { waitForMarkers, clickFirstMarker } from './helpers';
 
 test.use({ ...devices['iPhone 13'] });
 
@@ -20,12 +21,16 @@ test.describe('Mobile Layout', () => {
     await expect(menuToggle).toBeVisible();
   });
 
-  test('filter drawer opens on mobile', async ({ page }) => {
-    const menuToggle = page.locator('#menu-toggle');
-    const filterDrawer = page.locator('#filter-drawer');
+  test('menu opens on mobile and fits inside the map', async ({ page }) => {
+    await page.locator('#menu-toggle').click();
+    const panel = page.locator('#menu-panel');
+    await expect(panel).toHaveClass(/visible/);
 
-    await menuToggle.click();
-    await expect(filterDrawer).toHaveClass(/visible/);
+    const box = (await panel.boundingBox())!;
+    const map = (await page.locator('#map').boundingBox())!;
+    expect(box.x).toBeGreaterThanOrEqual(map.x);
+    expect(box.x + box.width).toBeLessThanOrEqual(map.x + map.width + 1);
+    expect(box.y + box.height).toBeLessThanOrEqual(map.y + map.height + 1);
   });
 
   test('map is visible on mobile', async ({ page }) => {
@@ -44,17 +49,14 @@ test.describe('Mobile Interactions', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     try {
-      await page.waitForSelector('.leaflet-interactive', { timeout: 5000 });
+      await waitForMarkers(page, 5000);
     } catch {
       test.skip(true, 'No forecast data available');
     }
   });
 
   test('tapping marker opens detail (no hover on mobile)', async ({ page }) => {
-    // On mobile, tap should go straight to detail (no hover popup)
-    // Use dispatchEvent for cross-browser compatibility with Leaflet markers
-    const marker = page.locator('.leaflet-interactive').first();
-    await marker.dispatchEvent('click');
+    await clickFirstMarker(page);
 
     // Detail content should be visible
     const detailContent = page.locator('#detail-content');

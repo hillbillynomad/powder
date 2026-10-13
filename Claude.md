@@ -54,7 +54,7 @@ powder/
 │   ├── jma.py        # JMA (7d) — Japan
 │   └── bom.py        # BOM (7d) — Australia/NZ
 ├── data/resorts.json # 215 resorts; schema in data/README.md
-└── web/              # Static Leaflet UI; web/data/ is gitignored (generated)
+└── web/              # Static MapLibre globe UI + sw.js tile cache; web/data/ is gitignored (generated)
 ```
 
 ### Key design points
@@ -67,7 +67,9 @@ powder/
 
 ### Web UI data flow
 
-`--export-json` writes `powder/web/data/forecasts.json`; `web/js/app.js` reads it directly. There is no backend — the UI is fully static. Three view modes (`Powder on the Way`, `Recent Powder`, `Total Recent + Forecast`) are computed client-side from forecast + historical days in the same JSON.
+`--export-json` writes `powder/web/data/forecasts.json`; `web/js/app.js` reads it directly. There is no backend — the UI is fully static.
+
+The map is a MapLibre GL JS globe (`projection: globe`) built in `app.js:buildMapStyle`. All tile sources live in the `MAP_SOURCES` constant and are free / key-less: Esri imagery (Satellite), OpenFreeMap vectors (Map mode + label overlay), OpenTopoMap (Topo), AWS Terrarium DEM (hillshade, 3D relief, and `maplibre-contour` feet contours), OpenSnowMap (ski trails). Layer ids are grouped by prefix (`base-*`, `osm-*`, `lbl-*`, `terrain-*`, `trails-*`) and `isLayerVisible` is the single source of truth for what each toggle shows. Resorts are a GeoJSON `circle` layer (no DOM markers); e2e tests use the `window.__powder` / `window.__map` hooks. `powder/web/sw.js` is a service worker that caches tiles; it is skipped under automated browsers unless `?sw=1`. Three view modes (`Powder on the Way`, `Recent Powder`, `Total Recent + Forecast`) are computed client-side from forecast + historical days in the same JSON.
 
 ## Testing notes
 

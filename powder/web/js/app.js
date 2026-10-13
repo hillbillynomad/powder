@@ -4,10 +4,15 @@ const BUBBLE_COLOR = '#3b82f6';
 const BUBBLE_FILL_OPACITY = 0.75;
 const MIN_RADIUS = 5;
 const NO_SNOW_THRESHOLD = 1; // inches; below this a resort is drawn as a hollow ring
-const MIN_ZOOM = 2;
+const MIN_ZOOM = 1; // MapLibre zoom (512px tiles); bubbles are base-sized here
+const MAX_ZOOM = 18;
 const ZOOM_SCALE_RATE = 0.1; // markers grow at 0.1x the map's zoom rate
-const MAX_LATITUDE = 85.05; // Web Mercator limit
-const TILE_SIZE = 256;
+const TILE_SIZE = 512;
+const GLOBE_FILL = 0.9; // fraction of the smaller viewport side the whole globe may occupy
+const FOCUS_ZOOM = 9;
+const TERRAIN_3D_MIN_ZOOM = 7; // 3D relief on a globe is only worth its cost once zoomed in
+const TERRAIN_EXAGGERATION = 1.4;
+const FEET_PER_METER = 3.28084;
 
 // Side panel: 'collapsed' | 'peek' | 'full'. 'full' is kept only so previously saved
 // state still loads; peek and full are both simply "open" in either layout.
@@ -16,11 +21,36 @@ const PANEL_STATE_KEY = 'powder.panelState';
 let panelState = 'peek';
 let lastOpenPanelState = 'peek';
 
+// Map layer preferences (persisted per browser)
+const LAYER_PREFS_KEY = 'powder.layerPrefs';
+const BASE_MODES = ['sat', 'map', 'topo'];
+const DEFAULT_LAYER_PREFS = { mode: 'sat', labels: true, terrain: false, threeD: false, trails: true };
+let layerPrefs = { ...DEFAULT_LAYER_PREFS };
+
+// Free, key-less map sources. Everything swappable lives here.
+const MAP_SOURCES = {
+    satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    topo: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',
+    pistes: 'https://tiles.opensnowmap.org/pistes/{z}/{x}/{y}.png',
+    dem: 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png',
+    vectorStyle: 'https://tiles.openfreemap.org/styles/liberty',
+    vectorTiles: 'https://tiles.openfreemap.org/planet',
+    glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+};
+const DEM_MAX_ZOOM = 13;
+// Contour spacing in feet by source zoom: [minor, major]
+const CONTOUR_THRESHOLDS_FT = {
+    8: [1000, 5000], 10: [500, 2500], 11: [250, 1000], 12: [100, 500],
+    13: [100, 500], 14: [40, 200], 15: [20, 100],
+};
+
 // Touch device detection - skip hover popups on mobile
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 let map;
-let markers = [];
+let mapReady = false;
+let demSource = null; // maplibre-contour DemSource shared by hillshade, 3D relief and contours
+let markers = []; // [{ resort, baseRadius, isRing }] for the currently displayed resorts
 let resortData = [];
 let currentDetailResort = null;
 
@@ -41,46 +71,476 @@ const COUNTRY_NAMES = {
     'SE': 'Sweden', 'SI': 'Slovenia', 'SK': 'Slovakia', 'US': 'United States'
 };
 
-// Initialize the map
-function initMap() {
-    map = L.map('map', {
-        minZoom: MIN_ZOOM,
-        zoomSnap: 0.5,
-        maxBoundsViscosity: 1.0,
-        // Web Mercator ends at ~85.05 degrees; bounds beyond that cause grey bands and pan bounce-back
-        maxBounds: [[-MAX_LATITUDE, -180], [MAX_LATITUDE, 180]],
-        zoomControl: false
-    }).setView([30, 0], 2);
+// ---- Layer preferences -------------------------------------------------------------
 
-    L.control.zoom({ position: 'topright' }).addTo(map);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 18,
-        noWrap: true,
-    }).addTo(map);
-
-    map.on('zoomend', updateMarkerRadii);
-    window.__map = map; // exposed for e2e tests / debugging
-    syncMapSize();
+function sanitizeLayerPrefs(raw) {
+    const prefs = { ...DEFAULT_LAYER_PREFS };
+    if (raw && typeof raw === 'object') {
+        if (BASE_MODES.includes(raw.mode)) prefs.mode = raw.mode;
+        for (const key of ['labels', 'terrain', 'threeD', 'trails']) {
+            if (typeof raw[key] === 'boolean') prefs[key] = raw[key];
+        }
+    }
+    return prefs;
 }
 
-// Smallest zoom at which the world still covers a width x height viewport (0.5 steps)
+function loadLayerPrefs() {
+    try {
+        return sanitizeLayerPrefs(JSON.parse(localStorage.getItem(LAYER_PREFS_KEY)));
+    } catch (e) {
+        return { ...DEFAULT_LAYER_PREFS }; // storage unavailable or corrupt
+    }
+}
+
+function saveLayerPrefs(prefs) {
+    try { localStorage.setItem(LAYER_PREFS_KEY, JSON.stringify(prefs)); } catch (e) { /* storage unavailable */ }
+}
+
+// Layer ids are grouped by prefix: base-*, osm-*, lbl-*, terrain-*, trails-*; anything else is always on
+function getLayerGroup(id) {
+    const prefix = id.split('-')[0];
+    return ['base', 'osm', 'lbl', 'terrain', 'trails'].includes(prefix) ? prefix : null;
+}
+
+function isLayerVisible(id, prefs) {
+    if (id === 'base-sat') return prefs.mode === 'sat';
+    if (id === 'base-topo') return prefs.mode === 'topo';
+    switch (getLayerGroup(id)) {
+        case 'osm': return prefs.mode === 'map';
+        case 'lbl': return prefs.mode === 'sat' && prefs.labels;
+        case 'terrain': return prefs.terrain;
+        case 'trails': return prefs.trails;
+        default: return true; // background, resorts
+    }
+}
+
+// ---- Share links -------------------------------------------------------------------
+// A share URL carries the camera, layer settings, filters and selected resort. It is only
+// read on first landing; the address bar is not kept in sync afterwards.
+
+const SHARE_PASS_VALUES = ['EPIC', 'IKON', 'none'];
+const SHARE_SNOW_VALUES = ['forecast', 'historical', 'total'];
+const SHARE_DEFAULT_ZOOM = 4;
+const SHARE_MAX_TEXT = 120;
+const TOAST_MS = 2200;
+
+function parseShareBool(value) {
+    if (value === '1' || value === 'true') return true;
+    if (value === '0' || value === 'false') return false;
+    return undefined;
+}
+
+function parseShareNumber(value, min, max) {
+    if (value === null || value === undefined || value.trim() === '') return undefined;
+    const n = Number(value);
+    return Number.isFinite(n) && n >= min && n <= max ? n : undefined;
+}
+
+function parseShareText(value) {
+    if (typeof value !== 'string') return undefined;
+    const text = value.trim();
+    return text && text.length <= SHARE_MAX_TEXT ? text : undefined;
+}
+
+// Parse and validate a location.search string. Anything malformed is dropped silently.
+function parseShareParams(search) {
+    const params = new URLSearchParams(search || '');
+    const result = { camera: null, prefs: {}, filters: {}, resort: null };
+
+    const lat = parseShareNumber(params.get('lat'), -90, 90);
+    const lng = parseShareNumber(params.get('lng'), -180, 180);
+    if (lat !== undefined && lng !== undefined) {
+        result.camera = {
+            lat, lng,
+            zoom: parseShareNumber(params.get('z'), 0, MAX_ZOOM) ?? SHARE_DEFAULT_ZOOM,
+            bearing: parseShareNumber(params.get('b'), -360, 360) ?? 0,
+            pitch: parseShareNumber(params.get('p'), 0, 85) ?? 0,
+        };
+    }
+
+    const base = params.get('base');
+    if (BASE_MODES.includes(base)) result.prefs.mode = base;
+    for (const [key, pref] of [['labels', 'labels'], ['terrain', 'terrain'], ['3d', 'threeD'], ['trails', 'trails']]) {
+        const value = parseShareBool(params.get(key));
+        if (value !== undefined) result.prefs[pref] = value;
+    }
+
+    const country = (params.get('country') || '').toUpperCase();
+    if (/^[A-Z]{2}$/.test(country)) result.filters.country = country;
+    const region = parseShareText(params.get('region'));
+    if (region) result.filters.region = region;
+    if (SHARE_PASS_VALUES.includes(params.get('pass'))) result.filters.pass = params.get('pass');
+    if (SHARE_SNOW_VALUES.includes(params.get('snow'))) result.filters.snow = params.get('snow');
+
+    result.resort = parseShareText(params.get('resort')) || null;
+    return result;
+}
+
+// state: { camera: {lat,lng,zoom,bearing,pitch}|null, prefs, filters, resort }
+function buildShareUrl(base, state) {
+    const params = new URLSearchParams();
+    if (state.camera) {
+        params.set('lat', state.camera.lat.toFixed(4));
+        params.set('lng', state.camera.lng.toFixed(4));
+        params.set('z', state.camera.zoom.toFixed(2));
+        if (Math.round(state.camera.bearing)) params.set('b', String(Math.round(state.camera.bearing)));
+        if (Math.round(state.camera.pitch)) params.set('p', String(Math.round(state.camera.pitch)));
+    }
+    const prefs = state.prefs || DEFAULT_LAYER_PREFS;
+    params.set('base', prefs.mode);
+    params.set('labels', prefs.labels ? '1' : '0');
+    params.set('terrain', prefs.terrain ? '1' : '0');
+    params.set('3d', prefs.threeD ? '1' : '0');
+    params.set('trails', prefs.trails ? '1' : '0');
+
+    const filters = state.filters || {};
+    if (filters.country) params.set('country', filters.country);
+    if (filters.region) params.set('region', filters.region);
+    if (filters.pass) params.set('pass', filters.pass);
+    if (filters.snow && filters.snow !== 'forecast') params.set('snow', filters.snow);
+    if (state.resort) params.set('resort', state.resort);
+
+    return `${base}?${params.toString()}`;
+}
+
+function getShareState() {
+    const value = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value : '';
+    };
+    const state = {
+        camera: null,
+        prefs: { ...layerPrefs },
+        filters: {
+            country: value('country-filter'), region: value('region-filter'),
+            pass: value('pass-filter'), snow: value('snow-filter'),
+        },
+        resort: currentDetailResort ? currentDetailResort.name : null,
+    };
+    if (map && mapReady) {
+        const c = map.getCenter();
+        state.camera = { lat: c.lat, lng: c.lng, zoom: map.getZoom(), bearing: map.getBearing(), pitch: map.getPitch() };
+    }
+    return state;
+}
+
+async function copyToClipboard(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+        return true;
+    } catch (e) { /* insecure context or permission denied: fall through */ }
+    try {
+        const field = document.createElement('textarea');
+        field.value = text;
+        field.setAttribute('readonly', '');
+        field.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+        document.body.appendChild(field);
+        field.select();
+        const ok = document.execCommand('copy');
+        field.remove();
+        return ok;
+    } catch (e) {
+        return false;
+    }
+}
+
+let toastTimer = null;
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), TOAST_MS);
+}
+
+async function shareCurrentView() {
+    const base = window.location.origin + window.location.pathname;
+    const url = buildShareUrl(base, getShareState());
+    if (await copyToClipboard(url)) {
+        showToast('URL copied to clipboard');
+    } else {
+        window.prompt('Copy this link to share this view:', url);
+    }
+}
+
+// ---- Map style ---------------------------------------------------------------------
+
+// The OpenFreeMap "Liberty" style supplies the labelled Map mode and the label overlay
+// used on top of satellite imagery. If it can't be fetched the raster modes still work.
+async function loadVectorStyle() {
+    try {
+        const response = await fetch(MAP_SOURCES.vectorStyle);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const style = await response.json();
+        return { layers: style.layers || [], sprite: style.sprite, glyphs: style.glyphs };
+    } catch (e) {
+        console.warn('Vector map style unavailable; labelled Map mode disabled', e);
+        return null;
+    }
+}
+
+// Liberty symbol layers worth drawing over satellite imagery (names only, no icons/shields)
+const LABEL_SOURCE_LAYERS = ['place', 'water_name', 'waterway', 'transportation_name', 'aerodrome_label'];
+
+function buildLabelOverlayLayers(vectorLayers) {
+    return vectorLayers
+        .filter(l => l.type === 'symbol' && LABEL_SOURCE_LAYERS.includes(l['source-layer']) &&
+            !/shield|one_way|poi/.test(l.id))
+        .map(l => ({
+            ...l,
+            id: `lbl-${l.id}`,
+            // Latin names only: Liberty's default stacks the local script on top of it
+            layout: { ...l.layout, 'text-field': ['coalesce', ['get', 'name:latin'], ['get', 'name']] },
+            paint: {
+                ...(l.paint || {}),
+                'text-color': '#ffffff',
+                'text-halo-color': 'rgba(0, 0, 0, 0.8)',
+                'text-halo-width': 1.6,
+                'text-halo-blur': 0.5,
+            },
+        }));
+}
+
+// Lift lines and names from OpenMapTiles data, shown with the lifts & trails toggle
+function buildLiftLayers() {
+    return [
+        {
+            id: 'trails-lifts', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation',
+            minzoom: 11, filter: ['==', ['get', 'class'], 'aerialway'],
+            paint: {
+                'line-color': '#ff4d4d',
+                'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1, 16, 3],
+                'line-dasharray': [2, 1],
+            },
+        },
+        {
+            id: 'trails-lift-labels', type: 'symbol', source: 'openmaptiles', 'source-layer': 'transportation_name',
+            minzoom: 13, filter: ['==', ['get', 'class'], 'aerialway'],
+            layout: {
+                'symbol-placement': 'line', 'text-field': ['get', 'name'],
+                'text-font': ['Noto Sans Regular'], 'text-size': 11,
+            },
+            paint: { 'text-color': '#ffffff', 'text-halo-color': 'rgba(0,0,0,0.85)', 'text-halo-width': 1.6 },
+        },
+    ];
+}
+
+function buildMapStyle(vector, prefs) {
+    const sources = {
+        'sat': {
+            type: 'raster', tiles: [MAP_SOURCES.satellite], tileSize: 256, maxzoom: 18,
+            attribution: 'Imagery &copy; Esri, Maxar, Earthstar Geographics',
+        },
+        'topo': {
+            type: 'raster', tiles: [MAP_SOURCES.topo], tileSize: 256, maxzoom: 17,
+            attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
+        },
+        'pistes': {
+            type: 'raster', tiles: [MAP_SOURCES.pistes], tileSize: 256, maxzoom: 18,
+            attribution: 'Trails &copy; <a href="https://www.opensnowmap.org">OpenSnowMap</a>',
+        },
+    };
+    const layers = [
+        { id: 'background', type: 'background', paint: { 'background-color': '#0b1d33' } },
+        { id: 'base-sat', type: 'raster', source: 'sat' },
+        { id: 'base-topo', type: 'raster', source: 'topo' },
+    ];
+
+    if (vector) {
+        sources.openmaptiles = {
+            type: 'vector', url: MAP_SOURCES.vectorTiles,
+            attribution: '&copy; <a href="https://openfreemap.org">OpenFreeMap</a> ' +
+                '&copy; <a href="https://www.openmaptiles.org/">OpenMapTiles</a> ' +
+                'Data from <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        };
+        sources.ne2_shaded = {
+            type: 'raster', tileSize: 256, maxzoom: 6,
+            tiles: ['https://tiles.openfreemap.org/natural_earth/ne2sr/{z}/{x}/{y}.png'],
+        };
+        for (const l of vector.layers) layers.push({ ...l, id: `osm-${l.id}` });
+    }
+
+    if (demSource) {
+        sources.dem = {
+            type: 'raster-dem', tiles: [demSource.sharedDemProtocolUrl], encoding: 'terrarium',
+            tileSize: 256, maxzoom: DEM_MAX_ZOOM,
+            attribution: 'Terrain &copy; <a href="https://registry.opendata.aws/terrain-tiles/">AWS Terrain Tiles</a>',
+        };
+        sources['dem-hillshade'] = { ...sources.dem };
+        sources.contours = {
+            type: 'vector', maxzoom: 15,
+            tiles: [demSource.contourProtocolUrl({
+                multiplier: FEET_PER_METER,
+                thresholds: CONTOUR_THRESHOLDS_FT,
+                contourLayer: 'contours', elevationKey: 'ele', levelKey: 'level',
+                extent: 4096, buffer: 1,
+            })],
+        };
+        layers.push(
+            {
+                id: 'terrain-hillshade', type: 'hillshade', source: 'dem-hillshade',
+                paint: {
+                    'hillshade-exaggeration': 0.4, 'hillshade-shadow-color': '#0a1a2a',
+                    'hillshade-highlight-color': '#ffffff', 'hillshade-accent-color': '#33445a',
+                },
+            },
+            {
+                id: 'terrain-contours-minor', type: 'line', source: 'contours', 'source-layer': 'contours',
+                filter: ['==', ['get', 'level'], 0],
+                paint: { 'line-color': 'rgba(255,255,255,0.3)', 'line-width': 0.5 },
+            },
+            {
+                id: 'terrain-contours-major', type: 'line', source: 'contours', 'source-layer': 'contours',
+                filter: ['==', ['get', 'level'], 1],
+                paint: { 'line-color': 'rgba(255,255,255,0.75)', 'line-width': 1.1 },
+            },
+            {
+                id: 'terrain-contour-labels', type: 'symbol', source: 'contours', 'source-layer': 'contours',
+                filter: ['>', ['get', 'level'], 0],
+                layout: {
+                    'symbol-placement': 'line', 'text-size': 10, 'text-font': ['Noto Sans Regular'],
+                    'text-field': ['concat', ['to-string', ['get', 'ele']], ' ft'],
+                },
+                paint: { 'text-color': '#ffffff', 'text-halo-color': 'rgba(0,0,0,0.8)', 'text-halo-width': 1.2 },
+            },
+        );
+    }
+
+    layers.push({ id: 'trails-pistes', type: 'raster', source: 'pistes', minzoom: 8 });
+    if (vector) {
+        layers.push(...buildLiftLayers());
+        layers.push(...buildLabelOverlayLayers(vector.layers));
+    }
+
+    for (const layer of layers) {
+        layer.layout = {
+            ...(layer.layout || {}),
+            visibility: isLayerVisible(layer.id, prefs) ? 'visible' : 'none',
+        };
+    }
+
+    return {
+        version: 8,
+        projection: { type: 'globe' },
+        sources,
+        layers,
+        sprite: vector ? vector.sprite : undefined,
+        glyphs: vector ? vector.glyphs : MAP_SOURCES.glyphs,
+        sky: { 'atmosphere-blend': ['interpolate', ['linear'], ['zoom'], 0, 1, 5, 1, 7, 0] },
+    };
+}
+
+// ---- Map lifecycle -----------------------------------------------------------------
+
+// Whole-globe minimum zoom: the largest 0.5-step zoom at which the globe still fits the
+// smaller viewport side (a globe's diameter is 512 * 2^z / PI px).
 function computeMinZoom(width, height) {
-    const size = Math.max(width, height);
+    const size = Math.min(width, height);
     if (!(size > 0)) return MIN_ZOOM;
-    return Math.max(0, Math.ceil(Math.log2(size / TILE_SIZE) * 2) / 2);
+    const zoom = Math.log2((Math.PI * GLOBE_FILL * size) / TILE_SIZE);
+    return Math.max(0, Math.floor(zoom * 2) / 2);
 }
 
-// Re-measure the map after any container resize and keep minZoom in step with it
+// Marker radius multiplier at a zoom level (grows at ZOOM_SCALE_RATE of the map's own rate)
+function zoomScaleAt(zoom) {
+    return Math.pow(2, ZOOM_SCALE_RATE * (zoom - MIN_ZOOM));
+}
+
+// circle-radius expression: per-feature base radius times the zoom scale. MapLibre only
+// allows zoom at the top of an interpolate, so sample the exponential at each whole zoom.
+function buildRadiusExpression() {
+    const expr = ['interpolate', ['linear'], ['zoom']];
+    for (let z = 0; z <= MAX_ZOOM; z++) {
+        expr.push(z, ['*', ['get', 'r'], zoomScaleAt(z)]);
+    }
+    return expr;
+}
+
+function resortToFeature(resort, index, baseRadius, isRing) {
+    return {
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [resort.longitude, resort.latitude] },
+        properties: { idx: index, r: baseRadius, ring: isRing },
+    };
+}
+
+async function initMap(shared) {
+    // Shared-link settings win for this visit; they are only saved if the user changes something
+    layerPrefs = { ...loadLayerPrefs(), ...(shared ? shared.prefs : {}) };
+    syncMenuInputs();
+    if (window.maplibregl && window.mlcontour) {
+        demSource = new window.mlcontour.DemSource({
+            url: MAP_SOURCES.dem, encoding: 'terrarium', maxzoom: DEM_MAX_ZOOM, worker: true,
+        });
+        demSource.setupMaplibre(window.maplibregl);
+    }
+    const vector = await loadVectorStyle();
+    const size = document.getElementById('map').getBoundingClientRect();
+    const minZoom = computeMinZoom(size.width, size.height);
+    const camera = shared ? shared.camera : null;
+
+    map = new maplibregl.Map({
+        container: 'map',
+        style: buildMapStyle(vector, layerPrefs),
+        center: camera ? [camera.lng, camera.lat] : [10, 30],
+        zoom: camera ? Math.max(camera.zoom, minZoom) : Math.max(minZoom, MIN_ZOOM),
+        bearing: camera ? camera.bearing : 0,
+        pitch: camera ? camera.pitch : 0,
+        minZoom,
+        maxZoom: MAX_ZOOM,
+        maxPitch: layerPrefs.threeD ? 85 : 60,
+        fadeDuration: 100,
+        maxTileCacheSize: 400,
+        refreshExpiredTiles: false,
+        attributionControl: { compact: true },
+    });
+    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
+    setLayerAvailability(!!vector, !!demSource);
+    window.__map = map; // exposed for e2e tests / debugging
+
+    window.__powder = createTestHooks();
+    map.on('zoomend', syncTerrain3d);
+    map.on('error', (e) => {
+        // Tile fetch failures are routine on flaky networks; keep them out of the user's face
+        if (e && e.error) console.debug('map error', e.error.message || e.error);
+    });
+    // Resort bubbles only need the style; don't wait for every visible tile ('load') first
+    if (!map.isStyleLoaded()) await new Promise(resolve => map.once('style.load', resolve));
+    mapReady = true;
+    addResortLayer();
+    syncTerrain3d();
+    watchMapSize();
+    installMapInteractions();
+}
+
+// Read-only introspection plus one navigation helper for e2e tests; bubbles are drawn on a
+// WebGL canvas so there are no DOM nodes to select.
+function createTestHooks() {
+    return {
+        markerCount: () => (mapReady ? markers.length : 0),
+        // Centre on the first displayed resort and return where it sits on the page
+        revealFirstMarker() {
+            const entry = markers[0];
+            if (!entry) return null;
+            map.jumpTo({ center: [entry.resort.longitude, entry.resort.latitude], zoom: 5, pitch: 0, bearing: 0 });
+            const rect = document.getElementById('map').getBoundingClientRect();
+            const pt = map.project([entry.resort.longitude, entry.resort.latitude]);
+            return { name: entry.resort.name, x: rect.left + pt.x, y: rect.top + pt.y };
+        },
+        layerVisibility: (id) => (map.getLayer(id) ? map.getLayoutProperty(id, 'visibility') : null),
+        hasTerrain: () => !!map.getTerrain(),
+    };
+}
+
+// Keep the canvas size in step with its container (side panel collapse, rotate, etc.)
 function syncMapSize() {
     if (!map) return;
-    map.invalidateSize({ pan: false });
-    const size = map.getSize();
-    map.setMinZoom(computeMinZoom(size.x, size.y));
+    map.resize();
+    const size = document.getElementById('map').getBoundingClientRect();
+    map.setMinZoom(computeMinZoom(size.width, size.height));
 }
 
-// Keep Leaflet's idea of its size in sync with what is actually on screen
 function watchMapSize() {
     let pending = false;
     const schedule = () => {
@@ -97,7 +557,7 @@ function watchMapSize() {
 }
 
 // The app shell must never scroll; undo any scroll the browser applies to it.
-const NON_SCROLLING_CLASSES = ['main-container', 'content-wrapper', 'map-wrapper', 'side-panel', 'leaflet-container'];
+const NON_SCROLLING_CLASSES = ['main-container', 'content-wrapper', 'map-wrapper', 'side-panel', 'maplibregl-map'];
 function installScrollGuard() {
     document.addEventListener('scroll', (e) => {
         const t = e.target;
@@ -110,20 +570,132 @@ function installScrollGuard() {
     }, true);
 }
 
+// ---- Layer switcher ----------------------------------------------------------------
+
+function applyLayerPrefs() {
+    if (!map || !mapReady) return;
+    for (const layer of map.getStyle().layers) {
+        if (layer.id === 'resorts') continue;
+        const want = isLayerVisible(layer.id, layerPrefs) ? 'visible' : 'none';
+        if (map.getLayoutProperty(layer.id, 'visibility') !== want) {
+            map.setLayoutProperty(layer.id, 'visibility', want);
+        }
+    }
+    map.setMaxPitch(layerPrefs.threeD ? 85 : 60);
+    syncTerrain3d();
+    saveLayerPrefs(layerPrefs);
+}
+
+// 3D relief only once zoomed in; setTerrain is skipped when nothing changes
+function syncTerrain3d() {
+    if (!map || !mapReady || !map.getSource('dem')) return;
+    const want = layerPrefs.threeD && map.getZoom() >= TERRAIN_3D_MIN_ZOOM;
+    const has = !!map.getTerrain();
+    if (want && !has) {
+        map.setTerrain({ source: 'dem', exaggeration: TERRAIN_EXAGGERATION });
+    } else if (!want && has) {
+        map.setTerrain(null);
+    }
+}
+
+// The menu (filters + map layers + share) is static markup in index.html so it still works
+// when WebGL is unavailable; these functions only wire it up.
+
+function syncMenuInputs() {
+    document.querySelectorAll('input[name="base-mode"]').forEach(i => { i.checked = i.value === layerPrefs.mode; });
+    document.querySelectorAll('input[data-pref]').forEach(i => { i.checked = !!layerPrefs[i.dataset.pref]; });
+}
+
+// Grey out layers whose sources didn't load (vector style fetch failed, contour plugin missing)
+function setLayerAvailability(hasVector, hasTerrain) {
+    const disable = (selector, off) => document.querySelectorAll(selector).forEach(i => { i.disabled = off; });
+    disable('input[name="base-mode"][value="map"]', !hasVector);
+    disable('input[data-pref="labels"]', !hasVector);
+    disable('input[data-pref="terrain"]', !hasTerrain);
+    disable('input[data-pref="threeD"]', !hasTerrain);
+}
+
+function onLayerInputChange(e) {
+    const input = e.target;
+    if (input.name === 'base-mode') layerPrefs.mode = input.value;
+    else if (input.dataset && input.dataset.pref) layerPrefs[input.dataset.pref] = input.checked;
+    else return;
+    if (mapReady) applyLayerPrefs();
+    else saveLayerPrefs(layerPrefs);
+}
+
+function setMenuOpen(open) {
+    const panel = document.getElementById('menu-panel');
+    const toggle = document.getElementById('menu-toggle');
+    if (!panel || !toggle) return;
+    panel.classList.toggle('visible', open);
+    toggle.setAttribute('aria-expanded', String(open));
+}
+
+function toggleMenu() {
+    const panel = document.getElementById('menu-panel');
+    setMenuOpen(!panel.classList.contains('visible'));
+}
+
+// ---- Resort layer ------------------------------------------------------------------
+
+function addResortLayer() {
+    map.addSource('resorts', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    map.addLayer({
+        id: 'resorts',
+        type: 'circle',
+        source: 'resorts',
+        paint: {
+            'circle-radius': buildRadiusExpression(),
+            'circle-color': BUBBLE_COLOR,
+            'circle-opacity': ['case', ['get', 'ring'], 0, BUBBLE_FILL_OPACITY],
+            'circle-stroke-color': BUBBLE_COLOR,
+            'circle-stroke-width': 2,
+            'circle-pitch-alignment': 'map',
+        },
+    });
+    refreshResortSource();
+}
+
+function refreshResortSource() {
+    if (!map || !mapReady) return;
+    const source = map.getSource('resorts');
+    if (!source) return;
+    const features = markers.map((m, i) => resortToFeature(m.resort, i, m.baseRadius, m.isRing));
+    source.setData({ type: 'FeatureCollection', features });
+}
+
+function installMapInteractions() {
+    map.on('mouseenter', 'resorts', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'resorts', () => {
+        map.getCanvas().style.cursor = '';
+        if (!isTouchDevice) scheduleHideHoverPopup();
+    });
+    if (!isTouchDevice) {
+        map.on('mousemove', 'resorts', (e) => {
+            const feature = e.features && e.features[0];
+            const entry = feature && markers[feature.properties.idx];
+            if (entry) showHoverPopup(entry.resort);
+        });
+    }
+    map.on('click', (e) => {
+        setMenuOpen(false);
+        const hits = map.queryRenderedFeatures(e.point, { layers: ['resorts'] });
+        const entry = hits.length ? markers[hits[0].properties.idx] : null;
+        if (entry) {
+            if (isTouchDevice) hideHoverPopup();
+            toggleDetail(entry.resort);
+        } else {
+            hideDetail();
+        }
+    });
+    // The popup is anchored in screen space: drop it as soon as the map moves under it
+    map.on('movestart', hideHoverPopup);
+}
+
 // Base bubble radius (at min zoom) based on total snowfall
 function getRadius(totalInches) {
     return MIN_RADIUS + (totalInches / 2);
-}
-
-// Markers scale at ZOOM_SCALE_RATE of the map's own (exponential) zoom rate
-function getZoomScale() {
-    const zoom = map ? map.getZoom() : MIN_ZOOM;
-    return Math.pow(2, ZOOM_SCALE_RATE * (zoom - MIN_ZOOM));
-}
-
-function updateMarkerRadii() {
-    const scale = getZoomScale();
-    markers.forEach(m => m.marker.setRadius(m.baseRadius * scale));
 }
 
 // Get snowfall value based on current filter selection
@@ -354,7 +926,7 @@ function createHoverPopup() {
 }
 
 // Show hover popup for a resort
-function showHoverPopup(resort, marker) {
+function showHoverPopup(resort) {
     if (hoverHideTimeout) {
         clearTimeout(hoverHideTimeout);
         hoverHideTimeout = null;
@@ -368,13 +940,13 @@ function showHoverPopup(resort, marker) {
     currentHoverResort = resort;
     hoverPopup.innerHTML = buildHoverPopupContent(resort);
     hoverPopup.style.display = 'block';
-    positionHoverPopup(marker);
+    positionHoverPopup(resort);
     renderHoverPopupChart(resort);
 }
 
-// Position hover popup relative to marker
-function positionHoverPopup(marker) {
-    const point = map.latLngToContainerPoint(marker.getLatLng());
+// Position hover popup relative to the resort's marker
+function positionHoverPopup(resort) {
+    const point = map.project([resort.longitude, resort.latitude]);
     const mapContainer = document.getElementById('map');
     const mapRect = mapContainer.getBoundingClientRect();
     
@@ -645,13 +1217,6 @@ function switchPanelTab(tabName) {
     document.getElementById('details-content').classList.toggle('hidden', tabName !== 'details');
 }
 
-// Toggle filter drawer
-function toggleFilterDrawer() {
-    const drawer = document.getElementById('filter-drawer');
-    drawer.classList.toggle('visible');
-    drawer.classList.toggle('hidden');
-}
-
 // Update filter badge count
 function updateFilterBadge() {
     let count = 0;
@@ -660,6 +1225,7 @@ function updateFilterBadge() {
     if (document.getElementById('pass-filter').value) count++;
 
     const badge = document.getElementById('filter-badge');
+    if (!badge) return;
     if (count > 0) {
         badge.textContent = count;
         badge.classList.remove('hidden');
@@ -670,7 +1236,9 @@ function updateFilterBadge() {
 
 // Center map on resort and open detail panel
 function focusResort(resort) {
-    map.setView([resort.latitude, resort.longitude], 10);
+    if (map) {
+        map.flyTo({ center: [resort.longitude, resort.latitude], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), essential: true });
+    }
     toggleDetail(resort);
 }
 
@@ -719,43 +1287,16 @@ function updateTop10() {
     });
 }
 
-// Create markers for all resorts
+// Rebuild the displayed resort bubbles from the current filters
 function createMarkers() {
-    markers.forEach(m => map.removeLayer(m.marker));
-    markers = [];
     hideHoverPopup();
 
-    const filtered = getFilteredResorts();
-
-    for (const resort of filtered) {
+    markers = getFilteredResorts().map(resort => {
         const snowfall = getSnowfallForFilter(resort);
         const isRing = snowfall < NO_SNOW_THRESHOLD;
-        const baseRadius = isRing ? MIN_RADIUS : getRadius(snowfall);
-
-        const marker = L.circleMarker([resort.latitude, resort.longitude], {
-            radius: baseRadius * getZoomScale(),
-            fillColor: BUBBLE_COLOR,
-            fillOpacity: isRing ? 0 : BUBBLE_FILL_OPACITY,
-            color: BUBBLE_COLOR,
-            weight: 2,
-        });
-
-        // Only add hover events on non-touch devices
-        if (!isTouchDevice) {
-            marker.on('mouseover', () => showHoverPopup(resort, marker));
-            marker.on('mouseout', () => scheduleHideHoverPopup());
-        }
-        
-        marker.on('click', () => {
-            if (isTouchDevice) {
-                hideHoverPopup(); // Ensure hover popup is hidden on touch devices
-            }
-            toggleDetail(resort);
-        });
-
-        marker.addTo(map);
-        markers.push({ marker, resort, baseRadius });
-    }
+        return { resort, baseRadius: isRing ? MIN_RADIUS : getRadius(snowfall), isRing };
+    });
+    refreshResortSource();
 
     updateTop10();
     updateFilterBadge();
@@ -796,21 +1337,27 @@ function populateRegionFilter() {
     populateFilter('.region-filter', options, 'All Regions');
 }
 
-// Handle country filter change
-function onCountryChange() {
-    populateRegionFilter();
-    createMarkers();
-
+// Frame the selected country's resorts (or reset to the whole globe)
+function fitToCountry() {
+    if (!map || !mapReady) return;
     const countryFilter = document.getElementById('country-filter').value;
     if (countryFilter) {
         const countryResorts = resortData.filter(r => r.country === countryFilter);
         if (countryResorts.length > 0) {
-            const bounds = L.latLngBounds(countryResorts.map(r => [r.latitude, r.longitude]));
-            map.fitBounds(bounds, { padding: [50, 50] });
+            const bounds = new maplibregl.LngLatBounds();
+            countryResorts.forEach(r => bounds.extend([r.longitude, r.latitude]));
+            map.fitBounds(bounds, { padding: 50, maxZoom: 7 });
         }
     } else {
-        map.setView([30, 0], Math.max(MIN_ZOOM, map.getMinZoom()));
+        map.flyTo({ center: [10, 30], zoom: map.getMinZoom(), pitch: 0, bearing: 0 });
     }
+}
+
+// Handle country filter change
+function onCountryChange() {
+    populateRegionFilter();
+    createMarkers();
+    fitToCountry();
 }
 
 // Handle other filter changes
@@ -844,26 +1391,21 @@ function setupEventListeners() {
     // Controls
     document.getElementById('panel-collapse').addEventListener('click', togglePanelCollapse);
     document.getElementById('panel-reopen').addEventListener('click', reopenPanel);
-    document.getElementById('menu-toggle').addEventListener('click', toggleFilterDrawer);
-
-    // Close details when clicking on map
-    map.on('click', (e) => {
-        if (e.originalEvent.target.classList.contains('leaflet-container') ||
-            e.originalEvent.target.classList.contains('leaflet-tile-pane') ||
-            e.originalEvent.target.classList.contains('leaflet-tile')) {
-            hideDetail();
-        }
-    });
+    document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
+    document.getElementById('share-button').addEventListener('click', shareCurrentView);
+    document.getElementById('menu-panel').addEventListener('change', onLayerInputChange);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenuOpen(false); });
 }
 
 // Initialize
 async function init() {
     installScrollGuard();
-    initMap();
-    watchMapSize();
     restorePanelState();
     createHoverPopup();
     setupEventListeners();
+    registerServiceWorker();
+    const shared = parseShareParams(window.location.search);
+    const mapInit = initMap(shared).catch(error => console.error('Map failed to initialise:', error));
 
     try {
         const response = await fetch('data/forecasts.json');
@@ -873,7 +1415,10 @@ async function init() {
 
         populateCountryFilter();
         populateRegionFilter();
+        applyShareFilters(shared.filters);
+        await mapInit; // markers need the map's source to exist
         createMarkers();
+        applySharedSelection(shared);
 
         console.log(`Loaded ${resortData.length} resorts, generated at ${data.generated_at}`);
     } catch (error) {
@@ -882,10 +1427,49 @@ async function init() {
     }
 }
 
+// Select a dropdown option only if it exists (a shared link may name a stale region)
+function setSelectIfValid(id, value) {
+    const el = document.getElementById(id);
+    if (el && [...el.options].some(o => o.value === value)) el.value = value;
+}
+
+function applyShareFilters(filters) {
+    if (filters.country) setSelectIfValid('country-filter', filters.country);
+    populateRegionFilter(); // region options depend on the country
+    if (filters.region) setSelectIfValid('region-filter', filters.region);
+    if (filters.pass) setSelectIfValid('pass-filter', filters.pass);
+    if (filters.snow) setSelectIfValid('snow-filter', filters.snow);
+}
+
+// Open the shared resort's details; frame the country or resort if the link had no camera
+function applySharedSelection(shared) {
+    const resort = shared.resort ? resortData.find(r => r.name === shared.resort) : null;
+    if (!shared.camera && map && mapReady) {
+        if (resort) {
+            map.jumpTo({ center: [resort.longitude, resort.latitude], zoom: FOCUS_ZOOM });
+        } else if (document.getElementById('country-filter').value) {
+            fitToCountry();
+        }
+    }
+    if (resort) showDetail(resort);
+}
+
+// Tile/asset cache: repeat visits and panning back over seen areas skip the network
+function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    // Automated test browsers opt in with ?sw=1 so cached tiles don't leak between tests
+    const optIn = new URLSearchParams(window.location.search).has('sw');
+    if (navigator.webdriver && !optIn) return;
+    navigator.serviceWorker.register('sw.js').catch(e => console.debug('Service worker unavailable', e));
+}
+
 if (typeof module !== 'undefined' && module.exports) {
     // Test environment: expose logic without booting the app
     module.exports = {
-        computeMinZoom, nextPanelState, setPanelState, restorePanelState,
+        computeMinZoom, zoomScaleAt, buildRadiusExpression, resortToFeature,
+        sanitizeLayerPrefs, loadLayerPrefs, saveLayerPrefs, isLayerVisible, getLayerGroup,
+        buildLabelOverlayLayers, buildMapStyle, parseShareParams, buildShareUrl,
+        nextPanelState, setPanelState, restorePanelState,
         showDetail, hideDetail, togglePanelCollapse, reopenPanel,
         getPanelState: () => panelState,
     };

@@ -44,7 +44,7 @@ body {
     flex-direction: column;
 }
 
-/* Header with menu toggle */
+/* Header */
 .header {
     flex-shrink: 0;
     background: var(--color-bg-panel);
@@ -64,79 +64,47 @@ body {
     color: var(--color-accent);
 }
 
-.menu-toggle {
-    background: var(--color-bg-input);
-    color: var(--color-text);
-    border: 1px solid var(--color-accent);
-    border-radius: var(--radius-md);
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.menu-toggle:hover {
-    background: var(--color-bg-hover);
-}
-
+/* Filter count badge on the map's menu button */
 .filter-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
     background: var(--color-accent);
     color: white;
-    border-radius: 10px;
-    padding: 2px 8px;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 600;
+    line-height: 16px;
+    text-align: center;
 }
 
 .filter-badge.hidden {
     display: none;
 }
 
-/* Filter drawer (toggles on menu click) */
-.filter-drawer {
-    background: var(--color-bg-panel);
-    border-bottom: 1px solid var(--color-border);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.filter-drawer.visible {
-    max-height: 300px;
-}
-
-.filter-drawer.hidden {
-    max-height: 0;
-}
-
-.filter-drawer-content {
-    padding: 16px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: center;
-}
-
-/* Filter groups */
+/* Filter groups (stacked inside the menu panel) */
 .filter-group {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
 }
 
 .filter-group label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--color-text-muted);
 }
 
 .filter-group select {
+    width: 100%;
     background: var(--color-bg-input);
     color: var(--color-text);
     border: 1px solid var(--color-accent);
     border-radius: var(--radius-sm);
-    padding: 6px 12px;
+    padding: 6px 10px;
     font-size: 0.9rem;
     cursor: pointer;
 }
@@ -149,8 +117,9 @@ body {
 /* Legend */
 .legend {
     display: flex;
-    gap: 16px;
-    margin-left: auto;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 4px;
 }
 
 .legend-item {
@@ -230,27 +199,124 @@ body {
 .panel-reopen:hover { background: var(--color-bg-hover); }
 .panel-reopen[hidden] { display: none; }
 
-/* Leaflet zoom controls */
-.leaflet-top.leaflet-right {
+/* MapLibre controls */
+.maplibregl-ctrl-top-right {
     top: 10px;
     right: 10px;
 }
 
-/* Leaflet tooltip customization */
-.leaflet-tooltip {
-    background: var(--color-bg-panel);
-    border: 1px solid var(--color-accent);
-    color: var(--color-text);
-    padding: 8px 12px;
-    font-size: 0.9rem;
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-sm);
-    max-width: 240px;
+/* Map menu: buttons sit under MapLibre's zoom/compass stack; the panel opens to their left.
+   The container is click-through so it never blocks the map beneath it. */
+.map-menu {
+    position: absolute;
+    z-index: 5;
+    top: 108px;
+    right: 10px;
+    bottom: 10px;
+    width: 29px;
+    pointer-events: none;
 }
 
-.leaflet-tooltip::before {
-    border-top-color: var(--color-accent);
+.map-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
 }
+
+.map-menu-button {
+    position: relative;
+    width: 29px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.map-menu-button + .map-menu-button { border-top: 1px solid var(--color-border); }
+.map-menu-button:hover { background: var(--color-bg-hover); }
+.map-menu-button:focus-visible { outline: 2px solid var(--color-accent-light); outline-offset: -2px; }
+
+.menu-panel {
+    display: none;
+    position: absolute;
+    top: -98px; /* align with the top of the zoom controls */
+    right: 38px;
+    width: min(260px, calc(100vw - 72px));
+    max-height: calc(100% + 98px);
+    overflow-y: auto;
+    padding: 12px 14px;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-text);
+    pointer-events: auto;
+}
+
+.menu-panel.visible { display: block; }
+
+.menu-section { margin-bottom: 14px; }
+.menu-section:last-child { margin-bottom: 0; }
+
+.menu-section h2 {
+    margin-bottom: 8px;
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.menu-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.menu-check:has(input:disabled) { opacity: 0.5; cursor: not-allowed; }
+
+/* Brief confirmation message (e.g. after copying a share link) */
+.toast {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    bottom: 24px;
+    transform: translate(-50%, 8px);
+    padding: 8px 14px;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.maplibregl-ctrl-attrib {
+    background: rgba(22, 33, 62, 0.75);
+}
+
+.maplibregl-ctrl-attrib a { color: var(--color-accent-light); }
 
 .tooltip-name { font-weight: 600; margin-bottom: 4px; }
 .tooltip-info { color: var(--color-text-muted); font-size: 0.85rem; }
@@ -565,11 +631,6 @@ body {
 /* Responsive: narrow screens */
 @media (max-width: 600px) {
     .header h1 { font-size: 1.1rem; }
-    .menu-toggle { padding: 6px 12px; font-size: 0.85rem; }
-    .filter-drawer-content { flex-direction: column; align-items: stretch; }
-    .filter-group { width: 100%; }
-    .filter-group select { flex: 1; }
-    .legend { margin-left: 0; margin-top: 8px; }
 }
 
 /* Narrow / portrait: the panel becomes a bottom sheet under the map.
