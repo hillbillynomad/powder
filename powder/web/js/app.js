@@ -399,7 +399,9 @@ function buildMapStyle(vector, prefs) {
                 id: 'terrain-contour-labels', type: 'symbol', source: 'contours', 'source-layer': 'contours',
                 filter: ['>', ['get', 'level'], 0],
                 layout: {
-                    'symbol-placement': 'line', 'text-size': 10, 'text-font': ['Noto Sans Regular'],
+                    'symbol-placement': 'line', 'symbol-spacing': 450,
+                    'text-size': ['interpolate', ['linear'], ['zoom'], 10, 8, 15, 10],
+                    'text-font': ['Noto Sans Regular'],
                     'text-field': ['concat', ['to-string', ['get', 'ele']], ' ft'],
                 },
                 paint: { 'text-color': '#ffffff', 'text-halo-color': 'rgba(0,0,0,0.8)', 'text-halo-width': 1.2 },
@@ -508,6 +510,12 @@ async function initMap(shared) {
     // Resort bubbles only need the style; don't wait for every visible tile ('load') first
     if (!map.isStyleLoaded()) await new Promise(resolve => map.once('style.load', resolve));
     mapReady = true;
+    collapseAttribution();
+    // MapLibre re-opens it on resize (e.g. the side panel settling), so keep it closed
+    // until the user first touches the map.
+    const keepClosed = () => collapseAttribution();
+    map.on('resize', keepClosed);
+    map.getCanvas().addEventListener('pointerdown', () => map.off('resize', keepClosed), { once: true });
     addResortLayer();
     syncTerrain3d();
     watchMapSize();
@@ -538,6 +546,15 @@ function createTestHooks() {
         layerVisibility: (id) => (map.getLayer(id) ? map.getLayoutProperty(id, 'visibility') : null),
         hasTerrain: () => !!map.getTerrain(),
     };
+}
+
+// MapLibre opens the compact attribution until the first map move; on a small map that
+// covers a third of the view. Start it collapsed behind its (i) button instead.
+function collapseAttribution() {
+    const attribution = document.querySelector('#map .maplibregl-ctrl-attrib');
+    if (!attribution) return;
+    attribution.classList.remove('maplibregl-compact-show');
+    attribution.removeAttribute('open');
 }
 
 // Keep the canvas size in step with its container (side panel collapse, rotate, etc.)
@@ -1464,9 +1481,11 @@ function applySharedSelection(shared) {
 // Tile/asset cache: repeat visits and panning back over seen areas skip the network
 function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return;
-    // Automated test browsers opt in with ?sw=1 so cached tiles don't leak between tests
+    // Automated browsers and local development skip it (stale JS while editing is confusing
+    // and cached tiles would leak between tests); ?sw=1 opts back in.
     const optIn = new URLSearchParams(window.location.search).has('sw');
-    if (navigator.webdriver && !optIn) return;
+    const isLocal = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
+    if ((navigator.webdriver || isLocal) && !optIn) return;
     navigator.serviceWorker.register('sw.js').catch(e => console.debug('Service worker unavailable', e));
 }
 
