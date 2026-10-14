@@ -65,6 +65,15 @@
                         <label class="menu-check"><input type="checkbox" data-pref="threeD"> 3D relief</label>
                         <label class="menu-check"><input type="checkbox" data-pref="trails"> Lifts &amp; resort names</label>
                     </section>
+
+                    <section class="menu-section">
+                        <h2>Weather</h2>
+                        <label class="menu-check"><input type="radio" name="wx-overlay" value="none" checked> None</label>
+                        <label class="menu-check"><input type="radio" name="wx-overlay" value="temp" disabled> Temperature</label>
+                        <label class="menu-check"><input type="radio" name="wx-overlay" value="depth" disabled> Snow depth</label>
+                        <label class="menu-check"><input type="radio" name="wx-overlay" value="fresh" disabled> New snow (24h)</label>
+                        <p id="wx-status" class="menu-note">Loading weather data…</p>
+                    </section>
                 </div>
             </div>
         </div>
@@ -94,6 +103,19 @@
                 <div id="map"></div>
 
                 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+                <div id="wx-timebar" class="wx-timebar" hidden>
+                    <button id="wx-play" class="wx-play" type="button" aria-label="Play">▶</button>
+                    <div class="wx-track">
+                        <input id="wx-slider" class="wx-slider" type="range" min="0" max="0" step="1" value="0"
+                               aria-label="Forecast time">
+                        <div id="wx-legend" class="wx-legend"></div>
+                    </div>
+                    <div class="wx-time">
+                        <span id="wx-time-when" class="wx-time-when"></span>
+                        <span id="wx-time-rel" class="wx-time-rel"></span>
+                    </div>
+                    <button id="wx-now" class="wx-now" type="button" hidden>Now</button>
+                </div>
                 <button id="panel-reopen" class="panel-reopen" title="Show panel" aria-label="Show panel" aria-expanded="false" hidden><span class="chev">▶</span></button>
             </div>
         </div>
@@ -102,6 +124,7 @@
     <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
     <script src="https://unpkg.com/maplibre-contour@0.1.1/dist/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
+    <script src="js/weather.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

@@ -19,6 +19,7 @@ poetry run powder --pass EPIC               # Filter by pass type
 poetry run powder --resort "Chamonix"       # Single resort
 poetry run powder --no-cache --resort "Niseko"  # Bypass HTTP cache
 poetry run powder --export-json             # Generate powder/web/data/forecasts.json
+poetry run powder --export-overlays         # Generate powder/web/data/overlays/ (GFS weather frames, ~20s)
 
 # Web UI (after --export-json)
 cd powder/web && python -m http.server 8000
@@ -45,6 +46,7 @@ powder/
 ├── forecast.py       # DailyForecast, ForecastResult, calculate_avg_forecasts
 ├── resorts.py        # SkiResort dataclass, load_resorts, filter_resorts
 ├── cache.py          # Module-level requests_cache.CachedSession (12h TTL, sqlite)
+├── overlays.py       # Hourly GFS temp / snow depth / new snow grids for the web weather overlay
 ├── providers/        # ForecastProvider implementations — see providers/MODELS.md
 │   ├── base.py       # Abstract ForecastProvider (.name, .get_snowfall_forecast)
 │   ├── open_meteo.py # GFS (16d forecast + 14d historical via past_days) — global
@@ -63,6 +65,7 @@ powder/
 - **Forecast aggregation is a simple per-day mean** across whatever providers returned data for that date (`forecast.py:ForecastResult.from_forecasts`). Missing providers for a date don't break aggregation — any provider with data contributes.
 - **Historical + forecast share one Open-Meteo call** via `past_days=14` (no separate archive API). Don't reintroduce a split.
 - **HTTP cache is global module state** in `cache.py`. `set_cache_enabled(False)` (called by `--no-cache`) resets the lazily-built session. Tests auto-disable caching via the `disable_cache_for_tests` autouse fixture in `tests/conftest.py`.
+- **Weather overlays are separate from resort forecasts** (`overlays.py`, `--export-overlays`). They byte-range-read single GRIB2 fields (via each file's `.idx`) from NOAA's free GFS mirror on AWS, decode with `eccodes` (`eccodeslib` supplies the C library off Windows), and write one 8-bit grayscale PNG per field per hour on a 0.5 degree grid (24h back to ~72h ahead) plus `manifest.json` describing the value encodings. Each run gets its own directory so frames are immutable. GFS snow depth has a missing-value sentinel over ocean (masked to 0); density = WEASD/SNOD; new snow = 24h depth gain. The deploy step is `continue-on-error`.
 - **`SkiResort` keeps backward-compat aliases** (`elevation_ft`, `state`, plus dual field-name support in `load_resorts`). Don't remove them without checking `data/resorts.json` and downstream JSON consumers.
 
 ### Web UI data flow
@@ -70,6 +73,8 @@ powder/
 `--export-json` writes `powder/web/data/forecasts.json`; `web/js/app.js` reads it directly. There is no backend — the UI is fully static.
 
 The map is a MapLibre GL JS globe (`projection: globe`) built in `app.js:buildMapStyle`. All tile sources live in the `MAP_SOURCES` constant and are free / key-less: Esri imagery (Satellite), OpenFreeMap vectors (Map mode + label overlay), OpenTopoMap (Topo), AWS Terrarium DEM (hillshade, 3D relief, and `maplibre-contour` feet contours). Layer ids are grouped by prefix (`base-*`, `osm-*`, `lbl-*`, `terrain-*`, `trails-*`) and `isLayerVisible` is the single source of truth for what each toggle shows. Resorts are a GeoJSON `circle` layer (no DOM markers); e2e tests use the `window.__powder` / `window.__map` hooks. `powder/web/sw.js` is a service worker that caches tiles; it is skipped under automated browsers unless `?sw=1`. Three view modes (`Powder on the Way`, `Recent Powder`, `Total Recent + Forecast`) are computed client-side from forecast + historical days in the same JSON.
+
+The weather overlay lives in `web/js/weather.js` (pure helpers are unit-tested) and is wired in from `app.js`. It is a Weather section in the ☰ menu, off by default; when on, a time bar (play / hourly slider / legend) appears and starts at the current hour, following "now" while the page is open. Frames are decoded from the grayscale PNGs, coloured through a LUT and reprojected to Web Mercator in `web/js/weather-worker.js` (OffscreenCanvas → PNG blob), then shown via a MapLibre `image` source (`wx-*` ids, skipped by `applyLayerPrefs`). Don't switch to a `canvas` source: it renders black on the globe. Clicking the map (not a resort) while an overlay is on shows depth / density / new snow / temperature at that point.
 
 ## Testing notes
 

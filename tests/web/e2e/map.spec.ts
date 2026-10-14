@@ -233,3 +233,76 @@ test.describe('Share links', () => {
     await page.waitForSelector('#map');
   });
 });
+
+/** Resolves once the weather overlay layer is drawn and visible. */
+async function waitForOverlayDrawn(page) {
+  await page.waitForFunction(() => {
+    const m = window.__map;
+    return !!m.getLayer('wx-overlay') && m.getPaintProperty('wx-overlay', 'raster-opacity') > 0;
+  }, undefined, { timeout: 20000 });
+}
+
+test.describe('Weather overlay', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    await page.waitForFunction(() => !!window.__powder && !!window.__powder.weather(), undefined, { timeout: 15000 })
+      .catch(() => test.skip(true, 'WebGL unavailable in this browser'));
+    await page.evaluate(() => window.__powder.weatherReady());
+    const frames = await page.evaluate(() => window.__powder.weather()!.frames);
+    test.skip(frames === 0, 'No overlay data: run `poetry run powder --export-overlays` first');
+  });
+
+  test('is off by default and lives in the menu', async ({ page }) => {
+    expect(await page.evaluate(() => window.__powder.weather()!.active)).toBe('none');
+    await expect(page.locator('#wx-timebar')).toBeHidden();
+    await page.locator('#menu-toggle').click();
+    await expect(page.locator('input[name="wx-overlay"][value="none"]')).toBeChecked();
+    await expect(page.locator('input[name="wx-overlay"][value="depth"]')).toBeEnabled();
+  });
+
+  test('picking an overlay drapes it, opens the time bar at "now", and the slider moves through hours', async ({ page }) => {
+    await page.locator('#menu-toggle').click();
+    await page.locator('input[name="wx-overlay"][value="depth"]').check();
+    await waitForOverlayDrawn(page);
+    await expect(page.locator('#wx-timebar')).toBeVisible();
+    await expect(page.locator('#wx-time-rel')).toHaveText('now');
+    await expect(page.locator('#wx-now')).toBeHidden();
+
+    const start = await page.evaluate(() => window.__powder.weather()!.frame);
+    await page.locator('#wx-slider').evaluate((el: HTMLInputElement, v) => {
+      el.value = String(v);
+      el.dispatchEvent(new Event('input'));
+    }, start + 6);
+    await expect(page.locator('#wx-time-rel')).toHaveText('+6h');
+    await expect(page.locator('#wx-now')).toBeVisible();
+
+    await page.locator('#wx-now').click();
+    await expect(page.locator('#wx-time-rel')).toHaveText('now');
+    expect(await page.evaluate(() => window.__powder.weather()!.frame)).toBe(start);
+  });
+
+  test('clicking the map shows values at that point; None turns it all off', async ({ page }) => {
+    await page.locator('#menu-toggle').click();
+    await page.locator('input[name="wx-overlay"][value="temp"]').check();
+    await waitForOverlayDrawn(page);
+    await page.locator('#menu-toggle').click();
+    // Open water in the mid-Pacific: no resort bubble to intercept the click
+    const point = await page.evaluate(() => {
+      window.__map.jumpTo({ center: [-150, 20], zoom: 3, pitch: 0, bearing: 0 });
+      const rect = document.getElementById('map')!.getBoundingClientRect();
+      const p = window.__map.project([-150, 20]);
+      return { x: rect.left + p.x, y: rect.top + p.y };
+    });
+    await page.mouse.click(point.x, point.y);
+    const popup = page.locator('.wx-popup');
+    await expect(popup).toBeVisible({ timeout: 10000 });
+    await expect(popup).toContainText('Temperature');
+    await expect(popup).toContainText('°F');
+
+    await page.locator('#menu-toggle').click();
+    await page.locator('input[name="wx-overlay"][value="none"]').check();
+    await expect(page.locator('#wx-timebar')).toBeHidden();
+    await expect(popup).toBeHidden();
+    expect(await page.evaluate(() => window.__map.getPaintProperty('wx-overlay', 'raster-opacity'))).toBe(0);
+  });
+});

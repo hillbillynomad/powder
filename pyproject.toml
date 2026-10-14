@@ -7,6 +7,11 @@ dependencies = [
     "requests>=2.31.0",
     "requests-cache>=1.2.0",
     "python-dateutil>=2.8.2",
+    "eccodes (>=2.37)",
+    # The ecCodes C library: bundled in the Windows wheel, a separate package elsewhere
+    "eccodeslib>=2.37; sys_platform != 'win32'",
+    "numpy (>=2.0)",
+    "pillow (>=10.0)",
 ]
 
 [project.scripts]
@@ -48,6 +53,7 @@ markers = [
     "elevation: Elevation calculation tests",
     "cli: CLI tests",
     "cache: Cache tests",
+    "overlays: GFS weather overlay export tests",
 ]
 addopts = "-v --tb=short"
 

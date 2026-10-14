@@ -33,3 +33,6 @@ tests/web/test-results/
 .claude/settings.local.json
 claude
 
+
+# Generated weather overlay frames (built fresh on deploy)
+powder/web/data/overlays/

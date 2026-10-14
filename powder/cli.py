@@ -241,6 +241,7 @@ Examples:
   powder --pass EPIC            Show forecasts for EPIC pass resorts
   powder --list                 List all available resorts
   powder --list --country JP    List Japanese resorts only
+  powder --export-overlays      Build GFS weather overlay frames for the web UI
         """,
     )
     parser.add_argument(
@@ -280,12 +281,25 @@ Examples:
         action="store_true",
         help="Export forecast data to JSON for web UI",
     )
+    parser.add_argument(
+        "--export-overlays",
+        action="store_true",
+        help="Export hourly GFS temperature/snow overlay frames for the web UI",
+    )
 
     args = parser.parse_args()
 
     # Configure caching based on --no-cache flag
     if args.no_cache:
         set_cache_enabled(False)
+
+    # Weather overlays are global grids, independent of the resort list and filters
+    if args.export_overlays:
+        from .overlays import main_export
+
+        main_export(Path(__file__).parent / "web" / "data" / "overlays")
+        if not args.export_json:
+            return
 
     # Load resorts from config
     try:

@@ -333,6 +333,108 @@ body {
 
 .menu-check:has(input:disabled) { opacity: 0.5; cursor: not-allowed; }
 
+.menu-note {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* Weather overlay time bar: play, hourly slider with the colour legend under it, time label */
+.wx-timebar {
+    position: absolute;
+    z-index: 5;
+    left: 10px;
+    right: 40px; /* clear of the attribution (i) button */
+    bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 640px;
+    padding: 8px 12px;
+    background: rgba(22, 33, 62, 0.9);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    color: var(--color-text);
+}
+
+.wx-timebar[hidden] { display: none; }
+
+.wx-play, .wx-now {
+    flex: 0 0 auto;
+    background: var(--color-bg-input);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.wx-play { width: 34px; height: 34px; font-size: 0.85rem; }
+.wx-now { padding: 4px 10px; font-size: 0.8rem; }
+.wx-now[hidden] { display: none; }
+.wx-play:hover, .wx-now:hover { background: var(--color-bg-hover); }
+
+.wx-track { flex: 1 1 auto; min-width: 0; }
+.wx-slider { width: 100%; accent-color: var(--color-accent); }
+
+.wx-legend-bar { height: 6px; border-radius: 3px; }
+
+.wx-legend-ticks {
+    position: relative;
+    height: 14px;
+    margin-right: 22px; /* room for the units label */
+    font-size: 10px;
+    color: var(--color-text-muted);
+}
+
+.wx-legend-ticks span { position: absolute; top: 1px; transform: translateX(-50%); }
+.wx-legend-ticks .wx-legend-units { left: auto; right: -22px; transform: none; }
+
+.wx-time {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 72px;
+    line-height: 1.2;
+}
+
+.wx-time-when { font-size: 0.85rem; font-weight: 600; }
+.wx-time-rel { font-size: 0.75rem; color: var(--color-accent-light); }
+
+/* Click-to-inspect popup; above the time bar, which shares the map wrapper's stacking context */
+.wx-popup { z-index: 6; }
+
+.wx-popup .maplibregl-popup-content {
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 12px 14px;
+    box-shadow: var(--shadow-lg);
+    color: var(--color-text);
+}
+
+.wx-popup .maplibregl-popup-tip { border-top-color: var(--color-bg-panel); border-bottom-color: var(--color-bg-panel); }
+.wx-popup .maplibregl-popup-close-button { color: var(--color-text); font-size: 18px; padding: 2px 8px; }
+
+.wx-readout { min-width: 180px; font-size: 0.85rem; }
+.wx-readout-title { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.wx-readout-value { font-size: 1.6rem; font-weight: 700; line-height: 1.15; margin: 2px 0 8px; }
+.wx-readout-row { display: flex; justify-content: space-between; gap: 16px; }
+.wx-readout-row span { color: var(--color-text-muted); }
+.wx-readout-meta { margin-top: 6px; font-size: 0.7rem; color: var(--color-text-muted); }
+
+@media (max-width: 600px) {
+    .wx-timebar { left: 6px; right: 34px; bottom: 6px; gap: 8px; padding: 6px 8px; }
+    .wx-time { min-width: 60px; }
+}
+
+/* Bottom-sheet layout: while the sheet is collapsed its reopen tab sits at the bottom centre
+   of the map, so lift the time bar above it (keep in sync with the bottom-sheet query) */
+@media (max-width: 700px), (max-aspect-ratio: 1/1) {
+    .map-wrapper:has(#panel-reopen:not([hidden])) .wx-timebar { bottom: 48px; }
+}
+
 /* Brief confirmation message (e.g. after copying a share link) */
 .toast {
     position: absolute;

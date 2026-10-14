@@ -349,3 +349,26 @@ class TestMain:
                 mock_path.return_value.parent.mkdir = MagicMock()
                 # This is complex - skip for now
                 pass
+
+
+@pytest.mark.cli
+@pytest.mark.overlays
+class TestExportOverlaysCommand:
+    """--export-overlays builds weather frames without touching resort forecasts."""
+
+    def test_exports_overlays_into_web_data(self):
+        with patch("sys.argv", ["powder", "--export-overlays"]), \
+                patch("powder.overlays.main_export") as export, \
+                patch("powder.cli.export_json") as export_forecasts:
+            main()
+        output_dir = export.call_args.args[0]
+        assert output_dir.parts[-3:] == ("web", "data", "overlays")
+        export_forecasts.assert_not_called()
+
+    def test_combines_with_export_json(self):
+        with patch("sys.argv", ["powder", "--export-overlays", "--export-json", "--country", "JP"]), \
+                patch("powder.overlays.main_export") as export, \
+                patch("powder.cli.export_json") as export_forecasts:
+            main()
+        export.assert_called_once()
+        export_forecasts.assert_called_once()

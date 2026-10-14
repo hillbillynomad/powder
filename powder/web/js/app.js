@@ -54,6 +54,7 @@ let map;
 let mapReady = false;
 let demSource = null; // maplibre-contour DemSource shared by hillshade, 3D relief and contours
 let markers = []; // [{ resort, baseRadius, isRing }] for the currently displayed resorts
+let weather = null; // weather.js overlay controller, once the map is up
 let resortData = [];
 let currentDetailResort = null;
 
@@ -507,6 +508,7 @@ async function initMap(shared) {
     syncTerrain3d();
     watchMapSize();
     installMapInteractions();
+    if (window.PowderWeather) weather = window.PowderWeather.createController(map, window.maplibregl);
 }
 
 // Read-only introspection plus one navigation helper for e2e tests; bubbles are drawn on a
@@ -532,6 +534,9 @@ function createTestHooks() {
         },
         layerVisibility: (id) => (map.getLayer(id) ? map.getLayoutProperty(id, 'visibility') : null),
         hasTerrain: () => !!map.getTerrain(),
+        weather: () => (weather ? weather.getState() : null),
+        weatherReady: () => (weather ? weather.ready.then(() => true) : Promise.resolve(false)),
+        setWeatherFrame: (i) => weather && weather.setFrame(i),
     };
 }
 
@@ -586,7 +591,7 @@ function installScrollGuard() {
 function applyLayerPrefs() {
     if (!map || !mapReady) return;
     for (const layer of map.getStyle().layers) {
-        if (layer.id === 'resorts') continue;
+        if (layer.id === 'resorts' || layer.id.startsWith('wx-')) continue; // managed elsewhere
         const want = isLayerVisible(layer.id, layerPrefs) ? 'visible' : 'none';
         if (map.getLayoutProperty(layer.id, 'visibility') !== want) {
             map.setLayoutProperty(layer.id, 'visibility', want);
@@ -726,6 +731,7 @@ function installMapInteractions() {
             toggleDetail(entry.resort);
         } else {
             hideDetail();
+            if (weather) weather.showReadout(e.lngLat);
         }
     });
     // The popup is anchored in screen space: drop it as soon as the map moves under it

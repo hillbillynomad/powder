@@ -13,6 +13,9 @@ declare global {
       firstMarkerRendered(): boolean;
       layerVisibility(id: string): string | null;
       hasTerrain(): boolean;
+      weather(): { active: string; frame: number; followNow: boolean; frames: number; playing: boolean } | null;
+      weatherReady(): Promise<boolean>;
+      setWeatherFrame(index: number): void;
     };
   }
 }

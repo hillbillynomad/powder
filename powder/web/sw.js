@@ -92,7 +92,10 @@ self.addEventListener('fetch', (event) => {
             event.respondWith(cacheFirst(request));
         }
     } else if (url.origin === self.location.origin) {
-        if (url.pathname.endsWith('.json')) {
+        if (url.pathname.includes('/data/overlays/') && url.pathname.endsWith('.png')) {
+            // Weather frames live under a per-run directory and never change: cache like tiles
+            event.respondWith(cacheFirst(request));
+        } else if (url.pathname.endsWith('.json')) {
             event.respondWith(networkFirst(request, SHELL_CACHE));
         } else {
             event.respondWith(staleWhileRevalidate(request, SHELL_CACHE));

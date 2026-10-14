@@ -1,9 +1,10 @@
 name: Deploy Forecasts
 
 on:
-  # Run every 6 hours
+  # Every 6 hours, ~5.5h after each GFS cycle (00/06/12/18Z) so the newest model run is
+  # fully published for the weather overlays
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '30 5,11,17,23 * * *'
   # Run on push to main
   push:
     branches: ["main"]
@@ -46,6 +47,12 @@ jobs:
 
       - name: Validate forecast data
         run: python scripts/validate_export.py
+
+      - name: Generate weather overlays
+        # Optional layer (GFS temperature / snow frames): if NOAA's bucket is unreachable the
+        # site still deploys and the UI just shows the Weather menu as unavailable
+        continue-on-error: true
+        run: poetry run powder --export-overlays
 
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
