@@ -10,6 +10,7 @@ declare global {
     __powder: {
       markerCount(): number;
       revealFirstMarker(): { name: string; x: number; y: number } | null;
+      firstMarkerRendered(): boolean;
       layerVisibility(id: string): string | null;
       hasTerrain(): boolean;
     };
@@ -33,7 +34,7 @@ export async function markerCount(page: Page): Promise<number> {
 export async function clickFirstMarker(page: Page) {
   const point = await page.evaluate(() => window.__powder.revealFirstMarker());
   if (!point) throw new Error('No resort markers to click');
-  // Let the camera jump render a frame so the circle layer is hit-testable
-  await page.waitForTimeout(500);
+  // Software-rendered WebGL can take a while to draw the frame after the camera jump
+  await page.waitForFunction(() => window.__powder.firstMarkerRendered(), undefined, { timeout: 20000 });
   await page.mouse.click(point.x, point.y);
 }

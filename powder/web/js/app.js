@@ -528,6 +528,13 @@ function createTestHooks() {
             const pt = map.project([entry.resort.longitude, entry.resort.latitude]);
             return { name: entry.resort.name, x: rect.left + pt.x, y: rect.top + pt.y };
         },
+        // Is the first displayed resort's bubble currently rendered (hit-testable) on screen?
+        firstMarkerRendered() {
+            const entry = markers[0];
+            if (!entry) return false;
+            const pt = map.project([entry.resort.longitude, entry.resort.latitude]);
+            return map.queryRenderedFeatures([pt.x, pt.y], { layers: ['resorts'] }).length > 0;
+        },
         layerVisibility: (id) => (map.getLayer(id) ? map.getLayoutProperty(id, 'visibility') : null),
         hasTerrain: () => !!map.getTerrain(),
     };

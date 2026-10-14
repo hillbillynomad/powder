@@ -3,9 +3,13 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
+  // Software-rendered WebGL (SwiftShader) is slow and CPU-hungry: give tests room and avoid
+  // starving them with too many parallel browsers.
+  timeout: 60 * 1000,
+  expect: { timeout: 10 * 1000 },
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 2,
   reporter: 'html',
 
   use: {

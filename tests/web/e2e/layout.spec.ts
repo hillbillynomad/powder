@@ -92,9 +92,9 @@ test.describe('Side panel recovery', () => {
     await reopen.click();
     await expect(panel).not.toHaveClass(/collapsed/);
     await expect(reopen).toBeHidden();
-    const box = await panel.boundingBox();
-    expect(box!.width).toBeGreaterThan(50);
-    expect(box!.height).toBeGreaterThan(50);
+    // The panel animates open; wait for it to finish rather than measuring mid-transition
+    await expect.poll(async () => (await panel.boundingBox())!.width).toBeGreaterThan(50);
+    await expect.poll(async () => (await panel.boundingBox())!.height).toBeGreaterThan(50);
   });
 
   test('deselecting a resort does not collapse the panel', async ({ page }) => {
