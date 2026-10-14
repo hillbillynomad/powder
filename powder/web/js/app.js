@@ -10,6 +10,7 @@ const ZOOM_SCALE_RATE = 0.1; // markers grow at 0.1x the map's zoom rate
 const TILE_SIZE = 512;
 const GLOBE_FILL = 0.9; // fraction of the smaller viewport side the whole globe may occupy
 const FOCUS_ZOOM = 9;
+const SEARCH_LIMIT = 10;
 const TERRAIN_3D_MIN_ZOOM = 7; // 3D relief on a globe is only worth its cost once zoomed in
 const TERRAIN_EXAGGERATION = 1.4;
 const FEET_PER_METER = 3.28084;
@@ -1238,6 +1239,77 @@ function focusResort(resort) {
     toggleDetail(resort);
 }
 
+// Lowercase and strip accents so "val d'isere" finds "Val d'Isère"
+function normalizeSearchText(text) {
+    return String(text || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+}
+
+// Resorts whose name contains the query: name-prefix matches first, then word-prefix, then anywhere
+function searchResorts(resorts, query, limit = SEARCH_LIMIT) {
+    const q = normalizeSearchText(query);
+    if (!q) return [];
+    const rank = name => {
+        if (name.startsWith(q)) return 0;
+        if (name.includes(' ' + q)) return 1;
+        return name.includes(q) ? 2 : -1;
+    };
+    return resorts
+        .map(resort => ({ resort, name: normalizeSearchText(resort.name) }))
+        .map(entry => ({ ...entry, rank: rank(entry.name) }))
+        .filter(entry => entry.rank >= 0)
+        .sort((a, b) => a.rank - b.rank || a.name.localeCompare(b.name))
+        .slice(0, limit)
+        .map(entry => entry.resort);
+}
+
+function setSearchResultsOpen(open) {
+    document.getElementById('search-results').hidden = !open;
+}
+
+// Fly to a resort and open its details (never toggles it closed, unlike focusResort)
+function selectSearchResult(resort) {
+    if (map) {
+        map.flyTo({ center: [resort.longitude, resort.latitude], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), essential: true });
+    }
+    showDetail(resort);
+}
+
+function runSearch(e) {
+    e.preventDefault();
+    const query = document.getElementById('search-input').value;
+    const results = searchResorts(resortData, query);
+    const container = document.getElementById('search-results');
+    container.innerHTML = '';
+
+    if (!normalizeSearchText(query)) {
+        setSearchResultsOpen(false);
+        return;
+    }
+    if (results.length === 0) {
+        container.innerHTML = '<div class="search-empty">No resorts found</div>';
+    }
+    results.forEach(resort => {
+        const region = resort.region || resort.state || '';
+        const item = document.createElement('div');
+        item.className = 'top-resort-item search-result';
+        item.innerHTML = `
+            <div class="name">${resort.name}</div>
+            <div class="info">
+                <span>${region ? region + ', ' : ''}${getCountryName(resort.country)}</span>
+                <span class="snowfall">${getSnowfallForFilter(resort).toFixed(1)}"</span>
+            </div>
+        `;
+        item.addEventListener('click', () => {
+            selectSearchResult(resort);
+            setSearchResultsOpen(false);
+        });
+        container.appendChild(item);
+    });
+    setSearchResultsOpen(true);
+
+    if (results.length > 0) selectSearchResult(results[0]);
+}
+
 // Update Top 10 list
 function updateTop10() {
     const sorted = [...resortData].sort((a, b) => getSnowfallForFilter(b) - getSnowfallForFilter(a));
@@ -1306,7 +1378,18 @@ function setupEventListeners() {
     document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
     document.getElementById('share-button').addEventListener('click', shareCurrentView);
     document.getElementById('menu-panel').addEventListener('change', onLayerInputChange);
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenuOpen(false); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            setMenuOpen(false);
+            setSearchResultsOpen(false);
+        }
+    });
+
+    // Search
+    document.getElementById('search-form').addEventListener('submit', runSearch);
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#search-form')) setSearchResultsOpen(false);
+    });
 }
 
 // Initialize
@@ -1375,7 +1458,7 @@ if (typeof module !== 'undefined' && module.exports) {
         computeMinZoom, zoomScaleAt, buildRadiusExpression, resortToFeature,
         sanitizeLayerPrefs, loadLayerPrefs, saveLayerPrefs, isLayerVisible, getLayerGroup,
         buildLabelOverlayLayers, buildMapStyle, parseShareParams, buildShareUrl,
-        nextPanelState, setPanelState, restorePanelState,
+        nextPanelState, setPanelState, restorePanelState, searchResorts,
         showDetail, hideDetail, togglePanelCollapse, reopenPanel,
         getPanelState: () => panelState,
     };

@@ -35,6 +35,32 @@ const resort = {
   total_snowfall_inches: 10, daily_forecasts: [], historical_snowfall: [],
 };
 
+describe('searchResorts', () => {
+  const { searchResorts } = loadApp();
+  const resorts = ['Park City', 'Deer Valley', 'Big Sky', "Val d'Isère", 'Snowbird', 'Valle Nevado']
+    .map(name => ({ name }));
+  const names = (q, limit) => searchResorts(resorts, q, limit).map(r => r.name);
+
+  it('matches case-insensitively anywhere in the name', () => {
+    expect(names('VALLEY')).toEqual(['Deer Valley']);
+    expect(names('bird')).toEqual(['Snowbird']);
+  });
+
+  it('ranks name-prefix, then word-prefix, then substring matches', () => {
+    expect(names('val')).toEqual(["Val d'Isère", 'Valle Nevado', 'Deer Valley']);
+  });
+
+  it('ignores accents', () => {
+    expect(names('isere')).toEqual(["Val d'Isère"]);
+  });
+
+  it('returns nothing for blank or unmatched queries and honours the limit', () => {
+    expect(names('   ')).toEqual([]);
+    expect(names('zermatt')).toEqual([]);
+    expect(names('a', 2)).toHaveLength(2);
+  });
+});
+
 describe('computeMinZoom', () => {
   const { computeMinZoom } = loadApp();
 

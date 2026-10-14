@@ -54,8 +54,56 @@ body {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 16px;
+}
+
+/* Resort search (header, right of the logo) */
+.search {
+    position: relative;
+    flex: 0 1 320px;
+    min-width: 0;
+}
+
+.search-input {
+    width: 100%;
+    padding: 6px 10px;
+    background: var(--color-bg-input);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.search-results {
+    position: absolute;
+    z-index: 1100;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    max-height: 60vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px;
+    background: var(--color-bg-panel);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.search-results[hidden] { display: none; }
+
+.search-empty {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
 }
 
 .header h1 {
