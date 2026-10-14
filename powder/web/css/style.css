@@ -399,7 +399,7 @@ body {
     line-height: 1.2;
 }
 
-.wx-time-when { font-size: 0.85rem; font-weight: 600; }
+.wx-time-when { font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
 .wx-time-rel { font-size: 0.75rem; color: var(--color-accent-light); }
 
 /* Click-to-inspect popup; above the time bar, which shares the map wrapper's stacking context */
@@ -427,6 +427,7 @@ body {
 @media (max-width: 600px) {
     .wx-timebar { left: 6px; right: 34px; bottom: 6px; gap: 8px; padding: 6px 8px; }
     .wx-time { min-width: 60px; }
+    .wx-time-when { font-size: 0.78rem; }
 }
 
 /* Bottom-sheet layout: while the sheet is collapsed its reopen tab sits at the bottom centre

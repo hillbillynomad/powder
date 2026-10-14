@@ -95,13 +95,14 @@
         return best;
     }
 
-    // "Wed 2 PM" in the viewer's time zone, plus how far from now ("now", "+5h", "-1d 3h")
+    // "Wed Oct 15, 2 PM" in the viewer's time zone, plus how far from now ("now", "+5h", "-1d 3h")
     function frameLabel(timeMs, nowMs, timeZone) {
-        // Weekday and hour formatted separately: engines disagree on the comma between them
+        // Each part formatted separately: engines disagree on the punctuation between them
         const zone = timeZone ? { timeZone } : {};
         const date = new Date(timeMs);
-        const when = `${date.toLocaleString('en-US', { weekday: 'short', ...zone })} ` +
-            date.toLocaleString('en-US', { hour: 'numeric', ...zone });
+        const part = (opts) => date.toLocaleString('en-US', { ...opts, ...zone });
+        const when = `${part({ weekday: 'short' })} ${part({ month: 'short' })} ${part({ day: 'numeric' })}, ` +
+            part({ hour: 'numeric' });
         const hours = Math.round((timeMs - nowMs) / HOUR_MS);
         if (hours === 0) return { when, rel: 'now' };
         const sign = hours > 0 ? '+' : '-';
@@ -481,6 +482,8 @@
         }
 
         ui.radios.forEach(r => r.addEventListener('change', () => { if (r.checked) setOverlay(r.value); }));
+        // The readout belongs to the spot that was tapped: drop it once the map moves away
+        map.on('movestart', () => { if (state.popup) state.popup.remove(); });
         ui.slider.addEventListener('input', () => { stop(); setFrame(Number(ui.slider.value)); });
         ui.play.addEventListener('click', togglePlay);
         ui.now.addEventListener('click', () => {

@@ -75,11 +75,13 @@ describe('frameLabel', () => {
   const hours = (h) => now + h * 3600 * 1000;
 
   it('labels the time in the given zone and relative to now', () => {
-    expect(W.frameLabel(now, now, 'America/Los_Angeles')).toEqual({ when: 'Wed 12 PM', rel: 'now' });
+    expect(W.frameLabel(now, now, 'America/Los_Angeles')).toEqual({ when: 'Wed Oct 14, 12 PM', rel: 'now' });
     expect(W.frameLabel(hours(5), now, 'UTC').rel).toBe('+5h');
     expect(W.frameLabel(hours(-3), now, 'UTC').rel).toBe('-3h');
     expect(W.frameLabel(hours(48), now, 'UTC').rel).toBe('+2d');
     expect(W.frameLabel(hours(-27), now, 'UTC').rel).toBe('-1d 3h');
+    // Crosses midnight in the viewer's zone: the date moves with it
+    expect(W.frameLabel(hours(12), now, 'America/Los_Angeles').when).toBe('Thu Oct 15, 12 AM');
   });
 });
 

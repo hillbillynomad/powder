@@ -267,6 +267,8 @@ test.describe('Weather overlay', () => {
     await expect(page.locator('#wx-timebar')).toBeVisible();
     await expect(page.locator('#wx-time-rel')).toHaveText('now');
     await expect(page.locator('#wx-now')).toBeHidden();
+    // Weekday, month, date and hour, e.g. "Wed Oct 15, 2 PM"
+    await expect(page.locator('#wx-time-when')).toHaveText(/^[A-Z][a-z]{2} [A-Z][a-z]{2} \d{1,2}, \d{1,2} [AP]M$/);
 
     const start = await page.evaluate(() => window.__powder.weather()!.frame);
     await page.locator('#wx-slider').evaluate((el: HTMLInputElement, v) => {
@@ -298,6 +300,12 @@ test.describe('Weather overlay', () => {
     await expect(popup).toBeVisible({ timeout: 10000 });
     await expect(popup).toContainText('Temperature');
     await expect(popup).toContainText('°F');
+
+    // Panning away drops the readout
+    await page.evaluate(() => window.__map.panBy([120, 0], { duration: 0 }));
+    await expect(popup).toBeHidden();
+    await page.mouse.click(point.x, point.y);
+    await expect(popup).toBeVisible({ timeout: 10000 });
 
     await page.locator('#menu-toggle').click();
     await page.locator('input[name="wx-overlay"][value="none"]').check();
