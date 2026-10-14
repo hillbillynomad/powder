@@ -330,18 +330,18 @@ describe('share links', () => {
     const state = {
       camera: { lat: 39.60512, lng: -106.37549, zoom: 13.456, bearing: 29.6, pitch: 41.2 },
       prefs: { mode: 'topo', labels: false, terrain: true, threeD: true, trails: false },
-      filters: { country: 'US', region: 'Colorado', pass: 'EPIC', snow: 'total' },
+      filters: { snow: 'total' },
       resort: 'Vail',
     };
     const parsed = parseShareParams(new URL(buildShareUrl(base, state)).search);
     expect(parsed.camera).toEqual({ lat: 39.6051, lng: -106.3755, zoom: 13.46, bearing: 30, pitch: 41 });
     expect(parsed.prefs).toEqual({ mode: 'topo', labels: false, terrain: true, threeD: true, trails: false });
-    expect(parsed.filters).toEqual({ country: 'US', region: 'Colorado', pass: 'EPIC', snow: 'total' });
+    expect(parsed.filters).toEqual({ snow: 'total' });
     expect(parsed.resort).toBe('Vail');
   });
 
   it('omits default filters, zero bearing/pitch and the camera when the map is unavailable', () => {
-    const url = buildShareUrl(base, { camera: null, prefs, filters: { country: '', region: '', pass: '', snow: 'forecast' }, resort: null });
+    const url = buildShareUrl(base, { camera: null, prefs, filters: { snow: 'forecast' }, resort: null });
     const q = new URL(url).searchParams;
     expect([...q.keys()].sort()).toEqual(['3d', 'base', 'labels', 'terrain', 'trails']);
   });
@@ -352,7 +352,7 @@ describe('share links', () => {
   });
 
   it('drops malformed or out-of-range values instead of trusting them', () => {
-    const parsed = parseShareParams('?lat=abc&lng=999&z=-4&base=<script>&labels=maybe&pass=nope&snow=x&country=usa');
+    const parsed = parseShareParams('?lat=abc&lng=999&z=-4&base=<script>&labels=maybe&snow=x');
     expect(parsed.camera).toBeNull();
     expect(parsed.prefs).toEqual({});
     expect(parsed.filters).toEqual({});

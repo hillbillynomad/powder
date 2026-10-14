@@ -14,21 +14,6 @@ test.describe('Filter Controls', () => {
     await expect(page.locator('#menu-panel')).toHaveClass(/visible/);
   });
 
-  test('country filter is present', async ({ page }) => {
-    const countryFilter = page.locator('#country-filter');
-    await expect(countryFilter).toBeVisible();
-  });
-
-  test('region filter is present', async ({ page }) => {
-    const regionFilter = page.locator('#region-filter');
-    await expect(regionFilter).toBeVisible();
-  });
-
-  test('pass filter is present', async ({ page }) => {
-    const passFilter = page.locator('#pass-filter');
-    await expect(passFilter).toBeVisible();
-  });
-
   test('snowfall filter is present', async ({ page }) => {
     const snowFilter = page.locator('#snow-filter');
     await expect(snowFilter).toBeVisible();
@@ -40,14 +25,6 @@ test.describe('Filter Controls', () => {
 
     // Should have 3 options: forecast, historical, total
     await expect(options).toHaveCount(3);
-  });
-
-  test('pass filter has correct options', async ({ page }) => {
-    const passFilter = page.locator('#pass-filter');
-    const options = passFilter.locator('option');
-
-    // Should have: All Passes, EPIC, IKON
-    await expect(options.first()).toContainText('All');
   });
 });
 
@@ -64,34 +41,9 @@ test.describe('Filter Functionality with Data', () => {
     await page.locator('#menu-toggle').click();
   });
 
-  test('selecting country reduces markers', async ({ page }) => {
-    const initialCount = await markerCount(page);
-
-    // Select Japan (should have fewer resorts than "All")
-    await page.selectOption('#country-filter', 'JP');
-
-    // Wait for markers to update
-    await page.waitForTimeout(500);
-
-    const filteredCount = await markerCount(page);
-
-    // JP should have fewer resorts than all countries
-    if (initialCount > 5) {
-      expect(filteredCount).toBeLessThan(initialCount);
+  test('country, region and pass filters are gone', async ({ page }) => {
+    for (const id of ['#country-filter', '#region-filter', '#pass-filter', '#filter-badge']) {
+      await expect(page.locator(id)).toHaveCount(0);
     }
-  });
-
-  test('filter badge shows active count', async ({ page }) => {
-    const badge = page.locator('#filter-badge');
-
-    // Initially should not show (no filters active)
-    await expect(badge).toHaveClass(/hidden/);
-
-    // Select a country
-    await page.selectOption('#country-filter', 'US');
-
-    // Badge should now show "1"
-    await expect(badge).not.toHaveClass(/hidden/);
-    await expect(badge).toHaveText('1');
   });
 });

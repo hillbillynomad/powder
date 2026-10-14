@@ -164,8 +164,8 @@ test.describe('Share links', () => {
     }
   });
 
-  test('landing on a shared link restores camera, layers and filters', async ({ page }) => {
-    await page.goto('/?lat=39.6&lng=-106.4&z=11.5&b=30&p=40&base=topo&labels=0&terrain=1&3d=1&trails=0&pass=IKON');
+  test('landing on a shared link restores camera and layers', async ({ page }) => {
+    await page.goto('/?lat=39.6&lng=-106.4&z=11.5&b=30&p=40&base=topo&labels=0&terrain=1&3d=1&trails=0');
     await page.waitForFunction(() => !!window.__map && window.__map.isStyleLoaded(), undefined, { timeout: 15000 })
       .catch(() => test.skip(true, 'WebGL unavailable in this browser'));
 
@@ -180,15 +180,13 @@ test.describe('Share links', () => {
 
     expect(await page.evaluate(() => window.__powder.layerVisibility('base-topo'))).toBe('visible');
     expect(await page.evaluate(() => window.__powder.layerVisibility('trails-pistes'))).toBe('none');
-    await expect(page.locator('#pass-filter')).toHaveValue('IKON');
     await page.locator('#menu-toggle').click();
     await expect(page.locator('input[name="base-mode"][value="topo"]')).toBeChecked();
     await expect(page.locator('input[data-pref="terrain"]')).toBeChecked();
   });
 
   test('a malformed link falls back to the default view', async ({ page }) => {
-    await page.goto('/?lat=abc&lng=999&z=-4&base=<script>&pass=nope');
+    await page.goto('/?lat=abc&lng=999&z=-4&base=<script>');
     await page.waitForSelector('#map');
-    await expect(page.locator('#pass-filter')).toHaveValue('');
   });
 });

@@ -118,9 +118,10 @@ function isLayerVisible(id, prefs) {
 // A share URL carries the camera, layer settings, filters and selected resort. It is only
 // read on first landing; the address bar is not kept in sync afterwards.
 
-const SHARE_PASS_VALUES = ['EPIC', 'IKON', 'none'];
 const SHARE_SNOW_VALUES = ['forecast', 'historical', 'total'];
 const SHARE_DEFAULT_ZOOM = 4;
+const DEFAULT_CENTER = [-119.5, 37.5]; // California
+const DEFAULT_ZOOM = 5;
 const SHARE_MAX_TEXT = 120;
 const TOAST_MS = 2200;
 
@@ -165,11 +166,6 @@ function parseShareParams(search) {
         if (value !== undefined) result.prefs[pref] = value;
     }
 
-    const country = (params.get('country') || '').toUpperCase();
-    if (/^[A-Z]{2}$/.test(country)) result.filters.country = country;
-    const region = parseShareText(params.get('region'));
-    if (region) result.filters.region = region;
-    if (SHARE_PASS_VALUES.includes(params.get('pass'))) result.filters.pass = params.get('pass');
     if (SHARE_SNOW_VALUES.includes(params.get('snow'))) result.filters.snow = params.get('snow');
 
     result.resort = parseShareText(params.get('resort')) || null;
@@ -194,9 +190,6 @@ function buildShareUrl(base, state) {
     params.set('trails', prefs.trails ? '1' : '0');
 
     const filters = state.filters || {};
-    if (filters.country) params.set('country', filters.country);
-    if (filters.region) params.set('region', filters.region);
-    if (filters.pass) params.set('pass', filters.pass);
     if (filters.snow && filters.snow !== 'forecast') params.set('snow', filters.snow);
     if (state.resort) params.set('resort', state.resort);
 
@@ -211,10 +204,7 @@ function getShareState() {
     const state = {
         camera: null,
         prefs: { ...layerPrefs },
-        filters: {
-            country: value('country-filter'), region: value('region-filter'),
-            pass: value('pass-filter'), snow: value('snow-filter'),
-        },
+        filters: { snow: value('snow-filter') },
         resort: currentDetailResort ? currentDetailResort.name : null,
     };
     if (map && mapReady) {
@@ -485,8 +475,8 @@ async function initMap(shared) {
     map = new maplibregl.Map({
         container: 'map',
         style: buildMapStyle(vector, layerPrefs),
-        center: camera ? [camera.lng, camera.lat] : [10, 30],
-        zoom: camera ? Math.max(camera.zoom, minZoom) : Math.max(minZoom, MIN_ZOOM),
+        center: camera ? [camera.lng, camera.lat] : DEFAULT_CENTER,
+        zoom: camera ? Math.max(camera.zoom, minZoom) : Math.max(minZoom, DEFAULT_ZOOM),
         bearing: camera ? camera.bearing : 0,
         pitch: camera ? camera.pitch : 0,
         minZoom,
@@ -497,7 +487,6 @@ async function initMap(shared) {
         refreshExpiredTiles: false,
         attributionControl: { compact: true },
     });
-    map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
     setLayerAvailability(!!vector, !!demSource);
     window.__map = map; // exposed for e2e tests / debugging
 
@@ -1241,23 +1230,6 @@ function switchPanelTab(tabName) {
     document.getElementById('details-content').classList.toggle('hidden', tabName !== 'details');
 }
 
-// Update filter badge count
-function updateFilterBadge() {
-    let count = 0;
-    if (document.getElementById('country-filter').value) count++;
-    if (document.getElementById('region-filter').value) count++;
-    if (document.getElementById('pass-filter').value) count++;
-
-    const badge = document.getElementById('filter-badge');
-    if (!badge) return;
-    if (count > 0) {
-        badge.textContent = count;
-        badge.classList.remove('hidden');
-    } else {
-        badge.classList.add('hidden');
-    }
-}
-
 // Center map on resort and open detail panel
 function focusResort(resort) {
     if (map) {
@@ -1266,26 +1238,9 @@ function focusResort(resort) {
     toggleDetail(resort);
 }
 
-// Get filtered resorts based on current filters
-function getFilteredResorts() {
-    const countryFilter = document.getElementById('country-filter').value;
-    const regionFilter = document.getElementById('region-filter').value;
-    const passFilter = document.getElementById('pass-filter').value;
-
-    return resortData.filter(resort => {
-        if (countryFilter && resort.country !== countryFilter) return false;
-        const region = resort.region || resort.state || '';
-        if (regionFilter && region !== regionFilter) return false;
-        if (passFilter === 'none' && resort.pass_type) return false;
-        if (passFilter && passFilter !== 'none' && resort.pass_type !== passFilter) return false;
-        return true;
-    });
-}
-
 // Update Top 10 list
 function updateTop10() {
-    const filtered = getFilteredResorts();
-    const sorted = [...filtered].sort((a, b) => getSnowfallForFilter(b) - getSnowfallForFilter(a));
+    const sorted = [...resortData].sort((a, b) => getSnowfallForFilter(b) - getSnowfallForFilter(a));
     const top10 = sorted.slice(0, 10);
 
     const container = document.getElementById('top-resorts-list');
@@ -1315,7 +1270,7 @@ function updateTop10() {
 function createMarkers() {
     hideHoverPopup();
 
-    markers = getFilteredResorts().map(resort => {
+    markers = resortData.map(resort => {
         const snowfall = getSnowfallForFilter(resort);
         const isRing = snowfall < NO_SNOW_THRESHOLD;
         return { resort, baseRadius: isRing ? MIN_RADIUS : getRadius(snowfall), isRing };
@@ -1323,70 +1278,6 @@ function createMarkers() {
     refreshResortSource();
 
     updateTop10();
-    updateFilterBadge();
-}
-
-// Populate filter dropdown
-function populateFilter(selector, options, allLabel) {
-    document.querySelectorAll(selector).forEach(select => {
-        select.innerHTML = `<option value="">${allLabel}</option>`;
-        options.forEach(opt => {
-            const option = document.createElement('option');
-            option.value = opt.value;
-            option.textContent = opt.label;
-            select.appendChild(option);
-        });
-    });
-}
-
-// Populate country filter
-function populateCountryFilter() {
-    const countries = [...new Set(resortData.map(r => r.country))].sort();
-    const options = countries.map(c => ({ value: c, label: getCountryName(c) }));
-    populateFilter('.country-filter', options, 'All Countries');
-}
-
-// Populate region filter based on selected country
-function populateRegionFilter() {
-    const countryFilter = document.getElementById('country-filter').value;
-    const filtered = countryFilter 
-        ? resortData.filter(r => r.country === countryFilter)
-        : resortData;
-    
-    const regions = [...new Set(
-        filtered.map(r => r.region || r.state || '').filter(r => r)
-    )].sort();
-    
-    const options = regions.map(r => ({ value: r, label: r }));
-    populateFilter('.region-filter', options, 'All Regions');
-}
-
-// Frame the selected country's resorts (or reset to the whole globe)
-function fitToCountry() {
-    if (!map || !mapReady) return;
-    const countryFilter = document.getElementById('country-filter').value;
-    if (countryFilter) {
-        const countryResorts = resortData.filter(r => r.country === countryFilter);
-        if (countryResorts.length > 0) {
-            const bounds = new maplibregl.LngLatBounds();
-            countryResorts.forEach(r => bounds.extend([r.longitude, r.latitude]));
-            map.fitBounds(bounds, { padding: 50, maxZoom: 7 });
-        }
-    } else {
-        map.flyTo({ center: [10, 30], zoom: map.getMinZoom(), pitch: 0, bearing: 0 });
-    }
-}
-
-// Handle country filter change
-function onCountryChange() {
-    populateRegionFilter();
-    createMarkers();
-    fitToCountry();
-}
-
-// Handle other filter changes
-function onFilterChange() {
-    createMarkers();
 }
 
 // Collapse / expand control inside the panel (cycles snaps on the bottom sheet)
@@ -1402,10 +1293,7 @@ function reopenPanel() {
 // Set up event listeners
 function setupEventListeners() {
     // Filter listeners
-    document.getElementById('country-filter').addEventListener('change', onCountryChange);
-    document.getElementById('region-filter').addEventListener('change', onFilterChange);
-    document.getElementById('pass-filter').addEventListener('change', onFilterChange);
-    document.getElementById('snow-filter').addEventListener('change', onFilterChange);
+    document.getElementById('snow-filter').addEventListener('change', createMarkers);
 
     // Panel tab listeners
     document.querySelectorAll('.panel-tab').forEach(tab => {
@@ -1437,8 +1325,6 @@ async function init() {
         const data = await response.json();
         resortData = data.resorts;
 
-        populateCountryFilter();
-        populateRegionFilter();
         applyShareFilters(shared.filters);
         await mapInit; // markers need the map's source to exist
         createMarkers();
@@ -1458,21 +1344,15 @@ function setSelectIfValid(id, value) {
 }
 
 function applyShareFilters(filters) {
-    if (filters.country) setSelectIfValid('country-filter', filters.country);
-    populateRegionFilter(); // region options depend on the country
-    if (filters.region) setSelectIfValid('region-filter', filters.region);
-    if (filters.pass) setSelectIfValid('pass-filter', filters.pass);
     if (filters.snow) setSelectIfValid('snow-filter', filters.snow);
 }
 
-// Open the shared resort's details; frame the country or resort if the link had no camera
+// Open the shared resort's details; frame the resort if the link had no camera
 function applySharedSelection(shared) {
     const resort = shared.resort ? resortData.find(r => r.name === shared.resort) : null;
     if (!shared.camera && map && mapReady) {
         if (resort) {
             map.jumpTo({ center: [resort.longitude, resort.latitude], zoom: FOCUS_ZOOM });
-        } else if (document.getElementById('country-filter').value) {
-            fitToCountry();
         }
     }
     if (resort) showDetail(resort);
