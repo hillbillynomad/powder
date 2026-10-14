@@ -456,11 +456,11 @@ describe('link preview card', () => {
   const html = fs.readFileSync(path.join(WEB, 'index.html'), 'utf8');
   const meta = (attr, key) => (html.match(new RegExp(`<meta ${attr}="${key}" content="([^"]*)"`)) || [])[1];
 
-  it('points og:image and twitter:image at the bundled GIF by absolute URL', () => {
+  it('points og:image and twitter:image at the bundled still image by absolute URL', () => {
     const image = meta('property', 'og:image');
-    expect(image).toMatch(/^https:\/\/.+\/img\/share-card\.gif$/);
+    expect(image).toMatch(/^https:\/\/.+\/img\/share-card\.png$/);
     expect(meta('name', 'twitter:image')).toBe(image);
-    expect(fs.existsSync(path.join(WEB, 'img/share-card.gif'))).toBe(true);
+    expect(fs.existsSync(path.join(WEB, 'img/share-card.png'))).toBe(true);
     expect(meta('name', 'twitter:card')).toBe('summary_large_image');
   });
 });
