@@ -121,8 +121,8 @@ function isLayerVisible(id, prefs) {
 
 const SHARE_SNOW_VALUES = ['forecast', 'historical', 'total'];
 const SHARE_DEFAULT_ZOOM = 4;
-const DEFAULT_CENTER = [-119.5, 37.5]; // California
-const DEFAULT_ZOOM = 5;
+// First view: whole globe visible (zoom = the fit-the-globe minimum), centred on California
+const DEFAULT_CENTER = [-119.5, 37.5];
 const SHARE_MAX_TEXT = 120;
 const TOAST_MS = 2200;
 
@@ -477,7 +477,7 @@ async function initMap(shared) {
         container: 'map',
         style: buildMapStyle(vector, layerPrefs),
         center: camera ? [camera.lng, camera.lat] : DEFAULT_CENTER,
-        zoom: camera ? Math.max(camera.zoom, minZoom) : Math.max(minZoom, DEFAULT_ZOOM),
+        zoom: camera ? Math.max(camera.zoom, minZoom) : minZoom,
         bearing: camera ? camera.bearing : 0,
         pitch: camera ? camera.pitch : 0,
         minZoom,

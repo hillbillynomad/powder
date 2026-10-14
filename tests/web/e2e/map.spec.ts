@@ -77,6 +77,19 @@ test.describe('Map with data', () => {
     }
   });
 
+  test('opens zoomed out on the whole globe, centred on California', async ({ page }) => {
+    await waitForMarkers(page);
+    const view = await page.evaluate(() => ({
+      lat: window.__map.getCenter().lat,
+      lng: window.__map.getCenter().lng,
+      zoom: window.__map.getZoom(),
+      minZoom: window.__map.getMinZoom(),
+    }));
+    expect(view.zoom).toBeCloseTo(view.minZoom, 1);
+    expect(view.lat).toBeCloseTo(37.5, 0);
+    expect(view.lng).toBeCloseTo(-119.5, 0);
+  });
+
   test('markers are displayed on map', async ({ page }) => {
     expect(await markerCount(page)).toBeGreaterThan(0);
   });
