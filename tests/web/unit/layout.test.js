@@ -106,10 +106,10 @@ describe('marker radius expression', () => {
 describe('resortToFeature', () => {
   const { resortToFeature } = loadApp();
 
-  it('emits GeoJSON in [lng, lat] order with the index and radius', () => {
-    const f = resortToFeature({ latitude: 39.6, longitude: -106.4 }, 7, 12.5, false);
+  it('emits GeoJSON in [lng, lat] order with the index, radius and name', () => {
+    const f = resortToFeature({ name: 'Vail', latitude: 39.6, longitude: -106.4 }, 7, 12.5, false);
     expect(f.geometry.coordinates).toEqual([-106.4, 39.6]);
-    expect(f.properties).toEqual({ idx: 7, r: 12.5, ring: false });
+    expect(f.properties).toEqual({ idx: 7, r: 12.5, ring: false, name: 'Vail' });
   });
 });
 
@@ -161,12 +161,12 @@ describe('layer visibility rules', () => {
     expect(isLayerVisible('lbl-label_city', prefs({ mode: 'topo' }))).toBe(false);
   });
 
-  it('terrain toggle drives hillshade and contours; trails toggle drives lifts and pistes', () => {
+  it('terrain toggle drives hillshade and contours; trails toggle drives lifts and resort names', () => {
     for (const id of ['terrain-hillshade', 'terrain-contours-major']) {
       expect(isLayerVisible(id, prefs())).toBe(false);
       expect(isLayerVisible(id, prefs({ terrain: true }))).toBe(true);
     }
-    for (const id of ['trails-pistes', 'trails-lifts']) {
+    for (const id of ['trails-resort-names', 'trails-lifts']) {
       expect(isLayerVisible(id, prefs())).toBe(true);
       expect(isLayerVisible(id, prefs({ trails: false }))).toBe(false);
     }

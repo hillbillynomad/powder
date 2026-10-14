@@ -32,13 +32,15 @@ let layerPrefs = { ...DEFAULT_LAYER_PREFS };
 const MAP_SOURCES = {
     satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
     topo: 'https://tile.opentopomap.org/{z}/{x}/{y}.png',
-    pistes: 'https://tiles.opensnowmap.org/pistes/{z}/{x}/{y}.png',
     dem: 'https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png',
     vectorStyle: 'https://tiles.openfreemap.org/styles/liberty',
     vectorTiles: 'https://tiles.openfreemap.org/planet',
     glyphs: 'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
 };
 const DEM_MAX_ZOOM = 13;
+// Resort names show once zoomed in on a region, then fade out as you zoom in on the resort
+const RESORT_NAME_MIN_ZOOM = 7;
+const RESORT_NAME_FADE_ZOOM = [11, 12];
 // Contour spacing in feet by source zoom: [minor, major]
 const CONTOUR_THRESHOLDS_FT = {
     8: [1000, 5000], 10: [500, 2500], 11: [250, 1000], 12: [100, 500],
@@ -327,10 +329,6 @@ function buildMapStyle(vector, prefs) {
             type: 'raster', tiles: [MAP_SOURCES.topo], tileSize: 256, maxzoom: 17,
             attribution: '&copy; <a href="https://opentopomap.org">OpenTopoMap</a> (CC-BY-SA)',
         },
-        'pistes': {
-            type: 'raster', tiles: [MAP_SOURCES.pistes], tileSize: 256, maxzoom: 18,
-            attribution: 'Trails &copy; <a href="https://www.opensnowmap.org">OpenSnowMap</a>',
-        },
     };
     const layers = [
         { id: 'background', type: 'background', paint: { 'background-color': '#0b1d33' } },
@@ -400,7 +398,6 @@ function buildMapStyle(vector, prefs) {
         );
     }
 
-    layers.push({ id: 'trails-pistes', type: 'raster', source: 'pistes', minzoom: 8 });
     if (vector) {
         layers.push(...buildLiftLayers());
         layers.push(...buildLabelOverlayLayers(vector.layers));
@@ -454,7 +451,7 @@ function resortToFeature(resort, index, baseRadius, isRing) {
     return {
         type: 'Feature',
         geometry: { type: 'Point', coordinates: [resort.longitude, resort.latitude] },
-        properties: { idx: index, r: baseRadius, ring: isRing },
+        properties: { idx: index, r: baseRadius, ring: isRing, name: resort.name },
     };
 }
 
@@ -668,7 +665,35 @@ function addResortLayer() {
             'circle-pitch-alignment': 'map',
         },
     });
+    map.addLayer(buildResortNameLayer());
     refreshResortSource();
+}
+
+// Blue resort names under the bubbles, shown with the lifts & names toggle
+function buildResortNameLayer() {
+    const [fadeStart, fadeEnd] = RESORT_NAME_FADE_ZOOM;
+    return {
+        id: 'trails-resort-names',
+        type: 'symbol',
+        source: 'resorts',
+        minzoom: RESORT_NAME_MIN_ZOOM,
+        maxzoom: fadeEnd,
+        layout: {
+            'text-field': ['get', 'name'],
+            'text-font': ['Noto Sans Regular'],
+            'text-size': 13,
+            'text-anchor': 'top',
+            'text-offset': [0, 1.4],
+            'text-max-width': 9,
+            visibility: isLayerVisible('trails-resort-names', layerPrefs) ? 'visible' : 'none',
+        },
+        paint: {
+            'text-color': '#1d4ed8',
+            'text-halo-color': 'rgba(255, 255, 255, 0.9)',
+            'text-halo-width': 1.6,
+            'text-opacity': ['interpolate', ['linear'], ['zoom'], fadeStart, 1, fadeEnd, 0],
+        },
+    };
 }
 
 function refreshResortSource() {

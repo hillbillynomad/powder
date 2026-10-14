@@ -12,7 +12,6 @@ const TILE_HOSTS = [
     's3.amazonaws.com', // elevation-tiles-prod terrarium DEM
     'tiles.openfreemap.org',
     'tile.opentopomap.org',
-    'tiles.opensnowmap.org',
 ];
 const STATIC_HOSTS = ['unpkg.com', 'cdn.jsdelivr.net'];
 

@@ -90,6 +90,35 @@ test.describe('Map with data', () => {
     expect(view.lng).toBeCloseTo(-119.5, 0);
   });
 
+  test('resort names are plain text that fades out as you zoom in, with no trail image overlay', async ({ page }) => {
+    await waitForMarkers(page);
+    const result = await page.evaluate(async () => {
+      const map = window.__map;
+      map.jumpTo({ center: [-119.03, 37.63], zoom: 9 }); // Mammoth
+      await new Promise(r => map.once('idle', r));
+      const namesAt9 = map.queryRenderedFeatures({ layers: ['trails-resort-names'] }).length;
+      // Record the names' opacity on every frame while zooming in past the fade
+      const frames = [];
+      const onRender = () => {
+        const zoom = map.getZoom();
+        const drawn = map.queryRenderedFeatures({ layers: ['trails-resort-names'] }).length;
+        frames.push({ zoom, drawn });
+      };
+      map.on('render', onRender);
+      map.easeTo({ zoom: 14, duration: 1500 });
+      await new Promise(r => map.once('moveend', r));
+      map.off('render', onRender);
+      return {
+        namesAt9,
+        drawnPastFade: frames.filter(f => f.zoom >= 12.05 && f.drawn > 0).length,
+        rasterOverlays: map.getStyle().layers.filter(l => l.id.startsWith('trails-') && l.type === 'raster').length,
+      };
+    });
+    expect(result.namesAt9).toBeGreaterThan(0);
+    expect(result.drawnPastFade).toBe(0);
+    expect(result.rasterOverlays).toBe(0);
+  });
+
   test('markers are displayed on map', async ({ page }) => {
     expect(await markerCount(page)).toBeGreaterThan(0);
   });
@@ -193,7 +222,7 @@ test.describe('Share links', () => {
     expect(view.bearing).toBeCloseTo(30, 0);
 
     expect(await page.evaluate(() => window.__powder.layerVisibility('base-topo'))).toBe('visible');
-    expect(await page.evaluate(() => window.__powder.layerVisibility('trails-pistes'))).toBe('none');
+    expect(await page.evaluate(() => window.__powder.layerVisibility('trails-resort-names'))).toBe('none');
     await page.locator('#menu-toggle').click();
     await expect(page.locator('input[name="base-mode"][value="topo"]')).toBeChecked();
     await expect(page.locator('input[data-pref="terrain"]')).toBeChecked();
