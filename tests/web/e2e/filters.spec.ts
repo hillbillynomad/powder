@@ -2,15 +2,16 @@
  * E2E tests for filter functionality
  */
 import { test, expect } from '@playwright/test';
+import { waitForMarkers, markerCount, clickFirstMarker } from './helpers';
 
 test.describe('Filter Controls', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     await page.waitForSelector('#map');
 
-    // Open filter drawer
+    // Open the menu
     await page.locator('#menu-toggle').click();
-    await expect(page.locator('#filter-drawer')).toHaveClass(/visible/);
+    await expect(page.locator('#menu-panel')).toHaveClass(/visible/);
   });
 
   test('country filter is present', async ({ page }) => {
@@ -54,17 +55,17 @@ test.describe('Filter Functionality with Data', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     try {
-      await page.waitForSelector('.leaflet-interactive', { timeout: 5000 });
+      await waitForMarkers(page, 5000);
     } catch {
       test.skip(true, 'No forecast data available');
     }
 
-    // Open filter drawer
+    // Open the menu
     await page.locator('#menu-toggle').click();
   });
 
   test('selecting country reduces markers', async ({ page }) => {
-    const initialCount = await page.locator('.leaflet-interactive').count();
+    const initialCount = await markerCount(page);
 
     // Select Japan (should have fewer resorts than "All")
     await page.selectOption('#country-filter', 'JP');
@@ -72,7 +73,7 @@ test.describe('Filter Functionality with Data', () => {
     // Wait for markers to update
     await page.waitForTimeout(500);
 
-    const filteredCount = await page.locator('.leaflet-interactive').count();
+    const filteredCount = await markerCount(page);
 
     // JP should have fewer resorts than all countries
     if (initialCount > 5) {

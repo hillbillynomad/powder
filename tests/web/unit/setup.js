@@ -2,21 +2,29 @@
  * Vitest setup file - sets up global test environment
  */
 
-// Mock Leaflet
-globalThis.L = {
-  map: () => ({
-    setView: () => ({ on: () => {} }),
-    fitBounds: () => {},
-    panTo: () => {},
-  }),
-  tileLayer: () => ({ addTo: () => {} }),
-  circleMarker: () => ({
-    addTo: () => {},
-    on: () => {},
-    bindPopup: () => {},
-  }),
-  control: {
-    zoom: () => ({ addTo: () => {} }),
+// Mock MapLibre GL JS (the real library needs WebGL, which jsdom lacks)
+globalThis.maplibregl = {
+  Map: class {
+    constructor() {}
+    on() { return this; }
+    once() { return this; }
+    addControl() {}
+    addSource() {}
+    addLayer() {}
+    getSource() { return null; }
+    getTerrain() { return null; }
+  },
+  NavigationControl: class {},
+  LngLatBounds: class { extend() { return this; } },
+  addProtocol() {},
+};
+globalThis.mlcontour = {
+  DemSource: class {
+    constructor() {
+      this.sharedDemProtocolUrl = 'dem-shared://{z}/{x}/{y}';
+    }
+    setupMaplibre() {}
+    contourProtocolUrl() { return 'contour://{z}/{x}/{y}'; }
   },
 };
 

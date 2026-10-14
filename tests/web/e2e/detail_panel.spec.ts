@@ -2,6 +2,7 @@
  * E2E tests for detail panel functionality
  */
 import { test, expect } from '@playwright/test';
+import { waitForMarkers, markerCount, clickFirstMarker } from './helpers';
 
 test.describe('Side Panel', () => {
   test.beforeEach(async ({ page }) => {
@@ -48,16 +49,14 @@ test.describe('Detail Panel with Data', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     try {
-      await page.waitForSelector('.leaflet-interactive', { timeout: 5000 });
+      await waitForMarkers(page, 5000);
     } catch {
       test.skip(true, 'No forecast data available');
     }
   });
 
   test('clicking marker shows resort details', async ({ page }) => {
-    // Click first marker using JavaScript dispatch for cross-browser compatibility
-    const marker = page.locator('.leaflet-interactive').first();
-    await marker.dispatchEvent('click');
+    await clickFirstMarker(page);
 
     // Detail header should show resort name
     const detailHeader = page.locator('.detail-header h2');
@@ -65,8 +64,7 @@ test.describe('Detail Panel with Data', () => {
   });
 
   test('detail shows elevation info', async ({ page }) => {
-    const marker = page.locator('.leaflet-interactive').first();
-    await marker.dispatchEvent('click');
+    await clickFirstMarker(page);
 
     // Wait for detail to load
     await page.waitForSelector('.detail-meta', { timeout: 5000 });
@@ -79,8 +77,7 @@ test.describe('Detail Panel with Data', () => {
   });
 
   test('detail shows forecast table', async ({ page }) => {
-    const marker = page.locator('.leaflet-interactive').first();
-    await marker.dispatchEvent('click');
+    await clickFirstMarker(page);
 
     // Wait for detail to load
     await page.waitForSelector('.forecast-table', { timeout: 5000 });
@@ -94,7 +91,7 @@ test.describe('Top 10 Panel', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     try {
-      await page.waitForSelector('.leaflet-interactive', { timeout: 5000 });
+      await waitForMarkers(page, 5000);
     } catch {
       test.skip(true, 'No forecast data available');
     }

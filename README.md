@@ -131,7 +131,8 @@ powder/
 └── web/
     ├── index.html      # Map page
     ├── css/style.css   # Styling
-    ├── js/app.js       # Leaflet map + interactions
+    ├── js/app.js       # MapLibre globe map + interactions
+    ├── sw.js           # Service worker: tile / asset cache
     └── data/           # Generated forecast JSON
 
 tests/

@@ -51,28 +51,22 @@ test.describe('App shell', () => {
 });
 
 test.describe('Map panning', () => {
-  test('can pan to the southern hemisphere and stays within Mercator bounds', async ({ page }) => {
+  test('can spin the globe to the southern hemisphere without jamming', async ({ page }) => {
     await load(page);
     const result = await page.evaluate(async () => {
       const map = (window as any).__map;
-      map.setView([30, 0], map.getMinZoom() + 1, { animate: false });
-      // Pan in drag-sized steps (a single huge jump bypasses Leaflet's bounds clamp)
-      for (let i = 0; i < 30; i++) map.panBy([0, 300], { animate: false });
-      await new Promise((r) => setTimeout(r, 500)); // let maxBounds settle
-      const b = map.getBounds();
+      // A globe has no map edge: pan in drag-sized steps all the way south and back
+      map.jumpTo({ center: [0, 30], zoom: map.getMinZoom() + 1 });
+      for (let i = 0; i < 30; i++) {
+        map.panBy([0, 300], { duration: 0 });
+      }
+      await new Promise((r) => setTimeout(r, 500));
+      const south = map.getCenter().lat;
       const mapEl = document.getElementById('map')!.getBoundingClientRect();
-      return {
-        south: b.getSouth(),
-        north: b.getNorth(),
-        mapBottom: mapEl.bottom,
-        innerHeight: window.innerHeight,
-      };
+      return { south, mapBottom: mapEl.bottom, innerHeight: window.innerHeight };
     });
-    // Bounds reach (near) the southern limit and never exceed Mercator range
     expect(result.south).toBeLessThan(-30);
-    // Small tolerance: Leaflet eases back inside maxBounds, so an edge frame can overshoot slightly
-    expect(result.south).toBeGreaterThanOrEqual(-86);
-    expect(result.north).toBeLessThanOrEqual(86);
+    expect(result.south).toBeGreaterThanOrEqual(-90);
     // The whole map must be on-screen, otherwise "south" is below the fold
     expect(result.mapBottom).toBeLessThanOrEqual(result.innerHeight + 1);
   });
@@ -98,14 +92,16 @@ test.describe('Side panel recovery', () => {
     await reopen.click();
     await expect(panel).not.toHaveClass(/collapsed/);
     await expect(reopen).toBeHidden();
-    const box = await panel.boundingBox();
-    expect(box!.width).toBeGreaterThan(50);
-    expect(box!.height).toBeGreaterThan(50);
+    // The panel animates open; wait for it to finish rather than measuring mid-transition
+    await expect.poll(async () => (await panel.boundingBox())!.width).toBeGreaterThan(50);
+    await expect.poll(async () => (await panel.boundingBox())!.height).toBeGreaterThan(50);
   });
 
   test('deselecting a resort does not collapse the panel', async ({ page }) => {
     await load(page);
-    await page.evaluate(() => (document.querySelector('.leaflet-container') as HTMLElement).click());
+    // Click empty ocean (top-left corner of the map canvas, outside the globe)
+    const box = (await page.locator('#map').boundingBox())!;
+    await page.mouse.click(box.x + 5, box.y + 5);
     await expect(page.locator('#side-panel')).not.toHaveClass(/collapsed/);
   });
 });
