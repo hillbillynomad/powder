@@ -341,6 +341,10 @@ describe('CSS invariants (app shell must not be scrollable)', () => {
     expect(rule('#map')).not.toMatch(/min-height:\s*\d+px/);
   });
 
+  it('search input is at least 16px so iOS does not zoom the page on focus', () => {
+    expect(rule('.search-input')).toMatch(/font-size:\s*16px/);
+  });
+
   it('bottom-sheet media query matches BOTTOM_PANEL_QUERY in app.js', () => {
     const q = appSource.match(/BOTTOM_PANEL_QUERY = '([^']+)'/)[1];
     expect(css).toContain(`@media ${q}`);

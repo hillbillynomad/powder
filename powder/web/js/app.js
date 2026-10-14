@@ -1274,6 +1274,18 @@ function selectSearchResult(resort) {
     showDetail(resort);
 }
 
+function syncSearchClear() {
+    document.getElementById('search-clear').hidden = !document.getElementById('search-input').value;
+}
+
+function clearSearch() {
+    const input = document.getElementById('search-input');
+    input.value = '';
+    syncSearchClear();
+    setSearchResultsOpen(false);
+    input.focus();
+}
+
 function runSearch(e) {
     e.preventDefault();
     const query = document.getElementById('search-input').value;
@@ -1307,7 +1319,11 @@ function runSearch(e) {
     });
     setSearchResultsOpen(true);
 
-    if (results.length > 0) selectSearchResult(results[0]);
+    if (results.length > 0) {
+        // Dismiss the on-screen keyboard so the map and details are visible on phones
+        document.getElementById('search-input').blur();
+        selectSearchResult(results[0]);
+    }
 }
 
 // Update Top 10 list
@@ -1386,7 +1402,10 @@ function setupEventListeners() {
     });
 
     // Search
+    const searchInput = document.getElementById('search-input');
     document.getElementById('search-form').addEventListener('submit', runSearch);
+    searchInput.addEventListener('input', syncSearchClear);
+    document.getElementById('search-clear').addEventListener('click', clearSearch);
     document.addEventListener('click', (e) => {
         if (!e.target.closest('#search-form')) setSearchResultsOpen(false);
     });

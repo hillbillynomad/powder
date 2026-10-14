@@ -39,4 +39,20 @@ test.describe('Resort search', () => {
     await page.keyboard.press('Escape');
     await expect(panel).toBeHidden();
   });
+
+  test('clear button empties the box and closes results', async ({ page }) => {
+    const input = page.locator('#search-input');
+    const clear = page.locator('#search-clear');
+    await expect(clear).toBeHidden();
+
+    await input.fill('chamonix');
+    await input.press('Enter');
+    await expect(clear).toBeVisible();
+    await expect(page.locator('#search-results')).toBeVisible();
+
+    await clear.click();
+    await expect(input).toHaveValue('');
+    await expect(clear).toBeHidden();
+    await expect(page.locator('#search-results')).toBeHidden();
+  });
 });

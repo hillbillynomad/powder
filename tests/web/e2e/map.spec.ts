@@ -57,8 +57,9 @@ test.describe('Map Functionality', () => {
     await expect(menuPanel).not.toHaveClass(/visible/);
   });
 
-  test('old header menu button and filter drawer are gone', async ({ page }) => {
-    await expect(page.locator('.header #menu-toggle')).toHaveCount(0);
+  test('menu and share buttons live in the header; old filter drawer is gone', async ({ page }) => {
+    await expect(page.locator('.header #menu-toggle')).toHaveCount(1);
+    await expect(page.locator('.header #share-button')).toHaveCount(1);
     await expect(page.locator('#filter-drawer')).toHaveCount(0);
   });
 });
