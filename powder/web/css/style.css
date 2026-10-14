@@ -105,36 +105,96 @@ body {
     border-color: var(--color-accent);
 }
 
-.search-results {
+/* Logo: a solid 3D snowflake. Seven stacked copies of the flat SVG, spread along Z,
+   spin together in one preserve-3d context so it shows real thickness edge-on. */
+.svg-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.home-button {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    margin: -4px 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.22) 0%, rgba(96, 165, 250, 0) 70%);
+    cursor: pointer;
+}
+
+.home-button:focus-visible { outline: 2px solid var(--color-accent-light); outline-offset: 2px; }
+
+.flake-stage {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    perspective: 140px;
+    filter: drop-shadow(0 0 3px rgba(170, 215, 255, 0.75));
+    transition: filter 0.3s;
+}
+
+.home-button:hover .flake-stage { filter: drop-shadow(0 0 6px rgba(190, 230, 255, 1)); }
+
+.flake {
     position: absolute;
-    z-index: 1100;
-    top: calc(100% + 4px);
-    left: 0;
-    right: 0;
-    max-height: 60vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding: 6px;
-    background: var(--color-bg-panel);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    inset: 4px;
+    transform-style: preserve-3d;
+    animation: flake-spin 9s linear infinite;
 }
 
-.search-results[hidden] { display: none; }
-
-.search-empty {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
+.flake-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    stroke: #5f8fca; /* inner layers read as the ice's edge when it turns side-on */
+    fill: #5f8fca;
+    transform: translateZ(calc(var(--z) * 0.55px));
 }
 
-.header h1 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--color-accent);
+.flake-layer.face {
+    stroke: url(#flake-ice);
+    fill: url(#flake-ice);
+    animation: flake-glint 4.5s linear infinite; /* brightest each time a face turns to the viewer */
+}
+
+/* A 60 degree turn about Z is invisible on a six-fold crystal, so the loop is seamless */
+@keyframes flake-spin {
+    from { transform: rotateX(14deg) rotateY(0deg) rotateZ(0deg); }
+    to { transform: rotateX(14deg) rotateY(360deg) rotateZ(60deg); }
+}
+
+@keyframes flake-glint {
+    0%, 100% { filter: brightness(1.15); }
+    25%, 75% { filter: brightness(0.8); }
+    50% { filter: brightness(1.15); }
+}
+
+.sparkle {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: #fff;
+    clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+    opacity: 0;
+    animation: sparkle-twinkle 3.2s ease-in-out infinite;
+}
+
+.sparkle.sp1 { top: 1px; right: 3px; }
+.sparkle.sp2 { bottom: 4px; left: 0; width: 5px; height: 5px; animation-delay: 0.9s; }
+.sparkle.sp3 { top: 9px; left: -2px; width: 4px; height: 4px; animation-delay: 1.7s; }
+.sparkle.sp4 { bottom: 0; right: 6px; width: 6px; height: 6px; animation-delay: 2.4s; }
+
+@keyframes sparkle-twinkle {
+    0%, 55%, 100% { opacity: 0; transform: scale(0.2) rotate(0deg); }
+    70% { opacity: 1; transform: scale(1) rotate(45deg); }
+    85% { opacity: 0; transform: scale(0.3) rotate(90deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flake { animation: none; transform: rotateX(14deg) rotateY(-24deg); }
+    .flake-layer.face, .sparkle { animation: none; }
 }
 
 /* Filter groups (stacked inside the menu panel) */
@@ -612,28 +672,47 @@ body {
     padding-left: 8px;
 }
 
-.panel-tabs {
+.panel-modes {
     display: flex;
     flex: 1;
+    gap: 4px;
+    margin: 8px 10px 8px 4px;
+    padding: 3px;
+    background: var(--color-bg-dark);
+    border-radius: 999px;
 }
 
-.panel-tab {
-    flex: 1;
+.panel-mode {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 6px 8px;
     background: transparent;
     color: var(--color-text-muted);
-    border: none;
-    padding: 14px 16px;
-    font-size: 0.9rem;
+    border: 0;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    white-space: nowrap;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.2s, color 0.2s;
 }
 
-.panel-tab:hover { color: var(--color-text); }
+.panel-mode[hidden] { display: none; }
+.panel-mode:hover { color: var(--color-text); }
+.panel-mode:focus-visible { outline: 2px solid var(--color-accent-light); outline-offset: 1px; }
 
-.panel-tab.active {
-    color: var(--color-accent);
-    border-bottom: 2px solid var(--color-accent);
+.panel-mode.active {
+    background: var(--color-accent);
+    color: #fff;
+    font-weight: 600;
 }
+
+.mode-count {
+    font-size: 0.75rem;
+    font-weight: 500;
+    opacity: 0.75;
+}
+
+.mode-count:empty { display: none; }
 
 .panel-collapse {
     background: transparent;
@@ -662,50 +741,115 @@ body {
 
 .tab-content.hidden { display: none; }
 
-/* Top resorts list */
-.top-resorts-list {
+/* Resort list (in view / top 10 / search) */
+.list-summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.list-summary strong { color: var(--color-text); font-weight: 600; }
+.list-summary .list-empty { line-height: 1.5; }
+
+.link-button {
+    padding: 0;
+    background: none;
+    border: 0;
+    color: var(--color-accent-light);
+    font: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.link-button:hover { text-decoration: underline; }
+
+.resort-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
-.top-resort-item {
+.resort-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 12px 11px;
+    overflow: hidden;
     background: var(--color-bg-input);
-    padding: 10px 12px;
+    color: var(--color-text);
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
+    font: inherit;
+    text-align: left;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, border-color 0.2s;
 }
 
-.top-resort-item:hover { background: var(--color-bg-hover); }
+.resort-item:hover, .resort-item:focus-visible { background: var(--color-bg-hover); outline: none; }
+.resort-item.selected { border-color: var(--color-accent-light); }
 
-.top-resort-item .rank {
-    color: var(--color-accent);
-    font-weight: 600;
+.resort-item .rank {
+    flex: 0 0 auto;
+    min-width: 1.6em;
+    color: var(--color-accent-light);
+    font-weight: 700;
     font-size: 0.85rem;
 }
 
-.top-resort-item .name {
-    font-weight: 500;
-    margin-top: 2px;
-    font-size: 0.9rem;
+.resort-item .main { flex: 1 1 auto; min-width: 0; }
+
+.resort-item .name,
+.resort-item .place {
+    display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.top-resort-item .info {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 4px;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
+.resort-item .name { font-weight: 500; font-size: 0.9rem; }
+.resort-item .place { margin-top: 2px; font-size: 0.75rem; color: var(--color-text-muted); }
+
+.resort-item .snowfall {
+    flex: 0 0 auto;
+    color: var(--color-accent-light);
+    font-weight: 700;
+    font-size: 0.95rem;
 }
 
-.top-resort-item .snowfall {
-    color: var(--color-accent);
-    font-weight: 600;
+.resort-item .snowfall.none { color: var(--color-text-muted); font-weight: 500; }
+
+/* Snowfall relative to the biggest value in the list */
+.resort-item .bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-accent), #a5d8ff);
+    border-radius: 0 2px 2px 0;
 }
+
+/* Back bar above a resort's details */
+.detail-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: -4px 0 14px;
+    padding: 5px 10px 5px 8px;
+    background: var(--color-bg-input);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.detail-back:hover { background: var(--color-bg-hover); }
 
 /* Detail content in side panel */
 .detail-header {
@@ -791,10 +935,6 @@ body {
 .forecast-table tr.historical:hover { background: var(--color-accent-15); }
 
 /* Responsive: narrow screens */
-@media (max-width: 600px) {
-    .header h1 { font-size: 1.1rem; }
-}
-
 /* Narrow / portrait: the panel becomes a bottom sheet under the map.
    Keep this query in sync with BOTTOM_PANEL_QUERY in app.js.
    Open height is a single value; collapsed is [data-snap="collapsed"] / .collapsed. */

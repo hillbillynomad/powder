@@ -10,7 +10,9 @@ const ZOOM_SCALE_RATE = 0.1; // markers grow at 0.1x the map's zoom rate
 const TILE_SIZE = 512;
 const GLOBE_FILL = 0.9; // fraction of the smaller viewport side the whole globe may occupy
 const FOCUS_ZOOM = 9;
-const SEARCH_LIMIT = 10;
+const SEARCH_LIMIT = 50;
+const TOP_LIMIT = 10;
+const HORIZON_DEG = 88; // on the globe, resorts further than this from the centre are round the back
 const TERRAIN_3D_MIN_ZOOM = 7; // 3D relief on a globe is only worth its cost once zoomed in
 const TERRAIN_EXAGGERATION = 1.4;
 const FEET_PER_METER = 3.28084;
@@ -57,6 +59,15 @@ let markers = []; // [{ resort, baseRadius, isRing }] for the currently displaye
 let weather = null; // weather.js overlay controller, once the map is up
 let resortData = [];
 let currentDetailResort = null;
+
+// Side panel list: 'view' (resorts on screen), 'top10' or 'search'. Search is only
+// available while the box has a query; clearing it returns to the last browse mode.
+const LIST_MODE_LABELS = { view: 'In view', top10: 'Top 10', search: 'Search results' };
+let listMode = 'view';
+let browseMode = 'view';
+let searchQuery = '';
+let inViewResorts = null; // null until the map can tell us what's on screen
+let inViewKey = '';
 
 // Hover popup state
 let hoverPopup = null;
@@ -440,10 +451,11 @@ function zoomScaleAt(zoom) {
 
 // circle-radius expression: per-feature base radius times the zoom scale. MapLibre only
 // allows zoom at the top of an interpolate, so sample the exponential at each whole zoom.
-function buildRadiusExpression() {
+function buildRadiusExpression(extra = 0) {
     const expr = ['interpolate', ['linear'], ['zoom']];
     for (let z = 0; z <= MAX_ZOOM; z++) {
-        expr.push(z, ['*', ['get', 'r'], zoomScaleAt(z)]);
+        const radius = ['*', ['get', 'r'], zoomScaleAt(z)];
+        expr.push(z, extra ? ['+', radius, extra] : radius);
     }
     return expr;
 }
@@ -508,6 +520,8 @@ async function initMap(shared) {
     syncTerrain3d();
     watchMapSize();
     installMapInteractions();
+    map.on('moveend', () => updateInView());
+    map.on('resize', () => updateInView());
     if (window.PowderWeather) weather = window.PowderWeather.createController(map, window.maplibregl);
 }
 
@@ -670,8 +684,27 @@ function addResortLayer() {
             'circle-pitch-alignment': 'map',
         },
     });
+    // White ring around the selected / list-hovered resort
+    map.addLayer({
+        id: 'resorts-highlight',
+        type: 'circle',
+        source: 'resorts',
+        filter: ['==', ['get', 'name'], ''],
+        paint: {
+            'circle-radius': buildRadiusExpression(3),
+            'circle-color': 'rgba(0, 0, 0, 0)',
+            'circle-stroke-color': '#ffffff',
+            'circle-stroke-width': 2.5,
+            'circle-pitch-alignment': 'map',
+        },
+    });
     map.addLayer(buildResortNameLayer());
     refreshResortSource();
+}
+
+function setMapHighlight(name) {
+    if (!map || !mapReady || !map.getLayer('resorts-highlight')) return;
+    map.setFilter('resorts-highlight', ['==', ['get', 'name'], name || '']);
 }
 
 // Blue resort names under the bubbles, shown with the lifts & names toggle
@@ -1226,22 +1259,160 @@ function restorePanelState() {
     }
 }
 
-// Show detail panel for a resort
+// ---- Side panel: resort list + details ---------------------------------------------
+
+function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// Great-circle distance in degrees
+function angularDistance(lat1, lng1, lat2, lng2) {
+    const rad = Math.PI / 180;
+    const cos = Math.sin(lat1 * rad) * Math.sin(lat2 * rad) +
+        Math.cos(lat1 * rad) * Math.cos(lat2 * rad) * Math.cos((lng2 - lng1) * rad);
+    return Math.acos(Math.min(1, Math.max(-1, cos))) / rad;
+}
+
+// Resorts on the visible side of the globe and inside the map's pixel box.
+// view: { project([lng, lat]) -> {x, y}, center: {lat, lng}, width, height }
+function filterInView(resorts, view) {
+    return resorts.filter(r => {
+        if (angularDistance(view.center.lat, view.center.lng, r.latitude, r.longitude) > HORIZON_DEG) return false;
+        const pt = view.project([r.longitude, r.latitude]);
+        return !!pt && pt.x >= 0 && pt.y >= 0 && pt.x <= view.width && pt.y <= view.height;
+    });
+}
+
+function bySnowfallDesc(resorts) {
+    return [...resorts].sort((a, b) => getSnowfallForFilter(b) - getSnowfallForFilter(a) || a.name.localeCompare(b.name));
+}
+
+// Recompute what's on screen; re-render only when that set changed (keeps scroll position)
+function updateInView(force = false) {
+    if (!map || !mapReady) return;
+    const rect = map.getCanvas().getBoundingClientRect();
+    const resorts = filterInView(resortData, {
+        project: (lngLat) => map.project(lngLat),
+        center: map.getCenter(),
+        width: rect.width,
+        height: rect.height,
+    });
+    const key = resorts.map(r => r.name).join('|');
+    if (!force && inViewResorts && key === inViewKey) return;
+    inViewKey = key;
+    inViewResorts = resorts;
+    syncModeButtons();
+    if (listMode === 'view') renderList();
+}
+
+function getListResorts() {
+    if (listMode === 'search') return searchResorts(resortData, searchQuery);
+    if (listMode === 'top10') return bySnowfallDesc(resortData).slice(0, TOP_LIMIT);
+    return bySnowfallDesc(inViewResorts || resortData);
+}
+
+function syncModeButtons() {
+    document.querySelectorAll('.panel-mode').forEach(btn => {
+        const active = btn.dataset.mode === listMode;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', String(active));
+        if (btn.dataset.mode === 'search') btn.hidden = !searchQuery;
+    });
+    const viewCount = document.getElementById('view-count');
+    if (viewCount) viewCount.textContent = inViewResorts ? String(inViewResorts.length) : '';
+    const searchCount = document.getElementById('search-count');
+    if (searchCount) searchCount.textContent = searchQuery ? String(searchResorts(resortData, searchQuery).length) : '';
+}
+
+function buildListSummary(count) {
+    const sortNote = `<span>${escapeHtml(getFilterLabel())} snow</span>`;
+    if (listMode === 'search') {
+        const q = escapeHtml(searchQuery);
+        const text = count
+            ? `<span><strong>${count}</strong> ${count === 1 ? 'match' : 'matches'} for “${q}”</span>`
+            : `<span class="list-empty">No resorts match “${q}”.</span>`;
+        return `${text}<button type="button" class="link-button" data-action="clear-search">Clear search</button>`;
+    }
+    if (listMode === 'top10') {
+        return `<span><strong>Most snow</strong> worldwide</span>${sortNote}`;
+    }
+    if (!count) {
+        return `<span class="list-empty">No resorts in view. Zoom out, or see the
+            <button type="button" class="link-button" data-action="top10">Top 10</button>.</span>`;
+    }
+    return `<span><strong>${count}</strong> ${count === 1 ? 'resort' : 'resorts'} on the map</span>${sortNote}`;
+}
+
+function buildResortItem(resort, rank, maxSnow) {
+    const snowfall = getSnowfallForFilter(resort);
+    const region = resort.region || resort.state || '';
+    const place = `${region ? region + ', ' : ''}${getCountryName(resort.country)}`;
+    const width = maxSnow > 0 ? Math.max(0, Math.min(100, (snowfall / maxSnow) * 100)) : 0;
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'resort-item';
+    item.dataset.name = resort.name;
+    if (currentDetailResort && currentDetailResort.name === resort.name) item.classList.add('selected');
+    item.innerHTML = `
+        ${rank ? `<span class="rank">#${rank}</span>` : ''}
+        <span class="main">
+            <span class="name">${escapeHtml(resort.name)}</span>
+            <span class="place">${escapeHtml(place)}</span>
+        </span>
+        <span class="snowfall${snowfall < NO_SNOW_THRESHOLD ? ' none' : ''}">${snowfall.toFixed(1)}"</span>
+        ${width ? `<span class="bar" style="width:${width.toFixed(1)}%"></span>` : ''}
+    `;
+    item.addEventListener('click', () => selectResort(resort));
+    item.addEventListener('mouseenter', () => setMapHighlight(resort.name));
+    item.addEventListener('mouseleave', () => setMapHighlight(currentDetailResort ? currentDetailResort.name : ''));
+    return item;
+}
+
+function renderList() {
+    const container = document.getElementById('resort-list');
+    if (!container) return;
+    const resorts = getListResorts();
+    const maxSnow = resorts.reduce((max, r) => Math.max(max, getSnowfallForFilter(r)), 0);
+    container.innerHTML = '';
+    resorts.forEach((resort, i) => container.appendChild(buildResortItem(resort, listMode === 'top10' ? i + 1 : 0, maxSnow)));
+    const summary = document.getElementById('list-summary');
+    if (summary) summary.innerHTML = buildListSummary(resorts.length);
+}
+
+function setListMode(mode) {
+    if (!LIST_MODE_LABELS[mode] || (mode === 'search' && !searchQuery)) mode = browseMode;
+    if (mode !== 'search') browseMode = mode;
+    listMode = mode;
+    if (currentDetailResort) hideDetail();
+    syncModeButtons();
+    renderList();
+}
+
+// Show a resort's details in place of the list
 function showDetail(resort) {
     document.getElementById('detail-content').innerHTML = buildDetailContent(resort);
-    switchPanelTab('details');
+    const back = document.getElementById('detail-back-label');
+    if (back) back.textContent = LIST_MODE_LABELS[listMode];
+    document.getElementById('list-content').classList.add('hidden');
+    document.getElementById('details-content').classList.remove('hidden');
     if (panelState === 'collapsed') setPanelState(lastOpenPanelState);
     currentDetailResort = resort;
+    setMapHighlight(resort.name);
+    const content = document.querySelector('.panel-content');
+    if (content) content.scrollTop = 0;
 
     requestAnimationFrame(() => {
         requestAnimationFrame(() => renderDetailChart(resort));
     });
 }
 
-// Deselect the resort and go back to Top 10. Collapsing is always an explicit user action.
+// Deselect the resort and go back to the list. Collapsing is always an explicit user action.
 function hideDetail() {
-    switchPanelTab('top10');
+    document.getElementById('details-content').classList.add('hidden');
+    document.getElementById('list-content').classList.remove('hidden');
     currentDetailResort = null;
+    setMapHighlight('');
+    document.querySelectorAll('.resort-item.selected').forEach(el => el.classList.remove('selected'));
 }
 
 // Toggle detail for a resort
@@ -1253,21 +1424,12 @@ function toggleDetail(resort) {
     showDetail(resort);
 }
 
-// Switch panel tab
-function switchPanelTab(tabName) {
-    document.querySelectorAll('.panel-tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.tab === tabName);
-    });
-    document.getElementById('top10-content').classList.toggle('hidden', tabName !== 'top10');
-    document.getElementById('details-content').classList.toggle('hidden', tabName !== 'details');
-}
-
-// Center map on resort and open detail panel
-function focusResort(resort) {
+// Fly to a resort and open its details
+function selectResort(resort) {
     if (map) {
         map.flyTo({ center: [resort.longitude, resort.latitude], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), essential: true });
     }
-    toggleDetail(resort);
+    showDetail(resort);
 }
 
 // Lowercase and strip accents so "val d'isere" finds "Val d'Isère"
@@ -1293,96 +1455,55 @@ function searchResorts(resorts, query, limit = SEARCH_LIMIT) {
         .map(entry => entry.resort);
 }
 
-function setSearchResultsOpen(open) {
-    document.getElementById('search-results').hidden = !open;
-}
-
-// Fly to a resort and open its details (never toggles it closed, unlike focusResort)
-function selectSearchResult(resort) {
-    if (map) {
-        map.flyTo({ center: [resort.longitude, resort.latitude], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), essential: true });
-    }
-    showDetail(resort);
-}
-
 function syncSearchClear() {
     document.getElementById('search-clear').hidden = !document.getElementById('search-input').value;
 }
 
-function clearSearch() {
+// Live search: results replace the panel list as you type
+function onSearchInput() {
     const input = document.getElementById('search-input');
-    input.value = '';
     syncSearchClear();
-    setSearchResultsOpen(false);
-    input.focus();
-}
-
-function runSearch(e) {
-    e.preventDefault();
-    const query = document.getElementById('search-input').value;
-    const results = searchResorts(resortData, query);
-    const container = document.getElementById('search-results');
-    container.innerHTML = '';
-
-    if (!normalizeSearchText(query)) {
-        setSearchResultsOpen(false);
+    searchQuery = normalizeSearchText(input.value) ? input.value.trim() : '';
+    if (!searchQuery) {
+        if (listMode === 'search') setListMode(browseMode);
+        else syncModeButtons();
         return;
     }
-    if (results.length === 0) {
-        container.innerHTML = '<div class="search-empty">No resorts found</div>';
-    }
-    results.forEach(resort => {
-        const region = resort.region || resort.state || '';
-        const item = document.createElement('div');
-        item.className = 'top-resort-item search-result';
-        item.innerHTML = `
-            <div class="name">${resort.name}</div>
-            <div class="info">
-                <span>${region ? region + ', ' : ''}${getCountryName(resort.country)}</span>
-                <span class="snowfall">${getSnowfallForFilter(resort).toFixed(1)}"</span>
-            </div>
-        `;
-        item.addEventListener('click', () => {
-            selectSearchResult(resort);
-            setSearchResultsOpen(false);
-        });
-        container.appendChild(item);
-    });
-    setSearchResultsOpen(true);
+    if (panelState === 'collapsed') setPanelState(lastOpenPanelState);
+    setListMode('search');
+}
 
+function clearSearch({ focus = true } = {}) {
+    const input = document.getElementById('search-input');
+    input.value = '';
+    onSearchInput();
+    if (focus) input.focus();
+}
+
+// Enter: open the best match (Back returns to the results)
+function runSearch(e) {
+    e.preventDefault();
+    onSearchInput();
+    const results = searchQuery ? searchResorts(resortData, searchQuery) : [];
     if (results.length > 0) {
         // Dismiss the on-screen keyboard so the map and details are visible on phones
         document.getElementById('search-input').blur();
-        selectSearchResult(results[0]);
+        selectResort(results[0]);
     }
 }
 
-// Update Top 10 list
-function updateTop10() {
-    const sorted = [...resortData].sort((a, b) => getSnowfallForFilter(b) - getSnowfallForFilter(a));
-    const top10 = sorted.slice(0, 10);
-
-    const container = document.getElementById('top-resorts-list');
-    container.innerHTML = '';
-
-    top10.forEach((resort, index) => {
-        const snowfall = getSnowfallForFilter(resort);
-        const region = resort.region || resort.state || '';
-        const countryName = getCountryName(resort.country);
-
-        const item = document.createElement('div');
-        item.className = 'top-resort-item';
-        item.innerHTML = `
-            <div class="rank">#${index + 1}</div>
-            <div class="name">${resort.name}</div>
-            <div class="info">
-                <span>${region ? region + ', ' : ''}${countryName}</span>
-                <span class="snowfall">${snowfall.toFixed(1)}"</span>
-            </div>
-        `;
-        item.addEventListener('click', () => focusResort(resort));
-        container.appendChild(item);
-    });
+// Logo: back to the opening view (whole globe, resorts in view, nothing selected)
+function goHome() {
+    setMenuOpen(false);
+    hideHoverPopup();
+    if (document.getElementById('search-input').value) clearSearch({ focus: false });
+    setListMode('view');
+    if (map && mapReady) {
+        map.flyTo({ center: DEFAULT_CENTER, zoom: map.getMinZoom(), bearing: 0, pitch: 0, essential: true });
+    }
+    if (window.location.search && window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname);
+    }
 }
 
 // Rebuild the displayed resort bubbles from the current filters
@@ -1396,7 +1517,10 @@ function createMarkers() {
     });
     refreshResortSource();
 
-    updateTop10();
+    // The sort order follows the snowfall filter, so always re-render
+    updateInView(true);
+    syncModeButtons();
+    renderList();
 }
 
 // Collapse / expand control inside the panel (cycles snaps on the bottom sheet)
@@ -1411,35 +1535,47 @@ function reopenPanel() {
 
 // Set up event listeners
 function setupEventListeners() {
-    // Filter listeners
-    document.getElementById('snow-filter').addEventListener('change', createMarkers);
+    // Filter listeners: rebuild bubbles + list, and refresh open details for the new filter
+    document.getElementById('snow-filter').addEventListener('change', () => {
+        createMarkers();
+        if (currentDetailResort) showDetail(currentDetailResort);
+    });
 
-    // Panel tab listeners
-    document.querySelectorAll('.panel-tab').forEach(tab => {
-        tab.addEventListener('click', () => switchPanelTab(tab.dataset.tab));
+    // Panel list modes, back bar and links inside the list summary
+    document.querySelectorAll('.panel-mode').forEach(btn => {
+        btn.addEventListener('click', () => setListMode(btn.dataset.mode));
+    });
+    document.getElementById('detail-back').addEventListener('click', hideDetail);
+    document.getElementById('list-summary').addEventListener('click', (e) => {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        if (action.dataset.action === 'clear-search') clearSearch({ focus: false });
+        else setListMode(action.dataset.action);
     });
 
     // Controls
+    document.getElementById('home-button').addEventListener('click', goHome);
     document.getElementById('panel-collapse').addEventListener('click', togglePanelCollapse);
     document.getElementById('panel-reopen').addEventListener('click', reopenPanel);
     document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
     document.getElementById('share-button').addEventListener('click', shareCurrentView);
     document.getElementById('menu-panel').addEventListener('change', onLayerInputChange);
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            setMenuOpen(false);
-            setSearchResultsOpen(false);
-        }
+        if (e.key === 'Escape') setMenuOpen(false);
     });
 
     // Search
     const searchInput = document.getElementById('search-input');
     document.getElementById('search-form').addEventListener('submit', runSearch);
-    searchInput.addEventListener('input', syncSearchClear);
-    document.getElementById('search-clear').addEventListener('click', clearSearch);
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('#search-form')) setSearchResultsOpen(false);
+    searchInput.addEventListener('input', onSearchInput);
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchInput.value) {
+            e.preventDefault();
+            clearSearch({ focus: false });
+            searchInput.blur();
+        }
     });
+    document.getElementById('search-clear').addEventListener('click', () => clearSearch());
 }
 
 // Initialize
@@ -1510,7 +1646,10 @@ if (typeof module !== 'undefined' && module.exports) {
         buildLabelOverlayLayers, buildMapStyle, parseShareParams, buildShareUrl,
         nextPanelState, setPanelState, restorePanelState, searchResorts,
         showDetail, hideDetail, togglePanelCollapse, reopenPanel,
+        filterInView, angularDistance, escapeHtml, setListMode, onSearchInput, clearSearch, renderList,
         getPanelState: () => panelState,
+        getListMode: () => listMode,
+        setResortData: (data) => { resortData = data; },
     };
 } else {
     document.addEventListener('DOMContentLoaded', init);

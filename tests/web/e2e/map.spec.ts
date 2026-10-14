@@ -24,10 +24,11 @@ test.describe('Map Functionality', () => {
     await expect(map).toBeVisible();
   });
 
-  test('header is visible with title', async ({ page }) => {
+  test('header shows the snowflake logo instead of a title', async ({ page }) => {
     const header = page.locator('header');
     await expect(header).toBeVisible();
-    await expect(header).toContainText('Powder');
+    await expect(page.locator('#home-button')).toBeVisible();
+    await expect(page.locator('header h1')).toHaveCount(0);
   });
 
   test('side panel exists', async ({ page }) => {

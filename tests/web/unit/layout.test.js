@@ -21,12 +21,20 @@ function setupDom() {
   document.body.innerHTML = `
     <aside id="side-panel" class="side-panel" data-snap="peek">
       <button id="panel-collapse" aria-expanded="true"></button>
-      <button class="panel-tab active" data-tab="top10"></button>
-      <button class="panel-tab" data-tab="details"></button>
-      <div id="top10-content" class="tab-content"></div>
-      <div id="details-content" class="tab-content hidden"><div id="detail-content"></div></div>
+      <button class="panel-mode active" data-mode="view">In view <span id="view-count"></span></button>
+      <button class="panel-mode" data-mode="top10">Top 10</button>
+      <button class="panel-mode" data-mode="search" hidden>Search <span id="search-count"></span></button>
+      <div class="panel-content">
+        <div id="list-content" class="tab-content">
+          <div id="list-summary"></div><div id="resort-list"></div>
+        </div>
+        <div id="details-content" class="tab-content hidden">
+          <span id="detail-back-label"></span><div id="detail-content"></div>
+        </div>
+      </div>
     </aside>
     <button id="panel-reopen" hidden></button>
+    <input id="search-input"><button id="search-clear" hidden></button>
     <select id="snow-filter"><option value="forecast">f</option></select>`;
 }
 
@@ -58,6 +66,93 @@ describe('searchResorts', () => {
     expect(names('   ')).toEqual([]);
     expect(names('zermatt')).toEqual([]);
     expect(names('a', 2)).toHaveLength(2);
+  });
+});
+
+describe('filterInView', () => {
+  const { filterInView, angularDistance } = loadApp();
+  const at = (name, latitude, longitude) => ({ name, latitude, longitude });
+  // Flat stand-in projection: 10px per degree around the centre
+  const view = (lat, lng, width = 400, height = 300) => ({
+    center: { lat, lng }, width, height,
+    project: ([x, y]) => ({ x: width / 2 + (x - lng) * 10, y: height / 2 - (y - lat) * 10 }),
+  });
+
+  it('measures great-circle distance in degrees', () => {
+    expect(angularDistance(0, 0, 0, 90)).toBeCloseTo(90, 6);
+    expect(angularDistance(40, -111, 40, -111)).toBeCloseTo(0, 4);
+    expect(angularDistance(90, 0, -90, 0)).toBeCloseTo(180, 6);
+  });
+
+  it('keeps resorts inside the map box and drops those outside it', () => {
+    const resorts = [at('Alta', 40.6, -111.6), at('Vail', 39.6, -106.4), at('Chamonix', 45.9, 6.9)];
+    expect(filterInView(resorts, view(40.5, -111.5, 60, 60)).map(r => r.name)).toEqual(['Alta']);
+    expect(filterInView(resorts, view(40, -109, 1000, 400)).map(r => r.name)).toEqual(['Alta', 'Vail']);
+  });
+
+  it('drops resorts round the back of the globe even if they project on screen', () => {
+    const everywhere = { center: { lat: 37.5, lng: -119.5 }, width: 400, height: 300, project: () => ({ x: 10, y: 10 }) };
+    const names = filterInView([at('Mammoth', 37.6, -119.0), at('Thredbo', -36.5, 148.3)], everywhere).map(r => r.name);
+    expect(names).toEqual(['Mammoth']);
+  });
+});
+
+describe('side panel list modes and search', () => {
+  let app;
+  const resorts = [
+    { name: 'Alta', country: 'US', region: 'UT', latitude: 40.6, longitude: -111.6, total_snowfall_inches: 4 },
+    { name: 'Snowbird', country: 'US', region: 'UT', latitude: 40.6, longitude: -111.7, total_snowfall_inches: 9 },
+    { name: 'Niseko', country: 'JP', region: 'Hokkaido', latitude: 42.8, longitude: 140.7, total_snowfall_inches: 20 },
+  ];
+  const listNames = () => [...document.querySelectorAll('#resort-list .resort-item .name')].map(n => n.textContent);
+  const modeButton = (mode) => document.querySelector(`.panel-mode[data-mode="${mode}"]`);
+
+  beforeEach(() => {
+    setupDom();
+    localStorage.clear();
+    vi.stubGlobal('requestAnimationFrame', () => 0);
+    app = loadApp();
+    app.setResortData(resorts);
+  });
+
+  it('defaults to In view, sorted by snowfall', () => {
+    app.renderList();
+    expect(app.getListMode()).toBe('view');
+    expect(listNames()).toEqual(['Niseko', 'Snowbird', 'Alta']);
+  });
+
+  it('Top 10 ranks resorts worldwide', () => {
+    app.setListMode('top10');
+    expect(modeButton('top10').classList.contains('active')).toBe(true);
+    expect(document.querySelector('#resort-list .rank').textContent).toBe('#1');
+  });
+
+  it('typing switches to search results; clearing goes back to the previous mode', () => {
+    app.setListMode('top10');
+    const input = document.getElementById('search-input');
+    input.value = 'snow';
+    app.onSearchInput();
+    expect(app.getListMode()).toBe('search');
+    expect(modeButton('search').hidden).toBe(false);
+    expect(listNames()).toEqual(['Snowbird']);
+
+    app.clearSearch({ focus: false });
+    expect(app.getListMode()).toBe('top10');
+    expect(modeButton('search').hidden).toBe(true);
+  });
+
+  it('search summary escapes the query', () => {
+    const input = document.getElementById('search-input');
+    input.value = '<img src=x>';
+    app.onSearchInput();
+    expect(document.getElementById('list-summary').innerHTML).not.toContain('<img');
+    expect(document.getElementById('list-summary').textContent).toContain('No resorts match');
+  });
+
+  it('switching mode closes open details', () => {
+    app.showDetail(resorts[0]);
+    app.setListMode('top10');
+    expect(document.getElementById('details-content').classList.contains('hidden')).toBe(true);
   });
 });
 
@@ -100,6 +195,10 @@ describe('marker radius expression', () => {
     expect(zooms).toEqual([...zooms].sort((a, b) => a - b));
     expect(new Set(zooms).size).toBe(zooms.length);
     expect(expr[4]).toEqual(['*', ['get', 'r'], zoomScaleAt(0)]);
+  });
+
+  it('can add a fixed pixel margin for the selection ring', () => {
+    expect(buildRadiusExpression(3)[4]).toEqual(['+', ['*', ['get', 'r'], zoomScaleAt(0)], 3]);
   });
 });
 
@@ -263,11 +362,13 @@ describe('side panel state', () => {
     expect(reopen().hidden).toBe(true);
   });
 
-  it('hideDetail returns to Top 10 and never collapses the panel', () => {
+  it('hideDetail returns to the list and never collapses the panel', () => {
     app.showDetail(resort);
     expect(document.getElementById('details-content').classList.contains('hidden')).toBe(false);
+    expect(document.getElementById('list-content').classList.contains('hidden')).toBe(true);
     app.hideDetail();
-    expect(document.getElementById('top10-content').classList.contains('hidden')).toBe(false);
+    expect(document.getElementById('list-content').classList.contains('hidden')).toBe(false);
+    expect(document.getElementById('details-content').classList.contains('hidden')).toBe(true);
     expect(panel().classList.contains('collapsed')).toBe(false);
   });
 
@@ -348,6 +449,19 @@ describe('CSS invariants (app shell must not be scrollable)', () => {
   it('bottom-sheet media query matches BOTTOM_PANEL_QUERY in app.js', () => {
     const q = appSource.match(/BOTTOM_PANEL_QUERY = '([^']+)'/)[1];
     expect(css).toContain(`@media ${q}`);
+  });
+});
+
+describe('link preview card', () => {
+  const html = fs.readFileSync(path.join(WEB, 'index.html'), 'utf8');
+  const meta = (attr, key) => (html.match(new RegExp(`<meta ${attr}="${key}" content="([^"]*)"`)) || [])[1];
+
+  it('points og:image and twitter:image at the bundled GIF by absolute URL', () => {
+    const image = meta('property', 'og:image');
+    expect(image).toMatch(/^https:\/\/.+\/img\/share-card\.gif$/);
+    expect(meta('name', 'twitter:image')).toBe(image);
+    expect(fs.existsSync(path.join(WEB, 'img/share-card.gif'))).toBe(true);
+    expect(meta('name', 'twitter:card')).toBe('summary_large_image');
   });
 });
 
