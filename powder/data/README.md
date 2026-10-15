@@ -39,13 +39,14 @@
 
 ## Selection Criteria
 - Ski resorts with 10+ lifts (chairs, gondolas, trams, T-bars) **or** 4,000+ ft of vertical drop
-- 215 resorts across 26 countries
+- 216 resorts across 26 countries
+- Plus a few sentimental exceptions that miss the lift/vertical bar (Bear Valley, CA)
 
 ## Coverage by Region
 
 | Region | Countries | Resort Count |
 |--------|-----------|--------------|
-| North America | US, CA | 72 |
+| North America | US, CA | 73 |
 | Europe | FR, AT, CH, IT, DE, NO, ES, FI, SE, AD, BG, PL, CZ, RO, SI, SK | 107 |
 | Asia | JP, KR, CN, IN | 21 |
 | Oceania | AU, NZ | 7 |

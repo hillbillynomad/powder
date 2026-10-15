@@ -2315,6 +2315,19 @@
       "elevation_peak_ft": 9800
     },
     {
+      "name": "Bear Valley",
+      "country": "US",
+      "region": "CA",
+      "latitude": 38.4915,
+      "longitude": -120.046,
+      "lift_count": 10,
+      "avg_snowfall_inches": 360,
+      "pass_type": null,
+      "timezone": "America/Los_Angeles",
+      "elevation_base_ft": 6600,
+      "elevation_peak_ft": 8500
+    },
+    {
       "name": "Snowbird",
       "country": "US",
       "region": "UT",

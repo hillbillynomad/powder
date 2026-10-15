@@ -1,0 +1,73 @@
+{
+ "resort": "Bear Valley",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -120.052,
+    38.503,
+    2315
+   ],
+   "seconds": 6.9,
+   "label": "Over the Grizzly base, Bear Top ahead",
+   "pitch": 52,
+   "ground": 1888
+  },
+  {
+   "camera": [
+    -120.0502,
+    38.496,
+    2765
+   ],
+   "seconds": 7.4,
+   "label": "Up the Grizzly line",
+   "pitch": 48,
+   "ground": 2443
+  },
+  {
+   "camera": [
+    -120.054,
+    38.488,
+    3031
+   ],
+   "seconds": 5.9,
+   "label": "Over Bear Top, the summit hub",
+   "pitch": 54,
+   "ground": 2360
+  },
+  {
+   "camera": [
+    -120.047,
+    38.4838,
+    2925
+   ],
+   "seconds": 5.6,
+   "label": "Over the Day Lodge lift line",
+   "pitch": 58,
+   "ground": 2286
+  },
+  {
+   "camera": [
+    -120.0405,
+    38.488,
+    2876
+   ],
+   "seconds": 8.3,
+   "label": "Past Koala and the Day Lodge",
+   "pitch": 60,
+   "ground": 2193
+  },
+  {
+   "camera": [
+    -120.0425,
+    38.4975,
+    2639
+   ],
+   "seconds": 8.2,
+   "label": "North along the east side",
+   "pitch": 62,
+   "ground": 1546
+  }
+ ]
+}

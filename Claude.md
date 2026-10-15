@@ -55,7 +55,7 @@ powder/
 │   ├── icon.py       # DWD ICON (7d) — Europe
 │   ├── jma.py        # JMA (7d) — Japan
 │   └── bom.py        # BOM (7d) — Australia/NZ
-├── data/resorts.json # 215 resorts; schema in data/README.md
+├── data/resorts.json # 216 resorts; schema in data/README.md
 └── web/              # Static MapLibre globe UI + sw.js tile cache; web/data/ is gitignored (generated)
 ```
 

@@ -6,7 +6,7 @@ Ski resort snowfall forecast tracker. Aggregates forecasts from multiple weather
 
 - **CLI** - Query forecasts by resort, country, region, or pass type
 - **Web UI** - Interactive world map with bubble visualization and Top 10 sidebar
-- **215 Resorts** - Ski resorts across 26 countries (10+ lifts or 4,000+ ft of vertical)
+- **216 Resorts** - Ski resorts across 26 countries (10+ lifts or 4,000+ ft of vertical)
 - **Regional Weather Models** - Best-in-class models for each region
 - **Historical Data** - 14 days of past snowfall via Open-Meteo's past_days parameter
 - **No API Keys** - All data sources are free and open
@@ -81,7 +81,7 @@ cd powder/web && python -m http.server 8000
 
 ### Features
 
-- **World Map** - Global view with all 215 resorts
+- **World Map** - Global view with all 216 resorts
 - **Bubble Map** - Blue circles sized by snowfall amount
 - **Top 10 Sidebar** - Highest snowfall resorts (updates with filters)
 - **Hover** - Quick view of resort name and snowfall total
