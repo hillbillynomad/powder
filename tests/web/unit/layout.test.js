@@ -508,6 +508,23 @@ describe('share links', () => {
     expect(parsed.camera).toEqual({ lat: 10, lng: 20, zoom: 4, bearing: 0, pitch: 0 });
   });
 
+  it('a flyover link carries the resort and fly=1 but no camera', () => {
+    const url = buildShareUrl(base, { camera: null, prefs, filters: {}, resort: 'Snowbird', fly: true });
+    const q = new URL(url).searchParams;
+    expect(q.get('resort')).toBe('Snowbird');
+    expect(q.get('fly')).toBe('1');
+    expect(q.has('lat')).toBe(false);
+    const parsed = parseShareParams(new URL(url).search);
+    expect(parsed.fly).toBe(true);
+    expect(parsed.camera).toBeNull();
+  });
+
+  it('fly only counts alongside a resort', () => {
+    expect(parseShareParams('?fly=1').fly).toBe(false);
+    expect(parseShareParams('?resort=Alta&fly=0').fly).toBe(false);
+    expect(parseShareParams('?resort=Alta').fly).toBe(false);
+  });
+
   it('requires both lat and lng for a camera', () => {
     expect(parseShareParams('?lat=10').camera).toBeNull();
     expect(parseShareParams('?lng=10').camera).toBeNull();

@@ -163,7 +163,7 @@ function parseShareText(value) {
 // Parse and validate a location.search string. Anything malformed is dropped silently.
 function parseShareParams(search) {
     const params = new URLSearchParams(search || '');
-    const result = { camera: null, prefs: {}, filters: {}, resort: null };
+    const result = { camera: null, prefs: {}, filters: {}, resort: null, fly: false };
 
     const lat = parseShareNumber(params.get('lat'), -90, 90);
     const lng = parseShareNumber(params.get('lng'), -180, 180);
@@ -186,10 +186,12 @@ function parseShareParams(search) {
     if (SHARE_SNOW_VALUES.includes(params.get('snow'))) result.filters.snow = params.get('snow');
 
     result.resort = parseShareText(params.get('resort')) || null;
+    result.fly = !!result.resort && parseShareBool(params.get('fly')) === true;
     return result;
 }
 
-// state: { camera: {lat,lng,zoom,bearing,pitch}|null, prefs, filters, resort }
+// state: { camera: {lat,lng,zoom,bearing,pitch}|null, prefs, filters, resort, fly }
+// A flyover link (fly) carries the resort but no camera: the friend gets the whole flight in.
 function buildShareUrl(base, state) {
     const params = new URLSearchParams();
     if (state.camera) {
@@ -209,6 +211,7 @@ function buildShareUrl(base, state) {
     const filters = state.filters || {};
     if (filters.snow && filters.snow !== 'forecast') params.set('snow', filters.snow);
     if (state.resort) params.set('resort', state.resort);
+    if (state.resort && state.fly) params.set('fly', '1');
 
     return `${base}?${params.toString()}`;
 }
@@ -218,13 +221,17 @@ function getShareState() {
         const el = document.getElementById(id);
         return el ? el.value : '';
     };
+    // On a resort with a flyover, share the flyover rather than the current camera, and the
+    // user's own layer choices rather than the ones the flyover forces
+    const fly = !!(currentDetailResort && flyby && flyby.getState().hasTour);
     const state = {
         camera: null,
-        prefs: { ...layerPrefs },
+        prefs: { ...(tourPrefsBackup || layerPrefs) },
         filters: { snow: value('snow-filter') },
         resort: currentDetailResort ? currentDetailResort.name : null,
+        fly,
     };
-    if (map && mapReady) {
+    if (map && mapReady && !fly) {
         const c = map.getCenter();
         state.camera = { lat: c.lat, lng: c.lng, zoom: map.getZoom(), bearing: map.getBearing(), pitch: map.getPitch() };
     }
@@ -263,9 +270,10 @@ function showToast(message) {
 
 async function shareCurrentView() {
     const base = window.location.origin + window.location.pathname;
-    const url = buildShareUrl(base, getShareState());
+    const state = getShareState();
+    const url = buildShareUrl(base, state);
     if (await copyToClipboard(url)) {
-        showToast('URL copied to clipboard');
+        showToast(state.fly ? `Flyover link copied: ${state.resort}` : 'URL copied to clipboard');
     } else {
         window.prompt('Copy this link to share this view:', url);
     }
@@ -1691,6 +1699,10 @@ function applyShareFilters(filters) {
 // Open the shared resort's details; frame the resort if the link had no camera
 function applySharedSelection(shared) {
     const resort = shared.resort ? resortData.find(r => r.name === shared.resort) : null;
+    if (resort && shared.fly) {
+        selectResort(resort); // flies in and starts its flyover (or just flies there if none)
+        return;
+    }
     if (!shared.camera && map && mapReady) {
         if (resort) {
             map.jumpTo({ center: [resort.longitude, resort.latitude], zoom: FOCUS_ZOOM });

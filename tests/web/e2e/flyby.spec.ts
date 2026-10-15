@@ -58,4 +58,32 @@ test.describe('Resort flyover', () => {
     await page.waitForTimeout(1000);
     await expect(page.locator('#flyby-toggle')).toBeHidden();
   });
+
+  test('sharing during a flyover copies a link that gives a friend the flyover', async ({ page, context, browserName }) => {
+    if (browserName === 'chromium') await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.locator('#search-input').fill('snowbird');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForFunction(() => window.__powder.flyby()?.playing, undefined, { timeout: 20000 });
+
+    await page.locator('#share-button').click();
+    await expect(page.locator('#toast')).toHaveText('Flyover link copied: Snowbird');
+
+    // Clipboard reads aren't available in every browser; build the same link if not
+    const copied = await page.evaluate(() => navigator.clipboard.readText()).catch(() => null);
+    const link = copied || '/?resort=Snowbird&fly=1';
+    if (copied) {
+      const q = new URL(copied).searchParams;
+      expect(q.get('resort')).toBe('Snowbird');
+      expect(q.get('fly')).toBe('1');
+      expect(q.has('lat')).toBe(false);
+      expect(q.get('3d')).toBe('0'); // the sharer's own settings, not the flyover's forced ones
+    }
+
+    // A friend opening it lands straight in the flyover
+    const friend = await context.newPage();
+    await friend.goto(link);
+    await friend.waitForFunction(() => window.__powder?.flyby()?.playing, undefined, { timeout: 30000 });
+    await expect(friend.locator('#detail-content')).toContainText('Snowbird');
+    await expect(friend.locator('#flyby-toggle')).toContainText('Pause');
+  });
 });
