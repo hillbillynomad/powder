@@ -5,69 +5,135 @@
  "points": [
   {
    "camera": [
-    -120.052,
-    38.503,
-    2315
+    -120.0425,
+    38.4948,
+    2700
    ],
-   "seconds": 6.9,
-   "label": "Over the Grizzly base, Bear Top ahead",
+   "seconds": 6.4,
+   "label": "Over the Day Lodge, Cub and Super Cub",
    "pitch": 52,
-   "ground": 1888
+   "ground": 2173
+  },
+  {
+   "camera": [
+    -120.0492,
+    38.4897,
+    2909
+   ],
+   "seconds": 3.5,
+   "label": "Up the Mokelumne Express",
+   "pitch": 48,
+   "ground": 2580
+  },
+  {
+   "camera": [
+    -120.0537,
+    38.4876,
+    2974
+   ],
+   "seconds": 4.9,
+   "label": "Over Bear Top, lifts converging",
+   "pitch": 50,
+   "ground": 2349
+  },
+  {
+   "camera": [
+    -120.0598,
+    38.4849,
+    2761
+   ],
+   "seconds": 4.8,
+   "label": "Down the Polar Express, back side",
+   "pitch": 48,
+   "ground": 2306
+  },
+  {
+   "camera": [
+    -120.0668,
+    38.4836,
+    2647
+   ],
+   "seconds": 8.1,
+   "label": "Polar Express bottom, turning north",
+   "pitch": 52,
+   "ground": 2309
+  },
+  {
+   "camera": [
+    -120.0655,
+    38.493,
+    2453
+   ],
+   "seconds": 7.4,
+   "label": "North along the West Ridge",
+   "pitch": 58,
+   "ground": 1615
+  },
+  {
+   "camera": [
+    -120.0592,
+    38.5002,
+    2361
+   ],
+   "seconds": 7.0,
+   "label": "West Ridge dropping into Grizzly",
+   "pitch": 56,
+   "ground": 1984
   },
   {
    "camera": [
     -120.0502,
-    38.496,
-    2765
+    38.4968,
+    2685
    ],
-   "seconds": 7.4,
+   "seconds": 4.0,
    "label": "Up the Grizzly line",
    "pitch": 48,
-   "ground": 2443
+   "ground": 2354
   },
   {
    "camera": [
-    -120.054,
-    38.488,
-    3031
+    -120.0478,
+    38.4926,
+    2814
    ],
-   "seconds": 5.9,
-   "label": "Over Bear Top, the summit hub",
+   "seconds": 4.0,
+   "label": "Over the Grizzly top, Day Lodge ahead",
    "pitch": 54,
-   "ground": 2360
+   "ground": 2489
   },
   {
    "camera": [
-    -120.047,
-    38.4838,
-    2925
+    -120.0422,
+    38.491,
+    2755
    ],
-   "seconds": 5.6,
-   "label": "Over the Day Lodge lift line",
+   "seconds": 3.2,
+   "label": "Up Koala",
+   "pitch": 54,
+   "ground": 2467
+  },
+  {
+   "camera": [
+    -120.0382,
+    38.489,
+    2840
+   ],
+   "seconds": 3.0,
+   "label": "Turning over Koala Top",
    "pitch": 58,
-   "ground": 2286
+   "ground": 2282
   },
   {
    "camera": [
-    -120.0405,
+    -120.0418,
     38.488,
-    2876
+    2843
    ],
-   "seconds": 8.3,
-   "label": "Past Koala and the Day Lodge",
+   "seconds": 5.8,
+   "label": "Down the Lunch Run",
    "pitch": 60,
-   "ground": 2193
-  },
-  {
-   "camera": [
-    -120.0425,
-    38.4975,
-    2639
-   ],
-   "seconds": 8.2,
-   "label": "North along the east side",
-   "pitch": 62,
-   "ground": 1546
+   "ground": 1505
   }
  ]
 }

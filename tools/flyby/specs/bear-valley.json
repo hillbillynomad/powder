@@ -2,11 +2,17 @@
  "resort": "Bear Valley",
  "speed_mps": 132,
  "points": [
-  {"label": "Over the Grizzly base, Bear Top ahead", "camera": [-120.0520, 38.5030, 380], "pitch": 52},
-  {"label": "Up the Grizzly line", "camera": [-120.0502, 38.4960, 520], "pitch": 48},
-  {"label": "Over Bear Top, the summit hub", "camera": [-120.0540, 38.4880, 470], "pitch": 54},
-  {"label": "Over the Day Lodge lift line", "camera": [-120.0470, 38.4838, 400], "pitch": 58},
-  {"label": "Past Koala and the Day Lodge", "camera": [-120.0405, 38.4880, 380], "pitch": 60},
-  {"label": "North along the east side", "camera": [-120.0425, 38.4975, 360], "pitch": 62}
+  {"label": "Over the Day Lodge, Cub and Super Cub", "camera": [-120.0425, 38.4948, 330], "pitch": 52},
+  {"label": "Up the Mokelumne Express", "camera": [-120.0492, 38.4897, 480], "pitch": 48},
+  {"label": "Over Bear Top, lifts converging", "camera": [-120.0537, 38.4876, 400], "pitch": 50},
+  {"label": "Down the Polar Express, back side", "camera": [-120.0598, 38.4849, 330], "pitch": 48},
+  {"label": "Polar Express bottom, turning north", "camera": [-120.0668, 38.4836, 360], "pitch": 52},
+  {"label": "North along the West Ridge", "camera": [-120.0655, 38.493, 420], "pitch": 58},
+  {"label": "West Ridge dropping into Grizzly", "camera": [-120.0592, 38.5002, 380], "pitch": 56},
+  {"label": "Up the Grizzly line", "camera": [-120.0502, 38.4968, 470], "pitch": 48},
+  {"label": "Over the Grizzly top, Day Lodge ahead", "camera": [-120.0478, 38.4926, 420], "pitch": 54},
+  {"label": "Up Koala", "camera": [-120.0422, 38.491, 340], "pitch": 54},
+  {"label": "Turning over Koala Top", "camera": [-120.0382, 38.489, 340], "pitch": 58},
+  {"label": "Down the Lunch Run", "camera": [-120.0418, 38.488, 330], "pitch": 60}
  ]
 }
