@@ -1,0 +1,330 @@
+{
+ "resort": "Les 3 Vallées",
+ "speed_mps": 150,
+ "points": [
+  {
+   "label": "High over Cime Caron, the three valleys ahead",
+   "camera": [
+    6.5605,
+    45.2635,
+    800
+   ],
+   "pitch": 64
+  },
+  {
+   "label": "North over the Péclet glacier lifts",
+   "camera": [
+    6.568,
+    45.28,
+    650
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Val Thorens, Funitel de Péclet and Cairn",
+   "camera": [
+    6.576,
+    45.2975,
+    400
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Over the 3 Vallées chair to Bruyères",
+   "camera": [
+    6.562,
+    45.3125,
+    330
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Bruyères and the Sunny Express",
+   "camera": [
+    6.548,
+    45.3135,
+    300
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Les Menuires, Roc 1 and Reberty",
+   "camera": [
+    6.538,
+    45.3205,
+    260
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Down the Belleville valley, Bettex",
+   "camera": [
+    6.527,
+    45.338,
+    280
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Belleville valley floor",
+   "camera": [
+    6.512,
+    45.358,
+    300
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Saint-Martin-de-Belleville",
+   "camera": [
+    6.505,
+    45.3765,
+    300
+   ],
+   "pitch": 55
+  },
+  {
+   "label": "Over the ridge toward the Méribel valley",
+   "camera": [
+    6.52,
+    45.405,
+    450
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Les Allues, Olympe line",
+   "camera": [
+    6.545,
+    45.435,
+    350
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Brides-les-Bains",
+   "camera": [
+    6.5585,
+    45.4545,
+    300
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Turning back up the valley",
+   "camera": [
+    6.5715,
+    45.445,
+    300
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Up the Olympe gondolas",
+   "camera": [
+    6.5635,
+    45.4285,
+    280
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Méribel-Village, Olympe 3",
+   "camera": [
+    6.563,
+    45.409,
+    280
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Méribel Centre, Rhodos and Saulire Express",
+   "camera": [
+    6.574,
+    45.392,
+    260
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Méribel-Mottaret, Plattières",
+   "camera": [
+    6.583,
+    45.372,
+    300
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Pas du Lac",
+   "camera": [
+    6.598,
+    45.379,
+    330
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Over Saulire",
+   "camera": [
+    6.6105,
+    45.384,
+    350
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Down the Vizelle and Saulire cable",
+   "camera": [
+    6.6185,
+    45.3955,
+    300
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Courchevel 1850",
+   "camera": [
+    6.6335,
+    45.4145,
+    260
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Courchevel Moriond 1650",
+   "camera": [
+    6.6405,
+    45.4225,
+    260
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Le Praz",
+   "camera": [
+    6.623,
+    45.4315,
+    280
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "La Tania",
+   "camera": [
+    6.5995,
+    45.4295,
+    280
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Up the La Tania gondola",
+   "camera": [
+    6.609,
+    45.4175,
+    350
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Climbing over Saulire",
+   "camera": [
+    6.628,
+    45.385,
+    650
+   ],
+   "pitch": 60
+  },
+  {
+   "label": "High over Mottaret's east side",
+   "camera": [
+    6.628,
+    45.355,
+    850
+   ],
+   "pitch": 64
+  },
+  {
+   "label": "High over Mont Coua",
+   "camera": [
+    6.628,
+    45.325,
+    950
+   ],
+   "pitch": 66
+  },
+  {
+   "label": "High over Péclet",
+   "camera": [
+    6.62,
+    45.29,
+    900
+   ],
+   "pitch": 66
+  },
+  {
+   "label": "Over the Bouchet glacier chair",
+   "camera": [
+    6.607,
+    45.255,
+    800
+   ],
+   "pitch": 62
+  },
+  {
+   "label": "Dropping toward Orelle",
+   "camera": [
+    6.59,
+    45.228,
+    500
+   ],
+   "pitch": 55
+  },
+  {
+   "label": "Orelle valley, circling the village",
+   "camera": [
+    6.563,
+    45.2045,
+    320
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Orelle",
+   "camera": [
+    6.5385,
+    45.2085,
+    300
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Up the Orelle gondola",
+   "camera": [
+    6.545,
+    45.2235,
+    350
+   ],
+   "pitch": 50
+  },
+  {
+   "label": "Orelle gondola, mid-station",
+   "camera": [
+    6.5625,
+    45.238,
+    450
+   ],
+   "pitch": 50
+  },
+  {
+   "label": "Orelle gondola, upper section",
+   "camera": [
+    6.5645,
+    45.2495,
+    620
+   ],
+   "pitch": 50
+  }
+ ]
+}
