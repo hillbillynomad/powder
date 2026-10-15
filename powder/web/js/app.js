@@ -866,6 +866,9 @@ function getCumulativeChartData(resort) {
     return points;
 }
 
+// Minimum y-axis span (inches) for the cumulative snowfall charts
+const CHART_MIN_SCALE_INCHES = 36;
+
 // ApexCharts configuration for snowfall graphs
 function getChartConfig(data, options = {}) {
     const { width = 280, height = 100, interactive = true, onDataPointHover = null, onMouseLeave = null } = options;
@@ -909,7 +912,10 @@ function getChartConfig(data, options = {}) {
             crosshairs: { show: interactive, stroke: { color: '#fff', width: 1, dashArray: 3 } },
             tooltip: { enabled: false }
         },
-        yaxis: { show: false, min: 0 },
+        // Absolute scale: the axis spans at least CHART_MIN_SCALE_INCHES so a
+        // 0.2" trace stays flat and a 36" storm reads as a big climb. Only a
+        // total beyond that grows the axis.
+        yaxis: { show: false, min: 0, max: Math.max(CHART_MIN_SCALE_INCHES, ...seriesData.map(d => d.y)) },
         grid: { show: false, padding: { left: 0, right: 0, top: 0, bottom: 0 } },
         tooltip: {
             enabled: interactive,
