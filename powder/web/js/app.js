@@ -616,7 +616,7 @@ function installScrollGuard() {
 function applyLayerPrefs({ save = true } = {}) {
     if (!map || !mapReady) return;
     for (const layer of map.getStyle().layers) {
-        if (layer.id === 'resorts' || layer.id.startsWith('wx-')) continue; // managed elsewhere
+        if (RESORT_BUBBLE_LAYERS.includes(layer.id) || layer.id.startsWith('wx-')) continue; // managed elsewhere
         const want = isLayerVisible(layer.id, layerPrefs) ? 'visible' : 'none';
         if (map.getLayoutProperty(layer.id, 'visibility') !== want) {
             map.setLayoutProperty(layer.id, 'visibility', want);
@@ -1450,6 +1450,15 @@ async function selectResort(resort) {
 // ---- Flyover tours (flyby.js) --------------------------------------------------------
 
 const FLYOVER_LAYERS = { mode: 'sat', threeD: true, trails: true }; // satellite, 3D relief, lift names
+const RESORT_BUBBLE_LAYERS = ['resorts', 'resorts-highlight'];
+
+// Bubbles mean nothing at resort scale (and balloon when that close), so a flyover hides them
+function setResortBubblesVisible(visible) {
+    if (!map || !mapReady) return;
+    for (const id of RESORT_BUBBLE_LAYERS) {
+        if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', visible ? 'visible' : 'none');
+    }
+}
 
 async function startTourIfAny(resort) {
     if (!flyby || !mapReady) return false;
@@ -1460,6 +1469,7 @@ async function startTourIfAny(resort) {
     layerPrefs = { ...layerPrefs, ...FLYOVER_LAYERS };
     applyLayerPrefs({ save: false });
     syncMenuInputs();
+    setResortBubblesVisible(false);
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     flyby.start(tour, { autoplay: !reduceMotion });
     return true;
@@ -1468,6 +1478,7 @@ async function startTourIfAny(resort) {
 // Stop flying and give the user back their own layer settings
 function endTour() {
     if (flyby) flyby.stop();
+    setResortBubblesVisible(true);
     if (tourPrefsBackup) {
         layerPrefs = tourPrefsBackup;
         tourPrefsBackup = null;

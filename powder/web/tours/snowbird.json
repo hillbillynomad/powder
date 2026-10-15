@@ -5,73 +5,69 @@
  "points": [
   {
    "camera": [
-    -111.656,
-    40.5905,
-    3233
+    -111.653,
+    40.576,
+    3337
    ],
-   "target": [
-    -111.6555,
-    40.5815,
-    2476
-   ],
-   "seconds": 8.9,
-   "label": "Cliff Lodge & Snowbird Center"
+   "seconds": 8.4,
+   "label": "Climbing Peruvian Gulch",
+   "pitch": 45,
+   "ground": 2871
   },
   {
    "camera": [
-    -111.6522,
-    40.5805,
-    3488
-   ],
-   "target": [
-    -111.6475,
-    40.566,
-    3045
+    -111.6478,
+    40.5672,
+    3626
    ],
    "seconds": 4.4,
-   "label": "Tram line over Regulator Johnson"
+   "label": "Up Regulator Johnson to the Summit",
+   "pitch": 45,
+   "ground": 3260
   },
   {
    "camera": [
-    -111.65,
-    40.5765,
-    3804
+    -111.6462,
+    40.5622,
+    3723
    ],
-   "target": [
-    -111.6452,
-    40.5612,
-    3338
-   ],
-   "seconds": 5.7,
-   "label": "The Summit at Hidden Peak"
+   "seconds": 4.4,
+   "label": "Over the Summit at Hidden Peak",
+   "pitch": 55,
+   "ground": 3259
   },
   {
    "camera": [
-    -111.6578,
-    40.5765,
-    3439
+    -111.6512,
+    40.5596,
+    3459
    ],
-   "target": [
-    -111.6538,
-    40.5615,
-    2985
+   "seconds": 6.1,
+   "label": "Turning west along the Cirque",
+   "pitch": 62,
+   "ground": 2933
+  },
+  {
+   "camera": [
+    -111.6575,
+    40.5645,
+    3201
    ],
    "seconds": 6.7,
-   "label": "The Cirque & Little Cloud"
+   "label": "Down Little Cloud past Gadzoom",
+   "pitch": 68,
+   "ground": 2571
   },
   {
    "camera": [
-    -111.662,
-    40.5835,
-    3216
+    -111.6598,
+    40.5722,
+    3095
    ],
-   "target": [
-    -111.6591,
-    40.5692,
-    2787
-   ],
-   "seconds": 7.0,
-   "label": "Mid-Gad & Chips, to the base"
+   "seconds": 5.7,
+   "label": "Over Mid-Gad, village ahead",
+   "pitch": 56,
+   "ground": 2508
   }
  ]
 }

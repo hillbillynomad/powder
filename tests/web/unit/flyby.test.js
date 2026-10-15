@@ -62,6 +62,48 @@ describe('poseAt', () => {
   });
 });
 
+describe('bird mode', () => {
+  // Same square loop without targets: the camera must face the way it flies
+  const bird = { points: square.points.map(({ camera, seconds }) => ({ camera, seconds, pitch: 60 })) };
+
+  it('faces the direction of travel', () => {
+    // Middle of the first leg runs east (0,0) -> (1,0); the third runs west. Within 10 degrees:
+    // the heading already leans toward the next corner, like a bird anticipating a turn.
+    expect(Math.abs(F.angleDiff(F.birdPose(bird, 5).bearing, 90))).toBeLessThan(10);
+    expect(Math.abs(F.angleDiff(F.birdPose(bird, 25).bearing, 270))).toBeLessThan(10);
+  });
+
+  it('uses the waypoint pitch and banks into turns, but never past the limit', () => {
+    let maxRoll = 0;
+    for (let t = 0; t < 40; t += 0.5) {
+      const p = F.birdPose(bird, t);
+      expect(p.pitch).toBeCloseTo(60, 6);
+      maxRoll = Math.max(maxRoll, Math.abs(p.roll));
+    }
+    expect(maxRoll).toBeGreaterThan(1);
+    expect(maxRoll).toBeLessThanOrEqual(10);
+  });
+
+  it('lookPoint aims along the line of sight: ahead on the heading and down by the pitch', () => {
+    const [lng, lat, alt] = F.lookPoint([0, 0, 1000], 90, 60, 1000); // east, 30 degrees below level
+    expect(lat).toBeCloseTo(0, 9);
+    expect(lng * 111320).toBeCloseTo(1000 * Math.sin(Math.PI / 3), 3);
+    expect(alt).toBeCloseTo(1000 - 1000 * Math.cos(Math.PI / 3), 6);
+  });
+
+  it('blends authored ground heights along the loop', () => {
+    const grounded = { points: bird.points.map((p, i) => ({ ...p, ground: 100 * (i + 1) })) };
+    expect(F.birdPose(grounded, 0).ground).toBeCloseTo(100, 6);
+    expect(F.birdPose(grounded, 10).ground).toBeCloseTo(200, 6);
+    expect(F.birdPose(bird, 0).ground).toBeUndefined();
+  });
+
+  it('angleDiff takes the short way round', () => {
+    expect(F.angleDiff(350, 10)).toBe(20);
+    expect(F.angleDiff(10, 350)).toBe(-20);
+  });
+});
+
 describe('shipped tours', () => {
   const index = JSON.parse(fs.readFileSync(path.join(WEB, 'tours/index.json'), 'utf8'));
   const resorts = JSON.parse(fs.readFileSync(path.resolve(WEB, '../data/resorts.json'), 'utf8'));
@@ -74,9 +116,9 @@ describe('shipped tours', () => {
     expect(tour.points.length).toBeGreaterThanOrEqual(3);
     for (const p of tour.points) {
       expect(p.camera).toHaveLength(3);
-      expect(p.target).toHaveLength(3);
       expect(p.seconds).toBeGreaterThan(0);
-      expect(p.camera[2]).toBeGreaterThan(p.target[2]); // always looking down at the mountain
+      if (p.target) expect(p.camera[2]).toBeGreaterThan(p.target[2]); // look-at: always looking down
+      else expect(p.pitch ?? 68).toBeLessThan(80); // bird: tilted down, never at the horizon
     }
   });
 });

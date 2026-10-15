@@ -11,10 +11,12 @@ Workflow for a new resort:
        node tools/flyby/extract_lifts.cjs tests/web/node_modules/playwright             "http://localhost:8000/" <lng> <lat> lifts.json
      (reads the same OpenFreeMap lift lines and names the app draws).
   2. Write tools/flyby/specs/<slug>.json: {"resort", "speed_mps", "points": [...]}, a loop of
-     {label, camera: [lng, lat, metres AGL], target: [lng, lat]} waypoints. Aim for ~30 s at
-     ~130 m/s (about 4 km): sweep across the face of the mountain looking into it, so the
-     heading barely changes, and point the targets at the famous runs, lifts and lodges.
-     ("seconds" per point instead of "speed_mps" times legs by hand.)
+     {label, camera: [lng, lat, metres AGL], pitch?} waypoints. Fly it like a bird: the camera
+     faces the way it flies (tilted down by pitch, default 68), so plan a circuit with no
+     backtracking - up from the base over famous runs, over the summit lodge, turn, and
+     down another side past lifts and lodges to the base. Keep climbs under ~30 degrees
+     (the printout shows climb and turn per leg). Adding "target": [lng, lat] to points
+     switches to look-at mode; "seconds" per point instead of "speed_mps" times legs by hand.
   3. poetry run python tools/flyby/author_tour.py tools/flyby/specs/<slug>.json powder/web/tours/<slug>.json
      and add <slug> to powder/web/tours/index.json.
 """
@@ -29,6 +31,8 @@ from PIL import Image
 Z = 13
 CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dem-cache')
 MIN_CLEARANCE = 150.0  # metres, camera above ground anywhere along the path
+EXAGGERATION = 1.4  # must match TERRAIN_EXAGGERATION in powder/web/js/app.js
+DEFAULT_PITCH = 68.0  # must match DEFAULT_PITCH in powder/web/js/flyby.js
 MAX_PITCH = 75.0  # degrees from straight down; flatter than this shows mostly sky
 _tiles = {}
 
@@ -68,20 +72,34 @@ def catmull(p0, p1, p2, p3, t):
             for a, b, c, d in zip(p0, p1, p2, p3)]
 
 
+def leg_metres(a, b):
+    """Horizontal and vertical metres between two [lng, lat, alt] points."""
+    dx = (b[0] - a[0]) * 111320 * math.cos(math.radians(a[1]))
+    dy = (b[1] - a[1]) * 110540
+    return math.hypot(dx, dy), b[2] - a[2]
+
+
+def bearing(a, b):
+    dx = (b[0] - a[0]) * math.cos(math.radians(a[1]))
+    return (math.degrees(math.atan2(dx, b[1] - a[1])) + 360) % 360
+
+
 def main(spec_path, out_path):
     spec = json.load(open(spec_path))
     pts = []
     for w in spec['points']:
         cam_lng, cam_lat, cam_agl = w['camera']
-        tgt_lng, tgt_lat = w['target'][:2]
-        tgt_agl = w['target'][2] if len(w['target']) > 2 else 0
-        cam_ground = elevation(cam_lng, cam_lat)
-        tgt_alt = elevation(tgt_lng, tgt_lat) + tgt_agl
-        cam_alt = cam_ground + cam_agl
-        dist = math.hypot((tgt_lng - cam_lng) * 111320 * math.cos(math.radians(cam_lat)), (tgt_lat - cam_lat) * 110540)
-        cam_alt = max(cam_alt, tgt_alt + dist / math.tan(math.radians(MAX_PITCH)))
-        pts.append({'camera': [cam_lng, cam_lat, cam_alt], 'target': [tgt_lng, tgt_lat, tgt_alt],
-                    'seconds': w.get('seconds'), 'label': w.get('label', '')})
+        cam_alt = elevation(cam_lng, cam_lat) + cam_agl
+        point = {'camera': [cam_lng, cam_lat, cam_alt], 'seconds': w.get('seconds'), 'label': w.get('label', '')}
+        if 'target' in w:  # look-at mode
+            tgt_lng, tgt_lat = w['target'][:2]
+            tgt_alt = elevation(tgt_lng, tgt_lat) + (w['target'][2] if len(w['target']) > 2 else 0)
+            dist, _ = leg_metres(point['camera'], [tgt_lng, tgt_lat, 0])
+            point['camera'][2] = max(cam_alt, tgt_alt + dist / math.tan(math.radians(MAX_PITCH)))
+            point['target'] = [tgt_lng, tgt_lat, tgt_alt]
+        elif 'pitch' in w:  # bird mode: optional per-point downward tilt
+            point['pitch'] = w['pitch']
+        pts.append(point)
 
     # Lift any waypoint whose neighbouring path segment scrapes the ground, until clear
     for _ in range(20):
@@ -103,27 +121,54 @@ def main(spec_path, out_path):
     else:
         sys.exit('could not clear terrain')
 
-    # A cruise speed in the spec sets each leg's time from its length (constant ground speed)
+    # A cruise speed in the spec sets each leg's time from its length (constant speed)
+    n = len(pts)
     if spec.get('speed_mps'):
-        n = len(pts)
         for i, p in enumerate(pts):
-            a, b = p['camera'], pts[(i + 1) % n]['camera']
-            leg = math.hypot((b[0] - a[0]) * 111320 * math.cos(math.radians(a[1])), (b[1] - a[1]) * 110540, b[2] - a[2])
-            p['seconds'] = round(max(3.0, leg / spec['speed_mps']), 1)
+            flat, rise = leg_metres(p['camera'], pts[(i + 1) % n]['camera'])
+            p['seconds'] = round(max(3.0, math.hypot(flat, rise) / spec['speed_mps']), 1)
 
-    for p in pts:
-        cam, tgt = p['camera'], p['target']
-        ground = math.hypot((tgt[0] - cam[0]) * 111320 * math.cos(math.radians(cam[1])), (tgt[1] - cam[1]) * 110540)
-        pitch = 90 - math.degrees(math.atan2(cam[2] - tgt[2], ground))
+    # Bird mode: record the ground height where each waypoint's line of sight meets the
+    # (exaggerated) terrain. The app aims at a smooth blend of these instead of reading live
+    # terrain, so the camera never jumps as terrain tiles load, yet the view centre stays on
+    # the surface (which is what MapLibre uses to pick imagery tiles).
+    for i, p in enumerate(pts):
+        if 'target' in p:
+            continue
+        prev, nxt = pts[i - 1]['camera'], pts[(i + 1) % n]['camera']
+        heading = math.radians(bearing(prev, nxt))
+        pitch = math.radians(p.get('pitch', DEFAULT_PITCH))
+        cam = p['camera']
+        ground = elevation(cam[0], cam[1])
+        for step in range(1, 400):  # march the rendered-space ray 25 m at a time
+            s = step * 25.0
+            ahead = s * math.sin(pitch)
+            lng = cam[0] + ahead * math.sin(heading) / (111320 * math.cos(math.radians(cam[1])))
+            lat = cam[1] + ahead * math.cos(heading) / 110540
+            ground = elevation(lng, lat)
+            if cam[2] * EXAGGERATION - s * math.cos(pitch) <= ground * EXAGGERATION:
+                break
+        p['ground'] = round(ground)
+
+    for i, p in enumerate(pts):
+        cam, nxt, prev = p['camera'], pts[(i + 1) % n]['camera'], pts[i - 1]['camera']
+        flat, rise = leg_metres(cam, nxt)
+        climb = math.degrees(math.atan2(rise, flat))
+        turn = ((bearing(cam, nxt) - bearing(prev, cam) + 540) % 360) - 180
         agl = cam[2] - elevation(cam[0], cam[1])
-        print(f"{p['label']:<28} cam {cam[2]:6.0f} m ({agl:4.0f} AGL)  target {tgt[2]:6.0f} m  pitch {pitch:4.1f}  dist {ground:5.0f} m")
+        line = f"{p['label']:<34} {cam[2]:5.0f} m ({agl:4.0f} AGL)  leg {flat:5.0f} m, climb {climb:+5.1f} deg, turn {turn:+6.1f} deg"
+        if 'target' in p:
+            tgt = p['target']
+            dist, _ = leg_metres(cam, tgt)
+            line += f"  look pitch {90 - math.degrees(math.atan2(cam[2] - tgt[2], dist)):4.1f}"
+            tgt[:] = [round(tgt[0], 5), round(tgt[1], 5), round(tgt[2])]
+        print(line)
         cam[:] = [round(cam[0], 5), round(cam[1], 5), round(cam[2])]
-        tgt[:] = [round(tgt[0], 5), round(tgt[1], 5), round(tgt[2])]
 
     tour = {'resort': spec['resort'], 'version': 1, 'units': 'metres above sea level (real, unexaggerated)',
             'points': pts}
     json.dump(tour, open(out_path, 'w', encoding='utf-8', newline='\n'), indent=1)
-    print('total', sum(p['seconds'] for p in pts), 's ->', out_path)
+    print('total', round(sum(p['seconds'] for p in pts), 1), 's ->', out_path)
 
 
 if __name__ == '__main__':
