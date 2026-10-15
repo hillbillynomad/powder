@@ -5,6 +5,39 @@
  "points": [
   {
    "camera": [
+    -110.89,
+    45.8105,
+    2230
+   ],
+   "seconds": 6.1,
+   "label": "Climbing out east, resort overview",
+   "pitch": 60,
+   "ground": 1863
+  },
+  {
+   "camera": [
+    -110.8845,
+    45.8165,
+    2416
+   ],
+   "seconds": 6.1,
+   "label": "High over the whole bowl",
+   "pitch": 62,
+   "ground": 1871
+  },
+  {
+   "camera": [
+    -110.8905,
+    45.8225,
+    2423
+   ],
+   "seconds": 6.7,
+   "label": "Swinging round, lifts below",
+   "pitch": 62,
+   "ground": 2009
+  },
+  {
+   "camera": [
     -110.8985,
     45.8172,
     2217
@@ -12,7 +45,7 @@
    "seconds": 9.0,
    "label": "Over Jim Bridger Lodge, Ridge ahead",
    "pitch": 52,
-   "ground": 1946
+   "ground": 1968
   },
   {
    "camera": [
@@ -64,10 +97,10 @@
     45.8125,
     2296
    ],
-   "seconds": 5.5,
+   "seconds": 9.0,
    "label": "Down toward the lodge",
    "pitch": 60,
-   "ground": 1838
+   "ground": 1796
   }
  ]
 }

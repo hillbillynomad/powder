@@ -2,17 +2,149 @@
  "resort": "Bear Valley",
  "speed_mps": 132,
  "points": [
-  {"label": "Over the Day Lodge, Cub and Super Cub", "camera": [-120.0425, 38.4948, 330], "pitch": 52},
-  {"label": "Up the Mokelumne Express", "camera": [-120.0492, 38.4897, 480], "pitch": 48},
-  {"label": "Over Bear Top, lifts converging", "camera": [-120.0537, 38.4876, 400], "pitch": 50},
-  {"label": "Down the Polar Express, back side", "camera": [-120.0598, 38.4849, 330], "pitch": 48},
-  {"label": "Polar Express bottom, turning north", "camera": [-120.0668, 38.4836, 360], "pitch": 52},
-  {"label": "North along the West Ridge", "camera": [-120.0655, 38.493, 420], "pitch": 58},
-  {"label": "West Ridge dropping into Grizzly", "camera": [-120.0592, 38.5002, 380], "pitch": 56},
-  {"label": "Up the Grizzly line", "camera": [-120.0502, 38.4968, 470], "pitch": 48},
-  {"label": "Over the Grizzly top, Day Lodge ahead", "camera": [-120.0478, 38.4926, 420], "pitch": 54},
-  {"label": "Up Koala", "camera": [-120.0422, 38.491, 340], "pitch": 54},
-  {"label": "Turning over Koala Top", "camera": [-120.0382, 38.489, 340], "pitch": 58},
-  {"label": "Down the Lunch Run", "camera": [-120.0418, 38.488, 330], "pitch": 60}
+  {
+   "label": "Out past the base, then climbing",
+   "camera": [
+    -120.0412,
+    38.4815,
+    420
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Climbing out east, resort overview",
+   "camera": [
+    -120.0335,
+    38.483,
+    480
+   ],
+   "pitch": 60
+  },
+  {
+   "label": "High over the whole mountain",
+   "camera": [
+    -120.0295,
+    38.4885,
+    650
+   ],
+   "pitch": 62
+  },
+  {
+   "label": "Swinging round, lifts below",
+   "camera": [
+    -120.0345,
+    38.4938,
+    600
+   ],
+   "pitch": 62
+  },
+  {
+   "label": "Over the Day Lodge, Cub and Super Cub",
+   "camera": [
+    -120.0425,
+    38.4948,
+    330
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Up the Mokelumne Express",
+   "camera": [
+    -120.0492,
+    38.4897,
+    480
+   ],
+   "pitch": 48
+  },
+  {
+   "label": "Over Bear Top, lifts converging",
+   "camera": [
+    -120.0537,
+    38.4876,
+    400
+   ],
+   "pitch": 50
+  },
+  {
+   "label": "Down the Polar Express, back side",
+   "camera": [
+    -120.0598,
+    38.4849,
+    330
+   ],
+   "pitch": 48
+  },
+  {
+   "label": "Polar Express bottom, turning north",
+   "camera": [
+    -120.0668,
+    38.4836,
+    360
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "North along the West Ridge",
+   "camera": [
+    -120.0655,
+    38.493,
+    420
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "West Ridge dropping into Grizzly",
+   "camera": [
+    -120.0592,
+    38.5002,
+    380
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Up the Grizzly line",
+   "camera": [
+    -120.0502,
+    38.4968,
+    470
+   ],
+   "pitch": 48
+  },
+  {
+   "label": "Over the Grizzly top, Day Lodge ahead",
+   "camera": [
+    -120.0478,
+    38.4926,
+    420
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Up Koala",
+   "camera": [
+    -120.0422,
+    38.491,
+    340
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Turning over Koala Top",
+   "camera": [
+    -120.0382,
+    38.489,
+    340
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Down the Lunch Run",
+   "camera": [
+    -120.0418,
+    38.488,
+    330
+   ],
+   "pitch": 60
+  }
  ]
 }

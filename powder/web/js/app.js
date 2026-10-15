@@ -322,16 +322,16 @@ function buildLiftLayers() {
     return [
         {
             id: 'trails-lifts', type: 'line', source: 'openmaptiles', 'source-layer': 'transportation',
-            minzoom: 11, filter: ['==', ['get', 'class'], 'aerialway'],
+            minzoom: 10, filter: ['==', ['get', 'class'], 'aerialway'],
             paint: {
                 'line-color': '#ff4d4d',
-                'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1, 16, 3],
+                'line-width': ['interpolate', ['linear'], ['zoom'], 10, 1, 16, 3],
                 'line-dasharray': [2, 1],
             },
         },
         {
             id: 'trails-lift-labels', type: 'symbol', source: 'openmaptiles', 'source-layer': 'transportation_name',
-            minzoom: 13, filter: ['==', ['get', 'class'], 'aerialway'],
+            minzoom: 12, filter: ['==', ['get', 'class'], 'aerialway'],
             layout: {
                 'symbol-placement': 'line', 'text-field': ['get', 'name'],
                 'text-font': ['Noto Sans Regular'], 'text-size': 11,

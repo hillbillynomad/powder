@@ -5,6 +5,50 @@
  "points": [
   {
    "camera": [
+    -120.0412,
+    38.4815,
+    2773
+   ],
+   "seconds": 5.2,
+   "label": "Out past the base, then climbing",
+   "pitch": 58,
+   "ground": 2210
+  },
+  {
+   "camera": [
+    -120.0335,
+    38.483,
+    2769
+   ],
+   "seconds": 5.5,
+   "label": "Climbing out east, resort overview",
+   "pitch": 60,
+   "ground": 2340
+  },
+  {
+   "camera": [
+    -120.0295,
+    38.4885,
+    2980
+   ],
+   "seconds": 5.5,
+   "label": "High over the whole mountain",
+   "pitch": 62,
+   "ground": 2375
+  },
+  {
+   "camera": [
+    -120.0345,
+    38.4938,
+    3037
+   ],
+   "seconds": 5.9,
+   "label": "Swinging round, lifts below",
+   "pitch": 62,
+   "ground": 1534
+  },
+  {
+   "camera": [
     -120.0425,
     38.4948,
     2700
@@ -12,7 +56,7 @@
    "seconds": 6.4,
    "label": "Over the Day Lodge, Cub and Super Cub",
    "pitch": 52,
-   "ground": 2173
+   "ground": 2405
   },
   {
    "camera": [
@@ -130,10 +174,10 @@
     38.488,
     2843
    ],
-   "seconds": 5.8,
+   "seconds": 5.5,
    "label": "Down the Lunch Run",
    "pitch": 60,
-   "ground": 1505
+   "ground": 2232
   }
  ]
 }
