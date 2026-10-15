@@ -3,33 +3,6 @@
  "speed_mps": 185,
  "points": [
   {
-   "label": "Climbing out over Old Town",
-   "camera": [
-    -111.5105,
-    40.67,
-    520
-   ],
-   "pitch": 60
-  },
-  {
-   "label": "High over town: the whole mountain below",
-   "camera": [
-    -111.513,
-    40.6785,
-    650
-   ],
-   "pitch": 62
-  },
-  {
-   "label": "Swinging west, Park City spread out",
-   "camera": [
-    -111.526,
-    40.676,
-    700
-   ],
-   "pitch": 64
-  },
-  {
    "label": "Down the length of the resort",
    "camera": [
     -111.53,
@@ -282,102 +255,88 @@
    "pitch": 52
   },
   {
-   "label": "Arriving at the pin",
+   "label": "Down toward Thaynes Canyon Dr",
    "camera": [
     -111.514,
-    40.66234,
-    170
+    40.6598,
+    240
    ],
    "target": [
     -111.51703,
     40.66275,
-    25
+    0
    ],
-   "seconds": 1.67
+   "seconds": 4.5
   },
   {
-   "label": "Circling the pin",
+   "label": "Over Thaynes Canyon Dr and Three Kings Dr",
    "camera": [
-    -111.51505,
-    40.66455,
-    170
+    -111.5152,
+    40.6612,
+    166
    ],
    "target": [
     -111.51703,
     40.66275,
-    25
+    0
    ],
-   "seconds": 1.67
+   "seconds": 5
   },
   {
-   "label": "Circling the pin",
+   "label": "Slowly down over the street names",
    "camera": [
-    -111.51808,
-    40.66496,
-    170
+    -111.5161,
+    40.662,
+    102
    ],
    "target": [
     -111.51703,
     40.66275,
-    25
+    0
    ],
-   "seconds": 1.67
+   "seconds": 5
   },
   {
-   "label": "Circling the pin",
+   "label": "The spot: 40.66274, -111.51703",
    "camera": [
-    -111.52006,
-    40.66316,
-    170
+    -111.51645,
+    40.66262,
+    60
    ],
    "target": [
     -111.51703,
     40.66275,
-    25
+    0
    ],
-   "seconds": 1.67
+   "seconds": 3.5
   },
   {
-   "label": "Circling the pin",
+   "label": "Rising off the spot",
    "camera": [
-    -111.51901,
-    40.66095,
-    170
+    -111.51661,
+    40.66326,
+    264
    ],
    "target": [
     -111.51703,
     40.66275,
-    25
+    0
    ],
-   "seconds": 1.67
-  },
-  {
-   "label": "Circling the pin",
-   "camera": [
-    -111.51598,
-    40.66054,
-    170
-   ],
-   "target": [
-    -111.51703,
-    40.66275,
-    25
-   ],
-   "seconds": 1.67
-  },
-  {
-   "label": "Circling the pin",
-   "camera": [
-    -111.514,
-    40.66234,
-    170
-   ],
-   "target": [
-    -111.51703,
-    40.66275,
-    25
-   ]
+   "seconds": 4
   }
  ],
- "min_leg_s": 2.0
+ "min_leg_s": 2.0,
+ "overview": {
+  "center": [
+   -111.5135,
+   40.6351
+  ],
+  "bearing": 180,
+  "agl": 2000,
+  "pitch": 66,
+  "label": "Overview: the whole resort and its lifts",
+  "pull_back": true
+ },
+ "descent_look": 12,
+ "min_clearance_m": 60
 }

@@ -14,8 +14,8 @@
   {
    "label": "Heading for Silverado",
    "camera": [
-    -120.2462,
-    39.2038,
+    -120.249,
+    39.2005,
     280
    ],
    "pitch": 52
@@ -95,8 +95,8 @@
   {
    "label": "Granite Chief peak, ridge below",
    "camera": [
-    -120.287,
-    39.1962,
+    -120.2825,
+    39.195,
     450
    ],
    "pitch": 62
@@ -104,7 +104,7 @@
   {
    "label": "Arcing south over Five Lakes",
    "camera": [
-    -120.2905,
+    -120.28,
     39.1895,
     400
    ],
@@ -113,8 +113,8 @@
   {
    "label": "Round to Siberia",
    "camera": [
-    -120.285,
-    39.1845,
+    -120.2795,
+    39.185,
     330
    ],
    "pitch": 56
@@ -300,31 +300,49 @@
    "pitch": 54
   },
   {
-   "label": "North along the east ridge",
+   "label": "Back up the gondola corridor toward Squaw",
    "camera": [
-    -120.217,
-    39.166,
-    430
-   ],
-   "pitch": 58
-  },
-  {
-   "label": "Over the resort's east side",
-   "camera": [
-    -120.222,
-    39.178,
-    450
-   ],
-   "pitch": 58
-  },
-  {
-   "label": "Back over to Squaw",
-   "camera": [
-    -120.229,
-    39.1875,
-    420
+    -120.2355,
+    39.173,
+    400
    ],
    "pitch": 56
+  },
+  {
+   "label": "Up the Resort chair line",
+   "camera": [
+    -120.23,
+    39.1845,
+    360
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Resort chair top, home over Olympic Village",
+   "camera": [
+    -120.2205,
+    39.1962,
+    300
+   ],
+   "pitch": 58,
+   "target": [
+    -120.2413,
+    39.1887
+   ],
+   "orbit": 1,
+   "seconds": 14
   }
- ]
+ ],
+ "overview": {
+  "center": [
+   -120.2413,
+   39.1887
+  ],
+  "bearing": 225,
+  "agl": 1300,
+  "pitch": 66,
+  "label": "Overview: the whole resort and its lifts",
+  "pull_back": true
+ },
+ "descent_look": 12
 }

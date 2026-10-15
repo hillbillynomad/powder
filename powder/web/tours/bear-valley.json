@@ -5,47 +5,35 @@
  "points": [
   {
    "camera": [
-    -120.0412,
-    38.4815,
-    2773
+    -120.049,
+    38.51038,
+    3228
    ],
-   "seconds": 5.2,
-   "label": "Out past the base, then climbing",
-   "pitch": 58,
-   "ground": 2210
+   "seconds": 7.0,
+   "label": "Overview: the whole resort and its lifts",
+   "target": [
+    -120.049,
+    38.49,
+    2423
+   ],
+   "orbit": 1,
+   "ground": 2198
   },
   {
    "camera": [
-    -120.0335,
-    38.483,
-    2769
+    -120.049,
+    38.50223,
+    3009
    ],
-   "seconds": 5.5,
-   "label": "Climbing out east, resort overview",
-   "pitch": 60,
-   "ground": 2340
-  },
-  {
-   "camera": [
-    -120.0295,
-    38.4885,
-    2980
-   ],
-   "seconds": 5.5,
-   "label": "High over the whole mountain",
-   "pitch": 62,
-   "ground": 2375
-  },
-  {
-   "camera": [
-    -120.0345,
-    38.4938,
-    3037
-   ],
-   "seconds": 5.9,
-   "label": "Swinging round, lifts below",
-   "pitch": 62,
-   "ground": 1534
+   "seconds": 7.9,
+   "label": "Easing in over the lifts",
+   "pitch": 68,
+   "ground": 2518,
+   "target": [
+    -120.04281,
+    38.48728,
+    2518
+   ]
   },
   {
    "camera": [
@@ -55,8 +43,13 @@
    ],
    "seconds": 6.4,
    "label": "Over the Day Lodge, Cub and Super Cub",
-   "pitch": 52,
-   "ground": 2405
+   "pitch": 45.1,
+   "ground": 2409,
+   "target": [
+    -120.04256,
+    38.49096,
+    2409
+   ]
   },
   {
    "camera": [
@@ -66,8 +59,13 @@
    ],
    "seconds": 3.5,
    "label": "Up the Mokelumne Express",
-   "pitch": 48,
-   "ground": 2580
+   "pitch": 48.0,
+   "ground": 2580,
+   "target": [
+    -120.05381,
+    38.48671,
+    2580
+   ]
   },
   {
    "camera": [
@@ -77,8 +75,13 @@
    ],
    "seconds": 4.9,
    "label": "Over Bear Top, lifts converging",
-   "pitch": 50,
-   "ground": 2349
+   "pitch": 42.3,
+   "ground": 2415,
+   "target": [
+    -120.06089,
+    38.48432,
+    2415
+   ]
   },
   {
    "camera": [
@@ -88,8 +91,13 @@
    ],
    "seconds": 4.8,
    "label": "Down the Polar Express, back side",
-   "pitch": 48,
-   "ground": 2306
+   "pitch": 36.2,
+   "ground": 2335,
+   "target": [
+    -120.06454,
+    38.48344,
+    2335
+   ]
   },
   {
    "camera": [
@@ -97,32 +105,47 @@
     38.4836,
     2647
    ],
-   "seconds": 8.1,
+   "seconds": 6.7,
    "label": "Polar Express bottom, turning north",
-   "pitch": 52,
-   "ground": 2309
+   "pitch": 47.9,
+   "ground": 2196,
+   "target": [
+    -120.06898,
+    38.48974,
+    2196
+   ]
   },
   {
    "camera": [
-    -120.0655,
-    38.493,
-    2453
+    -120.0618,
+    38.4905,
+    2692
    ],
-   "seconds": 7.4,
+   "seconds": 6.9,
    "label": "North along the West Ridge",
-   "pitch": 58,
-   "ground": 1615
+   "pitch": 56.6,
+   "ground": 1934,
+   "target": [
+    -120.0521,
+    38.50331,
+    1934
+   ]
   },
   {
    "camera": [
-    -120.0592,
-    38.5002,
-    2361
+    -120.0562,
+    38.4975,
+    2634
    ],
-   "seconds": 7.0,
+   "seconds": 4.0,
    "label": "West Ridge dropping into Grizzly",
-   "pitch": 56,
-   "ground": 1984
+   "pitch": 54.6,
+   "ground": 2088,
+   "target": [
+    -120.04601,
+    38.50307,
+    2088
+   ]
   },
   {
    "camera": [
@@ -132,8 +155,13 @@
    ],
    "seconds": 4.0,
    "label": "Up the Grizzly line",
-   "pitch": 48,
-   "ground": 2354
+   "pitch": 48.0,
+   "ground": 2348,
+   "target": [
+    -120.04524,
+    38.49389,
+    2348
+   ]
   },
   {
    "camera": [
@@ -143,8 +171,13 @@
    ],
    "seconds": 4.0,
    "label": "Over the Grizzly top, Day Lodge ahead",
-   "pitch": 54,
-   "ground": 2489
+   "pitch": 51.4,
+   "ground": 2476,
+   "target": [
+    -120.0427,
+    38.48888,
+    2476
+   ]
   },
   {
    "camera": [
@@ -154,8 +187,13 @@
    ],
    "seconds": 3.2,
    "label": "Up Koala",
-   "pitch": 54,
-   "ground": 2467
+   "pitch": 51.4,
+   "ground": 2480,
+   "target": [
+    -120.03714,
+    38.48909,
+    2480
+   ]
   },
   {
    "camera": [
@@ -165,8 +203,13 @@
    ],
    "seconds": 3.0,
    "label": "Turning over Koala Top",
-   "pitch": 58,
-   "ground": 2282
+   "pitch": 58.0,
+   "ground": 2282,
+   "target": [
+    -120.03668,
+    38.47755,
+    2282
+   ]
   },
   {
    "camera": [
@@ -174,10 +217,32 @@
     38.488,
     2843
    ],
-   "seconds": 5.5,
+   "seconds": 8.1,
    "label": "Down the Lunch Run",
-   "pitch": 60,
-   "ground": 2232
+   "pitch": 58.1,
+   "ground": 2061,
+   "target": [
+    -120.04475,
+    38.50377,
+    2061
+   ]
+  },
+  {
+   "camera": [
+    -120.0398,
+    38.4975,
+    2755
+   ],
+   "seconds": 14,
+   "label": "Climbing out over the base",
+   "target": [
+    -120.049,
+    38.49,
+    2423
+   ],
+   "orbit": 1,
+   "pitch": 66.1,
+   "ground": 1555
   }
  ]
 }

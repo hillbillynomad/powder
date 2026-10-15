@@ -2,11 +2,81 @@
  "resort": "Snowbird",
  "speed_mps": 132,
  "points": [
-  {"label": "Climbing Peruvian Gulch", "camera": [-111.653, 40.576, 620], "pitch": 45},
-  {"label": "Up Regulator Johnson to the Summit", "camera": [-111.6478, 40.5672, 600], "pitch": 45},
-  {"label": "Over the Summit at Hidden Peak", "camera": [-111.6462, 40.5622, 420], "pitch": 55},
-  {"label": "Turning west along the Cirque", "camera": [-111.6512, 40.5596, 360], "pitch": 62},
-  {"label": "Down Little Cloud past Gadzoom", "camera": [-111.6575, 40.5645, 300], "pitch": 68},
-  {"label": "Over Mid-Gad, village ahead", "camera": [-111.6598, 40.5722, 480], "pitch": 56}
- ]
+  {
+   "label": "Climbing Peruvian Gulch",
+   "camera": [
+    -111.653,
+    40.576,
+    620
+   ],
+   "pitch": 45
+  },
+  {
+   "label": "Up Regulator Johnson to the Summit",
+   "camera": [
+    -111.6478,
+    40.5672,
+    600
+   ],
+   "pitch": 45
+  },
+  {
+   "label": "Over the Summit at Hidden Peak",
+   "camera": [
+    -111.6462,
+    40.5622,
+    420
+   ],
+   "pitch": 55
+  },
+  {
+   "label": "Turning west along the Cirque",
+   "camera": [
+    -111.6512,
+    40.5596,
+    360
+   ],
+   "pitch": 62
+  },
+  {
+   "label": "Down Little Cloud past Gadzoom",
+   "camera": [
+    -111.6575,
+    40.5645,
+    300
+   ],
+   "pitch": 68
+  },
+  {
+   "label": "Over Mid-Gad, village ahead",
+   "camera": [
+    -111.6598,
+    40.5722,
+    480
+   ],
+   "pitch": 56,
+   "seconds": 14,
+   "target": [
+    -111.652,
+    40.578
+   ],
+   "orbit": 1
+  }
+ ],
+ "overview": {
+  "center": [
+   -111.652,
+   40.578
+  ],
+  "bearing": 100,
+  "agl": 1500,
+  "pitch": 66,
+  "label": "Overview: the whole resort and its lifts",
+  "seconds": [
+   6,
+   7
+  ],
+  "pull_back": true
+ },
+ "descent_look": 12
 }

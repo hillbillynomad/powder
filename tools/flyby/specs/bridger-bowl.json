@@ -3,85 +3,143 @@
  "speed_mps": 132,
  "points": [
   {
-   "label": "Climbing out east, resort overview",
+   "label": "Over the base: Virginia City and Sunnyside below",
    "camera": [
-    -110.89,
-    45.8105,
-    450
+    -110.899,
+    45.8192,
+    350
    ],
-   "pitch": 60
+   "pitch": 58
   },
   {
-   "label": "High over the whole bowl",
+   "label": "Alpine lifts, bottom terminals",
    "camera": [
-    -110.8845,
-    45.8165,
-    620
+    -110.9068,
+    45.8222,
+    300
    ],
-   "pitch": 62
+   "pitch": 58
   },
   {
-   "label": "Swinging round, lifts below",
+   "label": "Up the Alpine chair",
    "camera": [
-    -110.8905,
-    45.8225,
-    600
+    -110.9135,
+    45.825,
+    330
    ],
-   "pitch": 62
+   "pitch": 56
   },
   {
-   "label": "Over Jim Bridger Lodge, Ridge ahead",
+   "label": "Alpine top",
    "camera": [
-    -110.8985,
-    45.8172,
-    340
+    -110.9195,
+    45.8281,
+    350
    ],
-   "pitch": 52
+   "pitch": 56
   },
   {
-   "label": "Up the Bridger lift line",
+   "label": "Swinging south to the Ridge",
    "camera": [
-    -110.913,
-    45.8168,
-    540
+    -110.9265,
+    45.8248,
+    430
    ],
-   "pitch": 48
+   "pitch": 56
   },
   {
-   "label": "Cresting the Ridge",
+   "label": "Cresting the Ridge, Bridger lift below",
    "camera": [
-    -110.9272,
-    45.8152,
-    470
+    -110.93,
+    45.8205,
+    480
    ],
-   "pitch": 54
+   "pitch": 56
   },
   {
    "label": "South along the Ridge chutes",
    "camera": [
-    -110.9288,
-    45.8112,
-    400
+    -110.9306,
+    45.8105,
+    420
    ],
-   "pitch": 54
+   "pitch": 56
   },
   {
-   "label": "Down over Pierre's Knob",
+   "label": "Schlasman's top, the highest chair: hard left",
+   "camera": [
+    -110.9316,
+    45.8036,
+    340
+   ],
+   "pitch": 50
+  },
+  {
+   "label": "Turning left over Pierre's top",
+   "camera": [
+    -110.9262,
+    45.8082,
+    380
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Down Pierre's chair",
    "camera": [
     -110.9185,
-    45.8098,
-    300
+    45.811,
+    320
    ],
    "pitch": 54
   },
   {
-   "label": "Down toward the lodge",
+   "label": "Down the runs toward Bridger lift",
    "camera": [
-    -110.905,
-    45.8125,
+    -110.911,
+    45.8135,
     290
    ],
-   "pitch": 60
+   "pitch": 54
+  },
+  {
+   "label": "Along the Virginia City line toward the lodge",
+   "camera": [
+    -110.905,
+    45.816,
+    270
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Home over Jim Bridger Lodge",
+   "camera": [
+    -110.8975,
+    45.8165,
+    300
+   ],
+   "pitch": 60,
+   "seconds": 14,
+   "target": [
+    -110.908,
+    45.815
+   ],
+   "orbit": 1
   }
- ]
+ ],
+ "overview": {
+  "center": [
+   -110.908,
+   45.815
+  ],
+  "bearing": 270,
+  "agl": 1400,
+  "pitch": 68,
+  "label": "Overview: the whole resort and its lifts",
+  "seconds": [
+   6,
+   7
+  ],
+  "pull_back": true
+ },
+ "descent_look": 12
 }

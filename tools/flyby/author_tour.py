@@ -84,8 +84,56 @@ def bearing(a, b):
     return (math.degrees(math.atan2(dx, b[1] - a[1])) + 360) % 360
 
 
+def overview_waypoint(ov):
+    """Waypoints (opening pair, lead-in): one backed off from `center` so its line of sight meets the centre at `pitch`.
+
+    ov = {center: [lng, lat], bearing: compass direction the camera faces, agl?, pitch?, label?}.
+    Opens a tour with the whole resort in frame before it dives in. `drift` (0-1) is how far the
+    second waypoint moves toward the centre.
+    """
+    lng, lat = ov['center']
+    face = math.radians(ov['bearing'])
+    pitch = ov.get('pitch', 68)
+    agl = ov.get('agl', 1000)
+    ground = elevation(lng, lat)
+    back = agl * math.tan(math.radians(pitch))
+    for _ in range(4):  # the height above the centre depends on where the camera ends up
+        cam_lng = lng - back * math.sin(face) / (111320 * math.cos(math.radians(lat)))
+        cam_lat = lat - back * math.cos(face) / 110540
+        back = max(agl + elevation(cam_lng, cam_lat) - ground, 300) * math.tan(math.radians(pitch))
+    cam_lng = lng - back * math.sin(face) / (111320 * math.cos(math.radians(lat)))
+    cam_lat = lat - back * math.cos(face) / 110540
+    start = {'label': ov.get('label', 'Overview of the whole resort'),
+             'camera': [round(cam_lng, 5), round(cam_lat, 5), agl], 'pitch': pitch, 'hold_pitch': True}
+    # Then drift part-way in and down, so the overview lasts a few seconds before the dive
+    f = ov.get('drift', 0.4)
+    if ov.get('seconds'):  # [overview leg, drift leg] pacing, instead of the cruise speed
+        start['seconds'], drift_seconds = ov['seconds']
+    drift = {'label': 'Easing in over the lifts',
+             'camera': [round(cam_lng + (lng - cam_lng) * f, 5), round(cam_lat + (lat - cam_lat) * f, 5),
+                        round(agl * 0.75)], 'pitch': pitch, 'hold_pitch': True}
+    if ov.get('seconds'):
+        drift['seconds'] = drift_seconds
+    if ov.get('pull_back'):
+        # The route ends with an orbit point aimed at the centre, so the closing leg backs out to
+        # the overview while still facing the resort (a mixed tour) rather than turning round
+        start['target'] = [lng, lat]
+        start['orbit'] = 1
+        return [start, drift], None
+    # The loop wraps from the last waypoint, so a lead-in straight behind the start makes the
+    # camera arrive already facing the resort instead of at whatever heading the tour ended on
+    lead_m = ov.get('lead_m', 900)
+    lead = {'label': 'Lining up on the resort',
+            'camera': [round(cam_lng - lead_m * math.sin(face) / (111320 * math.cos(math.radians(lat))), 5),
+                       round(cam_lat - lead_m * math.cos(face) / 110540, 5), agl], 'pitch': pitch}
+    return [start, drift], lead
+
+
 def build_tour(spec, verbose=True):
     """Turn a spec dict into a tour dict (heights, clearance, timing, ground aim heights)."""
+    if 'overview' in spec:
+        head, lead = overview_waypoint(spec['overview'])
+        spec = dict(spec, points=head + spec['points'] + ([lead] if lead else []))
     pts = []
     # Some points with a target and some without: bird flight with orbits (see flyby.js)
     has_t = [('target' in w) for w in spec['points']]
@@ -94,6 +142,8 @@ def build_tour(spec, verbose=True):
         cam_lng, cam_lat, cam_agl = w['camera']
         cam_alt = elevation(cam_lng, cam_lat) + cam_agl
         point = {'camera': [cam_lng, cam_lat, cam_alt], 'seconds': w.get('seconds'), 'label': w.get('label', '')}
+        if w.get('hold_pitch'):  # keep the authored tilt (e.g. the overview) under descent_look
+            point['hold_pitch'] = True
         if w.get('orbit') and 'target' not in w:
             sys.exit(f"{w.get('label')}: an orbit point needs a target")
         if 'target' in w:  # look-at mode
@@ -109,6 +159,7 @@ def build_tour(spec, verbose=True):
         pts.append(point)
 
     # Lift any waypoint whose neighbouring path segment scrapes the ground, until clear
+    min_clear = spec.get('min_clearance_m', MIN_CLEARANCE)
     for _ in range(20):
         worst = None
         n = len(pts)
@@ -117,12 +168,12 @@ def build_tour(spec, verbose=True):
             for s in range(1, 40):
                 lng, lat, alt = catmull(*ctrl, s / 40)
                 clearance = alt - elevation(lng, lat)
-                if clearance < MIN_CLEARANCE and (worst is None or clearance < worst[0]):
+                if clearance < min_clear and (worst is None or clearance < worst[0]):
                     worst = (clearance, i, s / 40)
         if not worst:
             break
         clearance, i, t = worst
-        bump = MIN_CLEARANCE - clearance + 20
+        bump = min_clear - clearance + 20
         for j in (i, (i + 1) % n):  # raise both ends of the offending segment
             pts[j]['camera'][2] += bump * (1 - t if j == i else t) + 10
     else:
@@ -136,6 +187,19 @@ def build_tour(spec, verbose=True):
                 continue
             flat, rise = leg_metres(p['camera'], pts[(i + 1) % n]['camera'])
             p['seconds'] = round(max(spec.get('min_leg_s', 3.0), math.hypot(flat, rise) / spec['speed_mps']), 1)
+
+    # Descending, look further down (smaller pitch is steeper): a forward-looking camera crops
+    # the mountain it is flying over. `descent_look` is the most degrees tipped down, reached at a
+    # ~15 degree descent; flat and climbing legs are left as authored.
+    look = spec.get('descent_look', 0)
+    if look:
+        for i, p in enumerate(pts):
+            if p.get('hold_pitch') or ('target' in p and not mixed):
+                continue
+            legs = [leg_metres(pts[i - 1]['camera'], p['camera']), leg_metres(p['camera'], pts[(i + 1) % n]['camera'])]
+            fall = sum(max(0.0, -math.degrees(math.atan2(rise, flat))) for flat, rise in legs) / 2
+            base = p.get('pitch', DEFAULT_PITCH)
+            p['pitch'] = round(base - look * min(1.0, fall / 15.0), 1)
 
     # Bird mode: record the ground height where each waypoint's line of sight meets the
     # (exaggerated) terrain. The app aims at a smooth blend of these instead of reading live
@@ -160,6 +224,9 @@ def build_tour(spec, verbose=True):
         p['ground'] = round(ground)
         if mixed and 'target' not in p:  # bird points carry their aim so orbits can blend to it
             p['target'] = [round(lng, 5), round(lat, 5), round(ground)]
+
+    for p in pts:
+        p.pop('hold_pitch', None)
 
     for i, p in enumerate(pts):
         cam, nxt, prev = p['camera'], pts[(i + 1) % n]['camera'], pts[i - 1]['camera']

@@ -117,25 +117,29 @@
     }
 
     function createController(map, maplibre, { exaggeration = 1, onChange = () => {} } = {}) {
-        let index = null; // Promise<Set<slug>>
+        let index = null; // Promise<{ slugs: Set<slug>, versions: {slug: hash} }>
         const tours = new Map(); // slug -> Promise<tour|null>
         const state = { tour: null, playing: false, clock: 0, startedAt: 0, frame: 0, flying: false };
 
         function loadIndex() {
             if (!index) {
-                index = fetch(`${TOUR_DIR}index.json`)
+                // Revalidate the index so a re-exported tour (new content hash) is always seen
+                index = fetch(`${TOUR_DIR}index.json`, { cache: 'no-cache' })
                     .then(r => (r.ok ? r.json() : { tours: [] }))
-                    .then(data => new Set(data.tours || []))
-                    .catch(() => new Set());
+                    .then(data => ({ slugs: new Set(data.tours || []), versions: data.versions || {} }))
+                    .catch(() => ({ slugs: new Set(), versions: {} }));
             }
             return index;
         }
 
         async function getTour(resortName) {
             const slug = slugify(resortName);
-            if (!(await loadIndex()).has(slug)) return null;
+            const { slugs, versions } = await loadIndex();
+            if (!slugs.has(slug)) return null;
             if (!tours.has(slug)) {
-                tours.set(slug, fetch(`${TOUR_DIR}${slug}.json`).then(r => (r.ok ? r.json() : null)).catch(() => null));
+                // The content hash in the URL means an edited tour can never be served stale
+                const v = versions[slug] ? `?v=${versions[slug]}` : '';
+                tours.set(slug, fetch(`${TOUR_DIR}${slug}.json${v}`).then(r => (r.ok ? r.json() : null)).catch(() => null));
             }
             return tours.get(slug);
         }

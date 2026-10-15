@@ -13,6 +13,7 @@ Usage:
     poetry run python tools/flyby/auto_tour.py                # all resorts -> powder/web/tours
     poetry run python tools/flyby/auto_tour.py snowbird zermatt   # only these (index updated too)
 """
+import hashlib
 import json
 import math
 import os
@@ -259,8 +260,14 @@ def write_tour(slug, tour):
 
 def write_index():
     slugs = sorted(f[:-5] for f in os.listdir(TOURS_DIR) if f.endswith('.json') and f != 'index.json')
+    # Content hash per tour: the web app requests tours/<slug>.json?v=<hash>, so an edited tour
+    # is a new URL and no HTTP / service-worker cache can serve the old route
+    versions = {}
+    for slug in slugs:
+        with open(os.path.join(TOURS_DIR, f'{slug}.json'), 'rb') as t:
+            versions[slug] = hashlib.sha1(t.read()).hexdigest()[:8]
     with open(os.path.join(TOURS_DIR, 'index.json'), 'w', encoding='utf-8', newline='\n') as f:
-        json.dump({'tours': slugs}, f, indent=1)
+        json.dump({'tours': slugs, 'versions': versions}, f, indent=1)
         f.write('\n')
     return slugs
 
