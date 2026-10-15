@@ -420,6 +420,32 @@ body {
 
 .wx-timebar[hidden] { display: none; }
 
+/* Flyover play / pause, top centre of the map */
+.flyby-toggle {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    z-index: 5;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: rgba(22, 33, 62, 0.85);
+    color: var(--color-text);
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+    font-size: 0.85rem;
+    white-space: nowrap;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+}
+
+.flyby-toggle[hidden] { display: none; }
+.flyby-toggle:hover { background: var(--color-bg-hover); }
+.flyby-toggle span { font-size: 0.7rem; }
+
 .wx-play, .wx-now {
     flex: 0 0 auto;
     background: var(--color-bg-input);

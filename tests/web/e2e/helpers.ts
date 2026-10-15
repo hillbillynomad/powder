@@ -16,6 +16,7 @@ declare global {
       weather(): { active: string; frame: number; followNow: boolean; frames: number; playing: boolean } | null;
       weatherReady(): Promise<boolean>;
       setWeatherFrame(index: number): void;
+      flyby(): { hasTour: boolean; playing: boolean; resort: string | null } | null;
     };
   }
 }

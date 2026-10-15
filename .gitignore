@@ -36,3 +36,6 @@ claude
 
 # Generated weather overlay frames (built fresh on deploy)
 powder/web/data/overlays/
+
+# Terrain tiles cached by the flyover authoring tool
+tools/flyby/dem-cache/

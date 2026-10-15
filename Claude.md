@@ -76,6 +76,8 @@ The map is a MapLibre GL JS globe (`projection: globe`) built in `app.js:buildMa
 
 The weather overlay lives in `web/js/weather.js` (pure helpers are unit-tested) and is wired in from `app.js`. It is a Weather section in the ☰ menu, off by default; when on, a time bar (play / hourly slider / legend) appears and starts at the current hour, following "now" while the page is open. Frames are decoded from the grayscale PNGs, coloured through a LUT and reprojected to Web Mercator in `web/js/weather-worker.js` (OffscreenCanvas → PNG blob), then shown via a MapLibre `image` source (`wx-*` ids, skipped by `applyLayerPrefs`). Don't switch to a `canvas` source: it renders black on the globe. Clicking the map (not a resort) while an overlay is on shows depth / density / new snow / temperature at that point.
 
+Resort flyover tours live in `web/js/flyby.js` (pure helpers are unit-tested) with one JSON per resort in `web/tours/<slug>.json`, listed in `web/tours/index.json`. Selecting a resort that has a tour flies into a looping low-altitude flight: waypoints are camera + look-at positions in real metres above sea level (scaled by the terrain exaggeration at runtime), smoothed with a closed Catmull-Rom spline and applied per frame via `calculateCameraOptionsFromTo`. The tour forces satellite, 3D relief and lift names without saving them over the user's layer prefs, and restores them when the resort is closed; any map gesture pauses it. Tours are authored with `tools/flyby/` (lift lines from the app's own vector tiles, heights from the Terrarium DEM, clearance-checked).
+
 ## Testing notes
 
 - Provider unit tests use the `responses` library to mock HTTP; date-sensitive tests use `freezegun`. NWS requires two-step mocking (grid point → forecast).

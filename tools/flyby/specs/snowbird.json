@@ -1,0 +1,11 @@
+{
+ "resort": "Snowbird",
+ "speed_mps": 132,
+ "points": [
+  {"label": "Cliff Lodge & Snowbird Center", "camera": [-111.6560, 40.5905, 450], "target": [-111.6555, 40.5815]},
+  {"label": "Tram line over Regulator Johnson", "camera": [-111.6522, 40.5805, 450], "target": [-111.6475, 40.5660]},
+  {"label": "The Summit at Hidden Peak", "camera": [-111.6500, 40.5765, 450], "target": [-111.6452, 40.5612]},
+  {"label": "The Cirque & Little Cloud", "camera": [-111.6578, 40.5765, 450], "target": [-111.6538, 40.5615]},
+  {"label": "Mid-Gad & Chips, to the base", "camera": [-111.6620, 40.5835, 450], "target": [-111.6591, 40.5692]}
+ ]
+}

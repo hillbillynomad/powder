@@ -57,6 +57,8 @@ let mapReady = false;
 let demSource = null; // maplibre-contour DemSource shared by hillshade, 3D relief and contours
 let markers = []; // [{ resort, baseRadius, isRing }] for the currently displayed resorts
 let weather = null; // weather.js overlay controller, once the map is up
+let flyby = null; // flyby.js resort flyover controller, once the map is up
+let tourPrefsBackup = null; // the user's layer settings while a flyover forces its own
 let resortData = [];
 let currentDetailResort = null;
 
@@ -523,6 +525,11 @@ async function initMap(shared) {
     map.on('moveend', () => updateInView());
     map.on('resize', () => updateInView());
     if (window.PowderWeather) weather = window.PowderWeather.createController(map, window.maplibregl);
+    if (window.PowderFlyby) {
+        flyby = window.PowderFlyby.createController(map, window.maplibregl, {
+            exaggeration: TERRAIN_EXAGGERATION, onChange: syncFlybyButton,
+        });
+    }
 }
 
 // Read-only introspection plus one navigation helper for e2e tests; bubbles are drawn on a
@@ -551,6 +558,7 @@ function createTestHooks() {
         weather: () => (weather ? weather.getState() : null),
         weatherReady: () => (weather ? weather.ready.then(() => true) : Promise.resolve(false)),
         setWeatherFrame: (i) => weather && weather.setFrame(i),
+        flyby: () => (flyby ? flyby.getState() : null),
     };
 }
 
@@ -563,10 +571,13 @@ function collapseAttribution() {
     attribution.removeAttribute('open');
 }
 
-// Keep the canvas size in step with its container (side panel collapse, rotate, etc.)
+// Keep the canvas size in step with its container (side panel collapse, rotate, etc.).
+// Resizing clears the WebGL canvas and MapLibre would only repaint next frame, so during
+// the sheet's slide every frame flashed blank; redraw synchronously instead.
 function syncMapSize() {
     if (!map) return;
     map.resize();
+    map.redraw();
     const size = document.getElementById('map').getBoundingClientRect();
     map.setMinZoom(computeMinZoom(size.width, size.height));
 }
@@ -602,7 +613,7 @@ function installScrollGuard() {
 
 // ---- Layer switcher ----------------------------------------------------------------
 
-function applyLayerPrefs() {
+function applyLayerPrefs({ save = true } = {}) {
     if (!map || !mapReady) return;
     for (const layer of map.getStyle().layers) {
         if (layer.id === 'resorts' || layer.id.startsWith('wx-')) continue; // managed elsewhere
@@ -613,7 +624,7 @@ function applyLayerPrefs() {
     }
     map.setMaxPitch(layerPrefs.threeD ? 85 : 60);
     syncTerrain3d();
-    saveLayerPrefs(layerPrefs);
+    if (save) saveLayerPrefs(layerPrefs);
 }
 
 // 3D relief only once zoomed in; setTerrain is skipped when nothing changes
@@ -650,6 +661,7 @@ function onLayerInputChange(e) {
     if (input.name === 'base-mode') layerPrefs.mode = input.value;
     else if (input.dataset && input.dataset.pref) layerPrefs[input.dataset.pref] = input.checked;
     else return;
+    tourPrefsBackup = null; // an explicit choice outlives the flyover
     if (mapReady) applyLayerPrefs();
     else saveLayerPrefs(layerPrefs);
 }
@@ -762,6 +774,7 @@ function installMapInteractions() {
         if (entry) {
             if (isTouchDevice) hideHoverPopup();
             toggleDetail(entry.resort);
+            if (currentDetailResort === entry.resort) startTourIfAny(entry.resort);
         } else {
             hideDetail();
             if (weather) weather.showReadout(e.lngLat);
@@ -1411,6 +1424,7 @@ function hideDetail() {
     document.getElementById('details-content').classList.add('hidden');
     document.getElementById('list-content').classList.remove('hidden');
     currentDetailResort = null;
+    endTour();
     setMapHighlight('');
     document.querySelectorAll('.resort-item.selected').forEach(el => el.classList.remove('selected'));
 }
@@ -1424,12 +1438,58 @@ function toggleDetail(resort) {
     showDetail(resort);
 }
 
-// Fly to a resort and open its details
-function selectResort(resort) {
-    if (map) {
+// Open a resort's details and fly there: into its flyover tour when it has one
+async function selectResort(resort) {
+    showDetail(resort);
+    if (await startTourIfAny(resort)) return;
+    if (map && currentDetailResort === resort) {
         map.flyTo({ center: [resort.longitude, resort.latitude], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), essential: true });
     }
-    showDetail(resort);
+}
+
+// ---- Flyover tours (flyby.js) --------------------------------------------------------
+
+const FLYOVER_LAYERS = { mode: 'sat', threeD: true, trails: true }; // satellite, 3D relief, lift names
+
+async function startTourIfAny(resort) {
+    if (!flyby || !mapReady) return false;
+    if (flyby.getState().resort !== resort.name) endTour();
+    const tour = await flyby.getTour(resort.name);
+    if (!tour || currentDetailResort !== resort) return false; // none, or the user moved on
+    if (!tourPrefsBackup) tourPrefsBackup = { ...layerPrefs };
+    layerPrefs = { ...layerPrefs, ...FLYOVER_LAYERS };
+    applyLayerPrefs({ save: false });
+    syncMenuInputs();
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    flyby.start(tour, { autoplay: !reduceMotion });
+    return true;
+}
+
+// Stop flying and give the user back their own layer settings
+function endTour() {
+    if (flyby) flyby.stop();
+    if (tourPrefsBackup) {
+        layerPrefs = tourPrefsBackup;
+        tourPrefsBackup = null;
+        applyLayerPrefs({ save: false });
+        syncMenuInputs();
+    }
+}
+
+function syncFlybyButton(state) {
+    const button = document.getElementById('flyby-toggle');
+    if (!button) return;
+    button.hidden = !state.hasTour;
+    button.classList.toggle('playing', state.playing);
+    button.innerHTML = state.playing
+        ? '<span aria-hidden="true">❚❚</span> Pause flyover'
+        : '<span aria-hidden="true">▶</span> Fly over';
+}
+
+function toggleFlyby() {
+    if (!flyby) return;
+    if (flyby.getState().playing) flyby.pause();
+    else flyby.play();
 }
 
 // Lowercase and strip accents so "val d'isere" finds "Val d'Isère"
@@ -1555,6 +1615,7 @@ function setupEventListeners() {
 
     // Controls
     document.getElementById('home-button').addEventListener('click', goHome);
+    document.getElementById('flyby-toggle').addEventListener('click', toggleFlyby);
     document.getElementById('panel-collapse').addEventListener('click', togglePanelCollapse);
     document.getElementById('panel-reopen').addEventListener('click', reopenPanel);
     document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
