@@ -5,69 +5,69 @@
  "points": [
   {
    "camera": [
-    -107.81149,
-    37.93607,
-    3011
+    -107.81993,
+    37.92572,
+    3509
    ],
-   "seconds": 9.0,
+   "seconds": 6.6,
    "label": "Base, lift line ahead",
    "pitch": 52,
-   "ground": 2752
+   "ground": 3264
   },
   {
    "camera": [
-    -107.82411,
-    37.93447,
-    3397
+    -107.81977,
+    37.91869,
+    3911
    ],
-   "seconds": 7.8,
+   "seconds": 5.0,
    "label": "Up the lift line",
    "pitch": 48,
-   "ground": 3083
+   "ground": 3572
   },
   {
    "camera": [
-    -107.83453,
-    37.93094,
-    3642
+    -107.82226,
+    37.91318,
+    4069
    ],
-   "seconds": 10.4,
+   "seconds": 15.5,
    "label": "Over the top",
    "pitch": 54,
-   "ground": 3328
+   "ground": 3191
   },
   {
    "camera": [
-    -107.81925,
-    37.9298,
-    3415
+    -107.83282,
+    37.92923,
+    3640
    ],
-   "seconds": 3.7,
+   "seconds": 4.9,
    "label": "Across the top",
    "pitch": 56,
-   "ground": 2747
+   "ground": 2667
   },
   {
    "camera": [
-    -107.81623,
-    37.93293,
-    3190
+    -107.8279,
+    37.93246,
+    3326
    ],
-   "seconds": 4.3,
+   "seconds": 5.4,
    "label": "Down the run",
    "pitch": 60,
-   "ground": 2762
+   "ground": 2711
   },
   {
    "camera": [
-    -107.81259,
-    37.93671,
-    2974
+    -107.8222,
+    37.93621,
+    3040
    ],
-   "seconds": 3.0,
+   "seconds": 9.6,
    "label": "Back toward the base",
    "pitch": 64,
-   "ground": 2777
+   "ground": 2892
   }
  ]
 }
