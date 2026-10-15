@@ -1,0 +1,73 @@
+{
+ "resort": "Alta",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -111.63699,
+    40.58958,
+    2966
+   ],
+   "seconds": 7.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2598
+  },
+  {
+   "camera": [
+    -111.64136,
+    40.58269,
+    3359
+   ],
+   "seconds": 5.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2897
+  },
+  {
+   "camera": [
+    -111.64239,
+    40.57624,
+    3440
+   ],
+   "seconds": 7.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3119
+  },
+  {
+   "camera": [
+    -111.63142,
+    40.57206,
+    3587
+   ],
+   "seconds": 5.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2919
+  },
+  {
+   "camera": [
+    -111.63486,
+    40.57708,
+    3286
+   ],
+   "seconds": 5.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2636
+  },
+  {
+   "camera": [
+    -111.63879,
+    40.58283,
+    3121
+   ],
+   "seconds": 5.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2739
+  }
+ ]
+}

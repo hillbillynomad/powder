@@ -1,0 +1,73 @@
+{
+ "resort": "Zakopane (Kasprowy Wierch)",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    19.96824,
+    49.24719,
+    1646
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1396
+  },
+  {
+   "camera": [
+    19.97403,
+    49.23821,
+    2174
+   ],
+   "seconds": 7.4,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1822
+  },
+  {
+   "camera": [
+    19.98201,
+    49.23139,
+    2413
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1946
+  },
+  {
+   "camera": [
+    19.98301,
+    49.2324,
+    2362
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1254
+  },
+  {
+   "camera": [
+    19.97924,
+    49.24025,
+    1966
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1147
+  },
+  {
+   "camera": [
+    19.97511,
+    49.24888,
+    1686
+   ],
+   "seconds": 4.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1329
+  }
+ ]
+}

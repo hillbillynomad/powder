@@ -1,0 +1,73 @@
+{
+ "resort": "Blue Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -80.31023,
+    44.50332,
+    569
+   ],
+   "seconds": 5.8,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 251
+  },
+  {
+   "camera": [
+    -80.31801,
+    44.50035,
+    865
+   ],
+   "seconds": 4.3,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 449
+  },
+  {
+   "camera": [
+    -80.3225,
+    44.49633,
+    908
+   ],
+   "seconds": 4.8,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 501
+  },
+  {
+   "camera": [
+    -80.31781,
+    44.49169,
+    872
+   ],
+   "seconds": 4.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 289
+  },
+  {
+   "camera": [
+    -80.31277,
+    44.49522,
+    686
+   ],
+   "seconds": 5.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 222
+  },
+  {
+   "camera": [
+    -80.30692,
+    44.49932,
+    529
+   ],
+   "seconds": 3.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 214
+  }
+ ]
+}

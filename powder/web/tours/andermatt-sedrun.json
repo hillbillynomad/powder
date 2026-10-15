@@ -1,0 +1,73 @@
+{
+ "resort": "Andermatt-Sedrun",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    8.59153,
+    46.63483,
+    1775
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1429
+  },
+  {
+   "camera": [
+    8.59386,
+    46.62516,
+    2333
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2078
+  },
+  {
+   "camera": [
+    8.59893,
+    46.61723,
+    2680
+   ],
+   "seconds": 7.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2293
+  },
+  {
+   "camera": [
+    8.6108,
+    46.61844,
+    2691
+   ],
+   "seconds": 3.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1740
+  },
+  {
+   "camera": [
+    8.60702,
+    46.62064,
+    2433
+   ],
+   "seconds": 3.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1428
+  },
+  {
+   "camera": [
+    8.60234,
+    46.62337,
+    2296
+   ],
+   "seconds": 12.1,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1469
+  }
+ ]
+}

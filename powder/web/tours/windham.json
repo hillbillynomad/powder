@@ -1,0 +1,73 @@
+{
+ "resort": "Windham",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -74.25643,
+    42.29993,
+    838
+   ],
+   "seconds": 8.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 553
+  },
+  {
+   "camera": [
+    -74.26222,
+    42.29168,
+    1201
+   ],
+   "seconds": 6.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 869
+  },
+  {
+   "camera": [
+    -74.26455,
+    42.28371,
+    1369
+   ],
+   "seconds": 11.3,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 829
+  },
+  {
+   "camera": [
+    -74.25306,
+    42.29375,
+    1072
+   ],
+   "seconds": 3.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 495
+  },
+  {
+   "camera": [
+    -74.25546,
+    42.29604,
+    898
+   ],
+   "seconds": 3.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 461
+  },
+  {
+   "camera": [
+    -74.25853,
+    42.29897,
+    811
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 456
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Obertauern",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    13.566,
+    47.24339,
+    2041
+   ],
+   "seconds": 6.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1731
+  },
+  {
+   "camera": [
+    13.5719,
+    47.24934,
+    2361
+   ],
+   "seconds": 5.3,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2055
+  },
+  {
+   "camera": [
+    13.57907,
+    47.25285,
+    2555
+   ],
+   "seconds": 7.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2341
+  },
+  {
+   "camera": [
+    13.58038,
+    47.24465,
+    2382
+   ],
+   "seconds": 3.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1539
+  },
+  {
+   "camera": [
+    13.57595,
+    47.24265,
+    2097
+   ],
+   "seconds": 3.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1769
+  },
+  {
+   "camera": [
+    13.57051,
+    47.24022,
+    1938
+   ],
+   "seconds": 3.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1796
+  }
+ ]
+}

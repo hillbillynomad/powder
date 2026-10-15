@@ -1,0 +1,73 @@
+{
+ "resort": "Las Le\u00f1as",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -70.08045,
+    -35.14262,
+    2584
+   ],
+   "seconds": 7.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2309
+  },
+  {
+   "camera": [
+    -70.08989,
+    -35.14141,
+    2931
+   ],
+   "seconds": 5.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2565
+  },
+  {
+   "camera": [
+    -70.09713,
+    -35.13834,
+    3064
+   ],
+   "seconds": 6.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2672
+  },
+  {
+   "camera": [
+    -70.08846,
+    -35.13474,
+    2846
+   ],
+   "seconds": 3.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2239
+  },
+  {
+   "camera": [
+    -70.08378,
+    -35.13552,
+    2641
+   ],
+   "seconds": 4.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2250
+  },
+  {
+   "camera": [
+    -70.07812,
+    -35.13646,
+    2518
+   ],
+   "seconds": 5.4,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2203
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Camelback",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -75.34914,
+    41.05345,
+    720
+   ],
+   "seconds": 5.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 396
+  },
+  {
+   "camera": [
+    -75.34677,
+    41.04755,
+    991
+   ],
+   "seconds": 4.2,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 613
+  },
+  {
+   "camera": [
+    -75.34757,
+    41.04261,
+    1093
+   ],
+   "seconds": 4.8,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 474
+  },
+  {
+   "camera": [
+    -75.35503,
+    41.04324,
+    1049
+   ],
+   "seconds": 3.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 480
+  },
+  {
+   "camera": [
+    -75.35417,
+    41.04697,
+    817
+   ],
+   "seconds": 4.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 398
+  },
+  {
+   "camera": [
+    -75.35312,
+    41.05151,
+    703
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 390
+  }
+ ]
+}

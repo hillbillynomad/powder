@@ -1,0 +1,73 @@
+{
+ "resort": "Panorama",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -116.24018,
+    50.4583,
+    1485
+   ],
+   "seconds": 7.8,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1171
+  },
+  {
+   "camera": [
+    -116.23275,
+    50.45111,
+    1876
+   ],
+   "seconds": 6.4,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1518
+  },
+  {
+   "camera": [
+    -116.22935,
+    50.44396,
+    2072
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1738
+  },
+  {
+   "camera": [
+    -116.23024,
+    50.44284,
+    2048
+   ],
+   "seconds": 5.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1156
+  },
+  {
+   "camera": [
+    -116.23872,
+    50.44519,
+    1727
+   ],
+   "seconds": 5.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1150
+  },
+  {
+   "camera": [
+    -116.24836,
+    50.44787,
+    1507
+   ],
+   "seconds": 9.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1147
+  }
+ ]
+}

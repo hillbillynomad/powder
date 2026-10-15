@@ -1,0 +1,73 @@
+{
+ "resort": "Peyragudes",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    0.44519,
+    42.79037,
+    1935
+   ],
+   "seconds": 9.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1694
+  },
+  {
+   "camera": [
+    0.4499,
+    42.78084,
+    2452
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2070
+  },
+  {
+   "camera": [
+    0.45672,
+    42.77338,
+    2648
+   ],
+   "seconds": 11.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1915
+  },
+  {
+   "camera": [
+    0.45999,
+    42.78622,
+    2368
+   ],
+   "seconds": 5.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1542
+  },
+  {
+   "camera": [
+    0.45349,
+    42.78872,
+    2042
+   ],
+   "seconds": 5.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1566
+  },
+  {
+   "camera": [
+    0.44602,
+    42.7916,
+    1889
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1475
+  }
+ ]
+}

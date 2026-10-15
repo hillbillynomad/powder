@@ -1,0 +1,73 @@
+{
+ "resort": "Dolomiti Superski",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.86736,
+    46.5404,
+    2153
+   ],
+   "seconds": 7.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1523
+  },
+  {
+   "camera": [
+    11.86621,
+    46.53208,
+    2434
+   ],
+   "seconds": 6.3,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2094
+  },
+  {
+   "camera": [
+    11.8622,
+    46.52543,
+    2657
+   ],
+   "seconds": 8.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2324
+  },
+  {
+   "camera": [
+    11.84893,
+    46.5221,
+    2928
+   ],
+   "seconds": 4.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2609
+  },
+  {
+   "camera": [
+    11.85594,
+    46.52395,
+    2658
+   ],
+   "seconds": 5.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1838
+  },
+  {
+   "camera": [
+    11.86405,
+    46.52609,
+    2465
+   ],
+   "seconds": 12.4,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1586
+  }
+ ]
+}

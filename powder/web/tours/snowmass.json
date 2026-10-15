@@ -1,0 +1,73 @@
+{
+ "resort": "Snowmass",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -106.92511,
+    39.20449,
+    2897
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2640
+  },
+  {
+   "camera": [
+    -106.93253,
+    39.19616,
+    3303
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2928
+  },
+  {
+   "camera": [
+    -106.93664,
+    39.18775,
+    3457
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3090
+  },
+  {
+   "camera": [
+    -106.92969,
+    39.18544,
+    3472
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2855
+  },
+  {
+   "camera": [
+    -106.92476,
+    39.19312,
+    3174
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2590
+  },
+  {
+   "camera": [
+    -106.91957,
+    39.20121,
+    2962
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2446
+  }
+ ]
+}

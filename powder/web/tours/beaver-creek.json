@@ -1,0 +1,73 @@
+{
+ "resort": "Beaver Creek",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -106.51519,
+    39.59991,
+    2918
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2669
+  },
+  {
+   "camera": [
+    -106.51337,
+    39.58986,
+    3398
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3069
+  },
+  {
+   "camera": [
+    -106.50904,
+    39.58151,
+    3580
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3229
+  },
+  {
+   "camera": [
+    -106.50189,
+    39.5835,
+    3445
+   ],
+   "seconds": 7.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2656
+  },
+  {
+   "camera": [
+    -106.50498,
+    39.59175,
+    3229
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2534
+  },
+  {
+   "camera": [
+    -106.50823,
+    39.60044,
+    2921
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2411
+  }
+ ]
+}

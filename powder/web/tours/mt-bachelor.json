@@ -1,0 +1,73 @@
+{
+ "resort": "Mt. Bachelor",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -121.66996,
+    43.98686,
+    2488
+   ],
+   "seconds": 8.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2237
+  },
+  {
+   "camera": [
+    -121.6802,
+    43.98233,
+    2982
+   ],
+   "seconds": 6.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2681
+  },
+  {
+   "camera": [
+    -121.68719,
+    43.97674,
+    3166
+   ],
+   "seconds": 5.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2095
+  },
+  {
+   "camera": [
+    -121.68149,
+    43.97254,
+    2872
+   ],
+   "seconds": 6.1,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2041
+  },
+  {
+   "camera": [
+    -121.67407,
+    43.97721,
+    2701
+   ],
+   "seconds": 6.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1967
+  },
+  {
+   "camera": [
+    -121.66617,
+    43.98218,
+    2452
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1954
+  }
+ ]
+}

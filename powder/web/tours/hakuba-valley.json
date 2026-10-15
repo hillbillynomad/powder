@@ -1,0 +1,73 @@
+{
+ "resort": "Hakuba Valley",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    137.8373,
+    36.70132,
+    1116
+   ],
+   "seconds": 9.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 855
+  },
+  {
+   "camera": [
+    137.82481,
+    36.70026,
+    1649
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1310
+  },
+  {
+   "camera": [
+    137.81433,
+    36.69719,
+    1870
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1474
+  },
+  {
+   "camera": [
+    137.81433,
+    36.69659,
+    1832
+   ],
+   "seconds": 6.9,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 761
+  },
+  {
+   "camera": [
+    137.82378,
+    36.69641,
+    1488
+   ],
+   "seconds": 7.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 742
+  },
+  {
+   "camera": [
+    137.83424,
+    36.69621,
+    1164
+   ],
+   "seconds": 4.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 742
+  }
+ ]
+}

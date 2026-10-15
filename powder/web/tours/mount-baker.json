@@ -1,0 +1,73 @@
+{
+ "resort": "Mount Baker",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -121.65794,
+    48.85766,
+    1473
+   ],
+   "seconds": 6.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1189
+  },
+  {
+   "camera": [
+    -121.669,
+    48.85671,
+    1871
+   ],
+   "seconds": 5.3,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1470
+  },
+  {
+   "camera": [
+    -121.67736,
+    48.85388,
+    1979
+   ],
+   "seconds": 8.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1622
+  },
+  {
+   "camera": [
+    -121.66396,
+    48.84972,
+    1931
+   ],
+   "seconds": 4.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 924
+  },
+  {
+   "camera": [
+    -121.66189,
+    48.85402,
+    1575
+   ],
+   "seconds": 4.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 997
+  },
+  {
+   "camera": [
+    -121.65945,
+    48.85909,
+    1387
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1085
+  }
+ ]
+}

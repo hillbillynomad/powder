@@ -1,0 +1,73 @@
+{
+ "resort": "Big Sky",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -111.37281,
+    45.28164,
+    2447
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2177
+  },
+  {
+   "camera": [
+    -111.38593,
+    45.27761,
+    2868
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2555
+  },
+  {
+   "camera": [
+    -111.39601,
+    45.27215,
+    3099
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2620
+  },
+  {
+   "camera": [
+    -111.39122,
+    45.26733,
+    2964
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2336
+  },
+  {
+   "camera": [
+    -111.38091,
+    45.27183,
+    2694
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2071
+  },
+  {
+   "camera": [
+    -111.37006,
+    45.27658,
+    2509
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2185
+  }
+ ]
+}

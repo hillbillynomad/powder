@@ -1,0 +1,73 @@
+{
+ "resort": "Jisan Forest",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    127.29565,
+    37.21634,
+    545
+   ],
+   "seconds": 5.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 218
+  },
+  {
+   "camera": [
+    127.29851,
+    37.21146,
+    837
+   ],
+   "seconds": 3.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 235
+  },
+  {
+   "camera": [
+    127.3027,
+    37.20894,
+    845
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 368
+  },
+  {
+   "camera": [
+    127.30796,
+    37.21305,
+    746
+   ],
+   "seconds": 3.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 180
+  },
+  {
+   "camera": [
+    127.30491,
+    37.21589,
+    604
+   ],
+   "seconds": 3.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 245
+  },
+  {
+   "camera": [
+    127.3015,
+    37.21907,
+    574
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 281
+  }
+ ]
+}

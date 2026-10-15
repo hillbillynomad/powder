@@ -1,0 +1,73 @@
+{
+ "resort": "Sugar Bowl",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -120.33673,
+    39.30054,
+    2504
+   ],
+   "seconds": 7.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2211
+  },
+  {
+   "camera": [
+    -120.32961,
+    39.29396,
+    2797
+   ],
+   "seconds": 6.4,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2479
+  },
+  {
+   "camera": [
+    -120.32579,
+    39.28713,
+    2968
+   ],
+   "seconds": 11.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2106
+  },
+  {
+   "camera": [
+    -120.34128,
+    39.29441,
+    2833
+   ],
+   "seconds": 4.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2107
+  },
+  {
+   "camera": [
+    -120.33936,
+    39.29935,
+    2596
+   ],
+   "seconds": 5.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2109
+  },
+  {
+   "camera": [
+    -120.33713,
+    39.30506,
+    2414
+   ],
+   "seconds": 3.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2166
+  }
+ ]
+}

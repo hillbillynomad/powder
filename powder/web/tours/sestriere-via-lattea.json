@@ -1,0 +1,73 @@
+{
+ "resort": "Sestriere/Via Lattea",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.87551,
+    44.9516,
+    2360
+   ],
+   "seconds": 8.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2023
+  },
+  {
+   "camera": [
+    6.86964,
+    44.96008,
+    2677
+   ],
+   "seconds": 7.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2282
+  },
+  {
+   "camera": [
+    6.86194,
+    44.96632,
+    2769
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2486
+  },
+  {
+   "camera": [
+    6.85548,
+    44.96264,
+    2688
+   ],
+   "seconds": 7.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1600
+  },
+  {
+   "camera": [
+    6.86185,
+    44.95618,
+    2394
+   ],
+   "seconds": 7.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1898
+  },
+  {
+   "camera": [
+    6.86858,
+    44.94935,
+    2211
+   ],
+   "seconds": 4.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2007
+  }
+ ]
+}

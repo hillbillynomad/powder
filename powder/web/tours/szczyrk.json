@@ -1,0 +1,73 @@
+{
+ "resort": "Szczyrk",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    19.01241,
+    49.70958,
+    897
+   ],
+   "seconds": 8.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 560
+  },
+  {
+   "camera": [
+    19.01709,
+    49.70068,
+    1256
+   ],
+   "seconds": 7.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 902
+  },
+  {
+   "camera": [
+    19.02418,
+    49.69383,
+    1415
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 975
+  },
+  {
+   "camera": [
+    19.03192,
+    49.69689,
+    1308
+   ],
+   "seconds": 7.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 684
+  },
+  {
+   "camera": [
+    19.0263,
+    49.70384,
+    1005
+   ],
+   "seconds": 7.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 522
+  },
+  {
+   "camera": [
+    19.02037,
+    49.71119,
+    864
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 653
+  }
+ ]
+}

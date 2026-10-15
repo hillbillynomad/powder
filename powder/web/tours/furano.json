@@ -1,0 +1,73 @@
+{
+ "resort": "Furano",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    142.36235,
+    43.34205,
+    567
+   ],
+   "seconds": 6.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 266
+  },
+  {
+   "camera": [
+    142.35279,
+    43.34331,
+    865
+   ],
+   "seconds": 5.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 437
+  },
+  {
+   "camera": [
+    142.34479,
+    43.34225,
+    897
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 520
+  },
+  {
+   "camera": [
+    142.3455,
+    43.33638,
+    887
+   ],
+   "seconds": 4.9,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 289
+  },
+  {
+   "camera": [
+    142.35304,
+    43.33653,
+    681
+   ],
+   "seconds": 5.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 205
+  },
+  {
+   "camera": [
+    142.36119,
+    43.33669,
+    558
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 187
+  }
+ ]
+}

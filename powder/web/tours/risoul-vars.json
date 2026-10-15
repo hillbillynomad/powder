@@ -1,0 +1,73 @@
+{
+ "resort": "Risoul-Vars",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.63383,
+    44.61094,
+    2362
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2093
+  },
+  {
+   "camera": [
+    6.64316,
+    44.60331,
+    2753
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2406
+  },
+  {
+   "camera": [
+    6.6489,
+    44.59531,
+    2956
+   ],
+   "seconds": 10.3,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2242
+  },
+  {
+   "camera": [
+    6.63226,
+    44.59793,
+    2840
+   ],
+   "seconds": 6.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2255
+  },
+  {
+   "camera": [
+    6.63334,
+    44.60472,
+    2533
+   ],
+   "seconds": 6.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1921
+  },
+  {
+   "camera": [
+    6.63454,
+    44.61232,
+    2320
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1852
+  }
+ ]
+}

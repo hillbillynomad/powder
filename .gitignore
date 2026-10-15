@@ -39,3 +39,5 @@ powder/web/data/overlays/
 
 # Terrain tiles cached by the flyover authoring tool
 tools/flyby/dem-cache/
+tools/flyby/cache/
+tools/flyby/specs/auto/

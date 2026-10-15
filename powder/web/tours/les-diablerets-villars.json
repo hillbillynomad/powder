@@ -1,0 +1,73 @@
+{
+ "resort": "Les Diablerets-Villars",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    7.15273,
+    46.3435,
+    1577
+   ],
+   "seconds": 9.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1380
+  },
+  {
+   "camera": [
+    7.14046,
+    46.33801,
+    2183
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1687
+  },
+  {
+   "camera": [
+    7.1316,
+    46.33145,
+    2158
+   ],
+   "seconds": 5.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1731
+  },
+  {
+   "camera": [
+    7.13754,
+    46.32725,
+    1971
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1504
+  },
+  {
+   "camera": [
+    7.14686,
+    46.33289,
+    1774
+   ],
+   "seconds": 7.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1199
+  },
+  {
+   "camera": [
+    7.15668,
+    46.33882,
+    1545
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1179
+  }
+ ]
+}

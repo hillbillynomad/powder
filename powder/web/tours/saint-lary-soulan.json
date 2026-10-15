@@ -1,0 +1,73 @@
+{
+ "resort": "Saint-Lary-Soulan",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    0.32068,
+    42.81731,
+    1160
+   ],
+   "seconds": 9.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 845
+  },
+  {
+   "camera": [
+    0.30777,
+    42.81385,
+    1738
+   ],
+   "seconds": 8.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1464
+  },
+  {
+   "camera": [
+    0.29565,
+    42.81291,
+    2121
+   ],
+   "seconds": 5.5,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1720
+  },
+  {
+   "camera": [
+    0.28727,
+    42.81502,
+    2098
+   ],
+   "seconds": 7.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1235
+  },
+  {
+   "camera": [
+    0.29819,
+    42.81667,
+    1808
+   ],
+   "seconds": 8.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 808
+  },
+  {
+   "camera": [
+    0.31019,
+    42.81847,
+    1385
+   ],
+   "seconds": 6.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 846
+  }
+ ]
+}

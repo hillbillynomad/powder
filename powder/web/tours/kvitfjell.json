@@ -1,0 +1,73 @@
+{
+ "resort": "Kvitfjell",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    10.17231,
+    61.47225,
+    520
+   ],
+   "seconds": 8.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 207
+  },
+  {
+   "camera": [
+    10.15191,
+    61.47167,
+    983
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 672
+  },
+  {
+   "camera": [
+    10.13472,
+    61.46901,
+    1221
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 981
+  },
+  {
+   "camera": [
+    10.13797,
+    61.46333,
+    1203
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 180
+  },
+  {
+   "camera": [
+    10.15481,
+    61.46503,
+    812
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 180
+  },
+  {
+   "camera": [
+    10.17256,
+    61.46682,
+    481
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 183
+  }
+ ]
+}

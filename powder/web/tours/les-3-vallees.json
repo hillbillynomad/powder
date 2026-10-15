@@ -1,0 +1,73 @@
+{
+ "resort": "Les 3 Vall\u00e9es",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.55417,
+    45.31428,
+    2471
+   ],
+   "seconds": 9.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2232
+  },
+  {
+   "camera": [
+    6.5684,
+    45.31546,
+    3039
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2701
+  },
+  {
+   "camera": [
+    6.5803,
+    45.31864,
+    3266
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2472
+  },
+  {
+   "camera": [
+    6.57919,
+    45.31902,
+    3244
+   ],
+   "seconds": 7.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1936
+  },
+  {
+   "camera": [
+    6.56757,
+    45.31938,
+    2901
+   ],
+   "seconds": 8.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1767
+  },
+  {
+   "camera": [
+    6.55481,
+    45.31979,
+    2467
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1863
+  }
+ ]
+}

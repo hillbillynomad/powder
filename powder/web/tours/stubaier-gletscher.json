@@ -1,0 +1,73 @@
+{
+ "resort": "Stubaier Gletscher",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.13719,
+    46.99957,
+    2750
+   ],
+   "seconds": 8.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2396
+  },
+  {
+   "camera": [
+    11.12706,
+    46.99219,
+    3089
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2705
+  },
+  {
+   "camera": [
+    11.11604,
+    46.98732,
+    3328
+   ],
+   "seconds": 8.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2857
+  },
+  {
+   "camera": [
+    11.11937,
+    46.99638,
+    3041
+   ],
+   "seconds": 7.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2129
+  },
+  {
+   "camera": [
+    11.1297,
+    47.00054,
+    2884
+   ],
+   "seconds": 7.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1688
+  },
+  {
+   "camera": [
+    11.14106,
+    47.00513,
+    2653
+   ],
+   "seconds": 5.2,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2207
+  }
+ ]
+}

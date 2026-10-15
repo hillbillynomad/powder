@@ -1,0 +1,73 @@
+{
+ "resort": "Winterberg",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    8.51912,
+    51.18351,
+    978
+   ],
+   "seconds": 4.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 711
+  },
+  {
+   "camera": [
+    8.51117,
+    51.18291,
+    1226
+   ],
+   "seconds": 3.2,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 707
+  },
+  {
+   "camera": [
+    8.50628,
+    51.18059,
+    1204
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 765
+  },
+  {
+   "camera": [
+    8.51051,
+    51.17533,
+    1091
+   ],
+   "seconds": 3.1,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 748
+  },
+  {
+   "camera": [
+    8.51544,
+    51.17668,
+    944
+   ],
+   "seconds": 3.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 573
+  },
+  {
+   "camera": [
+    8.52104,
+    51.17821,
+    906
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 613
+  }
+ ]
+}

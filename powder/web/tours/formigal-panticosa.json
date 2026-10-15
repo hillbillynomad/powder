@@ -1,0 +1,73 @@
+{
+ "resort": "Formigal-Panticosa",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -0.3737,
+    42.7728,
+    1874
+   ],
+   "seconds": 7.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1510
+  },
+  {
+   "camera": [
+    -0.38175,
+    42.76694,
+    2250
+   ],
+   "seconds": 6.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1871
+  },
+  {
+   "camera": [
+    -0.38636,
+    42.76059,
+    2343
+   ],
+   "seconds": 6.7,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2064
+  },
+  {
+   "camera": [
+    -0.38833,
+    42.75308,
+    2589
+   ],
+   "seconds": 6.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1782
+  },
+  {
+   "camera": [
+    -0.38297,
+    42.75813,
+    2253
+   ],
+   "seconds": 6.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1565
+  },
+  {
+   "camera": [
+    -0.37692,
+    42.76383,
+    2031
+   ],
+   "seconds": 7.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1528
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Snow Valley",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -117.03597,
+    34.22634,
+    2394
+   ],
+   "seconds": 7.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2088
+  },
+  {
+   "camera": [
+    -117.03414,
+    34.21767,
+    2656
+   ],
+   "seconds": 6.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2287
+  },
+  {
+   "camera": [
+    -117.03515,
+    34.21007,
+    2769
+   ],
+   "seconds": 6.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2221
+  },
+  {
+   "camera": [
+    -117.03966,
+    34.2162,
+    2603
+   ],
+   "seconds": 3.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2051
+  },
+  {
+   "camera": [
+    -117.03889,
+    34.2198,
+    2472
+   ],
+   "seconds": 3.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2074
+  },
+  {
+   "camera": [
+    -117.03794,
+    34.22421,
+    2348
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2098
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Whakapapa",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    175.55765,
+    -39.23528,
+    1968
+   ],
+   "seconds": 8.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1684
+  },
+  {
+   "camera": [
+    175.56001,
+    -39.24526,
+    2320
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1950
+  },
+  {
+   "camera": [
+    175.56479,
+    -39.25345,
+    2489
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2196
+  },
+  {
+   "camera": [
+    175.57178,
+    -39.25122,
+    2586
+   ],
+   "seconds": 7.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1630
+  },
+  {
+   "camera": [
+    175.56825,
+    -39.24308,
+    2243
+   ],
+   "seconds": 8.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1462
+  },
+  {
+   "camera": [
+    175.56454,
+    -39.23451,
+    1832
+   ],
+   "seconds": 4.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1611
+  }
+ ]
+}

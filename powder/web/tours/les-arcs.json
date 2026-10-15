@@ -1,0 +1,73 @@
+{
+ "resort": "Les Arcs",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.7833,
+    45.57318,
+    2110
+   ],
+   "seconds": 9.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1829
+  },
+  {
+   "camera": [
+    6.79702,
+    45.57012,
+    2617
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2256
+  },
+  {
+   "camera": [
+    6.80976,
+    45.56955,
+    2826
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2049
+  },
+  {
+   "camera": [
+    6.81219,
+    45.57224,
+    2807
+   ],
+   "seconds": 5.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1783
+  },
+  {
+   "camera": [
+    6.80372,
+    45.57351,
+    2511
+   ],
+   "seconds": 6.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1031
+  },
+  {
+   "camera": [
+    6.79411,
+    45.57495,
+    2250
+   ],
+   "seconds": 6.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 758
+  }
+ ]
+}

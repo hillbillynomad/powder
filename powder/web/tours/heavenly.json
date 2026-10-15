@@ -1,0 +1,73 @@
+{
+ "resort": "Heavenly",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -119.92697,
+    38.94694,
+    2548
+   ],
+   "seconds": 10.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2374
+  },
+  {
+   "camera": [
+    -119.91845,
+    38.93929,
+    3298
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2787
+  },
+  {
+   "camera": [
+    -119.90903,
+    38.93413,
+    3251
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2773
+  },
+  {
+   "camera": [
+    -119.90449,
+    38.93883,
+    3237
+   ],
+   "seconds": 7.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2321
+  },
+  {
+   "camera": [
+    -119.91281,
+    38.94443,
+    3019
+   ],
+   "seconds": 8.4,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1941
+  },
+  {
+   "camera": [
+    -119.92156,
+    38.95033,
+    2548
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1922
+  }
+ ]
+}

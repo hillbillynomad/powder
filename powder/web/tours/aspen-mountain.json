@@ -1,0 +1,73 @@
+{
+ "resort": "Aspen Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -106.81973,
+    39.16273,
+    3545
+   ],
+   "seconds": 6.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 3266
+  },
+  {
+   "camera": [
+    -106.81812,
+    39.15582,
+    3850
+   ],
+   "seconds": 4.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3421
+  },
+  {
+   "camera": [
+    -106.81948,
+    39.15005,
+    3855
+   ],
+   "seconds": 11.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3237
+  },
+  {
+   "camera": [
+    -106.82716,
+    39.1621,
+    3675
+   ],
+   "seconds": 4.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2457
+  },
+  {
+   "camera": [
+    -106.82709,
+    39.16716,
+    3483
+   ],
+   "seconds": 5.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2415
+  },
+  {
+   "camera": [
+    -106.82702,
+    39.17304,
+    3304
+   ],
+   "seconds": 10.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 3038
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Taos Ski Valley",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -105.44941,
+    36.59685,
+    3221
+   ],
+   "seconds": 7.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2980
+  },
+  {
+   "camera": [
+    -105.44993,
+    36.58904,
+    3683
+   ],
+   "seconds": 5.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3334
+  },
+  {
+   "camera": [
+    -105.45295,
+    36.58283,
+    3900
+   ],
+   "seconds": 4.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3535
+  },
+  {
+   "camera": [
+    -105.45686,
+    36.579,
+    3862
+   ],
+   "seconds": 5.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 3232
+  },
+  {
+   "camera": [
+    -105.45892,
+    36.58513,
+    3590
+   ],
+   "seconds": 6.4,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2945
+  },
+  {
+   "camera": [
+    -105.46123,
+    36.59205,
+    3304
+   ],
+   "seconds": 9.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2964
+  }
+ ]
+}

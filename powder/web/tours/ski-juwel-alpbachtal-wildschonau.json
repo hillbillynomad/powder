@@ -1,0 +1,73 @@
+{
+ "resort": "Ski Juwel Alpbachtal Wildsch\u00f6nau",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.92476,
+    47.39861,
+    1262
+   ],
+   "seconds": 7.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 901
+  },
+  {
+   "camera": [
+    11.92398,
+    47.3897,
+    1608
+   ],
+   "seconds": 6.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1284
+  },
+  {
+   "camera": [
+    11.92646,
+    47.38211,
+    1867
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1560
+  },
+  {
+   "camera": [
+    11.93498,
+    47.38308,
+    1776
+   ],
+   "seconds": 6.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 954
+  },
+  {
+   "camera": [
+    11.93387,
+    47.3904,
+    1393
+   ],
+   "seconds": 6.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 971
+  },
+  {
+   "camera": [
+    11.93269,
+    47.39817,
+    1223
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1028
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Mt. Hood Meadows",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -121.64732,
+    45.32858,
+    1866
+   ],
+   "seconds": 6.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1486
+  },
+  {
+   "camera": [
+    -121.65186,
+    45.33483,
+    2212
+   ],
+   "seconds": 4.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1759
+  },
+  {
+   "camera": [
+    -121.65801,
+    45.33875,
+    2262
+   ],
+   "seconds": 9.7,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1907
+  },
+  {
+   "camera": [
+    -121.67219,
+    45.3444,
+    2406
+   ],
+   "seconds": 4.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2094
+  },
+  {
+   "camera": [
+    -121.66932,
+    45.33976,
+    2155
+   ],
+   "seconds": 5.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1617
+  },
+  {
+   "camera": [
+    -121.66598,
+    45.33437,
+    1947
+   ],
+   "seconds": 12.1,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1607
+  }
+ ]
+}

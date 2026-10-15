@@ -1,0 +1,73 @@
+{
+ "resort": "Falls Creek",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    147.27962,
+    -36.8615,
+    1841
+   ],
+   "seconds": 6.8,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1578
+  },
+  {
+   "camera": [
+    147.27054,
+    -36.86283,
+    2201
+   ],
+   "seconds": 5.2,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1728
+  },
+  {
+   "camera": [
+    147.26379,
+    -36.86594,
+    2224
+   ],
+   "seconds": 11.3,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1732
+  },
+  {
+   "camera": [
+    147.27858,
+    -36.8722,
+    2171
+   ],
+   "seconds": 4.1,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1606
+  },
+  {
+   "camera": [
+    147.28042,
+    -36.86783,
+    1977
+   ],
+   "seconds": 4.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1513
+  },
+  {
+   "camera": [
+    147.28258,
+    -36.86268,
+    1830
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1495
+  }
+ ]
+}

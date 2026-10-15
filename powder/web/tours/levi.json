@@ -1,0 +1,73 @@
+{
+ "resort": "Levi",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    24.81486,
+    67.78757,
+    580
+   ],
+   "seconds": 7.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 273
+  },
+  {
+   "camera": [
+    24.83649,
+    67.78478,
+    914
+   ],
+   "seconds": 6.4,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 511
+  },
+  {
+   "camera": [
+    24.85629,
+    67.78448,
+    1009
+   ],
+   "seconds": 10.6,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 330
+  },
+  {
+   "camera": [
+    24.83981,
+    67.79539,
+    866
+   ],
+   "seconds": 3.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 248
+  },
+  {
+   "camera": [
+    24.8314,
+    67.79361,
+    709
+   ],
+   "seconds": 3.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 235
+  },
+  {
+   "camera": [
+    24.82113,
+    67.79143,
+    574
+   ],
+   "seconds": 3.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 231
+  }
+ ]
+}

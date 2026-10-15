@@ -1,0 +1,73 @@
+{
+ "resort": "Jasn\u00e1",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    19.58177,
+    48.96631,
+    1528
+   ],
+   "seconds": 7.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1255
+  },
+  {
+   "camera": [
+    19.58376,
+    48.95805,
+    1901
+   ],
+   "seconds": 6.4,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1583
+  },
+  {
+   "camera": [
+    19.58857,
+    48.95159,
+    2172
+   ],
+   "seconds": 8.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1271
+  },
+  {
+   "camera": [
+    19.59033,
+    48.96046,
+    1798
+   ],
+   "seconds": 5.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1001
+  },
+  {
+   "camera": [
+    19.59361,
+    48.96626,
+    1563
+   ],
+   "seconds": 6.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1008
+  },
+  {
+   "camera": [
+    19.59733,
+    48.97282,
+    1327
+   ],
+   "seconds": 10.3,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1081
+  }
+ ]
+}

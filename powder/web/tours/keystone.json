@@ -1,0 +1,73 @@
+{
+ "resort": "Keystone",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -105.94044,
+    39.59723,
+    3412
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 3152
+  },
+  {
+   "camera": [
+    -105.94207,
+    39.58716,
+    3853
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3485
+  },
+  {
+   "camera": [
+    -105.94069,
+    39.57822,
+    3984
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3565
+  },
+  {
+   "camera": [
+    -105.93312,
+    39.57869,
+    3875
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 3339
+  },
+  {
+   "camera": [
+    -105.93333,
+    39.58729,
+    3592
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 3110
+  },
+  {
+   "camera": [
+    -105.93354,
+    39.59633,
+    3466
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2859
+  }
+ ]
+}

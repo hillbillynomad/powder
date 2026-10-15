@@ -1,0 +1,73 @@
+{
+ "resort": "Courmayeur",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.97184,
+    45.78549,
+    1564
+   ],
+   "seconds": 8.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1199
+  },
+  {
+   "camera": [
+    6.95777,
+    45.7878,
+    1823
+   ],
+   "seconds": 8.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1482
+  },
+  {
+   "camera": [
+    6.94636,
+    45.7919,
+    2193
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1914
+  },
+  {
+   "camera": [
+    6.94643,
+    45.79161,
+    2140
+   ],
+   "seconds": 6.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1215
+  },
+  {
+   "camera": [
+    6.95552,
+    45.79212,
+    1791
+   ],
+   "seconds": 6.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1240
+  },
+  {
+   "camera": [
+    6.96576,
+    45.7927,
+    1482
+   ],
+   "seconds": 7.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1227
+  }
+ ]
+}

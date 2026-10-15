@@ -1,0 +1,73 @@
+{
+ "resort": "Saas-Fee",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    7.92577,
+    46.09846,
+    2309
+   ],
+   "seconds": 9.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1948
+  },
+  {
+   "camera": [
+    7.91973,
+    46.08923,
+    2880
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2489
+  },
+  {
+   "camera": [
+    7.91735,
+    46.08039,
+    3058
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2741
+  },
+  {
+   "camera": [
+    7.92557,
+    46.07907,
+    3161
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2925
+  },
+  {
+   "camera": [
+    7.92904,
+    46.08732,
+    3009
+   ],
+   "seconds": 8.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1593
+  },
+  {
+   "camera": [
+    7.9327,
+    46.09599,
+    2499
+   ],
+   "seconds": 4.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1866
+  }
+ ]
+}

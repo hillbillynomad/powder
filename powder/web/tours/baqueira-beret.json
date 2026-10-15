@@ -1,0 +1,73 @@
+{
+ "resort": "Baqueira-Beret",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    0.94998,
+    42.69906,
+    2227
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1986
+  },
+  {
+   "camera": [
+    0.9631,
+    42.69611,
+    2698
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2355
+  },
+  {
+   "camera": [
+    0.97354,
+    42.69149,
+    2899
+   ],
+   "seconds": 4.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2339
+  },
+  {
+   "camera": [
+    0.96733,
+    42.69176,
+    2754
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1746
+  },
+  {
+   "camera": [
+    0.95685,
+    42.69452,
+    2433
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1531
+  },
+  {
+   "camera": [
+    0.94534,
+    42.69755,
+    2150
+   ],
+   "seconds": 3.2,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1688
+  }
+ ]
+}

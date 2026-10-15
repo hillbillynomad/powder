@@ -1,0 +1,73 @@
+{
+ "resort": "Garmisch-Partenkirchen",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.09548,
+    47.48187,
+    1068
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 706
+  },
+  {
+   "camera": [
+    11.09351,
+    47.47181,
+    1507
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1192
+  },
+  {
+   "camera": [
+    11.09498,
+    47.46286,
+    1787
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1245
+  },
+  {
+   "camera": [
+    11.09433,
+    47.46309,
+    1747
+   ],
+   "seconds": 3.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 763
+  },
+  {
+   "camera": [
+    11.0997,
+    47.46541,
+    1598
+   ],
+   "seconds": 4.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 886
+  },
+  {
+   "camera": [
+    11.10607,
+    47.46816,
+    1430
+   ],
+   "seconds": 13.3,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 714
+  }
+ ]
+}

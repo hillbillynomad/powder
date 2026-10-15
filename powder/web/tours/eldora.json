@@ -1,0 +1,73 @@
+{
+ "resort": "Eldora",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -105.58085,
+    39.93835,
+    3214
+   ],
+   "seconds": 6.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2879
+  },
+  {
+   "camera": [
+    -105.59064,
+    39.93623,
+    3482
+   ],
+   "seconds": 5.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3127
+  },
+  {
+   "camera": [
+    -105.59929,
+    39.93655,
+    3624
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3121
+  },
+  {
+   "camera": [
+    -105.60095,
+    39.93721,
+    3592
+   ],
+   "seconds": 5.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2770
+  },
+  {
+   "camera": [
+    -105.5964,
+    39.94215,
+    3361
+   ],
+   "seconds": 6.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2752
+  },
+  {
+   "camera": [
+    -105.59123,
+    39.94777,
+    3083
+   ],
+   "seconds": 10.4,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2771
+  }
+ ]
+}

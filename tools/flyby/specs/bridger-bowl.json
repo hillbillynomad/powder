@@ -1,0 +1,12 @@
+{
+ "resort": "Bridger Bowl",
+ "speed_mps": 132,
+ "points": [
+  {"label": "Over Jim Bridger Lodge, Ridge ahead", "camera": [-110.8985, 45.8172, 340], "pitch": 52},
+  {"label": "Up the Bridger lift line", "camera": [-110.9130, 45.8168, 540], "pitch": 48},
+  {"label": "Cresting the Ridge", "camera": [-110.9272, 45.8152, 470], "pitch": 54},
+  {"label": "South along the Ridge chutes", "camera": [-110.9288, 45.8112, 400], "pitch": 54},
+  {"label": "Down over Pierre's Knob", "camera": [-110.9185, 45.8098, 300], "pitch": 54},
+  {"label": "Down toward the lodge", "camera": [-110.9050, 45.8125, 290], "pitch": 60}
+ ]
+}

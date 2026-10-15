@@ -1,0 +1,73 @@
+{
+ "resort": "Gulmarg",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    74.38341,
+    34.04402,
+    3073
+   ],
+   "seconds": 8.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2804
+  },
+  {
+   "camera": [
+    74.37323,
+    34.03848,
+    3424
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3032
+  },
+  {
+   "camera": [
+    74.36588,
+    34.03189,
+    3527
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3143
+  },
+  {
+   "camera": [
+    74.37086,
+    34.02772,
+    3475
+   ],
+   "seconds": 7.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2579
+  },
+  {
+   "camera": [
+    74.37859,
+    34.03339,
+    3139
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2688
+  },
+  {
+   "camera": [
+    74.38674,
+    34.03936,
+    2980
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2778
+  }
+ ]
+}

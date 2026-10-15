@@ -1,0 +1,73 @@
+{
+ "resort": "Shiga Kogen",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    138.49494,
+    36.68472,
+    2027
+   ],
+   "seconds": 5.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1737
+  },
+  {
+   "camera": [
+    138.49906,
+    36.67937,
+    2293
+   ],
+   "seconds": 4.3,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1912
+  },
+  {
+   "camera": [
+    138.49999,
+    36.67431,
+    2393
+   ],
+   "seconds": 5.7,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1568
+  },
+  {
+   "camera": [
+    138.49215,
+    36.67679,
+    2303
+   ],
+   "seconds": 3.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1449
+  },
+  {
+   "camera": [
+    138.49385,
+    36.68008,
+    2085
+   ],
+   "seconds": 3.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1739
+  },
+  {
+   "camera": [
+    138.49595,
+    36.68413,
+    1976
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1780
+  }
+ ]
+}

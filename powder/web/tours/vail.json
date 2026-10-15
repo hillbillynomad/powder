@@ -1,0 +1,73 @@
+{
+ "resort": "Vail",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -106.38693,
+    39.63599,
+    3010
+   ],
+   "seconds": 9.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2775
+  },
+  {
+   "camera": [
+    -106.38808,
+    39.62589,
+    3498
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3117
+  },
+  {
+   "camera": [
+    -106.38629,
+    39.617,
+    3596
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3186
+  },
+  {
+   "camera": [
+    -106.37875,
+    39.61768,
+    3551
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2666
+  },
+  {
+   "camera": [
+    -106.37935,
+    39.62626,
+    3260
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2488
+  },
+  {
+   "camera": [
+    -106.37999,
+    39.63529,
+    2962
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2494
+  }
+ ]
+}

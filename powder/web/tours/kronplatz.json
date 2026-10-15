@@ -1,0 +1,73 @@
+{
+ "resort": "Kronplatz",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.96253,
+    46.75685,
+    1848
+   ],
+   "seconds": 9.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1702
+  },
+  {
+   "camera": [
+    11.96159,
+    46.74673,
+    2444
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2148
+  },
+  {
+   "camera": [
+    11.95764,
+    46.73815,
+    2721
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1609
+  },
+  {
+   "camera": [
+    11.95749,
+    46.73893,
+    2680
+   ],
+   "seconds": 5.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1006
+  },
+  {
+   "camera": [
+    11.95449,
+    46.74462,
+    2397
+   ],
+   "seconds": 6.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 928
+  },
+  {
+   "camera": [
+    11.95108,
+    46.75109,
+    2008
+   ],
+   "seconds": 8.3,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1052
+  }
+ ]
+}

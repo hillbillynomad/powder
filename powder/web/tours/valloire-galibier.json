@@ -1,0 +1,73 @@
+{
+ "resort": "Valloire-Galibier",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.42781,
+    45.16579,
+    1749
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1459
+  },
+  {
+   "camera": [
+    6.44122,
+    45.16251,
+    2196
+   ],
+   "seconds": 8.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1902
+  },
+  {
+   "camera": [
+    6.45375,
+    45.16173,
+    2581
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2234
+  },
+  {
+   "camera": [
+    6.4548,
+    45.16758,
+    2487
+   ],
+   "seconds": 7.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1334
+  },
+  {
+   "camera": [
+    6.44301,
+    45.16917,
+    2067
+   ],
+   "seconds": 8.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1536
+  },
+  {
+   "camera": [
+    6.43059,
+    45.17085,
+    1689
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1573
+  }
+ ]
+}

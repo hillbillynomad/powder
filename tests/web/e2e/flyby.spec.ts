@@ -52,9 +52,10 @@ test.describe('Resort flyover', () => {
   });
 
   test('resorts without a tour fly in as before, with no flyover button', async ({ page }) => {
-    await page.locator('#search-input').fill('chamonix');
+    // Mont Tremblant's marker sits in a flat town with no lifts in the map data: no tour
+    await page.locator('#search-input').fill('mont tremblant');
     await page.locator('#search-input').press('Enter');
-    await expect(page.locator('#detail-content')).toContainText(/Chamonix/i);
+    await expect(page.locator('#detail-content')).toContainText(/Tremblant/i);
     await page.waitForTimeout(1000);
     await expect(page.locator('#flyby-toggle')).toBeHidden();
   });

@@ -1,0 +1,73 @@
+{
+ "resort": "Pontedilegno-Tonale",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    10.57295,
+    46.25603,
+    2186
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1911
+  },
+  {
+   "camera": [
+    10.57561,
+    46.24605,
+    2661
+   ],
+   "seconds": 8.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2363
+  },
+  {
+   "camera": [
+    10.58096,
+    46.23786,
+    3044
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2336
+  },
+  {
+   "camera": [
+    10.58879,
+    46.24009,
+    2910
+   ],
+   "seconds": 7.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1821
+  },
+  {
+   "camera": [
+    10.58483,
+    46.24823,
+    2511
+   ],
+   "seconds": 8.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1908
+  },
+  {
+   "camera": [
+    10.58066,
+    46.2568,
+    2179
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1946
+  }
+ ]
+}

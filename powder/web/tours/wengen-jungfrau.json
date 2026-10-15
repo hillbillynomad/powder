@@ -1,0 +1,73 @@
+{
+ "resort": "Wengen/Jungfrau",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    7.91812,
+    46.60566,
+    1556
+   ],
+   "seconds": 9.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1300
+  },
+  {
+   "camera": [
+    7.93182,
+    46.6089,
+    2104
+   ],
+   "seconds": 8.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1871
+  },
+  {
+   "camera": [
+    7.94258,
+    46.61374,
+    2682
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 962
+  },
+  {
+   "camera": [
+    7.93823,
+    46.6188,
+    2697
+   ],
+   "seconds": 8.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1117
+  },
+  {
+   "camera": [
+    7.92734,
+    46.61494,
+    2002
+   ],
+   "seconds": 8.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1026
+  },
+  {
+   "camera": [
+    7.91587,
+    46.61086,
+    1587
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 967
+  }
+ ]
+}

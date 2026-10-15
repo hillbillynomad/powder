@@ -1,0 +1,73 @@
+{
+ "resort": "Grindelwald",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    8.04597,
+    46.63403,
+    1590
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1318
+  },
+  {
+   "camera": [
+    8.05314,
+    46.64288,
+    1972
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1602
+  },
+  {
+   "camera": [
+    8.05658,
+    46.65156,
+    2243
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2002
+  },
+  {
+   "camera": [
+    8.04845,
+    46.65334,
+    2185
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1880
+  },
+  {
+   "camera": [
+    8.04398,
+    46.64532,
+    1988
+   ],
+   "seconds": 7.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1126
+  },
+  {
+   "camera": [
+    8.03928,
+    46.63688,
+    1720
+   ],
+   "seconds": 4.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 974
+  }
+ ]
+}

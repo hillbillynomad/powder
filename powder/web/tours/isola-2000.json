@@ -1,0 +1,73 @@
+{
+ "resort": "Isola 2000",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    7.14905,
+    44.19182,
+    2289
+   ],
+   "seconds": 8.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1976
+  },
+  {
+   "camera": [
+    7.15093,
+    44.18252,
+    2683
+   ],
+   "seconds": 7.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2289
+  },
+  {
+   "camera": [
+    7.14956,
+    44.17432,
+    2828
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2362
+  },
+  {
+   "camera": [
+    7.14605,
+    44.17475,
+    2778
+   ],
+   "seconds": 7.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1995
+  },
+  {
+   "camera": [
+    7.14159,
+    44.18232,
+    2492
+   ],
+   "seconds": 8.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1849
+  },
+  {
+   "camera": [
+    7.13668,
+    44.19065,
+    2176
+   ],
+   "seconds": 7.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2014
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Arosa Lenzerheide",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    9.66439,
+    46.78582,
+    2328
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2112
+  },
+  {
+   "camera": [
+    9.65038,
+    46.78891,
+    2768
+   ],
+   "seconds": 7.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2441
+  },
+  {
+   "camera": [
+    9.63735,
+    46.78949,
+    3073
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2035
+  },
+  {
+   "camera": [
+    9.63486,
+    46.78679,
+    2917
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1890
+  },
+  {
+   "camera": [
+    9.64557,
+    46.78315,
+    2600
+   ],
+   "seconds": 8.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1781
+  },
+  {
+   "camera": [
+    9.65734,
+    46.77915,
+    2252
+   ],
+   "seconds": 6.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2007
+  }
+ ]
+}

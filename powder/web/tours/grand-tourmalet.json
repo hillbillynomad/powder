@@ -1,0 +1,73 @@
+{
+ "resort": "Grand Tourmalet",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    0.18084,
+    42.90751,
+    2123
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1724
+  },
+  {
+   "camera": [
+    0.17245,
+    42.91553,
+    2544
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2182
+  },
+  {
+   "camera": [
+    0.1629,
+    42.92111,
+    2696
+   ],
+   "seconds": 5.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2186
+  },
+  {
+   "camera": [
+    0.16046,
+    42.9154,
+    2566
+   ],
+   "seconds": 5.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1915
+  },
+  {
+   "camera": [
+    0.16626,
+    42.91209,
+    2286
+   ],
+   "seconds": 5.4,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1854
+  },
+  {
+   "camera": [
+    0.17294,
+    42.90827,
+    2092
+   ],
+   "seconds": 4.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1825
+  }
+ ]
+}

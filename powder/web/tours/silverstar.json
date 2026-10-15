@@ -1,0 +1,73 @@
+{
+ "resort": "SilverStar",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -119.04458,
+    50.35661,
+    1674
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1418
+  },
+  {
+   "camera": [
+    -119.05411,
+    50.3647,
+    2154
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1822
+  },
+  {
+   "camera": [
+    -119.06501,
+    50.37036,
+    2327
+   ],
+   "seconds": 4.5,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1806
+  },
+  {
+   "camera": [
+    -119.06958,
+    50.36593,
+    2264
+   ],
+   "seconds": 3.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1515
+  },
+  {
+   "camera": [
+    -119.06654,
+    50.36245,
+    2042
+   ],
+   "seconds": 4.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1630
+  },
+  {
+   "camera": [
+    -119.06289,
+    50.35827,
+    1907
+   ],
+   "seconds": 10.1,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1219
+  }
+ ]
+}

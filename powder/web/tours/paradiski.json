@@ -1,0 +1,73 @@
+{
+ "resort": "Paradiski",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.91369,
+    45.488,
+    2521
+   ],
+   "seconds": 9.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2309
+  },
+  {
+   "camera": [
+    6.8994,
+    45.48694,
+    3054
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2638
+  },
+  {
+   "camera": [
+    6.88741,
+    45.48387,
+    3155
+   ],
+   "seconds": 9.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2213
+  },
+  {
+   "camera": [
+    6.90345,
+    45.48157,
+    2882
+   ],
+   "seconds": 5.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1731
+  },
+  {
+   "camera": [
+    6.90941,
+    45.48522,
+    2658
+   ],
+   "seconds": 5.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1742
+  },
+  {
+   "camera": [
+    6.91625,
+    45.48941,
+    2459
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1865
+  }
+ ]
+}

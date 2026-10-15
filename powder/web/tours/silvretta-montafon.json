@@ -1,0 +1,73 @@
+{
+ "resort": "Silvretta Montafon",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    9.97092,
+    47.07794,
+    2167
+   ],
+   "seconds": 9.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1931
+  },
+  {
+   "camera": [
+    9.97221,
+    47.06784,
+    2743
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2337
+  },
+  {
+   "camera": [
+    9.97648,
+    47.05933,
+    2769
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1975
+  },
+  {
+   "camera": [
+    9.98471,
+    47.06103,
+    2805
+   ],
+   "seconds": 7.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1061
+  },
+  {
+   "camera": [
+    9.98184,
+    47.06939,
+    2422
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1020
+  },
+  {
+   "camera": [
+    9.97882,
+    47.0782,
+    2216
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1091
+  }
+ ]
+}

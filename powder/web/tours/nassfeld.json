@@ -1,0 +1,73 @@
+{
+ "resort": "Nassfeld",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    13.26177,
+    46.57782,
+    1851
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1590
+  },
+  {
+   "camera": [
+    13.25844,
+    46.56793,
+    2279
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1816
+  },
+  {
+   "camera": [
+    13.25252,
+    46.55992,
+    2357
+   ],
+   "seconds": 6.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1928
+  },
+  {
+   "camera": [
+    13.25462,
+    46.56702,
+    2277
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1453
+  },
+  {
+   "camera": [
+    13.25655,
+    46.57515,
+    1959
+   ],
+   "seconds": 7.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1112
+  },
+  {
+   "camera": [
+    13.25867,
+    46.58407,
+    1688
+   ],
+   "seconds": 5.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1016
+  }
+ ]
+}

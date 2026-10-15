@@ -1,0 +1,73 @@
+{
+ "resort": "Mammoth Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -119.00482,
+    37.62731,
+    2933
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2701
+  },
+  {
+   "camera": [
+    -119.01706,
+    37.62946,
+    3395
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3046
+  },
+  {
+   "camera": [
+    -119.02815,
+    37.62918,
+    3656
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2915
+  },
+  {
+   "camera": [
+    -119.02822,
+    37.62329,
+    3545
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2658
+  },
+  {
+   "camera": [
+    -119.01766,
+    37.62269,
+    3300
+   ],
+   "seconds": 8.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2614
+  },
+  {
+   "camera": [
+    -119.00654,
+    37.62206,
+    2907
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2479
+  }
+ ]
+}

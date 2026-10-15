@@ -1,0 +1,73 @@
+{
+ "resort": "Thaiwoo",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    115.42476,
+    40.94695,
+    2117
+   ],
+   "seconds": 7.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1863
+  },
+  {
+   "camera": [
+    115.41469,
+    40.9503,
+    2496
+   ],
+   "seconds": 6.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2095
+  },
+  {
+   "camera": [
+    115.40528,
+    40.95111,
+    2556
+   ],
+   "seconds": 9.6,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1829
+  },
+  {
+   "camera": [
+    115.41483,
+    40.94236,
+    2451
+   ],
+   "seconds": 5.9,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1754
+  },
+  {
+   "camera": [
+    115.42273,
+    40.94008,
+    2132
+   ],
+   "seconds": 6.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1702
+  },
+  {
+   "camera": [
+    115.43162,
+    40.93751,
+    1948
+   ],
+   "seconds": 9.1,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1725
+  }
+ ]
+}

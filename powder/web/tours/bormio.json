@@ -1,0 +1,73 @@
+{
+ "resort": "Bormio",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    10.37555,
+    46.45965,
+    1614
+   ],
+   "seconds": 9.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1351
+  },
+  {
+   "camera": [
+    10.38133,
+    46.45033,
+    2123
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1796
+  },
+  {
+   "camera": [
+    10.38917,
+    46.44316,
+    2410
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2132
+  },
+  {
+   "camera": [
+    10.39613,
+    46.44654,
+    2424
+   ],
+   "seconds": 8.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1362
+  },
+  {
+   "camera": [
+    10.38967,
+    46.45387,
+    1974
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1222
+  },
+  {
+   "camera": [
+    10.38286,
+    46.46159,
+    1658
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1200
+  }
+ ]
+}

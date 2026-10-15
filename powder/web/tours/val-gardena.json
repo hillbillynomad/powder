@@ -1,0 +1,73 @@
+{
+ "resort": "Val Gardena",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.76349,
+    46.55491,
+    1939
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1655
+  },
+  {
+   "camera": [
+    11.75624,
+    46.5461,
+    2410
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2089
+  },
+  {
+   "camera": [
+    11.75273,
+    46.53743,
+    2634
+   ],
+   "seconds": 5.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2019
+  },
+  {
+   "camera": [
+    11.76082,
+    46.53562,
+    2412
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1798
+  },
+  {
+   "camera": [
+    11.76536,
+    46.54362,
+    2123
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1752
+  },
+  {
+   "camera": [
+    11.77014,
+    46.55204,
+    2060
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1656
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "El Colorado",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -70.28618,
+    -33.35058,
+    3194
+   ],
+   "seconds": 7.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2915
+  },
+  {
+   "camera": [
+    -70.27762,
+    -33.34661,
+    3592
+   ],
+   "seconds": 6.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3258
+  },
+  {
+   "camera": [
+    -70.26938,
+    -33.34522,
+    3774
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3032
+  },
+  {
+   "camera": [
+    -70.27209,
+    -33.34761,
+    3652
+   ],
+   "seconds": 5.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2323
+  },
+  {
+   "camera": [
+    -70.27755,
+    -33.35093,
+    3338
+   ],
+   "seconds": 5.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2226
+  },
+  {
+   "camera": [
+    -70.28379,
+    -33.35472,
+    3090
+   ],
+   "seconds": 3.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2421
+  }
+ ]
+}

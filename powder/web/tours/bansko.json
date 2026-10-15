@@ -1,0 +1,73 @@
+{
+ "resort": "Bansko",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    23.47361,
+    41.81601,
+    1416
+   ],
+   "seconds": 8.8,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1120
+  },
+  {
+   "camera": [
+    23.46791,
+    41.80681,
+    1733
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1376
+  },
+  {
+   "camera": [
+    23.46562,
+    41.79798,
+    1921
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1523
+  },
+  {
+   "camera": [
+    23.47326,
+    41.79663,
+    1882
+   ],
+   "seconds": 7.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1404
+  },
+  {
+   "camera": [
+    23.47656,
+    41.80486,
+    1550
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1114
+  },
+  {
+   "camera": [
+    23.48004,
+    41.81352,
+    1412
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1010
+  }
+ ]
+}

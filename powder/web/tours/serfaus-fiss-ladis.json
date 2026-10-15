@@ -1,0 +1,73 @@
+{
+ "resort": "Serfaus-Fiss-Ladis",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    10.59525,
+    47.03842,
+    1810
+   ],
+   "seconds": 7.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1516
+  },
+  {
+   "camera": [
+    10.59495,
+    47.04645,
+    2164
+   ],
+   "seconds": 5.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1795
+  },
+  {
+   "camera": [
+    10.59161,
+    47.05293,
+    2318
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2061
+  },
+  {
+   "camera": [
+    10.58333,
+    47.05136,
+    2274
+   ],
+   "seconds": 5.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1720
+  },
+  {
+   "camera": [
+    10.58527,
+    47.04505,
+    1986
+   ],
+   "seconds": 5.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1661
+  },
+  {
+   "camera": [
+    10.58734,
+    47.03829,
+    1956
+   ],
+   "seconds": 4.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1664
+  }
+ ]
+}

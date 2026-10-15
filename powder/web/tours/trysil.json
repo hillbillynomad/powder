@@ -1,0 +1,73 @@
+{
+ "resort": "Trysil",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    12.24225,
+    61.30889,
+    784
+   ],
+   "seconds": 6.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 439
+  },
+  {
+   "camera": [
+    12.23102,
+    61.3132,
+    1068
+   ],
+   "seconds": 4.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 672
+  },
+  {
+   "camera": [
+    12.21963,
+    61.31493,
+    1131
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 776
+  },
+  {
+   "camera": [
+    12.21488,
+    61.30951,
+    1117
+   ],
+   "seconds": 4.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 618
+  },
+  {
+   "camera": [
+    12.22476,
+    61.30713,
+    914
+   ],
+   "seconds": 4.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 447
+  },
+  {
+   "camera": [
+    12.23548,
+    61.30455,
+    787
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 374
+  }
+ ]
+}

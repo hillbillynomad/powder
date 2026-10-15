@@ -1,0 +1,73 @@
+{
+ "resort": "Sun Peaks",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -119.89105,
+    50.8864,
+    1645
+   ],
+   "seconds": 9.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1406
+  },
+  {
+   "camera": [
+    -119.90003,
+    50.89479,
+    2208
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1795
+  },
+  {
+   "camera": [
+    -119.91058,
+    50.9008,
+    2321
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2048
+  },
+  {
+   "camera": [
+    -119.91704,
+    50.89656,
+    2321
+   ],
+   "seconds": 7.9,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1197
+  },
+  {
+   "camera": [
+    -119.90792,
+    50.89022,
+    1896
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1258
+  },
+  {
+   "camera": [
+    -119.89832,
+    50.88353,
+    1595
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1299
+  }
+ ]
+}

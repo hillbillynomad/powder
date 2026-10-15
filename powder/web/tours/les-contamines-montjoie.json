@@ -1,0 +1,73 @@
+{
+ "resort": "Les Contamines-Montjoie",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.72569,
+    45.81299,
+    1506
+   ],
+   "seconds": 7.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1246
+  },
+  {
+   "camera": [
+    6.71727,
+    45.80786,
+    1893
+   ],
+   "seconds": 5.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1453
+  },
+  {
+   "camera": [
+    6.71243,
+    45.80212,
+    1939
+   ],
+   "seconds": 5.5,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1255
+  },
+  {
+   "camera": [
+    6.71931,
+    45.79875,
+    1609
+   ],
+   "seconds": 5.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1309
+  },
+  {
+   "camera": [
+    6.72484,
+    45.80364,
+    1507
+   ],
+   "seconds": 5.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1261
+  },
+  {
+   "camera": [
+    6.73076,
+    45.80889,
+    1597
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1220
+  }
+ ]
+}

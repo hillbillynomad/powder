@@ -1,0 +1,73 @@
+{
+ "resort": "Zell am See-Kaprun",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    12.73662,
+    47.26792,
+    1373
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1132
+  },
+  {
+   "camera": [
+    12.72349,
+    47.26318,
+    1854
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1463
+  },
+  {
+   "camera": [
+    12.71368,
+    47.25717,
+    2053
+   ],
+   "seconds": 5.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1772
+  },
+  {
+   "camera": [
+    12.71918,
+    47.25263,
+    1863
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 947
+  },
+  {
+   "camera": [
+    12.72934,
+    47.25769,
+    1588
+   ],
+   "seconds": 8.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 770
+  },
+  {
+   "camera": [
+    12.74004,
+    47.26302,
+    1143
+   ],
+   "seconds": 4.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 905
+  }
+ ]
+}

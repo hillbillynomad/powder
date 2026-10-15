@@ -1,0 +1,73 @@
+{
+ "resort": "Crested Butte",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -106.96208,
+    38.89782,
+    3248
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 3010
+  },
+  {
+   "camera": [
+    -106.95254,
+    38.89097,
+    3653
+   ],
+   "seconds": 7.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3332
+  },
+  {
+   "camera": [
+    -106.94246,
+    38.88667,
+    3986
+   ],
+   "seconds": 9.7,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2929
+  },
+  {
+   "camera": [
+    -106.94524,
+    38.89735,
+    3571
+   ],
+   "seconds": 7.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 3040
+  },
+  {
+   "camera": [
+    -106.95558,
+    38.89832,
+    3348
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2881
+  },
+  {
+   "camera": [
+    -106.96695,
+    38.89939,
+    3155
+   ],
+   "seconds": 3.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2796
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Gore Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -74.0147,
+    43.67503,
+    922
+   ],
+   "seconds": 7.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 662
+  },
+  {
+   "camera": [
+    -74.02618,
+    43.67504,
+    1306
+   ],
+   "seconds": 6.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 968
+  },
+  {
+   "camera": [
+    -74.03562,
+    43.67717,
+    1425
+   ],
+   "seconds": 9.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 726
+  },
+  {
+   "camera": [
+    -74.02265,
+    43.68401,
+    1249
+   ],
+   "seconds": 5.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 504
+  },
+  {
+   "camera": [
+    -74.01394,
+    43.68299,
+    1041
+   ],
+   "seconds": 6.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 321
+  },
+  {
+   "camera": [
+    -74.00413,
+    43.68185,
+    795
+   ],
+   "seconds": 8.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 475
+  }
+ ]
+}

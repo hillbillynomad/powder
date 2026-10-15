@@ -1,0 +1,73 @@
+{
+ "resort": "Schladming",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    13.69291,
+    47.39233,
+    1080
+   ],
+   "seconds": 9.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 853
+  },
+  {
+   "camera": [
+    13.7047,
+    47.38615,
+    1694
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1360
+  },
+  {
+   "camera": [
+    13.71292,
+    47.3791,
+    1961
+   ],
+   "seconds": 5.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1666
+  },
+  {
+   "camera": [
+    13.70362,
+    47.37857,
+    1821
+   ],
+   "seconds": 7.5,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 915
+  },
+  {
+   "camera": [
+    13.69356,
+    47.38312,
+    1438
+   ],
+   "seconds": 8.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 740
+  },
+  {
+   "camera": [
+    13.6825,
+    47.38812,
+    1119
+   ],
+   "seconds": 6.9,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 772
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Flaine/Grand Massif",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.69374,
+    46.00186,
+    1946
+   ],
+   "seconds": 9.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1741
+  },
+  {
+   "camera": [
+    6.69876,
+    45.99235,
+    2488
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2125
+  },
+  {
+   "camera": [
+    6.706,
+    45.98491,
+    2654
+   ],
+   "seconds": 10.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2249
+  },
+  {
+   "camera": [
+    6.71527,
+    45.99537,
+    2521
+   ],
+   "seconds": 7.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2012
+  },
+  {
+   "camera": [
+    6.70469,
+    45.99898,
+    2181
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1542
+  },
+  {
+   "camera": [
+    6.69307,
+    46.00295,
+    1885
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1570
+  }
+ ]
+}

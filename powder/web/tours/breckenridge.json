@@ -1,0 +1,73 @@
+{
+ "resort": "Breckenridge",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -106.05943,
+    39.4703,
+    3389
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 3118
+  },
+  {
+   "camera": [
+    -106.06937,
+    39.46373,
+    3783
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3387
+  },
+  {
+   "camera": [
+    -106.07974,
+    39.45973,
+    3924
+   ],
+   "seconds": 8.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3432
+  },
+  {
+   "camera": [
+    -106.08489,
+    39.46957,
+    3858
+   ],
+   "seconds": 7.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 3197
+  },
+  {
+   "camera": [
+    -106.07432,
+    39.47006,
+    3503
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 3089
+  },
+  {
+   "camera": [
+    -106.0627,
+    39.4706,
+    3389
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2997
+  }
+ ]
+}

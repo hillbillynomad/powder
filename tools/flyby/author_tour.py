@@ -84,8 +84,8 @@ def bearing(a, b):
     return (math.degrees(math.atan2(dx, b[1] - a[1])) + 360) % 360
 
 
-def main(spec_path, out_path):
-    spec = json.load(open(spec_path))
+def build_tour(spec, verbose=True):
+    """Turn a spec dict into a tour dict (heights, clearance, timing, ground aim heights)."""
     pts = []
     for w in spec['points']:
         cam_lng, cam_lat, cam_agl = w['camera']
@@ -162,13 +162,21 @@ def main(spec_path, out_path):
             dist, _ = leg_metres(cam, tgt)
             line += f"  look pitch {90 - math.degrees(math.atan2(cam[2] - tgt[2], dist)):4.1f}"
             tgt[:] = [round(tgt[0], 5), round(tgt[1], 5), round(tgt[2])]
-        print(line)
+        if verbose:
+            print(line)
         cam[:] = [round(cam[0], 5), round(cam[1], 5), round(cam[2])]
 
     tour = {'resort': spec['resort'], 'version': 1, 'units': 'metres above sea level (real, unexaggerated)',
             'points': pts}
-    json.dump(tour, open(out_path, 'w', encoding='utf-8', newline='\n'), indent=1)
-    print('total', round(sum(p['seconds'] for p in pts), 1), 's ->', out_path)
+    return tour
+
+
+def main(spec_path, out_path):
+    spec = json.load(open(spec_path, encoding='utf-8'))
+    tour = build_tour(spec)
+    with open(out_path, 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(tour, f, indent=1)
+    print('total', round(sum(p['seconds'] for p in tour['points']), 1), 's ->', out_path)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,73 @@
+{
+ "resort": "Nevados de Chill\u00e1n",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -71.41303,
+    -36.90341,
+    2064
+   ],
+   "seconds": 9.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1781
+  },
+  {
+   "camera": [
+    -71.40365,
+    -36.89665,
+    2621
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2268
+  },
+  {
+   "camera": [
+    -71.39737,
+    -36.8892,
+    2882
+   ],
+   "seconds": 3.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2434
+  },
+  {
+   "camera": [
+    -71.40202,
+    -36.88879,
+    2717
+   ],
+   "seconds": 5.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1869
+  },
+  {
+   "camera": [
+    -71.40681,
+    -36.89321,
+    2463
+   ],
+   "seconds": 5.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1542
+  },
+  {
+   "camera": [
+    -71.41226,
+    -36.89823,
+    2196
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1568
+  }
+ ]
+}

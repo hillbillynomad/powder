@@ -1,0 +1,73 @@
+{
+ "resort": "Queenstown (Remarkables + Coronet Peak)",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    168.81281,
+    -45.05181,
+    1924
+   ],
+   "seconds": 7.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1641
+  },
+  {
+   "camera": [
+    168.81941,
+    -45.05838,
+    2221
+   ],
+   "seconds": 6.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1884
+  },
+  {
+   "camera": [
+    168.82237,
+    -45.06497,
+    2461
+   ],
+   "seconds": 10.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1926
+  },
+  {
+   "camera": [
+    168.80609,
+    -45.06046,
+    2424
+   ],
+   "seconds": 4.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 581
+  },
+  {
+   "camera": [
+    168.80996,
+    -45.05701,
+    2154
+   ],
+   "seconds": 4.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1694
+  },
+  {
+   "camera": [
+    168.81455,
+    -45.05292,
+    1891
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1659
+  }
+ ]
+}

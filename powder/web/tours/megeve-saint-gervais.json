@@ -1,0 +1,73 @@
+{
+ "resort": "Meg\u00e8ve/Saint-Gervais",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.61598,
+    45.8509,
+    1482
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1200
+  },
+  {
+   "camera": [
+    6.61283,
+    45.841,
+    1884
+   ],
+   "seconds": 7.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1551
+  },
+  {
+   "camera": [
+    6.61314,
+    45.832,
+    2201
+   ],
+   "seconds": 12.7,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1375
+  },
+  {
+   "camera": [
+    6.62493,
+    45.84406,
+    1751
+   ],
+   "seconds": 3.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1247
+  },
+  {
+   "camera": [
+    6.62028,
+    45.84647,
+    1565
+   ],
+   "seconds": 4.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1065
+  },
+  {
+   "camera": [
+    6.6147,
+    45.84936,
+    1450
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1096
+  }
+ ]
+}

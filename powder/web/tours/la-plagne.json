@@ -1,0 +1,73 @@
+{
+ "resort": "La Plagne",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.70912,
+    45.50345,
+    2435
+   ],
+   "seconds": 8.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2171
+  },
+  {
+   "camera": [
+    6.71908,
+    45.49892,
+    3023
+   ],
+   "seconds": 6.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2523
+  },
+  {
+   "camera": [
+    6.72564,
+    45.4934,
+    2956
+   ],
+   "seconds": 5.7,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2651
+  },
+  {
+   "camera": [
+    6.73497,
+    45.49399,
+    3119
+   ],
+   "seconds": 5.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2027
+  },
+  {
+   "camera": [
+    6.72588,
+    45.49422,
+    2833
+   ],
+   "seconds": 6.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2265
+  },
+  {
+   "camera": [
+    6.71563,
+    45.49447,
+    2692
+   ],
+   "seconds": 8.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2129
+  }
+ ]
+}

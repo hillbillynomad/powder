@@ -1,0 +1,73 @@
+{
+ "resort": "Mount Snow",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -72.89729,
+    42.96671,
+    971
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 600
+  },
+  {
+   "camera": [
+    -72.90937,
+    42.96184,
+    1395
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1008
+  },
+  {
+   "camera": [
+    -72.92118,
+    42.95956,
+    1543
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 777
+  },
+  {
+   "camera": [
+    -72.92182,
+    42.9593,
+    1505
+   ],
+   "seconds": 5.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 770
+  },
+  {
+   "camera": [
+    -72.92133,
+    42.96498,
+    1242
+   ],
+   "seconds": 5.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 796
+  },
+  {
+   "camera": [
+    -72.92077,
+    42.97147,
+    1080
+   ],
+   "seconds": 15.1,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 699
+  }
+ ]
+}

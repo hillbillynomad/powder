@@ -1,0 +1,73 @@
+{
+ "resort": "Stowe",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -72.78416,
+    44.52876,
+    800
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 534
+  },
+  {
+   "camera": [
+    -72.7981,
+    44.52713,
+    1254
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 934
+  },
+  {
+   "camera": [
+    -72.80962,
+    44.52357,
+    1541
+   ],
+   "seconds": 8.8,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 621
+  },
+  {
+   "camera": [
+    -72.79635,
+    44.52009,
+    1254
+   ],
+   "seconds": 6.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 491
+  },
+  {
+   "camera": [
+    -72.78954,
+    44.52446,
+    934
+   ],
+   "seconds": 6.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 475
+  },
+  {
+   "camera": [
+    -72.78188,
+    44.52938,
+    757
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 513
+  }
+ ]
+}

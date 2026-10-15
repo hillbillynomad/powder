@@ -1,0 +1,73 @@
+{
+ "resort": "Kirkwood",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -120.06715,
+    38.68501,
+    2716
+   ],
+   "seconds": 8.8,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2420
+  },
+  {
+   "camera": [
+    -120.06444,
+    38.67526,
+    3091
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2736
+  },
+  {
+   "camera": [
+    -120.06481,
+    38.66643,
+    3319
+   ],
+   "seconds": 11.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2598
+  },
+  {
+   "camera": [
+    -120.07774,
+    38.67511,
+    3199
+   ],
+   "seconds": 5.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2580
+  },
+  {
+   "camera": [
+    -120.07262,
+    38.67942,
+    2847
+   ],
+   "seconds": 5.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2402
+  },
+  {
+   "camera": [
+    -120.06679,
+    38.68432,
+    2679
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2477
+  }
+ ]
+}

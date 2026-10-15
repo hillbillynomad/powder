@@ -1,0 +1,73 @@
+{
+ "resort": "Vemdalen",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    13.9547,
+    62.42,
+    920
+   ],
+   "seconds": 6.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 640
+  },
+  {
+   "camera": [
+    13.96581,
+    62.42578,
+    1217
+   ],
+   "seconds": 5.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 839
+  },
+  {
+   "camera": [
+    13.97814,
+    62.42904,
+    1326
+   ],
+   "seconds": 7.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 926
+  },
+  {
+   "camera": [
+    13.97712,
+    62.41959,
+    1279
+   ],
+   "seconds": 4.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 623
+  },
+  {
+   "camera": [
+    13.96703,
+    62.42057,
+    1038
+   ],
+   "seconds": 4.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 604
+  },
+  {
+   "camera": [
+    13.95524,
+    62.42172,
+    903
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 515
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Livigno",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    10.13997,
+    46.54404,
+    2150
+   ],
+   "seconds": 8.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1839
+  },
+  {
+   "camera": [
+    10.12712,
+    46.54234,
+    2558
+   ],
+   "seconds": 6.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2263
+  },
+  {
+   "camera": [
+    10.11574,
+    46.54301,
+    2813
+   ],
+   "seconds": 7.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2088
+  },
+  {
+   "camera": [
+    10.12602,
+    46.54683,
+    2480
+   ],
+   "seconds": 4.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1807
+  },
+  {
+   "camera": [
+    10.13226,
+    46.54753,
+    2263
+   ],
+   "seconds": 4.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1819
+  },
+  {
+   "camera": [
+    10.13966,
+    46.54836,
+    2108
+   ],
+   "seconds": 3.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1843
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Mayrhofen",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.85154,
+    47.16629,
+    1146
+   ],
+   "seconds": 10.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1021
+  },
+  {
+   "camera": [
+    11.83979,
+    47.17247,
+    1847
+   ],
+   "seconds": 8.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1630
+  },
+  {
+   "camera": [
+    11.82774,
+    47.17607,
+    2236
+   ],
+   "seconds": 5.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1923
+  },
+  {
+   "camera": [
+    11.82399,
+    47.17077,
+    2086
+   ],
+   "seconds": 8.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 945
+  },
+  {
+   "camera": [
+    11.83493,
+    47.16656,
+    1533
+   ],
+   "seconds": 8.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 697
+  },
+  {
+   "camera": [
+    11.84645,
+    47.16212,
+    943
+   ],
+   "seconds": 4.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 654
+  }
+ ]
+}

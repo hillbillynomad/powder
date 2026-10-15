@@ -1,0 +1,91 @@
+{
+ "resort": "Mount Hotham",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    147.11844,
+    -37.08411,
+    2062
+   ],
+   "seconds": 5.8,
+   "label": "Orbit 0 deg",
+   "target": [
+    147.11844,
+    -37.0909,
+    1689
+   ]
+  },
+  {
+   "camera": [
+    147.12575,
+    -37.08751,
+    1927
+   ],
+   "seconds": 5.8,
+   "label": "Orbit 60 deg",
+   "target": [
+    147.11844,
+    -37.0909,
+    1689
+   ]
+  },
+  {
+   "camera": [
+    147.12575,
+    -37.09429,
+    2055
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 120 deg",
+   "target": [
+    147.11844,
+    -37.0909,
+    1689
+   ]
+  },
+  {
+   "camera": [
+    147.11844,
+    -37.09768,
+    1998
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 180 deg",
+   "target": [
+    147.11844,
+    -37.0909,
+    1689
+   ]
+  },
+  {
+   "camera": [
+    147.11112,
+    -37.09429,
+    1890
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 240 deg",
+   "target": [
+    147.11844,
+    -37.0909,
+    1689
+   ]
+  },
+  {
+   "camera": [
+    147.11112,
+    -37.08751,
+    1995
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 300 deg",
+   "target": [
+    147.11844,
+    -37.0909,
+    1689
+   ]
+  }
+ ]
+}

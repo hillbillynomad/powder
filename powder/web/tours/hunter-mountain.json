@@ -1,0 +1,73 @@
+{
+ "resort": "Hunter Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -74.20868,
+    42.20424,
+    845
+   ],
+   "seconds": 8.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 507
+  },
+  {
+   "camera": [
+    -74.22154,
+    42.20362,
+    1241
+   ],
+   "seconds": 7.2,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 929
+  },
+  {
+   "camera": [
+    -74.2323,
+    42.20094,
+    1412
+   ],
+   "seconds": 5.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 857
+  },
+  {
+   "camera": [
+    -74.23014,
+    42.19527,
+    1214
+   ],
+   "seconds": 7.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 712
+  },
+  {
+   "camera": [
+    -74.21959,
+    42.197,
+    994
+   ],
+   "seconds": 7.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 575
+  },
+  {
+   "camera": [
+    -74.20846,
+    42.19882,
+    883
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 523
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Grandvalira",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    1.68215,
+    42.55216,
+    2468
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2206
+  },
+  {
+   "camera": [
+    1.66967,
+    42.54802,
+    2871
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2435
+  },
+  {
+   "camera": [
+    1.66013,
+    42.54246,
+    2955
+   ],
+   "seconds": 5.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2418
+  },
+  {
+   "camera": [
+    1.66478,
+    42.53769,
+    2797
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2305
+  },
+  {
+   "camera": [
+    1.67457,
+    42.54228,
+    2617
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2268
+  },
+  {
+   "camera": [
+    1.68487,
+    42.54712,
+    2555
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2127
+  }
+ ]
+}

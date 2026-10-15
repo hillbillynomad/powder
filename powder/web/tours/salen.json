@@ -1,0 +1,73 @@
+{
+ "resort": "S\u00e4len",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    13.21319,
+    61.15288,
+    934
+   ],
+   "seconds": 8.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 611
+  },
+  {
+   "camera": [
+    13.19858,
+    61.14704,
+    1240
+   ],
+   "seconds": 6.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 878
+  },
+  {
+   "camera": [
+    13.18345,
+    61.14379,
+    1356
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 860
+  },
+  {
+   "camera": [
+    13.18414,
+    61.14666,
+    1295
+   ],
+   "seconds": 5.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 613
+  },
+  {
+   "camera": [
+    13.19349,
+    61.15071,
+    1061
+   ],
+   "seconds": 5.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 598
+  },
+  {
+   "camera": [
+    13.20411,
+    61.15529,
+    904
+   ],
+   "seconds": 4.2,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 563
+  }
+ ]
+}

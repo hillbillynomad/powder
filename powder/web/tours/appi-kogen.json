@@ -1,0 +1,73 @@
+{
+ "resort": "Appi Kogen",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    140.94477,
+    39.89471,
+    1125
+   ],
+   "seconds": 6.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 848
+  },
+  {
+   "camera": [
+    140.93666,
+    39.89287,
+    1436
+   ],
+   "seconds": 4.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1114
+  },
+  {
+   "camera": [
+    140.92976,
+    39.89345,
+    1611
+   ],
+   "seconds": 6.3,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 791
+  },
+  {
+   "camera": [
+    140.9377,
+    39.89719,
+    1369
+   ],
+   "seconds": 4.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 707
+  },
+  {
+   "camera": [
+    140.94312,
+    39.8979,
+    1142
+   ],
+   "seconds": 4.4,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 600
+  },
+  {
+   "camera": [
+    140.94957,
+    39.89874,
+    990
+   ],
+   "seconds": 4.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 635
+  }
+ ]
+}

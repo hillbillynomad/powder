@@ -1,0 +1,73 @@
+{
+ "resort": "Alpe d'Huez",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.03363,
+    45.09735,
+    1821
+   ],
+   "seconds": 9.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1604
+  },
+  {
+   "camera": [
+    6.04787,
+    45.09805,
+    2411
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2045
+  },
+  {
+   "camera": [
+    6.05991,
+    45.10083,
+    2557
+   ],
+   "seconds": 5.5,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1977
+  },
+  {
+   "camera": [
+    6.05767,
+    45.1065,
+    2234
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 713
+  },
+  {
+   "camera": [
+    6.04585,
+    45.10468,
+    2045
+   ],
+   "seconds": 8.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 721
+  },
+  {
+   "camera": [
+    6.03341,
+    45.10277,
+    1547
+   ],
+   "seconds": 5.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 714
+  }
+ ]
+}

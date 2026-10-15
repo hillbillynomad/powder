@@ -1,0 +1,73 @@
+{
+ "resort": "Geilo",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    8.19193,
+    60.5313,
+    1131
+   ],
+   "seconds": 6.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 837
+  },
+  {
+   "camera": [
+    8.18065,
+    60.53485,
+    1468
+   ],
+   "seconds": 4.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1082
+  },
+  {
+   "camera": [
+    8.17427,
+    60.5393,
+    1563
+   ],
+   "seconds": 9.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1004
+  },
+  {
+   "camera": [
+    8.19603,
+    60.54148,
+    1494
+   ],
+   "seconds": 3.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 789
+  },
+  {
+   "camera": [
+    8.19716,
+    60.53778,
+    1271
+   ],
+   "seconds": 4.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 769
+  },
+  {
+   "camera": [
+    8.19854,
+    60.53329,
+    1096
+   ],
+   "seconds": 3.2,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 770
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Ruka",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    29.17817,
+    66.16934,
+    675
+   ],
+   "seconds": 6.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 356
+  },
+  {
+   "camera": [
+    29.16253,
+    66.16557,
+    941
+   ],
+   "seconds": 5.2,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 403
+  },
+  {
+   "camera": [
+    29.14749,
+    66.16437,
+    912
+   ],
+   "seconds": 5.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 318
+  },
+  {
+   "camera": [
+    29.14975,
+    66.17071,
+    860
+   ],
+   "seconds": 3.4,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 303
+  },
+  {
+   "camera": [
+    29.15271,
+    66.17423,
+    691
+   ],
+   "seconds": 3.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 294
+  },
+  {
+   "camera": [
+    29.15632,
+    66.17851,
+    594
+   ],
+   "seconds": 10.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 386
+  }
+ ]
+}

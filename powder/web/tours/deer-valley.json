@@ -1,0 +1,73 @@
+{
+ "resort": "Deer Valley",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -111.47762,
+    40.63967,
+    2529
+   ],
+   "seconds": 8.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2269
+  },
+  {
+   "camera": [
+    -111.48321,
+    40.63179,
+    2902
+   ],
+   "seconds": 6.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2522
+  },
+  {
+   "camera": [
+    -111.48543,
+    40.62416,
+    3001
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2551
+  },
+  {
+   "camera": [
+    -111.47801,
+    40.62257,
+    2869
+   ],
+   "seconds": 6.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2250
+  },
+  {
+   "camera": [
+    -111.47483,
+    40.62956,
+    2698
+   ],
+   "seconds": 6.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2192
+  },
+  {
+   "camera": [
+    -111.47145,
+    40.63698,
+    2618
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2176
+  }
+ ]
+}

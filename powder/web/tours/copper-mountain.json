@@ -1,0 +1,73 @@
+{
+ "resort": "Copper Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -106.14686,
+    39.49334,
+    3495
+   ],
+   "seconds": 9.3,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 3278
+  },
+  {
+   "camera": [
+    -106.15113,
+    39.48375,
+    4006
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3589
+  },
+  {
+   "camera": [
+    -106.15216,
+    39.47479,
+    4103
+   ],
+   "seconds": 6.3,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3131
+  },
+  {
+   "camera": [
+    -106.14891,
+    39.48176,
+    3939
+   ],
+   "seconds": 6.9,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2974
+  },
+  {
+   "camera": [
+    -106.14387,
+    39.48837,
+    3618
+   ],
+   "seconds": 7.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 3008
+  },
+  {
+   "camera": [
+    -106.1383,
+    39.49567,
+    3282
+   ],
+   "seconds": 6.1,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2957
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Dam\u00fcls-Mellau",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    9.88658,
+    47.28445,
+    1755
+   ],
+   "seconds": 8.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1443
+  },
+  {
+   "camera": [
+    9.89088,
+    47.2931,
+    2156
+   ],
+   "seconds": 6.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1791
+  },
+  {
+   "camera": [
+    9.89152,
+    47.30107,
+    2241
+   ],
+   "seconds": 5.5,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1849
+  },
+  {
+   "camera": [
+    9.8858,
+    47.29606,
+    2033
+   ],
+   "seconds": 3.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1563
+  },
+  {
+   "camera": [
+    9.88218,
+    47.29425,
+    1848
+   ],
+   "seconds": 3.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1574
+  },
+  {
+   "camera": [
+    9.87758,
+    47.29197,
+    1748
+   ],
+   "seconds": 8.1,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1565
+  }
+ ]
+}

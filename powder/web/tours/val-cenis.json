@@ -1,0 +1,73 @@
+{
+ "resort": "Val Cenis",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    6.9056,
+    45.28802,
+    1800
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1538
+  },
+  {
+   "camera": [
+    6.914,
+    45.2798,
+    2252
+   ],
+   "seconds": 8.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1952
+  },
+  {
+   "camera": [
+    6.92371,
+    45.274,
+    2588
+   ],
+   "seconds": 9.8,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2011
+  },
+  {
+   "camera": [
+    6.92005,
+    45.28428,
+    2044
+   ],
+   "seconds": 4.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1498
+  },
+  {
+   "camera": [
+    6.91331,
+    45.28662,
+    1869
+   ],
+   "seconds": 5.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1466
+  },
+  {
+   "camera": [
+    6.90554,
+    45.28932,
+    1757
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1504
+  }
+ ]
+}

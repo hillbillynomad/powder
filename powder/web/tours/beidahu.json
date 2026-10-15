@@ -1,0 +1,91 @@
+{
+ "resort": "Beidahu",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    127.48741,
+    43.2224,
+    1236
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 0 deg",
+   "target": [
+    127.48741,
+    43.21561,
+    937
+   ]
+  },
+  {
+   "camera": [
+    127.49541,
+    43.21901,
+    1148
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 60 deg",
+   "target": [
+    127.48741,
+    43.21561,
+    937
+   ]
+  },
+  {
+   "camera": [
+    127.49541,
+    43.21222,
+    1214
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 120 deg",
+   "target": [
+    127.48741,
+    43.21561,
+    937
+   ]
+  },
+  {
+   "camera": [
+    127.48741,
+    43.20883,
+    1284
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 180 deg",
+   "target": [
+    127.48741,
+    43.21561,
+    937
+   ]
+  },
+  {
+   "camera": [
+    127.4794,
+    43.21222,
+    1198
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 240 deg",
+   "target": [
+    127.48741,
+    43.21561,
+    937
+   ]
+  },
+  {
+   "camera": [
+    127.4794,
+    43.21901,
+    1175
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 300 deg",
+   "target": [
+    127.48741,
+    43.21561,
+    937
+   ]
+  }
+ ]
+}

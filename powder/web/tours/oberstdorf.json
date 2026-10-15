@@ -1,0 +1,73 @@
+{
+ "resort": "Oberstdorf",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    10.32099,
+    47.41063,
+    1717
+   ],
+   "seconds": 8.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1365
+  },
+  {
+   "camera": [
+    10.33584,
+    47.41138,
+    2079
+   ],
+   "seconds": 7.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1773
+  },
+  {
+   "camera": [
+    10.34838,
+    47.41419,
+    2374
+   ],
+   "seconds": 5.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1996
+  },
+  {
+   "camera": [
+    10.34601,
+    47.41986,
+    2473
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1538
+  },
+  {
+   "camera": [
+    10.33369,
+    47.41801,
+    2282
+   ],
+   "seconds": 7.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 828
+  },
+  {
+   "camera": [
+    10.32073,
+    47.41606,
+    1987
+   ],
+   "seconds": 5.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 870
+  }
+ ]
+}

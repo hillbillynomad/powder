@@ -1,0 +1,73 @@
+{
+ "resort": "Banff Sunshine",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -115.76373,
+    51.11278,
+    2077
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1862
+  },
+  {
+   "camera": [
+    -115.77041,
+    51.10356,
+    2540
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2019
+  },
+  {
+   "camera": [
+    -115.77305,
+    51.09472,
+    2503
+   ],
+   "seconds": 5.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2121
+  },
+  {
+   "camera": [
+    -115.76397,
+    51.0934,
+    2657
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2434
+  },
+  {
+   "camera": [
+    -115.76012,
+    51.10164,
+    2785
+   ],
+   "seconds": 8.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1861
+  },
+  {
+   "camera": [
+    -115.75608,
+    51.11032,
+    2209
+   ],
+   "seconds": 4.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1856
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Zao Onsen",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    140.3929,
+    38.16526,
+    1175
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 890
+  },
+  {
+   "camera": [
+    140.40567,
+    38.16441,
+    1568
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1235
+  },
+  {
+   "camera": [
+    140.4169,
+    38.16585,
+    1808
+   ],
+   "seconds": 4.3,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1319
+  },
+  {
+   "camera": [
+    140.41681,
+    38.17083,
+    1681
+   ],
+   "seconds": 6.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1131
+  },
+  {
+   "camera": [
+    140.40709,
+    38.17084,
+    1437
+   ],
+   "seconds": 7.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 902
+  },
+  {
+   "camera": [
+    140.39636,
+    38.17086,
+    1200
+   ],
+   "seconds": 5.2,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 825
+  }
+ ]
+}

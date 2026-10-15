@@ -1,0 +1,73 @@
+{
+ "resort": "Seven Springs",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -79.30615,
+    40.03408,
+    1124
+   ],
+   "seconds": 5.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 777
+  },
+  {
+   "camera": [
+    -79.30982,
+    40.02811,
+    1322
+   ],
+   "seconds": 4.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 884
+  },
+  {
+   "camera": [
+    -79.3102,
+    40.02269,
+    1367
+   ],
+   "seconds": 4.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 857
+  },
+  {
+   "camera": [
+    -79.30482,
+    40.02518,
+    1295
+   ],
+   "seconds": 3.1,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 804
+  },
+  {
+   "camera": [
+    -79.30528,
+    40.02848,
+    1115
+   ],
+   "seconds": 3.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 790
+  },
+  {
+   "camera": [
+    -79.30586,
+    40.03259,
+    1044
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 815
+  }
+ ]
+}

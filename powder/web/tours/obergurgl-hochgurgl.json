@@ -1,0 +1,73 @@
+{
+ "resort": "Obergurgl-Hochgurgl",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.02529,
+    46.87122,
+    2223
+   ],
+   "seconds": 9.8,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1960
+  },
+  {
+   "camera": [
+    11.03475,
+    46.86345,
+    2876
+   ],
+   "seconds": 7.8,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2564
+  },
+  {
+   "camera": [
+    11.04532,
+    46.85815,
+    3153
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2911
+  },
+  {
+   "camera": [
+    11.04463,
+    46.85834,
+    3093
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1876
+  },
+  {
+   "camera": [
+    11.03965,
+    46.86582,
+    2760
+   ],
+   "seconds": 8.5,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1959
+  },
+  {
+   "camera": [
+    11.03419,
+    46.87405,
+    2258
+   ],
+   "seconds": 5.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1978
+  }
+ ]
+}

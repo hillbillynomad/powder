@@ -1,0 +1,73 @@
+{
+ "resort": "Stevens Pass",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -121.06742,
+    47.72857,
+    1582
+   ],
+   "seconds": 7.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1269
+  },
+  {
+   "camera": [
+    -121.0729,
+    47.73542,
+    1943
+   ],
+   "seconds": 5.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1643
+  },
+  {
+   "camera": [
+    -121.08006,
+    47.73994,
+    2100
+   ],
+   "seconds": 7.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1448
+  },
+  {
+   "camera": [
+    -121.08564,
+    47.73198,
+    1980
+   ],
+   "seconds": 5.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1554
+  },
+  {
+   "camera": [
+    -121.07726,
+    47.73147,
+    1706
+   ],
+   "seconds": 5.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1255
+  },
+  {
+   "camera": [
+    -121.06767,
+    47.73088,
+    1448
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1328
+  }
+ ]
+}

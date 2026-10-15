@@ -1,0 +1,73 @@
+{
+ "resort": "Arapahoe Basin",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -105.87388,
+    39.64346,
+    3691
+   ],
+   "seconds": 6.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 3443
+  },
+  {
+   "camera": [
+    -105.87656,
+    39.63686,
+    3956
+   ],
+   "seconds": 5.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3673
+  },
+  {
+   "camera": [
+    -105.87609,
+    39.63111,
+    4139
+   ],
+   "seconds": 6.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 3793
+  },
+  {
+   "camera": [
+    -105.87472,
+    39.62402,
+    4218
+   ],
+   "seconds": 5.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 3709
+  },
+  {
+   "camera": [
+    -105.87079,
+    39.62904,
+    3964
+   ],
+   "seconds": 5.8,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 3496
+  },
+  {
+   "camera": [
+    -105.86631,
+    39.63477,
+    3776
+   ],
+   "seconds": 8.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 3354
+  }
+ ]
+}

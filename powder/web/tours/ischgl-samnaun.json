@@ -1,0 +1,73 @@
+{
+ "resort": "Ischgl/Samnaun",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    10.28531,
+    46.95657,
+    2397
+   ],
+   "seconds": 9.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2111
+  },
+  {
+   "camera": [
+    10.29814,
+    46.95156,
+    2939
+   ],
+   "seconds": 7.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2645
+  },
+  {
+   "camera": [
+    10.31076,
+    46.94914,
+    3231
+   ],
+   "seconds": 5.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2691
+  },
+  {
+   "camera": [
+    10.31338,
+    46.95475,
+    3021
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2205
+  },
+  {
+   "camera": [
+    10.30174,
+    46.95788,
+    2836
+   ],
+   "seconds": 8.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2046
+  },
+  {
+   "camera": [
+    10.28948,
+    46.96117,
+    2380
+   ],
+   "seconds": 4.5,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2051
+  }
+ ]
+}

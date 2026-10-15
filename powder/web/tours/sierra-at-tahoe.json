@@ -1,0 +1,73 @@
+{
+ "resort": "Sierra-at-Tahoe",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -120.08175,
+    38.80226,
+    2560
+   ],
+   "seconds": 8.4,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2260
+  },
+  {
+   "camera": [
+    -120.0715,
+    38.79747,
+    2962
+   ],
+   "seconds": 7.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2632
+  },
+  {
+   "camera": [
+    -120.06141,
+    38.79526,
+    3141
+   ],
+   "seconds": 5.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2659
+  },
+  {
+   "camera": [
+    -120.05905,
+    38.80085,
+    2943
+   ],
+   "seconds": 6.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2225
+  },
+  {
+   "camera": [
+    -120.06828,
+    38.80376,
+    2694
+   ],
+   "seconds": 7.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2133
+  },
+  {
+   "camera": [
+    -120.07804,
+    38.80684,
+    2514
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2071
+  }
+ ]
+}

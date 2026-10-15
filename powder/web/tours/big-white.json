@@ -1,0 +1,73 @@
+{
+ "resort": "Big White",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -118.93195,
+    49.71567,
+    1976
+   ],
+   "seconds": 9.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1700
+  },
+  {
+   "camera": [
+    -118.93709,
+    49.72525,
+    2434
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2055
+  },
+  {
+   "camera": [
+    -118.93836,
+    49.73421,
+    2568
+   ],
+   "seconds": 5.7,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2226
+  },
+  {
+   "camera": [
+    -118.93039,
+    49.73853,
+    2562
+   ],
+   "seconds": 7.1,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1791
+  },
+  {
+   "camera": [
+    -118.92692,
+    49.7308,
+    2256
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1670
+  },
+  {
+   "camera": [
+    -118.92309,
+    49.72229,
+    2036
+   ],
+   "seconds": 7.4,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1595
+  }
+ ]
+}

@@ -1,0 +1,73 @@
+{
+ "resort": "Park City Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -111.50876,
+    40.64859,
+    2489
+   ],
+   "seconds": 9.1,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2217
+  },
+  {
+   "camera": [
+    -111.51563,
+    40.63991,
+    2929
+   ],
+   "seconds": 7.7,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2614
+  },
+  {
+   "camera": [
+    -111.51912,
+    40.63131,
+    3106
+   ],
+   "seconds": 7.5,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2404
+  },
+  {
+   "camera": [
+    -111.50833,
+    40.63456,
+    2934
+   ],
+   "seconds": 7.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2139
+  },
+  {
+   "camera": [
+    -111.50814,
+    40.64279,
+    2634
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2100
+  },
+  {
+   "camera": [
+    -111.50794,
+    40.65183,
+    2419
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2079
+  }
+ ]
+}

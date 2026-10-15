@@ -1,0 +1,73 @@
+{
+ "resort": "Crystal Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -121.47482,
+    46.93512,
+    1684
+   ],
+   "seconds": 10.2,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1316
+  },
+  {
+   "camera": [
+    -121.48943,
+    46.93652,
+    2426
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1990
+  },
+  {
+   "camera": [
+    -121.50245,
+    46.93557,
+    2468
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 961
+  },
+  {
+   "camera": [
+    -121.5009,
+    46.93572,
+    2501
+   ],
+   "seconds": 5.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1473
+  },
+  {
+   "camera": [
+    -121.49442,
+    46.93219,
+    2091
+   ],
+   "seconds": 5.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1496
+  },
+  {
+   "camera": [
+    -121.487,
+    46.92815,
+    1873
+   ],
+   "seconds": 9.2,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1448
+  }
+ ]
+}

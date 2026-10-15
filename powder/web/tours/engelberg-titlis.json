@@ -1,0 +1,73 @@
+{
+ "resort": "Engelberg-Titlis",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    8.41728,
+    46.81684,
+    1352
+   ],
+   "seconds": 8.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1025
+  },
+  {
+   "camera": [
+    8.41007,
+    46.82514,
+    1731
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1434
+  },
+  {
+   "camera": [
+    8.40662,
+    46.83333,
+    2026
+   ],
+   "seconds": 7.3,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1743
+  },
+  {
+   "camera": [
+    8.41742,
+    46.82921,
+    1816
+   ],
+   "seconds": 3.6,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1216
+  },
+  {
+   "camera": [
+    8.41694,
+    46.82562,
+    1553
+   ],
+   "seconds": 4.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1030
+  },
+  {
+   "camera": [
+    8.41635,
+    46.82122,
+    1344
+   ],
+   "seconds": 3.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1024
+  }
+ ]
+}

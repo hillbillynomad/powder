@@ -1,0 +1,73 @@
+{
+ "resort": "Rusutsu",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    140.91129,
+    42.73649,
+    801
+   ],
+   "seconds": 8.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 432
+  },
+  {
+   "camera": [
+    140.91024,
+    42.72637,
+    1158
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 772
+  },
+  {
+   "camera": [
+    140.91226,
+    42.7175,
+    1297
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 792
+  },
+  {
+   "camera": [
+    140.91234,
+    42.71809,
+    1276
+   ],
+   "seconds": 3.7,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 534
+  },
+  {
+   "camera": [
+    140.91515,
+    42.72143,
+    1051
+   ],
+   "seconds": 4.2,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 511
+  },
+  {
+   "camera": [
+    140.91853,
+    42.72546,
+    883
+   ],
+   "seconds": 10.3,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 511
+  }
+ ]
+}

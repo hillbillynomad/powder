@@ -1,0 +1,73 @@
+{
+ "resort": "Hintertux Glacier",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    11.67064,
+    47.07907,
+    2912
+   ],
+   "seconds": 9.5,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2223
+  },
+  {
+   "camera": [
+    11.6778,
+    47.07019,
+    3484
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 3200
+  },
+  {
+   "camera": [
+    11.68119,
+    47.0615,
+    3635
+   ],
+   "seconds": 3.0,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2009
+  },
+  {
+   "camera": [
+    11.68102,
+    47.06294,
+    3599
+   ],
+   "seconds": 3.3,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2876
+  },
+  {
+   "camera": [
+    11.67562,
+    47.06301,
+    3443
+   ],
+   "seconds": 4.0,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 3017
+  },
+  {
+   "camera": [
+    11.66902,
+    47.0631,
+    3278
+   ],
+   "seconds": 13.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2097
+  }
+ ]
+}

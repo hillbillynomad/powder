@@ -1,0 +1,73 @@
+{
+ "resort": "Zermatt",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    7.74533,
+    46.01651,
+    1975
+   ],
+   "seconds": 8.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1680
+  },
+  {
+   "camera": [
+    7.73645,
+    46.00855,
+    2240
+   ],
+   "seconds": 7.5,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1819
+  },
+  {
+   "camera": [
+    7.73125,
+    46.00037,
+    2309
+   ],
+   "seconds": 4.9,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2009
+  },
+  {
+   "camera": [
+    7.73881,
+    45.99777,
+    2321
+   ],
+   "seconds": 7.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2076
+  },
+  {
+   "camera": [
+    7.74487,
+    46.00519,
+    2250
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1814
+  },
+  {
+   "camera": [
+    7.75125,
+    46.013,
+    2091
+   ],
+   "seconds": 4.6,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1595
+  }
+ ]
+}

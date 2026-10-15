@@ -1,0 +1,73 @@
+{
+ "resort": "Big Bear Mountain",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -116.88939,
+    34.23757,
+    2453
+   ],
+   "seconds": 8.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2147
+  },
+  {
+   "camera": [
+    -116.89253,
+    34.22815,
+    2843
+   ],
+   "seconds": 7.3,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2461
+  },
+  {
+   "camera": [
+    -116.89271,
+    34.21952,
+    2939
+   ],
+   "seconds": 4.1,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2203
+  },
+  {
+   "camera": [
+    -116.88777,
+    34.22213,
+    2898
+   ],
+   "seconds": 4.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2151
+  },
+  {
+   "camera": [
+    -116.88551,
+    34.22649,
+    2704
+   ],
+   "seconds": 4.9,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 2112
+  },
+  {
+   "camera": [
+    -116.88288,
+    34.23161,
+    2518
+   ],
+   "seconds": 6.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 2086
+  }
+ ]
+}

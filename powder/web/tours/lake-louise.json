@@ -1,0 +1,73 @@
+{
+ "resort": "Lake Louise",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -116.14606,
+    51.44769,
+    2246
+   ],
+   "seconds": 7.7,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2001
+  },
+  {
+   "camera": [
+    -116.13336,
+    51.45021,
+    2676
+   ],
+   "seconds": 6.1,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2324
+  },
+  {
+   "camera": [
+    -116.12393,
+    51.45432,
+    2822
+   ],
+   "seconds": 9.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2445
+  },
+  {
+   "camera": [
+    -116.14093,
+    51.45385,
+    2528
+   ],
+   "seconds": 5.9,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1672
+  },
+  {
+   "camera": [
+    -116.14863,
+    51.44962,
+    2217
+   ],
+   "seconds": 6.3,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1639
+  },
+  {
+   "camera": [
+    -116.15731,
+    51.44485,
+    1993
+   ],
+   "seconds": 6.7,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1692
+  }
+ ]
+}

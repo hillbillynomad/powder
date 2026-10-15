@@ -1,0 +1,73 @@
+{
+ "resort": "Chapelco",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -71.31699,
+    -40.20152,
+    1652
+   ],
+   "seconds": 9.0,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 1392
+  },
+  {
+   "camera": [
+    -71.30936,
+    -40.20979,
+    2063
+   ],
+   "seconds": 7.6,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 1674
+  },
+  {
+   "camera": [
+    -71.30047,
+    -40.21566,
+    2200
+   ],
+   "seconds": 6.2,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 1722
+  },
+  {
+   "camera": [
+    -71.30344,
+    -40.20876,
+    2022
+   ],
+   "seconds": 7.2,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1314
+  },
+  {
+   "camera": [
+    -71.31112,
+    -40.20302,
+    1756
+   ],
+   "seconds": 7.7,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1197
+  },
+  {
+   "camera": [
+    -71.31955,
+    -40.19671,
+    1558
+   ],
+   "seconds": 4.4,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1068
+  }
+ ]
+}

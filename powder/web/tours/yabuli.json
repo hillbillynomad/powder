@@ -1,0 +1,91 @@
+{
+ "resort": "Yabuli",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    128.44398,
+    44.6072,
+    1226
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 0 deg",
+   "target": [
+    128.44398,
+    44.60042,
+    977
+   ]
+  },
+  {
+   "camera": [
+    128.45218,
+    44.60381,
+    1288
+   ],
+   "seconds": 5.9,
+   "label": "Orbit 60 deg",
+   "target": [
+    128.44398,
+    44.60042,
+    977
+   ]
+  },
+  {
+   "camera": [
+    128.45218,
+    44.59702,
+    1475
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 120 deg",
+   "target": [
+    128.44398,
+    44.60042,
+    977
+   ]
+  },
+  {
+   "camera": [
+    128.44398,
+    44.59363,
+    1433
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 180 deg",
+   "target": [
+    128.44398,
+    44.60042,
+    977
+   ]
+  },
+  {
+   "camera": [
+    128.43579,
+    44.59702,
+    1395
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 240 deg",
+   "target": [
+    128.44398,
+    44.60042,
+    977
+   ]
+  },
+  {
+   "camera": [
+    128.43579,
+    44.60381,
+    1326
+   ],
+   "seconds": 5.7,
+   "label": "Orbit 300 deg",
+   "target": [
+    128.44398,
+    44.60042,
+    977
+   ]
+  }
+ ]
+}

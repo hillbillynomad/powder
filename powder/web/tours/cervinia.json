@@ -1,0 +1,73 @@
+{
+ "resort": "Cervinia",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    7.6308,
+    45.93396,
+    2346
+   ],
+   "seconds": 8.9,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2056
+  },
+  {
+   "camera": [
+    7.64471,
+    45.93679,
+    2695
+   ],
+   "seconds": 7.9,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2387
+  },
+  {
+   "camera": [
+    7.65583,
+    45.94131,
+    2999
+   ],
+   "seconds": 5.6,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2609
+  },
+  {
+   "camera": [
+    7.64922,
+    45.94598,
+    2876
+   ],
+   "seconds": 7.0,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 2213
+  },
+  {
+   "camera": [
+    7.63999,
+    45.94139,
+    2577
+   ],
+   "seconds": 7.6,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1993
+  },
+  {
+   "camera": [
+    7.6298,
+    45.93633,
+    2307
+   ],
+   "seconds": 3.0,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1979
+  }
+ ]
+}

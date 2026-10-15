@@ -1,0 +1,73 @@
+{
+ "resort": "Jackson Hole",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -110.83339,
+    43.5919,
+    2347
+   ],
+   "seconds": 9.6,
+   "label": "Base, lift line ahead",
+   "pitch": 52,
+   "ground": 2133
+  },
+  {
+   "camera": [
+    -110.84582,
+    43.59646,
+    2938
+   ],
+   "seconds": 8.0,
+   "label": "Up the lift line",
+   "pitch": 48,
+   "ground": 2622
+  },
+  {
+   "camera": [
+    -110.85517,
+    43.60234,
+    3278
+   ],
+   "seconds": 6.4,
+   "label": "Over the top",
+   "pitch": 54,
+   "ground": 2396
+  },
+  {
+   "camera": [
+    -110.84543,
+    43.60401,
+    3044
+   ],
+   "seconds": 4.8,
+   "label": "Across the top",
+   "pitch": 56,
+   "ground": 1929
+  },
+  {
+   "camera": [
+    -110.84189,
+    43.59976,
+    2735
+   ],
+   "seconds": 5.1,
+   "label": "Down the run",
+   "pitch": 60,
+   "ground": 1915
+  },
+  {
+   "camera": [
+    -110.83779,
+    43.59482,
+    2509
+   ],
+   "seconds": 3.8,
+   "label": "Back toward the base",
+   "pitch": 64,
+   "ground": 1915
+  }
+ ]
+}
