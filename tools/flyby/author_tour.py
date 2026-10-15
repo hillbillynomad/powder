@@ -87,16 +87,23 @@ def bearing(a, b):
 def build_tour(spec, verbose=True):
     """Turn a spec dict into a tour dict (heights, clearance, timing, ground aim heights)."""
     pts = []
+    # Some points with a target and some without: bird flight with orbits (see flyby.js)
+    has_t = [('target' in w) for w in spec['points']]
+    mixed = any(has_t) and not all(has_t)
     for w in spec['points']:
         cam_lng, cam_lat, cam_agl = w['camera']
         cam_alt = elevation(cam_lng, cam_lat) + cam_agl
         point = {'camera': [cam_lng, cam_lat, cam_alt], 'seconds': w.get('seconds'), 'label': w.get('label', '')}
+        if w.get('orbit') and 'target' not in w:
+            sys.exit(f"{w.get('label')}: an orbit point needs a target")
         if 'target' in w:  # look-at mode
             tgt_lng, tgt_lat = w['target'][:2]
             tgt_alt = elevation(tgt_lng, tgt_lat) + (w['target'][2] if len(w['target']) > 2 else 0)
             dist, _ = leg_metres(point['camera'], [tgt_lng, tgt_lat, 0])
             point['camera'][2] = max(cam_alt, tgt_alt + dist / math.tan(math.radians(MAX_PITCH)))
             point['target'] = [tgt_lng, tgt_lat, tgt_alt]
+            if mixed:
+                point['orbit'] = 1
         elif 'pitch' in w:  # bird mode: optional per-point downward tilt
             point['pitch'] = w['pitch']
         pts.append(point)
@@ -125,15 +132,17 @@ def build_tour(spec, verbose=True):
     n = len(pts)
     if spec.get('speed_mps'):
         for i, p in enumerate(pts):
+            if p['seconds'] is not None:  # an explicit time (e.g. an orbit's pace) wins
+                continue
             flat, rise = leg_metres(p['camera'], pts[(i + 1) % n]['camera'])
-            p['seconds'] = round(max(3.0, math.hypot(flat, rise) / spec['speed_mps']), 1)
+            p['seconds'] = round(max(spec.get('min_leg_s', 3.0), math.hypot(flat, rise) / spec['speed_mps']), 1)
 
     # Bird mode: record the ground height where each waypoint's line of sight meets the
     # (exaggerated) terrain. The app aims at a smooth blend of these instead of reading live
     # terrain, so the camera never jumps as terrain tiles load, yet the view centre stays on
     # the surface (which is what MapLibre uses to pick imagery tiles).
     for i, p in enumerate(pts):
-        if 'target' in p:
+        if 'target' in p and not mixed:
             continue
         prev, nxt = pts[i - 1]['camera'], pts[(i + 1) % n]['camera']
         heading = math.radians(bearing(prev, nxt))
@@ -149,6 +158,8 @@ def build_tour(spec, verbose=True):
             if cam[2] * EXAGGERATION - s * math.cos(pitch) <= ground * EXAGGERATION:
                 break
         p['ground'] = round(ground)
+        if mixed and 'target' not in p:  # bird points carry their aim so orbits can blend to it
+            p['target'] = [round(lng, 5), round(lat, 5), round(ground)]
 
     for i, p in enumerate(pts):
         cam, nxt, prev = p['camera'], pts[(i + 1) % n]['camera'], pts[i - 1]['camera']

@@ -122,3 +122,24 @@ describe('shipped tours', () => {
     }
   });
 });
+
+describe('orbitWeight (bird flight with orbit points)', () => {
+  const cam = (i) => [i, 0, 100];
+  const tour = {
+    points: [
+      { camera: cam(0), seconds: 10, target: [0, 0, 0] },
+      { camera: cam(1), seconds: 10, target: [0, 0, 0], orbit: 1 },
+      { camera: cam(2), seconds: 10, target: [0, 0, 0], orbit: 1 },
+      { camera: cam(3), seconds: 10, target: [0, 0, 0] },
+    ],
+  };
+
+  it('is 0 on a bird leg, 1 on an orbit leg, and eases between them', () => {
+    expect(F.orbitWeight(tour, 0)).toBe(0);
+    expect(F.orbitWeight(tour, 5)).toBeCloseTo(0.5, 5);
+    expect(F.orbitWeight(tour, 10)).toBe(1);
+    expect(F.orbitWeight(tour, 15)).toBe(1);
+    expect(F.orbitWeight(tour, 25)).toBeCloseTo(0.5, 5);
+    expect(F.orbitWeight(tour, 40)).toBe(0); // wraps
+  });
+});

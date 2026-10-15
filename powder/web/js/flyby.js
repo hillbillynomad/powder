@@ -12,6 +12,9 @@
 //    smoothly before the corner, like a bird leaning into one.
 //  - look-at: each point also has a `target` the camera keeps looking at (interpolated as a
 //    position, so headings never spin the long way round).
+//  - mixed: bird flight with some points flagged `orbit: 1` (every point then also carries a
+//    `target`). The aim point blends from the bird's line of sight to the target as the camera
+//    moves onto an orbit point, so a route can circle a spot before flying on.
 (function () {
     const TOUR_DIR = 'tours/';
     const APPROACH_MS = 6000; // fly-in from wherever the map is to the tour's first pose
@@ -59,6 +62,19 @@
         }
         if (pts[0].target) pose.target = catmullRom(at(-1).target, at(0).target, at(1).target, at(2).target, u);
         return pose;
+    }
+
+    // 0 (bird) .. 1 (look at the target): how far into a mixed tour's orbit the camera is
+    function orbitWeight(tour, seconds) {
+        const pts = tour.points;
+        const n = pts.length;
+        const total = tourDuration(tour);
+        let t = ((seconds % total) + total) % total;
+        let i = 0;
+        while (t >= pts[i].seconds && i < n - 1) { t -= pts[i].seconds; i++; }
+        const u = Math.min(1, t / pts[i].seconds);
+        const w0 = pts[i].orbit ? 1 : 0, w1 = pts[(i + 1) % n].orbit ? 1 : 0;
+        return w0 + (w1 - w0) * u * u * (3 - 2 * u);
     }
 
     // Compass bearing (degrees) from a to b, both [lng, lat, ...]
@@ -126,7 +142,8 @@
 
         function cameraAt(seconds) {
             const tour = state.tour;
-            if (!tour.points[0].target) {
+            const mixed = tour.points.some(p => p.orbit);
+            if (!tour.points[0].target || mixed) {
                 const b = birdPose(tour, seconds);
                 const cam = [b.camera[0], b.camera[1], b.camera[2] * exaggeration];
                 // Aim where the line of sight meets the tour's smoothed ground (authored from the
@@ -134,10 +151,17 @@
                 const drop = b.ground === undefined ? null : cam[2] - b.ground * exaggeration;
                 const distance = drop === null ? LOOK_DISTANCE
                     : Math.max(MIN_LOOK_DISTANCE, drop / Math.cos((b.pitch * Math.PI) / 180));
-                const aim = lookPoint(cam, b.bearing, b.pitch, distance);
+                let aim = lookPoint(cam, b.bearing, b.pitch, distance);
+                let roll = b.roll;
+                if (mixed) {
+                    const w = orbitWeight(tour, seconds);
+                    const t = poseAt(tour, seconds).target;
+                    aim = aim.map((v, k) => v + ((k === 2 ? t[2] * exaggeration : t[k]) - v) * w);
+                    roll *= 1 - w;
+                }
                 const options = map.calculateCameraOptionsFromTo(
                     new maplibre.LngLat(cam[0], cam[1]), cam[2], new maplibre.LngLat(aim[0], aim[1]), aim[2]);
-                return { ...options, roll: b.roll };
+                return { ...options, roll };
             }
             const pose = poseAt(tour, seconds);
             const [cLng, cLat, cAlt] = pose.camera;
@@ -219,7 +243,7 @@
         return { getTour, start, stop, play, pause, getState };
     }
 
-    const api = { slugify, poseAt, birdPose, lookPoint, bearingBetween, angleDiff, tourDuration, catmullRom, createController };
+    const api = { slugify, poseAt, birdPose, lookPoint, bearingBetween, angleDiff, tourDuration, orbitWeight, catmullRom, createController };
     if (typeof module !== 'undefined' && module.exports) module.exports = api;
     else window.PowderFlyby = api;
 })();

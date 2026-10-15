@@ -5,69 +5,611 @@
  "points": [
   {
    "camera": [
-    -111.50876,
-    40.64859,
-    2489
+    -111.5105,
+    40.67,
+    2575
    ],
-   "seconds": 9.1,
-   "label": "Base, lift line ahead",
-   "pitch": 52,
-   "ground": 2217
-  },
-  {
-   "camera": [
-    -111.51563,
-    40.63991,
-    2929
-   ],
-   "seconds": 7.7,
-   "label": "Up the lift line",
-   "pitch": 48,
-   "ground": 2614
-  },
-  {
-   "camera": [
-    -111.51912,
-    40.63131,
-    3106
-   ],
-   "seconds": 7.5,
-   "label": "Over the top",
-   "pitch": 54,
-   "ground": 2404
-  },
-  {
-   "camera": [
-    -111.50833,
-    40.63456,
-    2934
-   ],
-   "seconds": 7.3,
-   "label": "Across the top",
-   "pitch": 56,
-   "ground": 2139
-  },
-  {
-   "camera": [
-    -111.50814,
-    40.64279,
-    2634
-   ],
-   "seconds": 7.7,
-   "label": "Down the run",
+   "seconds": 5.3,
+   "label": "Climbing out over Old Town",
    "pitch": 60,
-   "ground": 2100
+   "ground": 2100,
+   "target": [
+    -111.50985,
+    40.68056,
+    2100
+   ]
   },
   {
    "camera": [
-    -111.50794,
-    40.65183,
-    2419
+    -111.513,
+    40.6785,
+    2712
    ],
-   "seconds": 3.0,
-   "label": "Back toward the base",
+   "seconds": 6.1,
+   "label": "High over town: the whole mountain below",
+   "pitch": 62,
+   "ground": 2194,
+   "target": [
+    -111.52744,
+    40.68413,
+    2194
+   ]
+  },
+  {
+   "camera": [
+    -111.526,
+    40.676,
+    2752
+   ],
+   "seconds": 12.1,
+   "label": "Swinging west, Park City spread out",
    "pitch": 64,
-   "ground": 2079
+   "ground": 2283,
+   "target": [
+    -111.53407,
+    40.66524,
+    2283
+   ]
+  },
+  {
+   "camera": [
+    -111.53,
+    40.656,
+    2972
+   ],
+   "seconds": 10.9,
+   "label": "Down the length of the resort",
+   "pitch": 64,
+   "ground": 2421,
+   "target": [
+    -111.53114,
+    40.64139,
+    2421
+   ]
+  },
+  {
+   "camera": [
+    -111.529,
+    40.638,
+    3301
+   ],
+   "seconds": 10.1,
+   "label": "Over mid-mountain, Thaynes below",
+   "pitch": 66,
+   "ground": 2817,
+   "target": [
+    -111.53267,
+    40.62444,
+    2817
+   ]
+  },
+  {
+   "camera": [
+    -111.539,
+    40.623,
+    3489
+   ],
+   "seconds": 5.7,
+   "label": "Toward the Jupiter bowl",
+   "pitch": 66,
+   "ground": 2960,
+   "target": [
+    -111.55109,
+    40.61082,
+    2960
+   ]
+  },
+  {
+   "camera": [
+    -111.549,
+    40.618,
+    3184
+   ],
+   "seconds": 2.2,
+   "label": "Dropping in by Jupiter",
+   "pitch": 58,
+   "ground": 2876,
+   "target": [
+    -111.55488,
+    40.61354,
+    2876
+   ]
+  },
+  {
+   "camera": [
+    -111.5503,
+    40.6145,
+    3129
+   ],
+   "seconds": 2.0,
+   "label": "Jupiter bottom",
+   "pitch": 50,
+   "ground": 2937,
+   "target": [
+    -111.5517,
+    40.61157,
+    2937
+   ]
+  },
+  {
+   "camera": [
+    -111.5518,
+    40.6122,
+    3187
+   ],
+   "seconds": 2.0,
+   "label": "Up the Jupiter lift",
+   "pitch": 48,
+   "ground": 3035,
+   "target": [
+    -111.55306,
+    40.61024,
+    3035
+   ]
+  },
+  {
+   "camera": [
+    -111.5532,
+    40.61,
+    3272
+   ],
+   "seconds": 3.1,
+   "label": "Jupiter top, 3,040 m",
+   "pitch": 50,
+   "ground": 2792,
+   "target": [
+    -111.54575,
+    40.60547,
+    2792
+   ]
+  },
+  {
+   "camera": [
+    -111.5465,
+    40.609,
+    3226
+   ],
+   "seconds": 4.0,
+   "label": "Along the south ridge",
+   "pitch": 54,
+   "ground": 2894,
+   "target": [
+    -111.53924,
+    40.61087,
+    2894
+   ]
+  },
+  {
+   "camera": [
+    -111.5399,
+    40.6134,
+    3302
+   ],
+   "seconds": 5.4,
+   "label": "Over Jupiter Peak",
+   "pitch": 52,
+   "ground": 2811,
+   "target": [
+    -111.53304,
+    40.61947,
+    2811
+   ]
+  },
+  {
+   "camera": [
+    -111.5333,
+    40.6206,
+    3114
+   ],
+   "seconds": 3.2,
+   "label": "Pioneer top",
+   "pitch": 52,
+   "ground": 2790,
+   "target": [
+    -111.52993,
+    40.62529,
+    2790
+   ]
+  },
+  {
+   "camera": [
+    -111.531,
+    40.6257,
+    3078
+   ],
+   "seconds": 4.6,
+   "label": "Mother Lode and McConkey's tops",
+   "pitch": 52,
+   "ground": 2709,
+   "target": [
+    -111.53061,
+    40.63175,
+    2709
+   ]
+  },
+  {
+   "camera": [
+    -111.5325,
+    40.633,
+    2873
+   ],
+   "seconds": 4.1,
+   "label": "Down McConkey's Express",
+   "pitch": 50,
+   "ground": 2409,
+   "target": [
+    -111.53396,
+    40.64001,
+    2409
+   ]
+  },
+  {
+   "camera": [
+    -111.5339,
+    40.6395,
+    2675
+   ],
+   "seconds": 2.8,
+   "label": "McConkey's bottom",
+   "pitch": 50,
+   "ground": 2474,
+   "target": [
+    -111.53446,
+    40.64259,
+    2474
+   ]
+  },
+  {
+   "camera": [
+    -111.5345,
+    40.644,
+    2804
+   ],
+   "seconds": 2.3,
+   "label": "Turning round at Quicksilver",
+   "pitch": 54,
+   "ground": 2212,
+   "target": [
+    -111.52674,
+    40.65258,
+    2212
+   ]
+  },
+  {
+   "camera": [
+    -111.5298,
+    40.644,
+    2673
+   ],
+   "seconds": 2.1,
+   "label": "Over to Mother Lode",
+   "pitch": 54,
+   "ground": 2477,
+   "target": [
+    -111.52588,
+    40.6419,
+    2477
+   ]
+  },
+  {
+   "camera": [
+    -111.5283,
+    40.6407,
+    2674
+   ],
+   "seconds": 4.5,
+   "label": "Mother Lode bottom",
+   "pitch": 50,
+   "ground": 2500,
+   "target": [
+    -111.52809,
+    40.63793,
+    2500
+   ]
+  },
+  {
+   "camera": [
+    -111.529,
+    40.6335,
+    2932
+   ],
+   "seconds": 4.3,
+   "label": "Up Mother Lode Express",
+   "pitch": 48,
+   "ground": 2736,
+   "target": [
+    -111.52926,
+    40.63065,
+    2736
+   ]
+  },
+  {
+   "camera": [
+    -111.5296,
+    40.6264,
+    3081
+   ],
+   "seconds": 4.8,
+   "label": "Mother Lode top",
+   "pitch": 50,
+   "ground": 2758,
+   "target": [
+    -111.52927,
+    40.62138,
+    2758
+   ]
+  },
+  {
+   "camera": [
+    -111.528,
+    40.6185,
+    3014
+   ],
+   "seconds": 3.6,
+   "label": "South toward Empire",
+   "pitch": 54,
+   "ground": 2810,
+   "target": [
+    -111.52711,
+    40.6149,
+    2810
+   ]
+  },
+  {
+   "camera": [
+    -111.5262,
+    40.6128,
+    3150
+   ],
+   "seconds": 2.9,
+   "label": "Over Empire Express, 2,900 m",
+   "pitch": 54,
+   "ground": 2760,
+   "target": [
+    -111.51973,
+    40.60791,
+    2760
+   ]
+  },
+  {
+   "camera": [
+    -111.52,
+    40.6125,
+    3009
+   ],
+   "seconds": 4.8,
+   "label": "Past Empire",
+   "pitch": 54,
+   "ground": 2489,
+   "target": [
+    -111.5106,
+    40.61816,
+    2489
+   ]
+  },
+  {
+   "camera": [
+    -111.515,
+    40.6195,
+    2963
+   ],
+   "seconds": 7.9,
+   "label": "Round to Crescent",
+   "pitch": 54,
+   "ground": 2513,
+   "target": [
+    -111.5142,
+    40.62753,
+    2513
+   ]
+  },
+  {
+   "camera": [
+    -111.518,
+    40.6325,
+    2901
+   ],
+   "seconds": 4.6,
+   "label": "Crescent top",
+   "pitch": 52,
+   "ground": 2573,
+   "target": [
+    -111.51852,
+    40.63783,
+    2573
+   ]
+  },
+  {
+   "camera": [
+    -111.517,
+    40.64,
+    2721
+   ],
+   "seconds": 4.3,
+   "label": "North along the Crescent line",
+   "pitch": 52,
+   "ground": 2362,
+   "target": [
+    -111.5176,
+    40.64586,
+    2362
+   ]
+  },
+  {
+   "camera": [
+    -111.5195,
+    40.647,
+    2707
+   ],
+   "seconds": 3.3,
+   "label": "Eagle top",
+   "pitch": 52,
+   "ground": 2290,
+   "target": [
+    -111.52234,
+    40.65342,
+    2290
+   ]
+  },
+  {
+   "camera": [
+    -111.5223,
+    40.6519,
+    2587
+   ],
+   "seconds": 2.4,
+   "label": "Silver Star top",
+   "pitch": 52,
+   "ground": 2148,
+   "target": [
+    -111.5223,
+    40.65903,
+    2148
+   ]
+  },
+  {
+   "camera": [
+    -111.5195,
+    40.6552,
+    2483
+   ],
+   "seconds": 2.6,
+   "label": "Down Silver Star",
+   "pitch": 52,
+   "ground": 2084,
+   "target": [
+    -111.51413,
+    40.66036,
+    2084
+   ]
+  },
+  {
+   "camera": [
+    -111.5158,
+    40.6581,
+    2334
+   ],
+   "seconds": 2.7,
+   "label": "Silver Star bottom, Silver Star Cafe",
+   "pitch": 52,
+   "ground": 2078,
+   "target": [
+    -111.51298,
+    40.66179,
+    2078
+   ]
+  },
+  {
+   "camera": [
+    -111.514,
+    40.66234,
+    2251
+   ],
+   "seconds": 1.67,
+   "label": "Arriving at the pin",
+   "target": [
+    -111.51703,
+    40.66275,
+    2119
+   ],
+   "orbit": 1,
+   "ground": 2064
+  },
+  {
+   "camera": [
+    -111.51505,
+    40.66455,
+    2248
+   ],
+   "seconds": 1.67,
+   "label": "Circling the pin",
+   "target": [
+    -111.51703,
+    40.66275,
+    2119
+   ],
+   "orbit": 1,
+   "ground": 2078
+  },
+  {
+   "camera": [
+    -111.51808,
+    40.66496,
+    2258
+   ],
+   "seconds": 1.67,
+   "label": "Circling the pin",
+   "target": [
+    -111.51703,
+    40.66275,
+    2119
+   ],
+   "orbit": 1,
+   "ground": 2119
+  },
+  {
+   "camera": [
+    -111.52006,
+    40.66316,
+    2270
+   ],
+   "seconds": 1.67,
+   "label": "Circling the pin",
+   "target": [
+    -111.51703,
+    40.66275,
+    2119
+   ],
+   "orbit": 1,
+   "ground": 2152
+  },
+  {
+   "camera": [
+    -111.51901,
+    40.66095,
+    2280
+   ],
+   "seconds": 1.67,
+   "label": "Circling the pin",
+   "target": [
+    -111.51703,
+    40.66275,
+    2119
+   ],
+   "orbit": 1,
+   "ground": 2094
+  },
+  {
+   "camera": [
+    -111.51598,
+    40.66054,
+    2281
+   ],
+   "seconds": 1.67,
+   "label": "Circling the pin",
+   "target": [
+    -111.51703,
+    40.66275,
+    2119
+   ],
+   "orbit": 1,
+   "ground": 2085
+  },
+  {
+   "camera": [
+    -111.514,
+    40.66234,
+    2279
+   ],
+   "seconds": 5.1,
+   "label": "Circling the pin",
+   "target": [
+    -111.51703,
+    40.66275,
+    2119
+   ],
+   "orbit": 1,
+   "ground": 2058
   }
  ]
 }
