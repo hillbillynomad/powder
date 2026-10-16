@@ -5,69 +5,366 @@
  "points": [
   {
    "camera": [
-    -111.40878,
-    45.28199,
-    2702
+    -111.39251,
+    45.282,
+    3731
    ],
-   "seconds": 9.0,
-   "label": "Base, lift line ahead",
-   "pitch": 52,
-   "ground": 2410
+   "seconds": 7.3,
+   "label": "Overview: Lone Peak, the village and every lift",
+   "target": [
+    -111.425,
+    45.282,
+    2598
+   ],
+   "orbit": 1,
+   "ground": 2375
   },
   {
    "camera": [
-    -111.42132,
-    45.27709,
-    3109
+    -111.40388,
+    45.282,
+    3302
    ],
-   "seconds": 7.7,
-   "label": "Up the lift line",
-   "pitch": 48,
-   "ground": 2715
+   "seconds": 6.0,
+   "label": "Easing in over the lifts",
+   "pitch": 66,
+   "ground": 2681,
+   "target": [
+    -111.42912,
+    45.28383,
+    2681
+   ]
   },
   {
    "camera": [
-    -111.43359,
-    45.27477,
-    3311
+    -111.4119,
+    45.2834,
+    2824
    ],
-   "seconds": 8.4,
-   "label": "Over the top",
-   "pitch": 54,
-   "ground": 2906
+   "seconds": 6.5,
+   "label": "Up the Ramcharger line",
+   "pitch": 44.0,
+   "ground": 2504,
+   "target": [
+    -111.41763,
+    45.28296,
+    2504
+   ]
   },
   {
    "camera": [
-    -111.43532,
-    45.28467,
-    3375
+    -111.4222,
+    45.2806,
+    3004
+   ],
+   "seconds": 8.6,
+   "label": "Ramcharger, climbing to the ridge",
+   "pitch": 56.0,
+   "ground": 2685,
+   "target": [
+    -111.43063,
+    45.28112,
+    2685
+   ]
+  },
+  {
+   "camera": [
+    -111.4346,
+    45.2848,
+    3423
+   ],
+   "seconds": 7.1,
+   "label": "Challenger top: Headwaters, Hellroaring and Firehole below",
+   "pitch": 54.0,
+   "ground": 3067,
+   "target": [
+    -111.44323,
+    45.28365,
+    3067
+   ]
+  },
+  {
+   "camera": [
+    -111.44111,
+    45.2781,
+    3757
+   ],
+   "seconds": 5.5,
+   "label": "Big Couloir: the east face, 50 degrees from the summit",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2548
+  },
+  {
+   "camera": [
+    -111.4438,
+    45.28271,
+    3758
+   ],
+   "seconds": 5.5,
+   "label": "A-Z Chutes, Three Forks and Headwaters Bowl",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2139
+  },
+  {
+   "camera": [
+    -111.4503,
+    45.28461,
+    3757
+   ],
+   "seconds": 5.5,
+   "label": "North Summit Snowfield, Great Falls and the Rips",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2301
+  },
+  {
+   "camera": [
+    -111.4568,
+    45.28271,
+    3757
+   ],
+   "seconds": 5.5,
+   "label": "The Rips and Great Falls Gully, north-west",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2604
+  },
+  {
+   "camera": [
+    -111.45949,
+    45.2781,
+    3758
+   ],
+   "seconds": 5.5,
+   "label": "Lone Peak's west ridge and Kircher's Cliffs",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2642
+  },
+  {
+   "camera": [
+    -111.4568,
+    45.27349,
+    3757
+   ],
+   "seconds": 5.5,
+   "label": "Liberty Bowl and the south-west face",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2192
+  },
+  {
+   "camera": [
+    -111.4503,
+    45.27159,
+    3758
+   ],
+   "seconds": 5.5,
+   "label": "Liberty Bowl and Dakota Gully, the south face",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2623
+  },
+  {
+   "camera": [
+    -111.4438,
+    45.27349,
+    3757
+   ],
+   "seconds": 5.5,
+   "label": "Dictator Chutes, Castro's, Lenin, Marx and the Gullies",
+   "target": [
+    -111.4503,
+    45.2781,
+    3397
+   ],
+   "orbit": 1,
+   "pitch": 56.0,
+   "ground": 2356
+  },
+  {
+   "camera": [
+    -111.4425,
+    45.2722,
+    3248
+   ],
+   "seconds": 3.1,
+   "label": "Powder Seeker top, the Wave and Vuarnet Cliffs",
+   "pitch": 42.0,
+   "ground": 2842,
+   "target": [
+    -111.43598,
+    45.273,
+    2842
+   ]
+  },
+  {
+   "camera": [
+    -111.438,
+    45.2742,
+    3241
+   ],
+   "seconds": 3.8,
+   "label": "Over the ridge toward Swift Current",
+   "pitch": 48.9,
+   "ground": 2714,
+   "target": [
+    -111.42796,
+    45.27706,
+    2714
+   ]
+  },
+  {
+   "camera": [
+    -111.4319,
+    45.2752,
+    3093
    ],
    "seconds": 6.2,
-   "label": "Across the top",
-   "pitch": 56,
-   "ground": 2407
+   "label": "Swift Current 6 top",
+   "pitch": 44.2,
+   "ground": 2674,
+   "target": [
+    -111.42491,
+    45.2768,
+    2674
+   ]
   },
   {
    "camera": [
-    -111.42681,
-    45.28647,
-    2944
+    -111.4222,
+    45.2778,
+    2910
    ],
-   "seconds": 6.2,
-   "label": "Down the run",
-   "pitch": 60,
-   "ground": 2365
+   "seconds": 6.5,
+   "label": "Down Swift Current 6",
+   "pitch": 44.7,
+   "ground": 2471,
+   "target": [
+    -111.41486,
+    45.27978,
+    2471
+   ]
   },
   {
    "camera": [
-    -111.41721,
-    45.28851,
-    2728
+    -111.4121,
+    45.2805,
+    2674
    ],
-   "seconds": 7.4,
-   "label": "Back toward the base",
-   "pitch": 64,
-   "ground": 2302
+   "seconds": 4.0,
+   "label": "Swift Current 6, mid-mountain",
+   "pitch": 42.0,
+   "ground": 2347,
+   "target": [
+    -111.40713,
+    45.28189,
+    2347
+   ]
+  },
+  {
+   "camera": [
+    -111.406,
+    45.2823,
+    2510
+   ],
+   "seconds": 3.0,
+   "label": "Swift Current 6, approaching the village",
+   "pitch": 41.7,
+   "ground": 2306,
+   "target": [
+    -111.40286,
+    45.28321,
+    2306
+   ]
+  },
+  {
+   "camera": [
+    -111.4038,
+    45.2829,
+    2483
+   ],
+   "seconds": 4,
+   "label": "Down to the village",
+   "target": [
+    -111.40075,
+    45.28205,
+    2319
+   ],
+   "orbit": 1,
+   "pitch": 56.0,
+   "ground": 2314
+  },
+  {
+   "camera": [
+    -111.403,
+    45.2826,
+    2426
+   ],
+   "seconds": 3.5,
+   "label": "The spot at the base of the lifts",
+   "target": [
+    -111.40075,
+    45.28205,
+    2319
+   ],
+   "orbit": 1,
+   "pitch": 56.0,
+   "ground": 2288
+  },
+  {
+   "camera": [
+    -111.3955,
+    45.2895,
+    2739
+   ],
+   "seconds": 5,
+   "label": "Rising off the spot",
+   "target": [
+    -111.40075,
+    45.28205,
+    2319
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2261
   }
  ]
 }

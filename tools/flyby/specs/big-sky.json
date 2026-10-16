@@ -1,0 +1,255 @@
+{
+ "resort": "Big Sky",
+ "speed_mps": 135,
+ "descent_look": 12,
+ "min_clearance_m": 70,
+ "overview": {
+  "center": [
+   -111.425,
+   45.282
+  ],
+  "bearing": 270,
+  "agl": 1300,
+  "pitch": 66,
+  "pull_back": true,
+  "label": "Overview: Lone Peak, the village and every lift",
+  "drift": 0.35
+ },
+ "points": [
+  {
+   "label": "Up the Ramcharger line",
+   "camera": [
+    -111.4119,
+    45.2834,
+    420
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Ramcharger, climbing to the ridge",
+   "camera": [
+    -111.4222,
+    45.2806,
+    470
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Challenger top: Headwaters, Hellroaring and Firehole below",
+   "camera": [
+    -111.4346,
+    45.2848,
+    480
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Big Couloir: the east face, 50 degrees from the summit",
+   "camera": [
+    -111.44111,
+    45.2781,
+    851
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "A-Z Chutes, Three Forks and Headwaters Bowl",
+   "camera": [
+    -111.4438,
+    45.28271,
+    773
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "North Summit Snowfield, Great Falls and the Rips",
+   "camera": [
+    -111.4503,
+    45.28461,
+    861
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "The Rips and Great Falls Gully, north-west",
+   "camera": [
+    -111.4568,
+    45.28271,
+    714
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "Lone Peak's west ridge and Kircher's Cliffs",
+   "camera": [
+    -111.45949,
+    45.2781,
+    824
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "Liberty Bowl and the south-west face",
+   "camera": [
+    -111.4568,
+    45.27349,
+    622
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "Liberty Bowl and Dakota Gully, the south face",
+   "camera": [
+    -111.4503,
+    45.27159,
+    759
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "Dictator Chutes, Castro's, Lenin, Marx and the Gullies",
+   "camera": [
+    -111.4438,
+    45.27349,
+    822
+   ],
+   "target": [
+    -111.4503,
+    45.2781,
+    0
+   ],
+   "seconds": 5.5
+  },
+  {
+   "label": "Powder Seeker top, the Wave and Vuarnet Cliffs",
+   "camera": [
+    -111.4425,
+    45.2722,
+    380
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Over the ridge toward Swift Current",
+   "camera": [
+    -111.438,
+    45.2742,
+    330
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Swift Current 6 top",
+   "camera": [
+    -111.4319,
+    45.2752,
+    300
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Down Swift Current 6",
+   "camera": [
+    -111.4222,
+    45.2778,
+    300
+   ],
+   "pitch": 56
+  },
+  {
+   "label": "Swift Current 6, mid-mountain",
+   "camera": [
+    -111.4121,
+    45.2805,
+    240
+   ],
+   "pitch": 54
+  },
+  {
+   "label": "Swift Current 6, approaching the village",
+   "camera": [
+    -111.406,
+    45.2823,
+    170
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Down to the village",
+   "camera": [
+    -111.4038,
+    45.2829,
+    148
+   ],
+   "target": [
+    -111.40075,
+    45.28205,
+    0
+   ],
+   "seconds": 4
+  },
+  {
+   "label": "The spot at the base of the lifts",
+   "camera": [
+    -111.403,
+    45.2826,
+    93
+   ],
+   "target": [
+    -111.40075,
+    45.28205,
+    0
+   ],
+   "seconds": 3.5
+  },
+  {
+   "label": "Rising off the spot",
+   "camera": [
+    -111.3955,
+    45.2895,
+    476
+   ],
+   "target": [
+    -111.40075,
+    45.28205,
+    0
+   ],
+   "seconds": 5
+  }
+ ]
+}
