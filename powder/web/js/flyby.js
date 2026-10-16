@@ -119,7 +119,7 @@
     function createController(map, maplibre, { exaggeration = 1, onChange = () => {} } = {}) {
         let index = null; // Promise<{ slugs: Set<slug>, versions: {slug: hash} }>
         const tours = new Map(); // slug -> Promise<tour|null>
-        const state = { tour: null, playing: false, clock: 0, startedAt: 0, frame: 0, flying: false };
+        const state = { tour: null, playing: false, clock: 0, startedAt: 0, frame: 0, glideFrame: 0, flying: false };
 
         function loadIndex() {
             if (!index) {
@@ -196,6 +196,48 @@
             if (map.setCenterClampedToGround) map.setCenterClampedToGround(!hold);
         }
 
+        // The approach used to be one flyTo straight to the tour's first pose. flyTo ignores the
+        // pose's `elevation` and ends with the view centre at sea level, so the camera arrived
+        // ~2.8 km lower than the loop's first frame wants, and the first loop frame popped it
+        // upward. Now flyTo only brings the camera to a point straight above the first pose
+        // (sea level, pitch 0, where that is exact), and we glide from there to the pose
+        // frame by frame, so the camera path is continuous into the loop.
+        const EARTH_CIRCUMFERENCE = 40075016.686;
+
+        function lowZoomForAltitude(lat, altitude) {
+            // camera-to-centre distance (px) * metres per pixel at the zoom = altitude, pitch 0
+            const ctc = map.transform.cameraToCenterDistance;
+            return Math.log2((ctc * EARTH_CIRCUMFERENCE * Math.cos((lat * Math.PI) / 180)) / (512 * altitude));
+        }
+
+        // Glide between two sets of camera options (the same fields flyTo animates, plus the
+        // elevation and roll it drops). Both ends are exact: `from` is where flyTo stops (sea
+        // level, pitch 0) and `to` is the loop's first frame.
+        function glide(from, to, ms, done) {
+            const t0 = performance.now();
+            const lerp = (a, b, u) => a + (b - a) * u;
+            const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+            const step = (now) => {
+                if (!state.playing) return;
+                const u = Math.min(1, (now - t0) / ms);
+                const e = ease(u);
+                map.jumpTo({
+                    center: [lerp(from.center.lng, to.center.lng, e), lerp(from.center.lat, to.center.lat, e)],
+                    zoom: lerp(from.zoom, to.zoom, e),
+                    pitch: lerp(from.pitch, to.pitch, e),
+                    bearing: from.bearing + angleDiff(from.bearing, to.bearing) * e,
+                    elevation: lerp(from.elevation, to.elevation, e),
+                    roll: lerp(from.roll, to.roll || 0, e),
+                });
+                if (u < 1) state.glideFrame = requestAnimationFrame(step);
+                else {
+                    map.jumpTo(to); // land exactly on the loop's first frame
+                    done();
+                }
+            };
+            state.glideFrame = requestAnimationFrame(step);
+        }
+
         function play({ approachMs = RESUME_MS } = {}) {
             if (!state.tour || state.playing) return;
             state.playing = true;
@@ -203,8 +245,21 @@
             holdCamera(true);
             onChange(getState());
             const pose = cameraAt(state.clock);
-            map.once('moveend', () => { if (state.playing && state.flying) startLoop(); });
-            map.flyTo({ ...pose, duration: approachMs, essential: true });
+            // Resuming exactly where it paused: nothing to fly
+            const c = map.getCenter();
+            const metres = Math.hypot((c.lng - pose.center.lng) * 111320 * Math.cos((c.lat * Math.PI) / 180), (c.lat - pose.center.lat) * 110540);
+            if (state.clock > 0 && metres < 30 && Math.abs(map.getZoom() - pose.zoom) < 0.05 && Math.abs(angleDiff(map.getBearing(), pose.bearing)) < 2) {
+                startLoop();
+                return;
+            }
+            const altW = map.getZoom() < 9 ? 40000 : 15000; // looking straight down at the start's view centre
+            const wZoom = lowZoomForAltitude(pose.center.lat, altW);
+            const above = { center: pose.center, zoom: wZoom, pitch: 0, bearing: pose.bearing, elevation: 0, roll: 0 };
+            map.once('moveend', () => {
+                if (!state.playing || !state.flying) return;
+                glide(above, pose, approachMs * 0.45, () => { if (state.playing && state.flying) startLoop(); });
+            });
+            map.flyTo({ center: pose.center, zoom: wZoom, pitch: 0, bearing: pose.bearing, duration: approachMs * 0.55, essential: true });
         }
 
         function pause() {
@@ -213,6 +268,7 @@
             state.playing = false;
             state.flying = false;
             cancelAnimationFrame(state.frame);
+            cancelAnimationFrame(state.glideFrame);
             if (map.isMoving()) map.stop();
             holdCamera(false);
             if (map.getRoll && map.getRoll()) map.easeTo({ roll: 0, duration: 600 }); // level the wings
