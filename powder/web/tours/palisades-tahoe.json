@@ -5,612 +5,532 @@
  "points": [
   {
    "camera": [
-    -120.22288,
-    39.20308,
-    3190
+    -120.2153,
+    39.1887,
+    3144
    ],
-   "seconds": 7.6,
-   "label": "Overview: the whole resort and its lifts",
+   "seconds": 7.2,
+   "label": "Overview: Olympic Valley and Alpine Meadows, one mountain",
    "target": [
     -120.2413,
     39.1887,
     2189
    ],
    "orbit": 1,
-   "ground": 2215
+   "ground": 2092
   },
   {
    "camera": [
-    -120.23025,
-    39.19733,
-    2865
+    -120.2257,
+    39.1887,
+    3071
    ],
-   "seconds": 6.8,
+   "seconds": 12.3,
    "label": "Easing in over the lifts",
    "pitch": 66,
-   "ground": 2186,
+   "ground": 2268,
    "target": [
-    -120.25209,
-    39.1876,
-    2186
+    -120.25434,
+    39.18358,
+    2268
    ]
   },
   {
    "camera": [
-    -120.2355,
-    39.1975,
-    2153
+    -120.2418,
+    39.184,
+    2677
    ],
-   "seconds": 9.9,
-   "label": "Olympic Village, Funitel and Tram below",
-   "pitch": 40.0,
-   "ground": 1895,
+   "seconds": 3.4,
+   "label": "KT-22 summit: McConkey's, 75 Chute and the West Face",
+   "pitch": 42.0,
+   "ground": 2235,
    "target": [
-    -120.23896,
-    39.19809,
-    1895
+    -120.24835,
+    39.18339,
+    2235
    ]
   },
   {
    "camera": [
-    -120.249,
-    39.2005,
-    2413
+    -120.2442,
+    39.187,
+    2496
    ],
-   "seconds": 6.0,
-   "label": "Heading for Silverado",
-   "pitch": 49.2,
-   "ground": 2078,
+   "seconds": 7.2,
+   "label": "Down the West Face, Rock Garden and Moseley's",
+   "pitch": 39.7,
+   "ground": 2104,
    "target": [
-    -120.25496,
-    39.20223,
-    2078
+    -120.24948,
+    39.18775,
+    2104
    ]
   },
   {
    "camera": [
-    -120.2567,
-    39.2036,
-    2322
+    -120.2545,
+    39.1858,
+    2607
    ],
-   "seconds": 4.5,
-   "label": "Silverado bottom",
-   "pitch": 47.2,
-   "ground": 2125,
+   "seconds": 5.2,
+   "label": "Up Headwall Express",
+   "pitch": 56.0,
+   "ground": 2389,
    "target": [
-    -120.26031,
-    39.2036,
-    2125
+    -120.25962,
+    39.18477,
+    2389
    ]
   },
   {
    "camera": [
     -120.2612,
-    39.2005,
-    2544
+    39.1836,
+    2788
    ],
-   "seconds": 4.4,
-   "label": "Up Silverado",
-   "pitch": 50.0,
-   "ground": 2377,
+   "seconds": 3.6,
+   "label": "Headwall Face, the Slot and Cornice Bowl",
+   "pitch": 46.8,
+   "ground": 2566,
    "target": [
-    -120.26356,
-    39.19866,
-    2377
-   ]
-  },
-  {
-   "camera": [
-    -120.2651,
-    39.1971,
-    2762
-   ],
-   "seconds": 3.0,
-   "label": "Silverado top",
-   "pitch": 50.0,
-   "ground": 2486,
-   "target": [
-    -120.26757,
-    39.19322,
-    2486
+    -120.26521,
+    39.1836,
+    2566
    ]
   },
   {
    "camera": [
     -120.2655,
-    39.1938,
-    2771
-   ],
-   "seconds": 4.4,
-   "label": "Granite Chief lifts",
-   "pitch": 46.0,
-   "ground": 2437,
-   "target": [
-    -120.26679,
-    39.18952,
-    2437
-   ]
-  },
-  {
-   "camera": [
-    -120.2675,
-    39.1892,
-    2678
-   ],
-   "seconds": 3.4,
-   "label": "Emigrant bottom",
-   "pitch": 44.0,
-   "ground": 2487,
-   "target": [
-    -120.27009,
-    39.18799,
-    2487
-   ]
-  },
-  {
-   "camera": [
-    -120.272,
-    39.1908,
-    2711
-   ],
-   "seconds": 3.6,
-   "label": "Up the Emigrant line, Palisades cliffs",
-   "pitch": 46.0,
-   "ground": 2581,
-   "target": [
-    -120.27406,
-    39.19158,
-    2581
-   ]
-  },
-  {
-   "camera": [
-    -120.2765,
-    39.1926,
-    2835
-   ],
-   "seconds": 3.8,
-   "label": "Over the Palisades lip",
-   "pitch": 50.0,
-   "ground": 2554,
-   "target": [
-    -120.28164,
-    39.19423,
-    2554
-   ]
-  },
-  {
-   "camera": [
-    -120.2815,
-    39.1938,
-    2963
+    39.1858,
+    2760
    ],
    "seconds": 3.0,
-   "label": "Off the cliffs, looking down",
-   "pitch": 62.0,
-   "ground": 2645,
+   "label": "Siberia Bowl below the Palisades",
+   "pitch": 48.8,
+   "ground": 2479,
    "target": [
-    -120.29059,
-    39.19746,
-    2645
+    -120.27061,
+    39.18667,
+    2479
    ]
   },
   {
    "camera": [
-    -120.2825,
-    39.195,
-    3028
+    -120.2683,
+    39.1848,
+    2811
    ],
-   "seconds": 5.2,
-   "label": "Granite Chief peak, ridge below",
-   "pitch": 60.6,
-   "ground": 2617,
+   "seconds": 3.0,
+   "label": "Beneath the chutes: National, Extra and Main",
+   "pitch": 50.0,
+   "ground": 2610,
    "target": [
-    -120.2794,
-    39.18606,
-    2617
+    -120.27088,
+    39.18242,
+    2610
    ]
   },
   {
    "camera": [
-    -120.28,
-    39.1895,
-    2989
+    -120.269,
+    39.1826,
+    2874
    ],
-   "seconds": 4.0,
-   "label": "Arcing south over Five Lakes",
-   "pitch": 55.3,
-   "ground": 2406,
+   "seconds": 3.0,
+   "label": "Up the Palisades, face on",
+   "pitch": 48.0,
+   "ground": 2685,
    "target": [
-    -120.27687,
-    39.179,
-    2406
+    -120.27002,
+    39.18003,
+    2685
    ]
   },
   {
    "camera": [
-    -120.2795,
-    39.185,
-    2916
+    -120.2699,
+    39.1808,
+    3025
    ],
-   "seconds": 5.4,
-   "label": "Round to Siberia",
-   "pitch": 51.7,
-   "ground": 2521,
+   "seconds": 3.0,
+   "label": "Over the Palisades lip: Chimney",
+   "pitch": 39.2,
+   "ground": 2342,
    "target": [
-    -120.27386,
-    39.18012,
-    2521
+    -120.27787,
+    39.17729,
+    2342
    ]
   },
   {
    "camera": [
     -120.2722,
-    39.1828,
-    2889
+    39.1812,
+    2973
    ],
-   "seconds": 4.9,
-   "label": "Siberia Express top",
-   "pitch": 43.7,
-   "ground": 2570,
+   "seconds": 3.0,
+   "label": "Along the crest toward Siberia top",
+   "pitch": 45.7,
+   "ground": 2575,
    "target": [
-    -120.2672,
-    39.18287,
-    2570
+    -120.27598,
+    39.18546,
+    2575
    ]
   },
   {
    "camera": [
-    -120.266,
-    39.1852,
-    2745
+    -120.2724,
+    39.1836,
+    2951
    ],
-   "seconds": 4.4,
-   "label": "Down the Siberia Express",
-   "pitch": 39.0,
-   "ground": 2386,
+   "seconds": 6.4,
+   "label": "Siberia top",
+   "pitch": 44.7,
+   "ground": 2459,
    "target": [
-    -120.26179,
-    39.1869,
-    2386
+    -120.26893,
+    39.18918,
+    2459
+   ]
+  },
+  {
+   "camera": [
+    -120.2672,
+    39.1892,
+    2716
+   ],
+   "seconds": 3.9,
+   "label": "Emigrant bottom",
+   "pitch": 46.3,
+   "ground": 2492,
+   "target": [
+    -120.26712,
+    39.19231,
+    2492
+   ]
+  },
+  {
+   "camera": [
+    -120.2722,
+    39.191,
+    2828
+   ],
+   "seconds": 3.3,
+   "label": "Up Emigrant toward the Funnel",
+   "pitch": 52.0,
+   "ground": 2649,
+   "target": [
+    -120.27571,
+    39.1923,
+    2649
+   ]
+  },
+  {
+   "camera": [
+    -120.2762,
+    39.1925,
+    2980
+   ],
+   "seconds": 8.1,
+   "label": "Emigrant top: the Funnel, Granite Chief ahead",
+   "pitch": 52.0,
+   "ground": 2596,
+   "target": [
+    -120.28314,
+    39.19559,
+    2596
+   ]
+  },
+  {
+   "camera": [
+    -120.2862,
+    39.1972,
+    3028
+   ],
+   "seconds": 3.0,
+   "label": "Granite Chief Peak, Hidden Bowl and the Attic",
+   "pitch": 43.9,
+   "ground": 2558,
+   "target": [
+    -120.29185,
+    39.20097,
+    2558
+   ]
+  },
+  {
+   "camera": [
+    -120.2866,
+    39.1994,
+    2947
+   ],
+   "seconds": 4.0,
+   "label": "Granite Glades on the north side of the peak",
+   "pitch": 32.0,
+   "ground": 2584,
+   "target": [
+    -120.28326,
+    39.20061,
+    2584
+   ]
+  },
+  {
+   "camera": [
+    -120.2812,
+    39.199,
+    2789
+   ],
+   "seconds": 4.8,
+   "label": "High Voltage and the Attic, flying the runs east",
+   "pitch": 34.0,
+   "ground": 2396,
+   "target": [
+    -120.27683,
+    39.19885,
+    2396
+   ]
+  },
+  {
+   "camera": [
+    -120.2745,
+    39.199,
+    2638
+   ],
+   "seconds": 6.9,
+   "label": "Main Backside above the Silverado bowl",
+   "pitch": 47.1,
+   "ground": 2395,
+   "target": [
+    -120.27009,
+    39.19851,
+    2395
+   ]
+  },
+  {
+   "camera": [
+    -120.265,
+    39.1972,
+    2787
+   ],
+   "seconds": 4.8,
+   "label": "Silverado top: Rainbow Bowl and Trail 90 below",
+   "pitch": 40.9,
+   "ground": 2241,
+   "target": [
+    -120.25729,
+    39.19803,
+    2241
    ]
   },
   {
    "camera": [
     -120.2605,
-    39.1875,
-    2612
+    39.2005,
+    2513
    ],
-   "seconds": 5.6,
-   "label": "Siberia bottom, Gold Coast",
-   "pitch": 42.8,
-   "ground": 2233,
+   "seconds": 3.0,
+   "label": "Down Silverado, Oregon Trail and the back bowls",
+   "pitch": 38.8,
+   "ground": 2195,
    "target": [
-    -120.25479,
-    39.1875,
-    2233
+    -120.25637,
+    39.20096,
+    2195
    ]
   },
   {
    "camera": [
-    -120.253,
-    39.1852,
-    2500
+    -120.2578,
+    39.198,
+    2511
    ],
-   "seconds": 4.1,
-   "label": "Toward KT-22, Wa She Shu below",
-   "pitch": 47.3,
-   "ground": 2222,
+   "seconds": 3.0,
+   "label": "Over Land Bridge toward High Camp",
+   "pitch": 53.9,
+   "ground": 2319,
    "target": [
-    -120.24845,
-    39.18379,
-    2222
+    -120.25667,
+    39.19445,
+    2319
    ]
   },
   {
    "camera": [
-    -120.2475,
-    39.1835,
-    2476
+    -120.2588,
+    39.1952,
+    2696
    ],
-   "seconds": 4.2,
-   "label": "KT-22 west face",
-   "pitch": 44.9,
-   "ground": 2360,
+   "seconds": 6.2,
+   "label": "High Camp, the Tram",
+   "pitch": 53.2,
+   "ground": 2007,
    "target": [
-    -120.24552,
-    39.18311,
-    2360
+    -120.24428,
+    39.19201,
+    2007
    ]
   },
   {
    "camera": [
-    -120.2417,
-    39.183,
-    2622
+    -120.25,
+    39.1963,
+    2582
    ],
-   "seconds": 7.6,
-   "label": "Over the KT-22 summit",
-   "pitch": 45.8,
-   "ground": 2144,
+   "seconds": 5.4,
+   "label": "Down the Tram line to the village",
+   "pitch": 42.0,
+   "ground": 1895,
    "target": [
-    -120.23598,
-    39.17852,
-    2144
-   ]
-  },
-  {
-   "camera": [
-    -120.2372,
-    39.1755,
-    2369
-   ],
-   "seconds": 9.3,
-   "label": "Following the Base to Base gondola",
-   "pitch": 47.7,
-   "ground": 2060,
-   "target": [
-    -120.23631,
-    39.17104,
-    2060
-   ]
-  },
-  {
-   "camera": [
-    -120.2381,
-    39.165,
-    2360
-   ],
-   "seconds": 8.3,
-   "label": "Alpine Meadows base",
-   "pitch": 51.8,
-   "ground": 2160,
-   "target": [
-    -120.2393,
-    39.16176,
-    2160
-   ]
-  },
-  {
-   "camera": [
-    -120.244,
-    39.1572,
-    2613
-   ],
-   "seconds": 6.4,
-   "label": "Up Summit Six",
-   "pitch": 50.0,
-   "ground": 2431,
-   "target": [
-    -120.24575,
-    39.15479,
-    2431
-   ]
-  },
-  {
-   "camera": [
-    -120.2482,
-    39.1512,
-    2881
-   ],
-   "seconds": 4.1,
-   "label": "Summit Six top, Ward Peak",
-   "pitch": 49.5,
-   "ground": 2530,
-   "target": [
-    -120.24756,
-    39.14589,
-    2530
+    -120.24,
+    39.19732,
+    1895
    ]
   },
   {
    "camera": [
     -120.243,
-    39.149,
-    2824
+    39.1968,
+    2291
    ],
-   "seconds": 4.5,
-   "label": "Treeline and Ward ridge",
-   "pitch": 44.6,
-   "ground": 2265,
+   "seconds": 4.8,
+   "label": "Over the Tram's lower face",
+   "pitch": 42.0,
+   "ground": 1896,
    "target": [
-    -120.2351,
-    39.14573,
-    2265
+    -120.23719,
+    39.19667,
+    1896
    ]
   },
   {
    "camera": [
-    -120.2375,
-    39.1468,
-    2660
+    -120.2362,
+    39.196,
+    2228
    ],
-   "seconds": 3.7,
-   "label": "Alpine Bowl",
-   "pitch": 41.1,
-   "ground": 2246,
-   "target": [
-    -120.23164,
-    39.14624,
-    2246
-   ]
-  },
-  {
-   "camera": [
-    -120.2325,
-    39.148,
-    2580
-   ],
-   "seconds": 3.0,
-   "label": "Over Kangaroo",
-   "pitch": 47.9,
-   "ground": 2263,
-   "target": [
-    -120.22854,
-    39.15131,
-    2263
-   ]
-  },
-  {
-   "camera": [
-    -120.2322,
-    39.1512,
-    2601
-   ],
-   "seconds": 3.6,
-   "label": "Sherwood Forest, Sherwood Express top",
-   "pitch": 45.8,
-   "ground": 2266,
-   "target": [
-    -120.2338,
-    39.1554,
-    2266
-   ]
-  },
-  {
-   "camera": [
-    -120.235,
-    39.1545,
-    2520
-   ],
-   "seconds": 3.0,
-   "label": "Down through Sherwood",
-   "pitch": 40.7,
-   "ground": 2198,
-   "target": [
-    -120.23664,
-    39.1578,
-    2198
-   ]
-  },
-  {
-   "camera": [
-    -120.2352,
-    39.1572,
-    2453
-   ],
-   "seconds": 3.5,
-   "label": "Sherwood bottom",
-   "pitch": 44.9,
-   "ground": 2166,
-   "target": [
-    -120.23453,
-    39.16083,
-    2166
-   ]
-  },
-  {
-   "camera": [
-    -120.2338,
-    39.161,
-    2454
-   ],
-   "seconds": 3.0,
-   "label": "Turning to Scott",
-   "pitch": 52.0,
-   "ground": 2316,
-   "target": [
-    -120.23158,
-    39.16279,
-    2316
-   ]
-  },
-  {
-   "camera": [
-    -120.2312,
-    39.1604,
-    2544
-   ],
-   "seconds": 3.1,
-   "label": "Up the Scott chair",
-   "pitch": 50.0,
-   "ground": 2444,
-   "target": [
-    -120.22906,
-    39.15994,
-    2444
-   ]
-  },
-  {
-   "camera": [
-    -120.2272,
-    39.1596,
-    2696
-   ],
-   "seconds": 4.1,
-   "label": "Scott chair top",
-   "pitch": 52.0,
-   "ground": 2458,
-   "target": [
-    -120.22226,
-    39.15888,
-    2458
-   ]
-  },
-  {
-   "camera": [
-    -120.2215,
-    39.159,
-    2796
-   ],
-   "seconds": 16.0,
-   "label": "Over Scott Peak, Lakeview below",
-   "pitch": 49.7,
-   "ground": 2259,
-   "target": [
-    -120.22599,
-    39.16631,
-    2259
-   ]
-  },
-  {
-   "camera": [
-    -120.2355,
-    39.173,
-    2419
-   ],
-   "seconds": 10.9,
-   "label": "Back up the gondola corridor toward Squaw",
-   "pitch": 51.7,
-   "ground": 2107,
-   "target": [
-    -120.23715,
-    39.17798,
-    2107
-   ]
-  },
-  {
-   "camera": [
-    -120.23,
-    39.1845,
-    2543
-   ],
-   "seconds": 12.3,
-   "label": "Up the Resort chair line",
+   "seconds": 11.2,
+   "label": "Olympic Village base, Base to Base gondola",
    "pitch": 54.0,
-   "ground": 2292,
+   "ground": 2014,
    "target": [
-    -120.22748,
-    39.18843,
-    2292
+    -120.23449,
+    39.1922,
+    2014
    ]
   },
   {
    "camera": [
-    -120.2205,
-    39.1962,
-    2718
+    -120.2372,
+    39.184,
+    2680
    ],
-   "seconds": 14,
-   "label": "Resort chair top, home over Olympic Village",
+   "seconds": 10.0,
+   "label": "Over the Base to Base gondola toward Alpine",
+   "pitch": 54.1,
+   "ground": 2055,
    "target": [
-    -120.2413,
-    39.1887,
-    2189
+    -120.23807,
+    39.17285,
+    2055
+   ]
+  },
+  {
+   "camera": [
+    -120.238,
+    39.173,
+    2427
+   ],
+   "seconds": 6.6,
+   "label": "Gondola corridor, KT-22's skier's right below",
+   "pitch": 53.9,
+   "ground": 2088,
+   "target": [
+    -120.23832,
+    39.16697,
+    2088
+   ]
+  },
+  {
+   "camera": [
+    -120.2382,
+    39.1655,
+    2417
+   ],
+   "seconds": 14.3,
+   "label": "Alpine Meadows base",
+   "pitch": 55.8,
+   "ground": 2183,
+   "target": [
+    -120.23906,
+    39.16106,
+    2183
+   ]
+  },
+  {
+   "camera": [
+    -120.2425,
+    39.15,
+    2739
+   ],
+   "seconds": 4.2,
+   "label": "Over to Marenka and NC",
+   "pitch": 52.0,
+   "ground": 2556,
+   "target": [
+    -120.24432,
+    39.14732,
+    2556
+   ]
+  },
+  {
+   "camera": [
+    -120.248,
+    39.1512,
+    2917
+   ],
+   "seconds": 5.0,
+   "label": "Summit Six top, Ward Peak",
+   "pitch": 46.9,
+   "ground": 2477,
+   "target": [
+    -120.25284,
+    39.15579,
+    2477
+   ]
+  },
+  {
+   "camera": [
+    -120.2495,
+    39.1566,
+    2817
+   ],
+   "seconds": 5.1,
+   "label": "Dogleg and Idiot's Delight",
+   "pitch": 46.9,
+   "ground": 2517,
+   "target": [
+    -120.25103,
+    39.16055,
+    2517
+   ]
+  },
+  {
+   "camera": [
+    -120.2522,
+    39.162,
+    2838
+   ],
+   "seconds": 18,
+   "label": "The Castle",
+   "target": [
+    -120.24,
+    39.175,
+    2095
    ],
    "orbit": 1,
    "pitch": 68.0,
-   "ground": 1937
+   "ground": 2149
   }
  ]
 }
