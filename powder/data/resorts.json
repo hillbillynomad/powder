@@ -2807,6 +2807,19 @@
       "timezone": "Asia/Kolkata",
       "elevation_base_ft": 8694,
       "elevation_peak_ft": 13058
+    },
+    {
+      "name": "Mount Audubon",
+      "country": "US",
+      "region": "CO",
+      "latitude": 40.0992,
+      "longitude": -105.6163,
+      "lift_count": 0,
+      "avg_snowfall_inches": null,
+      "pass_type": null,
+      "timezone": "America/Denver",
+      "elevation_base_ft": 10500,
+      "elevation_peak_ft": 13223
     }
   ]
 }

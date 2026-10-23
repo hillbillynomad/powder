@@ -1,0 +1,536 @@
+{
+ "resort": "Mount Audubon",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -105.56697,
+    40.093,
+    4734
+   ],
+   "seconds": 9.3,
+   "label": "Overview: the Strava course to Mount Audubon",
+   "target": [
+    -105.6,
+    40.093,
+    3486
+   ],
+   "orbit": 1,
+   "ground": 3074
+  },
+  {
+   "camera": [
+    -105.58018,
+    40.093,
+    4438
+   ],
+   "seconds": 14.0,
+   "label": "Easing in over the lifts",
+   "pitch": 66,
+   "ground": 3291,
+   "target": [
+    -105.603,
+    40.06525,
+    3291
+   ]
+  },
+  {
+   "camera": [
+    -105.57778,
+    40.07995,
+    3462
+   ],
+   "seconds": 3.0,
+   "label": "Trailhead at Brainard Lake, the Strava start",
+   "pitch": 48.0,
+   "ground": 3164,
+   "target": [
+    -105.57747,
+    40.07575,
+    3164
+   ]
+  },
+  {
+   "camera": [
+    -105.57939,
+    40.08235,
+    3485
+   ],
+   "seconds": 3.0,
+   "label": "Beaver Creek Trail, climbing",
+   "pitch": 58.0,
+   "ground": 3243,
+   "target": [
+    -105.58344,
+    40.08624,
+    3243
+   ]
+  },
+  {
+   "camera": [
+    -105.58256,
+    40.08451,
+    3514
+   ],
+   "seconds": 3.0,
+   "label": "Beaver Creek Trail, climbing",
+   "pitch": 58.0,
+   "ground": 3261,
+   "target": [
+    -105.58749,
+    40.08803,
+    3261
+   ]
+  },
+  {
+   "camera": [
+    -105.58473,
+    40.08614,
+    3550
+   ],
+   "seconds": 3.2,
+   "label": "Beaver Creek Trail, climbing",
+   "pitch": 58.0,
+   "ground": 3321,
+   "target": [
+    -105.58794,
+    40.09047,
+    3321
+   ]
+  },
+  {
+   "camera": [
+    -105.5863,
+    40.08951,
+    3596
+   ],
+   "seconds": 3.0,
+   "label": "Beaver Creek Trail, climbing",
+   "pitch": 58.0,
+   "ground": 3419,
+   "target": [
+    -105.58721,
+    40.09328,
+    3419
+   ]
+  },
+  {
+   "camera": [
+    -105.5859,
+    40.09096,
+    3649
+   ],
+   "seconds": 3.0,
+   "label": "Up Beaver Creek Trail",
+   "pitch": 58.0,
+   "ground": 3359,
+   "target": [
+    -105.58194,
+    40.09606,
+    3359
+   ]
+  },
+  {
+   "camera": [
+    -105.58356,
+    40.09302,
+    3687
+   ],
+   "seconds": 3.7,
+   "label": "Beaver Creek Trail, climbing",
+   "pitch": 58.0,
+   "ground": 3424,
+   "target": [
+    -105.58308,
+    40.09838,
+    3424
+   ]
+  },
+  {
+   "camera": [
+    -105.58537,
+    40.09689,
+    3740
+   ],
+   "seconds": 3.4,
+   "label": "Beaver Creek Trail, climbing",
+   "pitch": 58.0,
+   "ground": 3493,
+   "target": [
+    -105.58846,
+    40.10149,
+    3493
+   ]
+  },
+  {
+   "camera": [
+    -105.58825,
+    40.09995,
+    3796
+   ],
+   "seconds": 3.4,
+   "label": "Beaver Creek Trail, climbing",
+   "pitch": 58.0,
+   "ground": 3580,
+   "target": [
+    -105.59328,
+    40.10244,
+    3580
+   ]
+  },
+  {
+   "camera": [
+    -105.5931,
+    40.10069,
+    3857
+   ],
+   "seconds": 3.6,
+   "label": "Beaver Creek Trail meets the Audubon Trail",
+   "pitch": 58.0,
+   "ground": 3642,
+   "target": [
+    -105.59867,
+    40.10236,
+    3642
+   ]
+  },
+  {
+   "camera": [
+    -105.59758,
+    40.10272,
+    3934
+   ],
+   "seconds": 3.0,
+   "label": "Along the Mount Audubon Trail",
+   "pitch": 58.0,
+   "ground": 3747,
+   "target": [
+    -105.60174,
+    40.10483,
+    3747
+   ]
+  },
+  {
+   "camera": [
+    -105.59934,
+    40.10383,
+    3990
+   ],
+   "seconds": 3.7,
+   "label": "Along the Mount Audubon Trail",
+   "pitch": 58.0,
+   "ground": 3762,
+   "target": [
+    -105.60556,
+    40.10358,
+    3762
+   ]
+  },
+  {
+   "camera": [
+    -105.60447,
+    40.10245,
+    4036
+   ],
+   "seconds": 3.7,
+   "label": "Along the Mount Audubon Trail",
+   "pitch": 58.0,
+   "ground": 3830,
+   "target": [
+    -105.60986,
+    40.10169,
+    3830
+   ]
+  },
+  {
+   "camera": [
+    -105.60983,
+    40.10237,
+    4122
+   ],
+   "seconds": 3.0,
+   "label": "Along the Mount Audubon Trail",
+   "pitch": 58.0,
+   "ground": 3923,
+   "target": [
+    -105.61506,
+    40.10222,
+    3923
+   ]
+  },
+  {
+   "camera": [
+    -105.61361,
+    40.10219,
+    4202
+   ],
+   "seconds": 3.2,
+   "label": "Along the Mount Audubon Trail",
+   "pitch": 58.0,
+   "ground": 3941,
+   "target": [
+    -105.61948,
+    40.09929,
+    3941
+   ]
+  },
+  {
+   "camera": [
+    -105.61622,
+    40.09923,
+    4250
+   ],
+   "seconds": 5.3,
+   "label": "Mount Audubon summit, 13,223 ft",
+   "pitch": 42.1,
+   "ground": 3565,
+   "target": [
+    -105.62216,
+    40.09281,
+    3565
+   ]
+  },
+  {
+   "camera": [
+    -105.6205,
+    40.0948,
+    3983
+   ],
+   "seconds": 6.9,
+   "label": "Over the south cliffs and the Blue Lake cirque",
+   "pitch": 36.1,
+   "ground": 3505,
+   "target": [
+    -105.61617,
+    40.09173,
+    3505
+   ]
+  },
+  {
+   "camera": [
+    -105.6105,
+    40.0952,
+    4118
+   ],
+   "seconds": 5.3,
+   "label": "Off the summit, back along the ridge",
+   "pitch": 52.0,
+   "ground": 3765,
+   "target": [
+    -105.60526,
+    40.09948,
+    3765
+   ]
+  },
+  {
+   "camera": [
+    -105.61361,
+    40.10038,
+    4334
+   ],
+   "seconds": 3.0,
+   "label": "Back down the course",
+   "pitch": 46.4,
+   "ground": 3269,
+   "target": [
+    -105.61185,
+    40.11456,
+    3269
+   ]
+  },
+  {
+   "camera": [
+    -105.60983,
+    40.10056,
+    4236
+   ],
+   "seconds": 3.8,
+   "label": "Back down the course",
+   "pitch": 42.0,
+   "ground": 3643,
+   "target": [
+    -105.601,
+    40.10081,
+    3643
+   ]
+  },
+  {
+   "camera": [
+    -105.60447,
+    40.10064,
+    4127
+   ],
+   "seconds": 3.8,
+   "label": "Back down the course",
+   "pitch": 43.2,
+   "ground": 3601,
+   "target": [
+    -105.59636,
+    40.10178,
+    3601
+   ]
+  },
+  {
+   "camera": [
+    -105.59934,
+    40.10202,
+    4021
+   ],
+   "seconds": 3.0,
+   "label": "Back down the course",
+   "pitch": 42.7,
+   "ground": 3565,
+   "target": [
+    -105.59238,
+    40.10229,
+    3565
+   ]
+  },
+  {
+   "camera": [
+    -105.59758,
+    40.10091,
+    3970
+   ],
+   "seconds": 3.6,
+   "label": "Back down the course",
+   "pitch": 45.6,
+   "ground": 3542,
+   "target": [
+    -105.59145,
+    40.0978,
+    3542
+   ]
+  },
+  {
+   "camera": [
+    -105.5931,
+    40.09888,
+    3936
+   ],
+   "seconds": 3.4,
+   "label": "Back down Beaver Creek Trail",
+   "pitch": 47.8,
+   "ground": 3411,
+   "target": [
+    -105.58418,
+    40.09621,
+    3411
+   ]
+  },
+  {
+   "camera": [
+    -105.58825,
+    40.09814,
+    3875
+   ],
+   "seconds": 3.4,
+   "label": "Back down Beaver Creek Trail",
+   "pitch": 46.8,
+   "ground": 3306,
+   "target": [
+    -105.57979,
+    40.09395,
+    3306
+   ]
+  },
+  {
+   "camera": [
+    -105.58537,
+    40.09508,
+    3821
+   ],
+   "seconds": 3.7,
+   "label": "Back down Beaver Creek Trail",
+   "pitch": 45.6,
+   "ground": 3204,
+   "target": [
+    -105.58055,
+    40.08791,
+    3204
+   ]
+  },
+  {
+   "camera": [
+    -105.58356,
+    40.09121,
+    3725
+   ],
+   "seconds": 3.0,
+   "label": "Back down Beaver Creek Trail",
+   "pitch": 44.7,
+   "ground": 3223,
+   "target": [
+    -105.58412,
+    40.08486,
+    3223
+   ]
+  },
+  {
+   "camera": [
+    -105.5859,
+    40.08915,
+    3673
+   ],
+   "seconds": 3.0,
+   "label": "Back down Beaver Creek Trail",
+   "pitch": 45.6,
+   "ground": 3245,
+   "target": [
+    -105.58966,
+    40.08429,
+    3245
+   ]
+  },
+  {
+   "camera": [
+    -105.5863,
+    40.0877,
+    3646
+   ],
+   "seconds": 3.2,
+   "label": "Back down Beaver Creek Trail",
+   "pitch": 46.5,
+   "ground": 3185,
+   "target": [
+    -105.58482,
+    40.08157,
+    3185
+   ]
+  },
+  {
+   "camera": [
+    -105.58473,
+    40.08433,
+    3597
+   ],
+   "seconds": 6.8,
+   "label": "Back down Beaver Creek Trail",
+   "pitch": 49.7,
+   "ground": 3177,
+   "target": [
+    -105.58062,
+    40.07879,
+    3177
+   ]
+  },
+  {
+   "camera": [
+    -105.58256,
+    40.0827,
+    4401
+   ],
+   "seconds": 14,
+   "label": "Home over the trailhead, the peak behind",
+   "target": [
+    -105.612,
+    40.093,
+    3663
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 2903
+  }
+ ]
+}

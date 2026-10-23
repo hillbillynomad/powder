@@ -1,0 +1,304 @@
+{
+ "resort": "Mount Audubon",
+ "speed_mps": 125,
+ "descent_look": 10,
+ "min_clearance_m": 110,
+ "overview": {
+  "center": [
+   -105.6,
+   40.093
+  ],
+  "bearing": 270,
+  "agl": 1500,
+  "pitch": 66,
+  "pull_back": true,
+  "label": "Overview: the Strava course to Mount Audubon"
+ },
+ "points": [
+  {
+   "label": "Trailhead at Brainard Lake, the Strava start",
+   "camera": [
+    -105.57778,
+    40.07995,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail, climbing",
+   "camera": [
+    -105.57939,
+    40.08235,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail, climbing",
+   "camera": [
+    -105.58256,
+    40.08451,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail, climbing",
+   "camera": [
+    -105.58473,
+    40.08614,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail, climbing",
+   "camera": [
+    -105.5863,
+    40.08951,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Up Beaver Creek Trail",
+   "camera": [
+    -105.5859,
+    40.09096,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail, climbing",
+   "camera": [
+    -105.58356,
+    40.09302,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail, climbing",
+   "camera": [
+    -105.58537,
+    40.09689,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail, climbing",
+   "camera": [
+    -105.58825,
+    40.09995,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Beaver Creek Trail meets the Audubon Trail",
+   "camera": [
+    -105.5931,
+    40.10069,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Along the Mount Audubon Trail",
+   "camera": [
+    -105.59758,
+    40.10272,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Along the Mount Audubon Trail",
+   "camera": [
+    -105.59934,
+    40.10383,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Along the Mount Audubon Trail",
+   "camera": [
+    -105.60447,
+    40.10245,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Along the Mount Audubon Trail",
+   "camera": [
+    -105.60983,
+    40.10237,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Along the Mount Audubon Trail",
+   "camera": [
+    -105.61361,
+    40.10219,
+    300
+   ],
+   "pitch": 58
+  },
+  {
+   "label": "Mount Audubon summit, 13,223 ft",
+   "camera": [
+    -105.61622,
+    40.09923,
+    220
+   ],
+   "pitch": 50
+  },
+  {
+   "label": "Over the south cliffs and the Blue Lake cirque",
+   "camera": [
+    -105.6205,
+    40.0948,
+    300
+   ],
+   "pitch": 44
+  },
+  {
+   "label": "Off the summit, back along the ridge",
+   "camera": [
+    -105.6105,
+    40.0952,
+    320
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down the course",
+   "camera": [
+    -105.61361,
+    40.10038,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down the course",
+   "camera": [
+    -105.60983,
+    40.10056,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down the course",
+   "camera": [
+    -105.60447,
+    40.10064,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down the course",
+   "camera": [
+    -105.59934,
+    40.10202,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down the course",
+   "camera": [
+    -105.59758,
+    40.10091,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down Beaver Creek Trail",
+   "camera": [
+    -105.5931,
+    40.09888,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down Beaver Creek Trail",
+   "camera": [
+    -105.58825,
+    40.09814,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down Beaver Creek Trail",
+   "camera": [
+    -105.58537,
+    40.09508,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down Beaver Creek Trail",
+   "camera": [
+    -105.58356,
+    40.09121,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down Beaver Creek Trail",
+   "camera": [
+    -105.5859,
+    40.08915,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down Beaver Creek Trail",
+   "camera": [
+    -105.5863,
+    40.0877,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Back down Beaver Creek Trail",
+   "camera": [
+    -105.58473,
+    40.08433,
+    380
+   ],
+   "pitch": 52
+  },
+  {
+   "label": "Home over the trailhead, the peak behind",
+   "camera": [
+    -105.58256,
+    40.0827,
+    380
+   ],
+   "pitch": 52,
+   "target": [
+    -105.612,
+    40.093
+   ],
+   "orbit": 1,
+   "seconds": 14
+  }
+ ]
+}
