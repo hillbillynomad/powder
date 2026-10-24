@@ -567,6 +567,8 @@ function createTestHooks() {
         weatherReady: () => (weather ? weather.ready.then(() => true) : Promise.resolve(false)),
         setWeatherFrame: (i) => weather && weather.setFrame(i),
         flyby: () => (flyby ? flyby.getState() : null),
+        flybyTime: () => (flyby ? flyby.getTime() : 0),
+        flybyDuration: () => (flyby ? flyby.getDuration() : 0),
     };
 }
 
@@ -1545,13 +1547,55 @@ function endTour() {
 }
 
 function syncFlybyButton(state) {
+    const bar = document.getElementById('flyby-bar');
+    if (!bar) return;
+    bar.hidden = !state.hasTour;
     const button = document.getElementById('flyby-toggle');
-    if (!button) return;
-    button.hidden = !state.hasTour;
     button.classList.toggle('playing', state.playing);
-    button.innerHTML = state.playing
-        ? '<span aria-hidden="true">❚❚</span> Pause flyover'
-        : '<span aria-hidden="true">▶</span> Fly over';
+    button.textContent = state.playing ? '❚❚' : '▶';
+    button.setAttribute('aria-label', state.playing ? 'Pause flyover' : 'Fly over');
+    const slider = document.getElementById('flyby-slider');
+    const duration = flyby ? flyby.getDuration() : 0;
+    slider.max = String(Math.round(duration * 10));
+    if (state.hasTour) startFlybyClock();
+}
+
+// Keep the slider and time readout moving with the camera while a tour is up
+let flybyClockFrame = 0;
+let flybyScrubbing = false;
+function startFlybyClock() {
+    cancelAnimationFrame(flybyClockFrame);
+    const tick = () => {
+        if (!flyby || !flyby.getState().hasTour) return;
+        updateFlybyClock();
+        flybyClockFrame = requestAnimationFrame(tick);
+    };
+    tick();
+}
+
+function updateFlybyClock() {
+    const slider = document.getElementById('flyby-slider');
+    const time = flyby.getTime(), duration = flyby.getDuration();
+    if (!flybyScrubbing) slider.value = String(Math.round(time * 10));
+    const shown = flybyScrubbing ? Number(slider.value) / 10 : time;
+    document.getElementById('flyby-time').textContent =
+        `${window.PowderFlyby.formatClock(shown)} / ${window.PowderFlyby.formatClock(duration)}`;
+}
+
+function wireFlybyBar() {
+    const slider = document.getElementById('flyby-slider');
+    slider.addEventListener('pointerdown', () => { flybyScrubbing = true; });
+    const release = () => { flybyScrubbing = false; };
+    slider.addEventListener('pointerup', release);
+    slider.addEventListener('change', release);
+    slider.addEventListener('blur', release);
+    slider.addEventListener('input', () => {
+        if (!flyby) return;
+        flyby.seek(Number(slider.value) / 10);
+        updateFlybyClock();
+    });
+    document.getElementById('flyby-restart').addEventListener('click', () => { if (flyby) { flyby.seek(0); updateFlybyClock(); } });
+    document.getElementById('flyby-end').addEventListener('click', () => { if (flyby) { flyby.seek(flyby.getDuration() - 6); updateFlybyClock(); } });
 }
 
 function toggleFlyby() {
@@ -1684,6 +1728,7 @@ function setupEventListeners() {
     // Controls
     document.getElementById('home-button').addEventListener('click', goHome);
     document.getElementById('flyby-toggle').addEventListener('click', toggleFlyby);
+    wireFlybyBar();
     document.getElementById('panel-collapse').addEventListener('click', togglePanelCollapse);
     document.getElementById('panel-reopen').addEventListener('click', reopenPanel);
     document.getElementById('menu-toggle').addEventListener('click', toggleMenu);

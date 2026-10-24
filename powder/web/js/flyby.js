@@ -38,6 +38,12 @@
             (2 * p0[i] - 5 * p1[i] + 4 * p2[i] - p3[i]) * t2 + (-p0[i] + 3 * p1[i] - 3 * p2[i] + p3[i]) * t3));
     }
 
+    // 83.4 -> "1:23"
+    function formatClock(seconds) {
+        const s = Math.max(0, Math.round(seconds));
+        return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+    }
+
     function tourDuration(tour) {
         return tour.points.reduce((sum, p) => sum + p.seconds, 0);
     }
@@ -300,10 +306,42 @@
             return { hasTour: !!state.tour, playing: state.playing, resort: state.tour ? state.tour.resort : null };
         }
 
-        return { getTour, start, stop, play, pause, getState };
+        function getDuration() {
+            return state.tour ? tourDuration(state.tour) : 0;
+        }
+
+        // Where the camera is in the loop, in seconds (0 .. duration)
+        function getTime() {
+            if (!state.tour) return 0;
+            const total = tourDuration(state.tour);
+            const t = state.playing && !state.flying ? state.clock + (performance.now() - state.startedAt) / 1000 : state.clock;
+            return ((t % total) + total) % total;
+        }
+
+        // Jump to a point in the loop: straight there (no fly-in), then keep going if it was playing
+        function seek(seconds) {
+            if (!state.tour) return;
+            const total = tourDuration(state.tour);
+            state.clock = Math.max(0, Math.min(total - 0.05, seconds));
+            const wasPlaying = state.playing;
+            if (state.flying) { // still on the way in: drop the approach
+                cancelAnimationFrame(state.glideFrame);
+                if (map.isMoving()) map.stop();
+                state.flying = false;
+            }
+            holdCamera(true);
+            map.jumpTo(cameraAt(state.clock));
+            if (wasPlaying) {
+                cancelAnimationFrame(state.frame);
+                startLoop();
+            }
+            onChange(getState());
+        }
+
+        return { getTour, start, stop, play, pause, getState, getTime, getDuration, seek };
     }
 
-    const api = { slugify, poseAt, birdPose, lookPoint, bearingBetween, angleDiff, tourDuration, orbitWeight, catmullRom, createController };
+    const api = { slugify, formatClock, poseAt, birdPose, lookPoint, bearingBetween, angleDiff, tourDuration, orbitWeight, catmullRom, createController };
     if (typeof module !== 'undefined' && module.exports) module.exports = api;
     else window.PowderFlyby = api;
 })();

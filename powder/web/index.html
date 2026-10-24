@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Powder - Snowfall Forecast</title>
-    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.css" />
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="img/snowflake.svg">
     <!-- Link preview: just the snowflake. A still image, not a GIF: iMessage plays an animated preview instead of opening the link (absolute URLs: scrapers don't resolve relative ones) -->
@@ -176,7 +176,14 @@
                 <div id="map"></div>
 
                 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-                <button id="flyby-toggle" class="flyby-toggle" type="button" hidden></button>
+                <div id="flyby-bar" class="flyby-bar" hidden>
+                    <button id="flyby-restart" class="flyby-btn" type="button" aria-label="Back to the start">⏮</button>
+                    <button id="flyby-toggle" class="flyby-btn flyby-play" type="button" aria-label="Pause flyover">❚❚</button>
+                    <input id="flyby-slider" class="flyby-slider" type="range" min="0" max="0" step="1" value="0"
+                           aria-label="Flyover position">
+                    <span id="flyby-time" class="flyby-time">0:00 / 0:00</span>
+                    <button id="flyby-end" class="flyby-btn" type="button" aria-label="Jump to the end">⏭</button>
+                </div>
                 <div id="wx-timebar" class="wx-timebar" hidden>
                     <button id="wx-play" class="wx-play" type="button" aria-label="Play">▶</button>
                     <div class="wx-track">
@@ -195,7 +202,7 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/maplibre-gl@5.6.0/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
     <script src="https://unpkg.com/maplibre-contour@0.1.1/dist/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
     <script src="js/weather.js"></script>

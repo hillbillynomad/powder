@@ -7,12 +7,14 @@ const { chromium } = require(process.argv[2]);
 const [url, resort, outDir] = [process.argv[3], process.argv[4], process.argv[5]];
 const frames = Number(process.argv[6] || 8);
 const span = Number(process.argv[7] || 0);
-const start = Number(process.argv[8] || 0); // first sample time (seconds) // sample only the first `span` seconds (e.g. the intro)
+const start = Number(process.argv[8] || 0); // first sample time (seconds)
+const viewport = process.env.VIEW ? { width: Number(process.env.VIEW.split('x')[0]), height: Number(process.env.VIEW.split('x')[1]) } : { width: 1280, height: 800 };
+const settleMs = Number(process.env.SETTLE || 1200); // sample only the first `span` seconds (e.g. the intro)
 
 (async () => {
   fs.mkdirSync(outDir, { recursive: true });
   const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
-  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const page = await browser.newPage({ viewport });
   page.on('pageerror', e => console.log('pageerror', e.message));
   await page.goto(url);
   await page.waitForFunction(() => window.__powder && window.__powder.markerCount() > 0, undefined, { timeout: 90000 });
@@ -49,7 +51,7 @@ const start = Number(process.argv[8] || 0); // first sample time (seconds) // sa
       m.jumpTo({ ...o, roll });
     }, s);
     await page.waitForFunction(() => window.__map.loaded() && window.__map.areTilesLoaded(), undefined, { timeout: 40000 }).catch(() => {});
-    await page.waitForTimeout(1200);
+    await page.waitForTimeout(settleMs);
     await page.screenshot({ path: path.join(outDir, `t${String(Math.round(s)).padStart(3, '0')}.png`) });
   }
   await browser.close();

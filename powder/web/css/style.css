@@ -420,31 +420,50 @@ body {
 
 .wx-timebar[hidden] { display: none; }
 
-/* Flyover play / pause, top centre of the map */
-.flyby-toggle {
+/* Flyover timeline: restart, play / pause, scrubber, time, jump to end; bottom of the map */
+.flyby-bar {
     position: absolute;
-    top: 12px;
-    left: 50%;
     z-index: 5;
-    transform: translateX(-50%);
-    display: inline-flex;
+    left: 10px;
+    right: 40px; /* clear of the attribution (i) button */
+    bottom: 10px;
+    display: flex;
     align-items: center;
     gap: 8px;
-    padding: 7px 14px;
-    background: rgba(22, 33, 62, 0.85);
-    color: var(--color-text);
+    max-width: 560px;
+    padding: 6px 12px;
+    background: rgba(22, 33, 62, 0.9);
     border: 1px solid var(--color-accent);
     border-radius: 999px;
     box-shadow: var(--shadow-sm);
-    font-size: 0.85rem;
-    white-space: nowrap;
-    cursor: pointer;
+    color: var(--color-text);
     backdrop-filter: blur(6px);
 }
 
-.flyby-toggle[hidden] { display: none; }
-.flyby-toggle:hover { background: var(--color-bg-hover); }
-.flyby-toggle span { font-size: 0.7rem; }
+.flyby-bar[hidden] { display: none; }
+/* the weather time bar takes the bottom edge when it is on: sit above it */
+.wx-timebar:not([hidden]) ~ .flyby-bar { bottom: 74px; }
+
+.flyby-btn {
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid transparent;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.flyby-btn:hover { background: var(--color-bg-hover); }
+.flyby-play { border-color: var(--color-accent); }
+.flyby-slider { flex: 1 1 auto; min-width: 60px; accent-color: var(--color-accent); cursor: pointer; }
+.flyby-time { flex: 0 0 auto; min-width: 74px; text-align: right; font-size: 0.8rem; font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
 
 .wx-play, .wx-now {
     flex: 0 0 auto;
@@ -512,6 +531,8 @@ body {
 
 @media (max-width: 600px) {
     .wx-timebar { left: 6px; right: 34px; bottom: 6px; gap: 8px; padding: 6px 8px; }
+    .flyby-bar { left: 6px; right: 34px; bottom: 6px; gap: 4px; padding: 4px 8px; }
+    .flyby-time { min-width: 66px; font-size: 0.72rem; }
     .wx-time { min-width: 60px; }
     .wx-time-when { font-size: 0.78rem; }
 }
@@ -520,6 +541,8 @@ body {
    of the map, so lift the time bar above it (keep in sync with the bottom-sheet query) */
 @media (max-width: 700px), (max-aspect-ratio: 1/1) {
     .map-wrapper:has(#panel-reopen:not([hidden])) .wx-timebar { bottom: 48px; }
+    .map-wrapper:has(#panel-reopen:not([hidden])) .flyby-bar { bottom: 48px; }
+    .map-wrapper:has(#panel-reopen:not([hidden])) .wx-timebar:not([hidden]) ~ .flyby-bar { bottom: 112px; }
 }
 
 /* Brief confirmation message (e.g. after copying a share link) */

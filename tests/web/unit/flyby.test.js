@@ -128,6 +128,15 @@ describe('shipped tours', () => {
   });
 });
 
+describe('formatClock', () => {
+  it('shows minutes and zero-padded seconds', () => {
+    expect(F.formatClock(0)).toBe('0:00');
+    expect(F.formatClock(83.4)).toBe('1:23');
+    expect(F.formatClock(600)).toBe('10:00');
+    expect(F.formatClock(-4)).toBe('0:00');
+  });
+});
+
 describe('orbitWeight (bird flight with orbit points)', () => {
   const cam = (i) => [i, 0, 100];
   const tour = {
