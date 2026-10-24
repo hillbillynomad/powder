@@ -1474,6 +1474,47 @@ function setResortBubblesVisible(visible) {
     }
 }
 
+// Labelled places a tour passes (camps, summits...), drawn only while it flies. The ids start
+// with `tourmarks-` so applyLayerPrefs leaves them alone; emptying the source hides them.
+function ensureTourMarkerLayers() {
+    if (!map || !mapReady || map.getSource('tour-markers')) return;
+    map.addSource('tour-markers', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+    map.addLayer({
+        id: 'tourmarks-dots', type: 'circle', source: 'tour-markers',
+        paint: { 'circle-radius': 7, 'circle-color': '#f97316', 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 },
+    });
+    map.addLayer({
+        id: 'tourmarks-labels', type: 'symbol', source: 'tour-markers',
+        layout: {
+            'text-field': ['get', 'label'], 'text-font': ['Noto Sans Regular'], 'text-size': 17,
+            'text-anchor': 'bottom', 'text-offset': [0, -0.8], 'text-max-width': 14,
+            'text-allow-overlap': true, 'text-ignore-placement': true,
+        },
+        paint: { 'text-color': '#fff', 'text-halo-color': 'rgba(0, 0, 0, 0.85)', 'text-halo-width': 2 },
+    });
+}
+
+function setTourMarkers(markers) {
+    if (!markers || !markers.length) { clearTourMarkers(); return; }
+    ensureTourMarkerLayers();
+    const src = map && map.getSource('tour-markers');
+    if (!src) return;
+    src.setData({
+        type: 'FeatureCollection',
+        features: markers.map(m => ({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: m.at },
+            properties: { label: `${m.name}
+${Math.round(m.ele_m).toLocaleString()} m (${Math.round(m.ele_m * 3.28084).toLocaleString()} ft)` },
+        })),
+    });
+}
+
+function clearTourMarkers() {
+    const src = map && mapReady && map.getSource('tour-markers');
+    if (src) src.setData({ type: 'FeatureCollection', features: [] });
+}
+
 async function startTourIfAny(resort) {
     if (!flyby || !mapReady) return false;
     if (flyby.getState().resort !== resort.name) endTour();
@@ -1484,6 +1525,7 @@ async function startTourIfAny(resort) {
     applyLayerPrefs({ save: false });
     syncMenuInputs();
     setResortBubblesVisible(false);
+    setTourMarkers(tour.markers);
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     flyby.start(tour, { autoplay: !reduceMotion });
     return true;
@@ -1492,6 +1534,7 @@ async function startTourIfAny(resort) {
 // Stop flying and give the user back their own layer settings
 function endTour() {
     if (flyby) flyby.stop();
+    clearTourMarkers();
     setResortBubblesVisible(true);
     if (tourPrefsBackup) {
         layerPrefs = tourPrefsBackup;

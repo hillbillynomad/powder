@@ -2820,6 +2820,19 @@
       "timezone": "America/Denver",
       "elevation_base_ft": 10500,
       "elevation_peak_ft": 13223
+    },
+    {
+      "name": "Aconcagua",
+      "country": "AR",
+      "region": "Mendoza",
+      "latitude": -32.6532,
+      "longitude": -70.012,
+      "lift_count": 0,
+      "avg_snowfall_inches": null,
+      "pass_type": null,
+      "timezone": "America/Argentina/Mendoza",
+      "elevation_base_ft": 9678,
+      "elevation_peak_ft": 22838
     }
   ]
 }

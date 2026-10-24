@@ -1,0 +1,713 @@
+{
+ "resort": "Aconcagua",
+ "version": 1,
+ "units": "metres above sea level (real, unexaggerated)",
+ "points": [
+  {
+   "camera": [
+    -69.9565,
+    -32.77593,
+    6668
+   ],
+   "seconds": 8,
+   "label": "Overview: the Normal Route, Horcones to the summit",
+   "target": [
+    -70.0,
+    -32.735,
+    3695
+   ],
+   "orbit": 1,
+   "ground": 3711
+  },
+  {
+   "camera": [
+    -69.95737,
+    -32.77511,
+    5817
+   ],
+   "seconds": 6,
+   "label": "Easing in over the lifts",
+   "pitch": 64,
+   "ground": 4028,
+   "target": [
+    -69.97968,
+    -32.73256,
+    4028
+   ]
+  },
+  {
+   "camera": [
+    -69.96432,
+    -32.76112,
+    4048
+   ],
+   "seconds": 8,
+   "label": "Confluencia, up the Horcones valley",
+   "pitch": 50.0,
+   "ground": 3448,
+   "target": [
+    -69.9724,
+    -32.755,
+    3448
+   ]
+  },
+  {
+   "camera": [
+    -70.01587,
+    -32.73113,
+    4268
+   ],
+   "seconds": 8,
+   "label": "Up the Horcones valley",
+   "pitch": 60.0,
+   "ground": 3680,
+   "target": [
+    -70.02749,
+    -32.72246,
+    3680
+   ]
+  },
+  {
+   "camera": [
+    -70.05411,
+    -32.69462,
+    4454
+   ],
+   "seconds": 5,
+   "label": "Horcones valley, Plaza de Mulas ahead",
+   "pitch": 60.0,
+   "ground": 4028,
+   "target": [
+    -70.05983,
+    -32.68656,
+    4028
+   ]
+  },
+  {
+   "camera": [
+    -70.0602,
+    -32.66914,
+    4517
+   ],
+   "seconds": 4,
+   "label": "Into the final valley bowl",
+   "pitch": 60.0,
+   "ground": 4125,
+   "target": [
+    -70.061,
+    -32.66035,
+    4125
+   ]
+  },
+  {
+   "camera": [
+    -70.05786,
+    -32.65366,
+    4622
+   ],
+   "seconds": 3.4,
+   "label": "Plaza de Mulas, Base Camp",
+   "pitch": 56.0,
+   "ground": 4373,
+   "target": [
+    -70.05714,
+    -32.64901,
+    4373
+   ]
+  },
+  {
+   "camera": [
+    -70.05687,
+    -32.64774,
+    4747
+   ],
+   "seconds": 3.6,
+   "label": "Above Base Camp, the Normal Route climbs",
+   "pitch": 56.0,
+   "ground": 4548,
+   "target": [
+    -70.0537,
+    -32.64486,
+    4548
+   ]
+  },
+  {
+   "camera": [
+    -70.05003,
+    -32.64659,
+    5053
+   ],
+   "seconds": 3.7,
+   "label": "Up toward Plaza Canada",
+   "pitch": 56.0,
+   "ground": 4888,
+   "target": [
+    -70.04642,
+    -32.64569,
+    4888
+   ]
+  },
+  {
+   "camera": [
+    -70.04328,
+    -32.64439,
+    5369
+   ],
+   "seconds": 3.9,
+   "label": "Plaza Canada, Camp 1",
+   "pitch": 56.0,
+   "ground": 5193,
+   "target": [
+    -70.03988,
+    -32.64264,
+    5193
+   ]
+  },
+  {
+   "camera": [
+    -70.03742,
+    -32.64013,
+    5643
+   ],
+   "seconds": 3.5,
+   "label": "Up toward Nido de Condores",
+   "pitch": 56.0,
+   "ground": 5457,
+   "target": [
+    -70.03333,
+    -32.63871,
+    5457
+   ]
+  },
+  {
+   "camera": [
+    -70.03029,
+    -32.63993,
+    5873
+   ],
+   "seconds": 4.0,
+   "label": "Nido de Condores, Camp 2",
+   "pitch": 56.0,
+   "ground": 5685,
+   "target": [
+    -70.02609,
+    -32.63875,
+    5685
+   ]
+  },
+  {
+   "camera": [
+    -70.02325,
+    -32.63618,
+    6080
+   ],
+   "seconds": 3.0,
+   "label": "Climbing to Berlin",
+   "pitch": 56.0,
+   "ground": 5911,
+   "target": [
+    -70.01956,
+    -32.63556,
+    5911
+   ]
+  },
+  {
+   "camera": [
+    -70.02147,
+    -32.63845,
+    6262
+   ],
+   "seconds": 3.2,
+   "label": "Berlin, Camp 3",
+   "pitch": 56.0,
+   "ground": 6103,
+   "target": [
+    -70.01867,
+    -32.64057,
+    6103
+   ]
+  },
+  {
+   "camera": [
+    -70.01619,
+    -32.64149,
+    6512
+   ],
+   "seconds": 3.0,
+   "label": "Above Berlin, the Cresta del Viento",
+   "pitch": 56.0,
+   "ground": 6288,
+   "target": [
+    -70.01352,
+    -32.64516,
+    6288
+   ]
+  },
+  {
+   "camera": [
+    -70.01595,
+    -32.64598,
+    6701
+   ],
+   "seconds": 3.9,
+   "label": "Independencia refuge",
+   "pitch": 56.0,
+   "ground": 6512,
+   "target": [
+    -70.01584,
+    -32.64973,
+    6512
+   ]
+  },
+  {
+   "camera": [
+    -70.01586,
+    -32.65258,
+    6957
+   ],
+   "seconds": 3.0,
+   "label": "The Travesia traverse",
+   "pitch": 56.0,
+   "ground": 6818,
+   "target": [
+    -70.01533,
+    -32.65536,
+    6818
+   ]
+  },
+  {
+   "camera": [
+    -70.01427,
+    -32.65465,
+    7162
+   ],
+   "seconds": 3.0,
+   "label": "La Canaleta, the final couloir",
+   "pitch": 56.0,
+   "ground": 4408,
+   "target": [
+    -69.95398,
+    -32.6627,
+    4408
+   ]
+  },
+  {
+   "camera": [
+    -70.01156,
+    -32.65315,
+    7198
+   ],
+   "seconds": 3.5,
+   "label": "Aconcagua summit, 6,961 m",
+   "pitch": 50.0,
+   "ground": 5176,
+   "target": [
+    -70.02456,
+    -32.62453,
+    5176
+   ]
+  },
+  {
+   "camera": [
+    -70.01686,
+    -32.64899,
+    7406
+   ],
+   "seconds": 4.2,
+   "label": "Circling the summit: North-west ridge",
+   "target": [
+    -70.01196,
+    -32.65315,
+    6926
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 5277
+  },
+  {
+   "camera": [
+    -70.01196,
+    -32.64727,
+    7406
+   ],
+   "seconds": 4.2,
+   "label": "Circling the summit: North face",
+   "target": [
+    -70.01196,
+    -32.65315,
+    6926
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 4198
+  },
+  {
+   "camera": [
+    -70.00706,
+    -32.64899,
+    7406
+   ],
+   "seconds": 4.2,
+   "label": "Circling the summit: North-east, the Polish Glacier side",
+   "target": [
+    -70.01196,
+    -32.65315,
+    6926
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 4945
+  },
+  {
+   "camera": [
+    -70.00502,
+    -32.65315,
+    7406
+   ],
+   "seconds": 4.2,
+   "label": "Circling the summit: East ridge, Filo del Guanaco",
+   "target": [
+    -70.01196,
+    -32.65315,
+    6926
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 3585
+  },
+  {
+   "camera": [
+    -70.00706,
+    -32.65731,
+    7406
+   ],
+   "seconds": 4.2,
+   "label": "Circling the summit: South-east, toward the Ameghino col",
+   "target": [
+    -70.01196,
+    -32.65315,
+    6926
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 4597
+  },
+  {
+   "camera": [
+    -70.01196,
+    -32.65903,
+    7406
+   ],
+   "seconds": 4.2,
+   "label": "Circling the summit: South face, 3,000 m of vertical",
+   "target": [
+    -70.01196,
+    -32.65315,
+    6926
+   ],
+   "orbit": 1,
+   "pitch": 68.0,
+   "ground": 3999
+  },
+  {
+   "camera": [
+    -70.01686,
+    -32.65731,
+    7406
+   ],
+   "seconds": 4.2,
+   "label": "Circling the summit: South-west, Cerro Ameghino beyond",
+   "target": [
+    -70.01196,
+    -32.65315,
+    6926
+   ],
+   "orbit": 1,
+   "pitch": 58.0,
+   "ground": 5006
+  },
+  {
+   "camera": [
+    -70.01427,
+    -32.65628,
+    7117
+   ],
+   "seconds": 3,
+   "label": "Back down the Normal Route",
+   "pitch": 42.0,
+   "ground": 6849,
+   "target": [
+    -70.01329,
+    -32.65321,
+    6849
+   ]
+  },
+  {
+   "camera": [
+    -70.01586,
+    -32.65421,
+    7161
+   ],
+   "seconds": 3,
+   "label": "Back down the Normal Route",
+   "pitch": 44.6,
+   "ground": 6276,
+   "target": [
+    -70.01797,
+    -32.64324,
+    6276
+   ]
+  },
+  {
+   "camera": [
+    -70.01595,
+    -32.64761,
+    6863
+   ],
+   "seconds": 3,
+   "label": "Back down the Normal Route",
+   "pitch": 42.0,
+   "ground": 5926,
+   "target": [
+    -70.01627,
+    -32.63687,
+    5926
+   ]
+  },
+  {
+   "camera": [
+    -70.01619,
+    -32.64312,
+    6687
+   ],
+   "seconds": 3,
+   "label": "Back down the Normal Route",
+   "pitch": 42.0,
+   "ground": 5559,
+   "target": [
+    -70.02415,
+    -32.63217,
+    5559
+   ]
+  },
+  {
+   "camera": [
+    -70.02147,
+    -32.64007,
+    6386
+   ],
+   "seconds": 3,
+   "label": "Back down the Normal Route",
+   "pitch": 42.0,
+   "ground": 5436,
+   "target": [
+    -70.03421,
+    -32.63865,
+    5436
+   ]
+  },
+  {
+   "camera": [
+    -70.03029,
+    -32.64156,
+    5996
+   ],
+   "seconds": 3,
+   "label": "Back down the Normal Route",
+   "pitch": 42.0,
+   "ground": 5133,
+   "target": [
+    -70.04149,
+    -32.64464,
+    5133
+   ]
+  },
+  {
+   "camera": [
+    -70.04328,
+    -32.64602,
+    5475
+   ],
+   "seconds": 3,
+   "label": "Back down the Normal Route",
+   "pitch": 42.0,
+   "ground": 4367,
+   "target": [
+    -70.05743,
+    -32.65021,
+    4367
+   ]
+  },
+  {
+   "camera": [
+    -70.05687,
+    -32.64937,
+    4783
+   ],
+   "seconds": 4,
+   "label": "Back down the Normal Route",
+   "pitch": 42.4,
+   "ground": 4339,
+   "target": [
+    -70.06177,
+    -32.65272,
+    4339
+   ]
+  },
+  {
+   "camera": [
+    -70.05786,
+    -32.65592,
+    4767
+   ],
+   "seconds": 4,
+   "label": "Plaza de Mulas, heading home",
+   "pitch": 53.7,
+   "ground": 4019,
+   "target": [
+    -70.05979,
+    -32.66876,
+    4019
+   ]
+  },
+  {
+   "camera": [
+    -70.0602,
+    -32.6714,
+    4601
+   ],
+   "seconds": 4,
+   "label": "Back down the valley",
+   "pitch": 57.1,
+   "ground": 3964,
+   "target": [
+    -70.05906,
+    -32.6839,
+    3964
+   ]
+  },
+  {
+   "camera": [
+    -70.05411,
+    -32.69688,
+    4437
+   ],
+   "seconds": 6,
+   "label": "Back down the valley",
+   "pitch": 58.1,
+   "ground": 3737,
+   "target": [
+    -70.04535,
+    -32.70922,
+    3737
+   ]
+  },
+  {
+   "camera": [
+    -70.01587,
+    -32.73339,
+    4210
+   ],
+   "seconds": 8,
+   "label": "Back down the valley",
+   "pitch": 59.2,
+   "ground": 3565,
+   "target": [
+    -70.00348,
+    -32.74263,
+    3565
+   ]
+  },
+  {
+   "camera": [
+    -69.96432,
+    -32.76338,
+    8824
+   ],
+   "seconds": 14,
+   "label": "Back down the valley",
+   "target": [
+    -70.035,
+    -32.665,
+    5413
+   ],
+   "orbit": 1,
+   "pitch": 58.0,
+   "ground": 2963
+  }
+ ],
+ "markers": [
+  {
+   "name": "Horcones trailhead",
+   "at": [
+    -69.9411,
+    -32.8053
+   ],
+   "ele_m": 2950
+  },
+  {
+   "name": "Confluencia",
+   "at": [
+    -69.9643202,
+    -32.7611231
+   ],
+   "ele_m": 3400
+  },
+  {
+   "name": "Plaza de Mulas \u00b7 BASE CAMP",
+   "at": [
+    -70.0578596,
+    -32.6536558
+   ],
+   "ele_m": 4300
+  },
+  {
+   "name": "Plaza Canad\u00e1 \u00b7 Camp 1",
+   "at": [
+    -70.043284,
+    -32.6443889
+   ],
+   "ele_m": 5050
+  },
+  {
+   "name": "Nido de C\u00f3ndores \u00b7 Camp 2",
+   "at": [
+    -70.0302943,
+    -32.6399328
+   ],
+   "ele_m": 5550
+  },
+  {
+   "name": "Berl\u00edn \u00b7 Camp 3",
+   "at": [
+    -70.0214681,
+    -32.6384458
+   ],
+   "ele_m": 5940
+  },
+  {
+   "name": "Independencia refuge",
+   "at": [
+    -70.0159496,
+    -32.6459797
+   ],
+   "ele_m": 6380
+  },
+  {
+   "name": "La Canaleta",
+   "at": [
+    -70.0161,
+    -32.6535
+   ],
+   "ele_m": 6695
+  },
+  {
+   "name": "SUMMIT \u00b7 Aconcagua",
+   "at": [
+    -70.01196,
+    -32.65315
+   ],
+   "ele_m": 6961
+  }
+ ]
+}

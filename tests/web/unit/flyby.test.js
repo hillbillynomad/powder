@@ -120,6 +120,11 @@ describe('shipped tours', () => {
       if (p.target) expect(p.camera[2]).toBeGreaterThan(p.target[2]); // look-at: always looking down
       else expect(p.pitch ?? 68).toBeLessThan(80); // bird: tilted down, never at the horizon
     }
+    for (const m of tour.markers || []) { // labelled places drawn on the map during the flight
+      expect(typeof m.name).toBe('string');
+      expect(m.at).toHaveLength(2);
+      expect(m.ele_m).toBeGreaterThan(-500);
+    }
   });
 });
 

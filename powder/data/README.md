@@ -39,9 +39,9 @@
 
 ## Selection Criteria
 - Ski resorts with 10+ lifts (chairs, gondolas, trams, T-bars) **or** 4,000+ ft of vertical drop
-- 217 entries across 26 countries
+- 218 entries across 26 countries
 - Plus a few sentimental exceptions that miss the lift/vertical bar (Bear Valley, CA)
-- Plus non-resort climbing peaks added as special cases: Mount Audubon, CO (0 lifts, ~2,700 ft of vertical from the Mitchell Lake trailhead to the 13,223 ft summit)
+- Plus non-resort climbing peaks added as special cases: Aconcagua, AR (Normal Route, 13,160 ft of vertical from Horcones) and Mount Audubon, CO (0 lifts, ~2,700 ft of vertical from the Mitchell Lake trailhead to the 13,223 ft summit)
 
 ## Coverage by Region
 

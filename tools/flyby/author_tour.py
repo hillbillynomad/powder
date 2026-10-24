@@ -246,6 +246,10 @@ def build_tour(spec, verbose=True):
 
     tour = {'resort': spec['resort'], 'version': 1, 'units': 'metres above sea level (real, unexaggerated)',
             'points': pts}
+    if spec.get('markers'):
+        # Labelled places the app draws on the map during the flight (camps, summits...):
+        # {name, at: [lng, lat], ele_m, note?}; the label shows the elevation in m and ft
+        tour['markers'] = [{k: m[k] for k in ('name', 'at', 'ele_m', 'note') if k in m} for m in spec['markers']]
     return tour
 
 
