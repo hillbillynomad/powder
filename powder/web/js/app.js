@@ -786,7 +786,10 @@ function installMapInteractions() {
             toggleDetail(entry.resort);
             if (currentDetailResort === entry.resort) startTourIfAny(entry.resort);
         } else {
-            hideDetail();
+            // While a flyover is up, a click on the map is someone looking around (zooming,
+            // glancing): the gesture already paused the flight, so keep the resort and the
+            // timeline bar there to resume from. It closes with the back button or a new search.
+            if (!(flyby && flyby.getState().hasTour)) hideDetail();
             if (weather) weather.showReadout(e.lngLat);
         }
     });

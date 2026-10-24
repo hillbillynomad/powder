@@ -73,6 +73,31 @@ test.describe('Resort flyover', () => {
     await expect(page.locator('#flyby-toggle')).toHaveAttribute('aria-label', 'Fly over');
   });
 
+  test('clicking or zooming the map pauses the flyover but keeps the timeline to resume from', async ({ page }) => {
+    await page.locator('#search-input').fill('snowbird');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForFunction(() => window.__powder.flyby()?.playing, undefined, { timeout: 20000 });
+    await page.locator('#flyby-slider').fill(String(Math.round((await page.evaluate(() => window.__powder.flybyDuration())) * 4)));
+
+    const box = (await page.locator('#map .maplibregl-canvas-container').boundingBox())!;
+    await page.mouse.click(box.x + box.width / 2, box.y + box.height / 3);
+    await page.mouse.dblclick(box.x + box.width / 2, box.y + box.height / 2);
+
+    // Paused, but the bar, the resort and the position are all still there
+    await expect(page.locator('#flyby-toggle')).toHaveAttribute('aria-label', 'Fly over');
+    await expect(page.locator('#flyby-bar')).toBeVisible();
+    await expect(page.locator('#detail-content')).toContainText('Snowbird');
+    expect(await page.evaluate(() => window.__powder.flyby()!.hasTour)).toBe(true);
+    const pausedAt = await page.evaluate(() => window.__powder.flybyTime());
+    expect(pausedAt).toBeGreaterThan(10);
+
+    // Resume carries on from the same place
+    await page.locator('#flyby-toggle').click();
+    await expect(page.locator('#flyby-toggle')).toHaveAttribute('aria-label', 'Pause flyover');
+    await page.waitForTimeout(1500);
+    expect(await page.evaluate(() => window.__powder.flybyTime())).toBeGreaterThan(pausedAt - 1);
+  });
+
   test('resorts without a tour fly in as before, with no flyover button', async ({ page }) => {
     // Mont Tremblant's marker sits in a flat town with no lifts in the map data: no tour
     await page.locator('#search-input').fill('mont tremblant');
