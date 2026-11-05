@@ -25,7 +25,12 @@ test.describe('Resort search', () => {
     await expect(page.locator('#detail-back')).toContainText('Search results');
 
     // Camera ends up centred on the resort
-    await page.waitForFunction(() => !window.__map.isMoving(), undefined, { timeout: 20000 });
+    // (not just "not moving": that is also true before the flight has started, e.g. while the
+    // resort's flyover file loads)
+    await page.waitForFunction(() => {
+      const c = window.__map.getCenter();
+      return !window.__map.isMoving() && Math.abs(c.lat - 45.9) < 0.5 && Math.abs(c.lng - 6.9) < 0.5;
+    }, undefined, { timeout: 30000 });
     const center = await page.evaluate(() => window.__map.getCenter());
     expect(center.lat).toBeCloseTo(45.9, 0);
     expect(center.lng).toBeCloseTo(6.9, 0);

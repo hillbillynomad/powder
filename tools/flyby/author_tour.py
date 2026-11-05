@@ -240,6 +240,10 @@ def build_tour(spec, verbose=True):
             dist, _ = leg_metres(cam, tgt)
             line += f"  look pitch {90 - math.degrees(math.atan2(cam[2] - tgt[2], dist)):4.1f}"
             tgt[:] = [round(tgt[0], 5), round(tgt[1], 5), round(tgt[2])]
+        # Heading is the direction of travel, so a leg that is nearly straight down has none: the
+        # camera spins through it (an Aconcagua opening turned 220 deg/s). Flag steep, short legs.
+        if flat < 300 and abs(rise) > 2 * flat and 'target' not in p:
+            line += '   <-- WARNING: steep short leg, heading will spin; lengthen it (overview drift)'
         if verbose:
             print(line)
         cam[:] = [round(cam[0], 5), round(cam[1], 5), round(cam[2])]

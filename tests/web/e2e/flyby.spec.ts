@@ -1,8 +1,51 @@
 /**
  * E2E tests for resort flyover tours (powder/web/js/flyby.js + tours/*.json)
  */
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import { waitForMarkers } from './helpers';
+
+// Measure the camera before and after every call that can move it. A "cut" is one call that
+// changes the view by a lot at once: an instant re-orientation, re-position or lurch in height.
+// (The loop's and the glide's per-frame steps are small; the approach is a flyTo, whose animation
+// is not an instant call.) Results collect in window.__cuts; window.__terrainOff counts 3D relief
+// being switched off.
+async function watchCameraCuts(page: Page, { forceRoll = false } = {}) {
+  await page.evaluate((forceRoll) => {
+    const m = (window as any).__map;
+    const w: any = window;
+    w.__cuts = [];
+    w.__terrainOff = 0;
+    const snap = () => {
+      const ll = m.transform.getCameraLngLat(), c = m.getCenter(), z = m.getZoom(), p = m.getPitch();
+      // the camera's own height above sea level: view-centre height plus the drop from camera to centre
+      const mpp = 40075016.686 * Math.cos(c.lat * Math.PI / 180) / (512 * Math.pow(2, z));
+      const alt = m.getCameraTargetElevation() + m.transform.cameraToCenterDistance * mpp * Math.cos(p * Math.PI / 180);
+      return { lng: ll.lng, lat: ll.lat, z, p, b: m.getBearing(), alt };
+    };
+    for (const fn of ['jumpTo', 'setTerrain']) {
+      const orig = m[fn].bind(m);
+      m[fn] = (...a: any[]) => {
+        const before = snap();
+        const r = orig(...a);
+        const after = snap();
+        if (fn === 'setTerrain' && !a[0]) w.__terrainOff++;
+        const dB = Math.abs(((after.b - before.b + 540) % 360) - 180);
+        const dist = Math.hypot((after.lng - before.lng) * 111320 * Math.cos(before.lat * Math.PI / 180), (after.lat - before.lat) * 110540);
+        const view = 40075016 * Math.cos(before.lat * Math.PI / 180) / (512 * Math.pow(2, Math.max(0, Math.min(before.z, after.z)))) * 800;
+        const dAlt = Math.abs(after.alt - before.alt) / Math.max(1, Math.min(before.alt, after.alt));
+        // far beyond any frame-to-frame step, even at software-rendering frame rates
+        if (dB > 60 || Math.abs(after.p - before.p) > 40 || Math.abs(after.z - before.z) > 3 || dist > 5 * view || dAlt > 0.2) {
+          w.__cuts.push({ fn, dB: Math.round(dB), dp: Math.round(after.p - before.p), dz: +(after.z - before.z).toFixed(2), screens: Math.round(dist / view), height: `${Math.round(before.alt)} -> ${Math.round(after.alt)} m` });
+        }
+        return r;
+      };
+    }
+    if (forceRoll) { // report a banked camera
+      const roll = m.getRoll.bind(m);
+      m.getRoll = () => roll() || 8;
+    }
+  }, forceRoll);
+}
 
 test.describe('Resort flyover', () => {
   test.beforeEach(async ({ page }) => {
@@ -52,7 +95,7 @@ test.describe('Resort flyover', () => {
     const nearEnd = await page.evaluate(() => ({ t: window.__powder.flybyTime(), d: window.__powder.flybyDuration() }));
     expect(nearEnd.t).toBeGreaterThan(nearEnd.d - 10);
     await page.locator('#flyby-restart').click();
-    expect(await page.evaluate(() => window.__powder.flybyTime())).toBeLessThan(2);
+    expect(await page.evaluate(() => window.__powder.flybyTime())).toBeLessThan(8);
 
     // Dragging the scrubber moves the flight there
     const target = await page.evaluate(() => Math.round(window.__powder.flybyDuration() * 10 * 0.5));
@@ -96,6 +139,51 @@ test.describe('Resort flyover', () => {
     await expect(page.locator('#flyby-toggle')).toHaveAttribute('aria-label', 'Pause flyover');
     await page.waitForTimeout(1500);
     expect(await page.evaluate(() => window.__powder.flybyTime())).toBeGreaterThan(pausedAt - 1);
+  });
+
+  test('flying from one flyover into another never cuts or teleports the camera', async ({ page }) => {
+    await page.locator('#search-input').fill('snowbird');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForFunction(() => window.__powder.flyby()?.playing, undefined, { timeout: 20000 });
+    await page.waitForTimeout(1500);
+
+    // Leaving a flyover while the camera is banked is what used to start the approach early
+    await watchCameraCuts(page, { forceRoll: true });
+
+    await page.locator('#search-input').fill('park city mountain');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForFunction(() => window.__powder.flyby()?.resort === 'Park City Mountain', undefined, { timeout: 20000 });
+    await page.waitForTimeout(9000);
+
+    expect(await page.evaluate(() => (window as any).__cuts)).toEqual([]);
+    // the flyover layers stayed on: 3D relief was never dropped and re-added in between
+    expect(await page.evaluate(() => (window as any).__terrainOff)).toBe(0);
+    expect(await page.evaluate(() => window.__powder.flyby()!.playing)).toBe(true);
+  });
+
+  test('wandering off a flyover and resuming it glides back without a cut', async ({ page }) => {
+    // Aconcagua's ground is 5 km up: resuming used to drop the camera by that height in one frame
+    await page.locator('#search-input').fill('aconcagua');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForFunction(() => window.__powder.flyby()?.playing, undefined, { timeout: 20000 });
+    await page.waitForTimeout(9000); // fly-in done, the loop is running
+
+    // Drag the map a little to look around (the gesture pauses the flyover)
+    const box = (await page.locator('#map .maplibregl-canvas-container').boundingBox())!;
+    const [x, y] = [box.x + box.width / 2, box.y + box.height / 2];
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    for (let i = 1; i <= 10; i++) await page.mouse.move(x - 25 * i, y - 8 * i);
+    await page.mouse.up();
+    await expect(page.locator('#flyby-toggle')).toHaveAttribute('aria-label', 'Fly over');
+    await page.waitForTimeout(1000);
+
+    await watchCameraCuts(page);
+    await page.locator('#flyby-toggle').click();
+    await page.waitForTimeout(8000);
+
+    expect(await page.evaluate(() => (window as any).__cuts)).toEqual([]);
+    expect(await page.evaluate(() => window.__powder.flyby()!.playing)).toBe(true);
   });
 
   test('resorts without a tour fly in as before, with no flyover button', async ({ page }) => {

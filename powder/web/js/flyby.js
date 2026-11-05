@@ -125,7 +125,7 @@
     function createController(map, maplibre, { exaggeration = 1, onChange = () => {} } = {}) {
         let index = null; // Promise<{ slugs: Set<slug>, versions: {slug: hash} }>
         const tours = new Map(); // slug -> Promise<tour|null>
-        const state = { tour: null, playing: false, clock: 0, startedAt: 0, frame: 0, glideFrame: 0, flying: false };
+        const state = { tour: null, playing: false, clock: 0, startedAt: 0, frame: 0, glideFrame: 0, flying: false, approachId: 0, approachOff: null };
 
         function loadIndex() {
             if (!index) {
@@ -206,8 +206,8 @@
         // pose's `elevation` and ends with the view centre at sea level, so the camera arrived
         // ~2.8 km lower than the loop's first frame wants, and the first loop frame popped it
         // upward. Now flyTo only brings the camera to a point straight above the first pose
-        // (sea level, pitch 0, where that is exact), and we glide from there to the pose
-        // frame by frame, so the camera path is continuous into the loop.
+        // (pitch 0), and we glide from wherever it actually stopped to the pose frame by frame,
+        // so the camera path is continuous into the loop.
         const EARTH_CIRCUMFERENCE = 40075016.686;
 
         function lowZoomForAltitude(lat, altitude) {
@@ -217,15 +217,22 @@
         }
 
         // Glide between two sets of camera options (the same fields flyTo animates, plus the
-        // elevation and roll it drops). Both ends are exact: `from` is where flyTo stops (sea
-        // level, pitch 0) and `to` is the loop's first frame.
+        // elevation and roll it drops). Both ends are exact: `from` is the camera as flyTo left it
+        // and `to` is the loop's first frame.
+        // Progress advances by the real frame time but at most MAX_GLIDE_STEP_MS per frame: when a
+        // frame stalls (tile decoding, a busy tab), the camera must not leap the whole missed
+        // stretch in one jump, it carries on from where it was and the glide simply runs longer.
+        const MAX_GLIDE_STEP_MS = 50;
+
         function glide(from, to, ms, done) {
-            const t0 = performance.now();
+            let elapsed = 0, last = performance.now();
             const lerp = (a, b, u) => a + (b - a) * u;
             const ease = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
             const step = (now) => {
                 if (!state.playing) return;
-                const u = Math.min(1, (now - t0) / ms);
+                elapsed += Math.min(Math.max(0, now - last), MAX_GLIDE_STEP_MS);
+                last = now;
+                const u = Math.min(1, elapsed / ms);
                 const e = ease(u);
                 map.jumpTo({
                     center: [lerp(from.center.lng, to.center.lng, e), lerp(from.center.lat, to.center.lat, e)],
@@ -244,6 +251,20 @@
             state.glideFrame = requestAnimationFrame(step);
         }
 
+        // The camera's height above sea level for a set of camera options
+        function cameraAltitude(o) {
+            const lat = o.center.lat;
+            const mpp = (EARTH_CIRCUMFERENCE * Math.cos((lat * Math.PI) / 180)) / (512 * Math.pow(2, o.zoom));
+            return (o.elevation || 0) + map.transform.cameraToCenterDistance * mpp * Math.cos((o.pitch * Math.PI) / 180);
+        }
+
+        // A glide down from far out (after zooming out to the globe) covers many times its own
+        // height: at the usual length it is a dive. Give it more time per halving of height.
+        function glideMs(from, to, ms) {
+            const halvings = Math.log2(Math.max(1, cameraAltitude(from) / Math.max(1, cameraAltitude(to))));
+            return ms * Math.min(4, Math.max(1, halvings / 1.2));
+        }
+
         function play({ approachMs = RESUME_MS } = {}) {
             if (!state.tour || state.playing) return;
             state.playing = true;
@@ -260,37 +281,69 @@
             }
             const altW = map.getZoom() < 9 ? 40000 : 15000; // looking straight down at the start's view centre
             const wZoom = lowZoomForAltitude(pose.center.lat, altW);
-            const above = { center: pose.center, zoom: wZoom, pitch: 0, bearing: pose.bearing, elevation: 0, roll: 0 };
-            map.once('moveend', () => {
+            // flyTo cancels whatever is moving (a roll-levelling ease from the last pause, a
+            // user's pan) and that cancelled movement fires its own `moveend` straight away. An
+            // untagged listener took it for the end of our flight and started the glide at once,
+            // teleporting the camera to the tour's start. Our flyTo carries a token in its event
+            // data and only a `moveend` with that token ends the approach.
+            cancelApproach();
+            const token = state.approachId;
+            const onEnd = (e) => {
+                if (e.flybyApproach !== token) return;
+                cancelApproach();
                 if (!state.playing || !state.flying) return;
-                glide(above, pose, approachMs * 0.45, () => { if (state.playing && state.flying) startLoop(); });
-            });
-            map.flyTo({ center: pose.center, zoom: wZoom, pitch: 0, bearing: pose.bearing, duration: approachMs * 0.55, essential: true });
+                // Glide on from exactly where flyTo left the camera. flyTo does not touch the held
+                // view-centre height (with the centre unclamped), so after a pan near the mountain
+                // it is still the ground's height there, not sea level: starting the glide from an
+                // assumed sea-level pose dropped the camera by that height (5 km on Aconcagua) in
+                // one frame.
+                const from = {
+                    center: map.getCenter(), zoom: map.getZoom(), pitch: map.getPitch(), bearing: map.getBearing(),
+                    elevation: map.getCameraTargetElevation ? map.getCameraTargetElevation() : 0,
+                    roll: map.getRoll ? map.getRoll() : 0,
+                };
+                glide(from, pose, glideMs(from, pose, approachMs * 0.45), () => { if (state.playing && state.flying) startLoop(); });
+            };
+            state.approachOff = () => map.off('moveend', onEnd);
+            map.on('moveend', onEnd);
+            // roll: 0 levels the wings as part of the flight instead of in a separate ease
+            map.flyTo({ center: pose.center, zoom: wZoom, pitch: 0, bearing: pose.bearing, roll: 0, duration: approachMs * 0.55, essential: true }, { flybyApproach: token });
         }
 
-        function pause() {
+        // Drop an approach in progress: its pending `moveend` must not start a glide
+        function cancelApproach() {
+            state.approachId++;
+            if (state.approachOff) {
+                state.approachOff();
+                state.approachOff = null;
+            }
+        }
+
+        // level: ease the bank angle back to zero (not wanted when another flight takes over at once)
+        function pause({ level = true } = {}) {
             if (!state.playing) return;
             if (!state.flying) state.clock += (performance.now() - state.startedAt) / 1000;
             state.playing = false;
             state.flying = false;
+            cancelApproach();
             cancelAnimationFrame(state.frame);
             cancelAnimationFrame(state.glideFrame);
             if (map.isMoving()) map.stop();
             holdCamera(false);
-            if (map.getRoll && map.getRoll()) map.easeTo({ roll: 0, duration: 600 }); // level the wings
+            if (level && map.getRoll && map.getRoll()) map.easeTo({ roll: 0, duration: 600 }); // level the wings
             onChange(getState());
         }
 
         function start(tour, { autoplay = true } = {}) {
-            stop();
+            stop({ level: false }); // the approach's flyTo levels the wings itself
             state.tour = tour;
             state.clock = 0;
             if (autoplay) play({ approachMs: APPROACH_MS });
             else onChange(getState());
         }
 
-        function stop() {
-            pause();
+        function stop({ level = true } = {}) {
+            pause({ level });
             state.tour = null;
             state.clock = 0;
             onChange(getState());
@@ -325,9 +378,10 @@
             state.clock = Math.max(0, Math.min(total - 0.05, seconds));
             const wasPlaying = state.playing;
             if (state.flying) { // still on the way in: drop the approach
+                state.flying = false;
+                cancelApproach();
                 cancelAnimationFrame(state.glideFrame);
                 if (map.isMoving()) map.stop();
-                state.flying = false;
             }
             holdCamera(true);
             map.jumpTo(cameraAt(state.clock));

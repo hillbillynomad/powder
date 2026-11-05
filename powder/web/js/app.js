@@ -784,7 +784,7 @@ function installMapInteractions() {
         if (entry) {
             if (isTouchDevice) hideHoverPopup();
             toggleDetail(entry.resort);
-            if (currentDetailResort === entry.resort) startTourIfAny(entry.resort);
+            if (currentDetailResort === entry.resort) startTourIfAny(entry.resort).then(started => { if (!started) restoreLayersAfterMove(); });
         } else {
             // While a flyover is up, a click on the map is someone looking around (zooming,
             // glancing): the gesture already paused the flight, so keep the resort and the
@@ -1415,7 +1415,9 @@ function setListMode(mode) {
     if (!LIST_MODE_LABELS[mode] || (mode === 'search' && !searchQuery)) mode = browseMode;
     if (mode !== 'search') browseMode = mode;
     listMode = mode;
-    if (currentDetailResort) hideDetail();
+    // Typing a search closes the open resort, but the next thing is usually a pick that starts
+    // another flyover: keep its layers meanwhile so 3D relief is not dropped and re-added
+    if (currentDetailResort) hideDetail({ deferLayers: true });
     syncModeButtons();
     renderList();
 }
@@ -1439,11 +1441,11 @@ function showDetail(resort) {
 }
 
 // Deselect the resort and go back to the list. Collapsing is always an explicit user action.
-function hideDetail() {
+function hideDetail({ deferLayers = false } = {}) {
     document.getElementById('details-content').classList.add('hidden');
     document.getElementById('list-content').classList.remove('hidden');
     currentDetailResort = null;
-    endTour();
+    endTour({ deferLayers });
     setMapHighlight('');
     document.querySelectorAll('.resort-item.selected').forEach(el => el.classList.remove('selected'));
 }
@@ -1462,8 +1464,35 @@ async function selectResort(resort) {
     showDetail(resort);
     if (await startTourIfAny(resort)) return;
     if (map && currentDetailResort === resort) {
-        map.flyTo({ center: [resort.longitude, resort.latitude], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), essential: true });
+        // Coming from a flyover the camera is tilted, banked and turned: level it on the way
+        const level = tourPrefsBackup ? { pitch: 0, bearing: 0 } : {};
+        map.flyTo({ center: [resort.longitude, resort.latitude], zoom: Math.max(map.getZoom(), FOCUS_ZOOM), roll: 0, ...level, essential: true });
     }
+    restoreLayersAfterMove();
+}
+
+// After leaving a flyover for somewhere without one: the user's layers (usually 2D) come back once
+// the camera has arrived, not at the start of the flight when switching 3D off re-heights the view
+function restoreLayersAfterMove() {
+    if (!tourPrefsBackup) return;
+    if (map && map.isMoving()) map.once('moveend', settleThenRestoreLayers);
+    else settleThenRestoreLayers();
+}
+
+// The flyover held the camera at the mountain's height (thousands of metres); where the flight
+// ended the ground may be near sea level, and switching 3D relief off snaps the view down by that
+// difference. Bring the held height down first, then the switch changes nothing.
+function settleThenRestoreLayers() {
+    const from = map.getCameraTargetElevation ? map.getCameraTargetElevation() : 0;
+    if (!map.getTerrain() || from < 50) { restoreUserLayers(); return; }
+    const t0 = performance.now(), ms = 700;
+    const step = (now) => {
+        const u = Math.min(1, (now - t0) / ms), e = u * u * (3 - 2 * u);
+        map.jumpTo({ elevation: from * (1 - e) });
+        if (u < 1) requestAnimationFrame(step);
+        else restoreUserLayers();
+    };
+    requestAnimationFrame(step);
 }
 
 // ---- Flyover tours (flyby.js) --------------------------------------------------------
@@ -1522,9 +1551,22 @@ function clearTourMarkers() {
 
 async function startTourIfAny(resort) {
     if (!flyby || !mapReady) return false;
-    if (flyby.getState().resort !== resort.name) endTour();
+    // Leaving one flyover for another: stop the old flight but keep the flyover layers (satellite,
+    // 3D relief, lift names). Restoring the user's layers here and forcing them back a moment
+    // later switched 3D terrain off and on again, which re-heights the camera: a visible jump.
+    clearTimeout(layerRestoreTimer); // a deferred restore (after a search) is superseded
+    layerRestoreTimer = 0;
+    const switching = flyby.getState().hasTour && flyby.getState().resort !== resort.name;
+    if (switching) {
+        flyby.stop({ level: false });
+        clearTourMarkers();
+    }
     const tour = await flyby.getTour(resort.name);
-    if (!tour || currentDetailResort !== resort) return false; // none, or the user moved on
+    if (!tour || currentDetailResort !== resort) {
+        // No tour at the new place after all: the caller flies there, then gives the user's layers
+        // back (restoreLayersAfterMove), so 3D relief is not dropped under a high camera mid-air
+        return false; // none, or the user moved on
+    }
     if (!tourPrefsBackup) tourPrefsBackup = { ...layerPrefs };
     layerPrefs = { ...layerPrefs, ...FLYOVER_LAYERS };
     applyLayerPrefs({ save: false });
@@ -1536,10 +1578,27 @@ async function startTourIfAny(resort) {
     return true;
 }
 
-// Stop flying and give the user back their own layer settings
-function endTour() {
+// Stop flying and give the user back their own layer settings. With deferLayers the flight stops
+// now but the layers stay for a grace period, so a flyover that starts next (a search pick) reuses
+// them instead of switching 3D relief off and on again, which re-heights the camera.
+const LAYER_RESTORE_GRACE_MS = 8000;
+let layerRestoreTimer = 0;
+
+function endTour({ deferLayers = false } = {}) {
     if (flyby) flyby.stop();
     clearTourMarkers();
+    clearTimeout(layerRestoreTimer);
+    layerRestoreTimer = 0;
+    if (deferLayers && tourPrefsBackup) {
+        layerRestoreTimer = setTimeout(restoreUserLayers, LAYER_RESTORE_GRACE_MS);
+        return;
+    }
+    restoreUserLayers();
+}
+
+function restoreUserLayers() {
+    clearTimeout(layerRestoreTimer);
+    layerRestoreTimer = 0;
     setResortBubblesVisible(true);
     if (tourPrefsBackup) {
         layerPrefs = tourPrefsBackup;
