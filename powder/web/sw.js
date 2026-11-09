@@ -1,9 +1,9 @@
-// Powder service worker: caches map tiles and static assets so panning back over seen
-// areas and repeat visits skip the network. Forecast data is always network-first.
+// Powder service worker: caches map tiles so panning back over seen areas skips the network.
+// The app's own page, scripts, styles and data are network-first (the cache is only an offline
+// fallback), so a new deploy shows on the first load instead of one reload later.
 
-const VERSION = 'v1';
-const TILE_CACHE = `powder-tiles-${VERSION}`;
-const SHELL_CACHE = `powder-shell-${VERSION}`;
+const TILE_CACHE = 'powder-tiles-v1';
+const SHELL_CACHE = 'powder-shell-v2'; // v1 served the app stale-while-revalidate
 const MAX_TILE_ENTRIES = 4000;
 const TRIM_EVERY = 100; // puts between trims
 
@@ -66,10 +66,13 @@ async function staleWhileRevalidate(request, cacheName) {
     return refresh;
 }
 
-async function networkFirst(request, cacheName) {
+async function networkFirst(request, cacheName, { revalidate = false } = {}) {
     const cache = await caches.open(cacheName);
     try {
-        const response = await fetch(request);
+        // revalidate: skip the browser's HTTP cache freshness window (GitHub Pages allows 10 min)
+        // and ask the server, which answers 304 when nothing changed. Not for page navigations:
+        // a rebuilt navigation request stops following redirects.
+        const response = await fetch(request, revalidate ? { cache: 'no-cache' } : undefined);
         if (response.ok) cache.put(request, response.clone()).catch(() => {});
         return response;
     } catch (e) {
@@ -95,10 +98,9 @@ self.addEventListener('fetch', (event) => {
         if (url.pathname.includes('/data/overlays/') && url.pathname.endsWith('.png')) {
             // Weather frames live under a per-run directory and never change: cache like tiles
             event.respondWith(cacheFirst(request));
-        } else if (url.pathname.endsWith('.json')) {
-            event.respondWith(networkFirst(request, SHELL_CACHE));
         } else {
-            event.respondWith(staleWhileRevalidate(request, SHELL_CACHE));
+            // Page, scripts, styles, forecasts and tours: always the deployed version when online
+            event.respondWith(networkFirst(request, SHELL_CACHE, { revalidate: request.mode !== 'navigate' }));
         }
     } else if (STATIC_HOSTS.includes(url.hostname)) {
         event.respondWith(staleWhileRevalidate(request, SHELL_CACHE));
