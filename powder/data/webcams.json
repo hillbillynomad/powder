@@ -1,8 +1,1228 @@
 {
+  "Adelboden-Lenk": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.adelboden-lenk.ch/en/Service/Webcams"
+    }
+  ],
+  "Alpe d'Huez": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.alpedhuez.com/en/webcams/"
+    }
+  ],
+  "Alta": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.alta.com/weather#mountain-cams"
+    }
+  ],
+  "Alta Badia": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.altabadia.org/en/alta-badia-webcam"
+    }
+  ],
+  "Andermatt-Sedrun": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.andermatt-swissalps.ch/en/webcams/"
+    }
+  ],
+  "Appi Kogen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.appi.co.jp/live-camera/"
+    }
+  ],
+  "Arapahoe Basin": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.arapahoebasin.com/mountain-cams/"
+    }
+  ],
+  "Arosa Lenzerheide": [
+    {
+      "label": "Mountain cams",
+      "url": "https://arosalenzerheide.swiss/en/Ski-Area/Up-to-date/Webcams"
+    }
+  ],
+  "Aspen Highlands": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.aspensnowmass.com/four-mountains/aspen-highlands/mountain-cams"
+    }
+  ],
+  "Aspen Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.aspensnowmass.com/four-mountains/aspen-mountain/mountain-cams"
+    }
+  ],
+  "Auron": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.stationsnicecotedazur.com/fr/webcam/auron/"
+    }
+  ],
+  "Avoriaz": [
+    {
+      "label": "Resort cams",
+      "url": "https://www.avoriaz.com/en/discover/the-resort/avoriaz-resort-webcams--live-views-all-year-round/"
+    },
+    {
+      "label": "Slope cams",
+      "url": "https://www.avoriaz.com/en/discover/discover/live-ski-slope-webcams/"
+    }
+  ],
+  "Bad Gastein": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skigastein.com/en/webcams-in-skigastein/"
+    }
+  ],
+  "Banff Sunshine": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skibanff.com/webcams"
+    }
+  ],
+  "Bansko": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.banskoski.com/en/webcam/bansko"
+    }
+  ],
+  "Baqueira-Beret": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.baqueira.es/en/webcams"
+    }
+  ],
+  "Bardonecchia": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.bardonecchiaski.com/it/live-info/webcam-bardonecchia"
+    }
+  ],
+  "Bear Valley": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.bearvalley.com/webcams"
+    }
+  ],
+  "Beaver Creek": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.beavercreek.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Big Bear Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.bigbearmountainresort.com/webcams"
+    }
+  ],
+  "Big Sky": [
+    {
+      "label": "Mountain cams",
+      "url": "https://bigskyresort.com/webcams"
+    }
+  ],
+  "Big White": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.bigwhite.com/mountain-conditions/webcams"
+    }
+  ],
+  "Blue Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.bluemountain.ca/mountain/webcams"
+    }
+  ],
+  "Bormio": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.bormio.eu/en/live-info/webcams"
+    }
+  ],
+  "Borovets": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.borovets-bg.com/en/information/webcams"
+    }
+  ],
+  "Breckenridge": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.breckenridge.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Bridger Bowl": [
+    {
+      "label": "Mountain cams",
+      "url": "https://bridgerbowl.com/weather/webcams"
+    }
+  ],
+  "Brighton": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.brightonresort.com/conditions"
+    }
+  ],
+  "Camelback": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.camelbackresort.com/resort-information/live-cameras"
+    }
+  ],
+  "Cerler": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.aramon.com/cerler/webcam-cerler.html"
+    }
+  ],
+  "Cerro Catedral": [
+    {
+      "label": "Mountain cams",
+      "url": "https://catedralaltapatagonia.com/webcams/"
+    }
+  ],
+  "Cervinia": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.cervinia.it/en/webcam"
+    }
+  ],
+  "Chamonix Mont-Blanc": [
+    {
+      "label": "Mountain cams",
+      "url": "https://en.chamonix.com/webcams"
+    }
+  ],
+  "Chapelco": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.cerrochapelco.com.ar/webcams-cerro-chapelco/"
+    }
+  ],
+  "Copper Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.coppercolorado.com/the-mountain/webcams"
+    }
+  ],
+  "Cortina d'Ampezzo": [
+    {
+      "label": "Mountain cams",
+      "url": "https://cortina.dolomiti.org/en/winter/info/webcam/"
+    }
+  ],
+  "Courmayeur": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.courmayeurmontblanc.it/en/webcam-and-weather-forecasts/"
+    }
+  ],
+  "Crans-Montana": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.crans-montana.ch/en/webcam"
+    }
+  ],
+  "Crested Butte": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skicb.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Crystal Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.crystalmountainresort.com/the-mountain/mountain-report-and-webcams/webcams"
+    }
+  ],
+  "Damüls-Mellau": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.damuels-mellau.at/en/webcams-damuels-mellau.html"
+    }
+  ],
+  "Davos Klosters": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.davosklostersmountains.ch/en/mountains/winter/live-info/webcams"
+    }
+  ],
+  "El Colorado": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.elcolorado.cl/live-cam/"
+    }
+  ],
+  "Engelberg-Titlis": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.engelberg.ch/en/webcams/"
+    }
+  ],
+  "Falls Creek": [
+    {
+      "label": "Snow cams",
+      "url": "https://www.fallscreek.com.au/snow-cams/"
+    }
+  ],
+  "Feldberg": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.feldberg-erlebnis.de/en/news/webcam"
+    }
+  ],
+  "Fernie Alpine Resort": [
+    {
+      "label": "Mountain cams",
+      "url": "https://skifernie.com/conditions/mountain-cam/"
+    }
+  ],
+  "Flaine/Grand Massif": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.flaine.com/en/webcams/"
+    }
+  ],
+  "Formigal-Panticosa": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.aramon.com/formigal-panticosa/webcam-formigal-panticosa.html"
+    }
+  ],
+  "Furano": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.princehotels.co.jp/ski/furano/livecamera/"
+    }
+  ],
+  "Garmisch-Partenkirchen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://zugspitze.de/en/Service-information/Webcams"
+    }
+  ],
+  "Geilo": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skigeilo.no/en/webcam-and-weather"
+    }
+  ],
+  "Grand Tourmalet": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.n-py.com/en/grand-tourmalet/webcams"
+    }
+  ],
+  "Grandvalira": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.grandvalira.com/en/resort/live-webcams"
+    }
+  ],
+  "Grindelwald": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.jungfrau.ch/en-gb/live/webcams/"
+    }
+  ],
+  "Hafjell": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.alpinco.com/en/hafjell/webcam"
+    }
+  ],
+  "Hakuba Valley": [
+    {
+      "label": "Happo-One cams",
+      "url": "https://www.happo-one.jp/en/gelande/livecamera/"
+    }
+  ],
+  "Heavenly": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skiheavenly.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Hemsedal": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skistar.com/en/ski-destinations/hemsedal/winter-in-hemsedal/weather-and-slopes/webcams-hemsedal/"
+    }
+  ],
+  "Hintertux Glacier": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.hintertuxergletscher.at/en/skiing/skiing-region-current-information/webcams/"
+    }
+  ],
+  "Hunter Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.huntermtn.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Ischgl/Samnaun": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.ischgl.com/en/plan-your-trip/webcams"
+    }
+  ],
+  "Isola 2000": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.stationsnicecotedazur.com/en/webcam/isola/"
+    }
+  ],
+  "Jasná": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.jasna.sk/en/resort/resort-info/webcameras"
+    }
+  ],
+  "Jisan Forest": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.jisanresort.co.kr/w/ski/slopes/webcam.asp"
+    }
+  ],
+  "Keystone": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.keystoneresort.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Kicking Horse": [
+    {
+      "label": "Mountain cams",
+      "url": "https://kickinghorseresort.com/conditions/mountain-cam/"
+    }
+  ],
+  "Kirkwood": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.kirkwood.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Kiroro": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.kiroro.co.jp/livecamera/"
+    }
+  ],
+  "Kitzbühel": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.kitzski.at/en/current-info/webcams.html"
+    }
+  ],
+  "Kranjska Gora": [
+    {
+      "label": "Mountain cams",
+      "url": "https://kranjska-gora.si/en/webcams"
+    }
+  ],
+  "Kronplatz": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.kronplatz.com/en/planning-booking/webcams"
+    }
+  ],
+  "Kvitfjell": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.alpinco.com/en/kvitfjell/webcam"
+    }
+  ],
+  "La Clusaz": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.laclusaz.com/en/webcams/"
+    }
+  ],
+  "La Grave": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.hautesvallees.com/la-grave/en/webcam/"
+    }
+  ],
+  "La Parva": [
+    {
+      "label": "Mountain cams",
+      "url": "https://laparva.cl/es/reporte-de-montana/camaras-web/"
+    }
+  ],
+  "La Plagne": [
+    {
+      "label": "Mountain cams",
+      "url": "https://en.la-plagne.com/discover/ski-area/webcams"
+    }
+  ],
+  "Laax/Flims": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.laax.com/en/webcams"
+    }
+  ],
+  "Lake Louise": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skilouise.com/mountain-cam/"
+    }
+  ],
+  "Las Leñas": [
+    {
+      "label": "Mountain cams",
+      "url": "https://laslenas.com/camara-en-vivo/"
+    }
+  ],
+  "Les 2 Alpes": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.les2alpes.com/winter/les-2-alpes-live/webcams/"
+    }
+  ],
+  "Les 3 Vallées": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.les3vallees.com/en/live/webcams"
+    }
+  ],
+  "Les Arcs": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.lesarcs.com/en/livecams-and-webcams"
+    }
+  ],
+  "Les Contamines-Montjoie": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.lescontamines.com/hiver/webcams"
+    }
+  ],
+  "Les Diablerets-Villars": [
+    {
+      "label": "Glacier 3000 cams",
+      "url": "https://www.glacier3000.ch/en/webcams"
+    }
+  ],
+  "Les Orres": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.lesorres.com/en/webcams"
+    }
+  ],
+  "Les Sybelles": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.sybelles.ski/en/live/webcams"
+    }
+  ],
+  "Levi": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.levi.fi/en/ski/cameras/"
+    }
+  ],
+  "Livigno": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.livigno.eu/en/webcam"
+    },
+    {
+      "label": "Mottolino cams",
+      "url": "https://mottolino.com/en/webcam-livigno"
+    }
+  ],
+  "Madarao Kogen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.madarao.jp/live-camera"
+    }
+  ],
+  "Madonna di Campiglio": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.ski.it/en/info-live/webcam-and-livecam"
+    }
+  ],
+  "Mayrhofen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.mayrhofen.at/en/mountopolis/winter/info-service"
+    }
+  ],
+  "Megève/Saint-Gervais": [
+    {
+      "label": "Megève cams",
+      "url": "https://www.megeve-tourisme.fr/en/informations-pratiques/infos-live/webcams/"
+    },
+    {
+      "label": "Saint-Gervais cams",
+      "url": "https://www.ski-saintgervais.com/en/webcams"
+    }
+  ],
+  "Mont Tremblant": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.tremblant.ca/mountain-village/webcams"
+    }
+  ],
+  "Monterosa Ski": [
+    {
+      "label": "Mountain cams",
+      "url": "https://monterosaski.eu/en/webcam"
+    }
+  ],
+  "Mount Buller": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.mtbuller.com.au/winter/weather/web-cams"
+    }
+  ],
+  "Mount Hotham": [
+    {
+      "label": "Snow cams",
+      "url": "https://www.mthotham.com.au/summer/onmountain/conditions/weather-cams"
+    }
+  ],
+  "Mount Snow": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.mountsnow.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Mt. Bachelor": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.mtbachelor.com/the-mountain/webcams/"
+    }
+  ],
+  "Mt. Hood Meadows": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skihood.com/mountain-report/mountain-cams"
+    }
+  ],
+  "Myoko Kogen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.city.myoko.niigata.jp/live-camera/"
+    }
+  ],
+  "Naeba": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.princehotels.co.jp/ski/naeba/livecamera/"
+    }
+  ],
+  "Nassfeld": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.nassfeld.at/en/Service/Live-aus-der-Region/Webcam"
+    }
+  ],
+  "Nauders": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.nauders.com/en/News/Webcams"
+    }
+  ],
+  "Nevados de Chillán": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.nevadosdechillan.com/camaras"
+    }
+  ],
+  "Niseko United": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.niseko.ne.jp/en/livecamera/"
+    }
+  ],
   "Northstar": [
     {
       "label": "Mountain cams",
       "url": "https://www.northstarcalifornia.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Nozawa Onsen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://nozawaski.com/winter/course/livecam_map/"
+    }
+  ],
+  "Obergurgl-Hochgurgl": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.gurgl.com/en/live-information/livecams"
+    }
+  ],
+  "Oberstdorf": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.ok-bergbahnen.com/en/service/webcams-livecams/"
+    }
+  ],
+  "Obertauern": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.obertauern.com/en/winter/service-info/webcams.html"
+    }
+  ],
+  "Okemo": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.okemo.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Palisades Tahoe": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.palisadestahoe.com/mountain-information/webcams"
+    }
+  ],
+  "Panorama": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.panoramaresort.com/panorama-today/mountain-webcams"
+    }
+  ],
+  "Paradiski": [
+    {
+      "label": "La Plagne cams",
+      "url": "https://en.la-plagne.com/discover/ski-area/webcams"
+    },
+    {
+      "label": "Les Arcs cams",
+      "url": "https://www.lesarcs.com/en/webcams"
+    }
+  ],
+  "Park City Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.parkcitymountain.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Perisher": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.perisher.com.au/reports-cams/cams"
+    }
+  ],
+  "Peyragudes": [
+    {
+      "label": "Mountain cams",
+      "url": "https://n-py.com/en/peyragudes/webcams"
+    }
+  ],
+  "Pitztal Glacier": [
+    {
+      "label": "Glacier cams",
+      "url": "https://www.pitztaler-gletscher.at/en/webcam.html"
+    }
+  ],
+  "Poiana Brașov": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.discoverpoiana.ro/en/webcam-live"
+    }
+  ],
+  "Pontedilegno-Tonale": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.pontedilegnotonale.com/en/webcam/"
+    }
+  ],
+  "Portes du Soleil": [
+    {
+      "label": "Mountain cams",
+      "url": "https://en.portesdusoleil.com/webcams/"
+    }
+  ],
+  "Portillo": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skiportillo.com/en/webcams/"
+    }
+  ],
+  "Purgatory": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.purgatory.ski/webcams"
+    }
+  ],
+  "Revelstoke Mountain Resort": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.revelstokemountainresort.com/mountain/conditions/webcams/"
+    }
+  ],
+  "Risoul-Vars": [
+    {
+      "label": "Risoul cams",
+      "url": "https://en.risoul.com/webcams-risoul-1.html"
+    },
+    {
+      "label": "Vars cams",
+      "url": "https://www.vars.com/fr/a-faire-sur-place/infolive/webcam/"
+    }
+  ],
+  "Ruka": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.ruka.fi/en/webcams"
+    }
+  ],
+  "Rusutsu": [
+    {
+      "label": "Mountain cams",
+      "url": "https://rusutsu.com/en/live-mountain-cams/"
+    }
+  ],
+  "Saalbach Hinterglemm": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.saalbach.com/en/live-info/livecams"
+    }
+  ],
+  "Saas-Fee": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.saas-fee.ch/en/webcams"
+    }
+  ],
+  "Saint-Lary-Soulan": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.saintlary.com/winter/practical/webcams"
+    }
+  ],
+  "Schladming": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.schladming-dachstein.at/en/info-and-service/webcams-and-weather/webcams"
+    }
+  ],
+  "Schweitzer": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.schweitzer.com/mountain-info/webcam"
+    }
+  ],
+  "Serfaus-Fiss-Ladis": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.serfaus-fiss-ladis.at/en/live-info/webcams"
+    }
+  ],
+  "Serre Chevalier": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.serre-chevalier.com/en/ski-area/webcam-live-serre-chevalier-briancon"
+    }
+  ],
+  "Seven Springs": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.7springs.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Shiga Kogen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.shigakogen.gr.jp/english/live/index.html"
+    }
+  ],
+  "Sierra Nevada": [
+    {
+      "label": "Mountain cams",
+      "url": "https://sierranevada.es/en/invierno/the-station/live/webcams/"
+    }
+  ],
+  "Sierra-at-Tahoe": [
+    {
+      "label": "Mountain cams",
+      "url": "https://sierraattahoe.com/live-cams/"
+    }
+  ],
+  "SilverStar": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skisilverstar.com/the-mountain/webcams/"
+    }
+  ],
+  "Silvretta Montafon": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.silvretta-montafon.at/en/webcams"
+    }
+  ],
+  "Ski Arlberg": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skiarlberg.at/en/live-info/webcams"
+    }
+  ],
+  "Ski Juwel Alpbachtal Wildschönau": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skijuwel.com/en/webcams"
+    }
+  ],
+  "SkiWelt Wilder Kaiser": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skiwelt.at/en/webcams-in-winter.html"
+    }
+  ],
+  "Snow Space Salzburg": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.snow-space.com/en/winter/information-ski-resort/live/webcams"
+    }
+  ],
+  "Snow Valley": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.bigbearmountainresort.com/webcams/snow-valley"
+    }
+  ],
+  "Snowbasin": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.snowbasin.com/the-mountain/web-cams/"
+    }
+  ],
+  "Snowbird": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.snowbird.com/the-mountain/webcams/view-all-webcams/"
+    }
+  ],
+  "Snowmass": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.aspensnowmass.com/four-mountains/snowmass/mountain-cams"
+    }
+  ],
+  "Snowshoe": [
+    {
+      "label": "Village cam",
+      "url": "https://www.snowshoemtn.com/media-room/snowshoe-village-live-cam"
+    },
+    {
+      "label": "Skidder Slope cam",
+      "url": "https://www.snowshoemtn.com/media-room/skidder-slope-live-cam"
+    }
+  ],
+  "Solitude": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.solitudemountain.com/mountain-and-village/webcams"
+    }
+  ],
+  "St. Moritz": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.stmoritz.com/en/webcams/berge/"
+    },
+    {
+      "label": "Corviglia cams",
+      "url": "https://www.mountains.ch/de/webcam"
+    }
+  ],
+  "Steamboat": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.steamboat.com/the-mountain/live-cams"
+    }
+  ],
+  "Stevens Pass": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.stevenspass.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Stowe": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.stowe.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Stratton": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.stratton.com/the-mountain/webcams"
+    }
+  ],
+  "Stubaier Gletscher": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.stubaier-gletscher.com/en/stubai-live/webcams/"
+    }
+  ],
+  "Sugar Bowl": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.sugarbowl.com/webcams"
+    }
+  ],
+  "Sugarbush": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.sugarbush.com/mountain/webcams"
+    }
+  ],
+  "Sugarloaf": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.sugarloaf.com/mountain-report"
+    }
+  ],
+  "Sun Peaks": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/webcams"
+    }
+  ],
+  "Sun Valley": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.sunvalley.com/the-mountain/web-cams"
+    }
+  ],
+  "Sunday River": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.sundayriver.com/mountain-report"
+    }
+  ],
+  "Szczyrk": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.szczyrkowski.pl/en/resort/webcams-szczyrk"
+    }
+  ],
+  "Sälen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skistar.com/en/ski-destinations/salen/winter-in-salen/weather-slopes/webcams-salen/"
+    }
+  ],
+  "Sölden": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.soelden.com/en/live-information/livecams"
+    }
+  ],
+  "Taos Ski Valley": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skitaos.com/webcams"
+    }
+  ],
+  "Telluride": [
+    {
+      "label": "Mountain cams",
+      "url": "https://tellurideskiresort.com/webcams/"
+    }
+  ],
+  "The Summit at Snoqualmie": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.summitatsnoqualmie.com/webcams"
+    }
+  ],
+  "Thredbo": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.thredbo.com.au/weather/snow-cams/"
+    }
+  ],
+  "Tignes/Val d'Isère": [
+    {
+      "label": "Tignes cams",
+      "url": "https://www.tignes.net/webcams"
+    },
+    {
+      "label": "Val d'Isère cams",
+      "url": "https://www.valdisere.com/live/webcams/"
+    }
+  ],
+  "Trysil": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skistar.com/en/ski-destinations/trysil/winter-in-trysil/weather-and-slopes/webcams-trysil/"
+    }
+  ],
+  "Vail": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.vail.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Val Cenis": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.valcenis.com/en/webcams"
+    }
+  ],
+  "Val Gardena": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.valgardena.it/en/webcams/"
+    }
+  ],
+  "Valle Nevado": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.vallenevado.com/es/camaras/"
+    }
+  ],
+  "Vallnord": [
+    {
+      "label": "Ordino Arcalis cams",
+      "url": "https://www.ordinoarcalis.com/en/resort/webcams"
+    },
+    {
+      "label": "Pal Arinsal cams",
+      "url": "https://www.palarinsal.com/en/resort/webcams"
+    }
+  ],
+  "Valloire-Galibier": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.valloire.com/webcams-valloire-galibier.html"
+    }
+  ],
+  "Vemdalen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skistar.com/en/ski-destinations/vemdalen/winter-in-vemdalen/weather-and-slopes/webcams-vemdalen/"
+    }
+  ],
+  "Verbier": [
+    {
+      "label": "Ski area cams",
+      "url": "https://verbier4vallees.ch/en/useful-information/webcams"
+    },
+    {
+      "label": "Village cams",
+      "url": "https://www.verbier.ch/en/practice/live/webcams/"
+    }
+  ],
+  "Wengen/Jungfrau": [
+    {
+      "label": "Mountain cams",
+      "url": "https://jungfrauregion.swiss/en/service/webcams.html"
+    }
+  ],
+  "Whakapapa": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.whakapapa.com/report"
+    }
+  ],
+  "Whistler Blackcomb": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.whistlerblackcomb.com/the-mountain/mountain-conditions/mountain-cams.aspx"
+    }
+  ],
+  "Whitefish Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://skiwhitefish.com/webcams/"
+    }
+  ],
+  "Windham": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.windhammountain.com/mountain-cam/"
+    }
+  ],
+  "Winter Park": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.winterparkresort.com/the-mountain/mountain-cams"
+    }
+  ],
+  "Winterberg": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skiliftkarussell.de/en/ski/live-info/webcams"
+    }
+  ],
+  "Ylläs": [
+    {
+      "label": "Mountain cams",
+      "url": "https://ski.yllas.fi/en/about-us/webcams/"
+    }
+  ],
+  "Yongpyong": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.yongpyong.co.kr/kor/guide/realTimeNews/ypResortWebcam.do"
+    }
+  ],
+  "Zakopane (Kasprowy Wierch)": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.pkl.pl/kasprowy-wierch/kamery-online.html"
+    }
+  ],
+  "Zao Onsen": [
+    {
+      "label": "Mountain cams",
+      "url": "https://zaomountainresort.com/live-camera/"
+    }
+  ],
+  "Zell am See-Kaprun": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.zellamsee-kaprun.com/en/service/live/webcams"
+    }
+  ],
+  "Zermatt": [
+    {
+      "label": "Village cams",
+      "url": "https://zermatt.swiss/en/info/webcams"
+    },
+    {
+      "label": "Mountain cams",
+      "url": "https://www.matterhornparadise.ch/en/information/webcams"
+    }
+  ],
+  "Zillertal Arena": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.zillertalarena.com/en/information-services/live-cams-weather/live-cams/"
+    }
+  ],
+  "Zugspitze": [
+    {
+      "label": "Mountain cams",
+      "url": "https://zugspitze.de/en/Service-information/Webcams"
+    }
+  ],
+  "Åre": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skistar.com/en/ski-destinations/are/winter-in-are/weather-and-slopes/webcams-are/"
+    }
+  ],
+  "Špindlerův Mlýn": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.skiareal.cz/en/ski-resort/live-from-spindl/webcams"
     }
   ]
 }
