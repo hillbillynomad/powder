@@ -19,6 +19,7 @@ from .providers import (
     OpenMeteoProvider,
 )
 from .resorts import SkiResort, filter_resorts, load_resorts
+from .webcams import webcams_for
 
 
 def fetch_all_forecasts(resort: SkiResort) -> dict[date, list[DailyForecast]]:
@@ -160,7 +161,7 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
     total_forecast = sum(d["avg_inches"] for d in daily_forecasts)
     total_historical = sum(h["snowfall_inches"] for h in historical_data)
 
-    return {
+    data = {
         "name": resort.name,
         "country": resort.country,
         "region": resort.region,
@@ -178,6 +179,10 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
         "total_historical_inches": round(total_historical, 1),
         "historical_snowfall": historical_data,
     }
+    webcams = webcams_for(resort.name)
+    if webcams:
+        data["webcams"] = webcams
+    return data
 
 
 def export_json(resorts: list[SkiResort], output_path: Path) -> None:

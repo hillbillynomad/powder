@@ -1182,6 +1182,28 @@ function getSourcesFromForecasts(dailyForecasts) {
     return Array.from(sources).sort();
 }
 
+// Only https links from the curated webcam list make it into the page
+function safeHttpsUrl(url) {
+    return typeof url === 'string' && /^https:\/\//i.test(url) ? url : null;
+}
+
+// "Mountain Cams" links under the forecast table; each opens the resort's webcam page in a new tab
+function webcamsHtml(resort) {
+    const links = ((resort && resort.webcams) || []).filter(l => l && l.label && safeHttpsUrl(l.url));
+    if (!links.length) return '';
+    const items = links.map(l => {
+        let host = '';
+        try { host = new URL(l.url).hostname.replace(/^www\./, ''); } catch (e) { /* label only */ }
+        return `<li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer">` +
+            `📷 ${escapeHtml(l.label)} <span class="cams-host">${escapeHtml(host)} ↗</span></a></li>`;
+    }).join('');
+    return `
+        <div class="detail-cams">
+            <div class="cams-header">Mountain Cams</div>
+            <ul class="cams-links">${items}</ul>
+        </div>`;
+}
+
 // Build detail panel content
 function buildDetailContent(resort) {
     const passDisplay = resort.pass_type || 'Independent';
@@ -1244,6 +1266,7 @@ function buildDetailContent(resort) {
             <thead><tr><th>Date</th><th>Snow</th>${sourceHeaders}</tr></thead>
             <tbody>${forecastRows}${historicalRows}</tbody>
         </table>
+        ${webcamsHtml(resort)}
     `;
 }
 
@@ -1886,7 +1909,7 @@ if (typeof module !== 'undefined' && module.exports) {
         buildLabelOverlayLayers, buildMapStyle, parseShareParams, buildShareUrl,
         nextPanelState, setPanelState, restorePanelState, searchResorts,
         showDetail, hideDetail, togglePanelCollapse, reopenPanel,
-        filterInView, angularDistance, escapeHtml, setListMode, onSearchInput, clearSearch, renderList,
+        filterInView, angularDistance, escapeHtml, webcamsHtml, setListMode, onSearchInput, clearSearch, renderList,
         getPanelState: () => panelState,
         getListMode: () => listMode,
         setResortData: (data) => { resortData = data; },

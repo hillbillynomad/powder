@@ -1,6 +1,8 @@
 """Integration tests for the CLI module."""
 
 import json
+from dataclasses import replace
+
 import pytest
 import responses
 from io import StringIO
@@ -233,6 +235,27 @@ class TestBuildResortForecastData:
         assert data["elevation_base_ft"] == sample_resort.elevation_base_ft
         assert data["elevation_peak_ft"] == sample_resort.elevation_peak_ft
         assert data["vertical_drop_ft"] == sample_resort.vertical_drop_ft
+
+    @responses.activate
+    def test_omits_webcams_when_resort_has_none(self, sample_resort):
+        mock_all_api_endpoints()
+
+        data = build_resort_forecast_data(sample_resort)
+
+        assert "webcams" not in data
+
+    @responses.activate
+    def test_includes_webcams(self, sample_resort):
+        mock_all_api_endpoints()
+        northstar = replace(sample_resort, name="Northstar")
+
+        data = build_resort_forecast_data(northstar)
+
+        assert data["webcams"] == [{
+            "label": "Mountain cams",
+            "url": "https://www.northstarcalifornia.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+        }]
+
 
 
 @pytest.mark.integration

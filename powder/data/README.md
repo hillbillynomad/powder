@@ -116,6 +116,25 @@ Add entries to `resorts.json`:
 
 Required fields: `name`, `country`, `region`, `latitude`, `longitude`, `elevation_base_ft`
 
+## Webcams (`webcams.json`)
+
+Links to each resort's official webcam page(s), keyed by the exact resort `name`. They're shown as "Mountain Cams" in the resort panel and open in a new tab:
+
+```json
+{
+  "Northstar": [
+    {"label": "Mountain cams", "url": "https://www.northstarcalifornia.com/the-mountain/mountain-conditions/mountain-cams.aspx"}
+  ],
+  "Some Resort": []
+}
+```
+
+An empty list means we looked and found no public webcams. URLs must be https. Before committing changes, check every link with:
+
+```bash
+poetry run python tools/webcams/check.py --browser "$(pwd)/tests/web/node_modules/playwright"
+```
+
 Recommended: `elevation_peak_ft` (enables vertical drop display in UI)
 
 ## Weather Provider Selection

@@ -41,3 +41,6 @@ powder/web/data/overlays/
 tools/flyby/dem-cache/
 tools/flyby/cache/
 tools/flyby/specs/auto/
+
+# Webcam link-check reports
+tools/webcams/cache/
