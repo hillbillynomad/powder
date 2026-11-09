@@ -626,7 +626,7 @@ function installScrollGuard() {
 function applyLayerPrefs({ save = true } = {}) {
     if (!map || !mapReady) return;
     for (const layer of map.getStyle().layers) {
-        if (RESORT_BUBBLE_LAYERS.includes(layer.id) || layer.id.startsWith('wx-')) continue; // managed elsewhere
+        if (RESORT_BUBBLE_LAYERS.includes(layer.id) || layer.id.startsWith('wx-') || layer.id.startsWith('fresh-')) continue; // managed elsewhere
         const want = isLayerVisible(layer.id, layerPrefs) ? 'visible' : 'none';
         if (map.getLayoutProperty(layer.id, 'visibility') !== want) {
             map.setLayoutProperty(layer.id, 'visibility', want);
@@ -1010,6 +1010,7 @@ function buildHoverPopupContent(resort) {
             <div class="hover-popup-meta">${elevationLine}</div>
         </div>
         <div class="hover-popup-snowfall" id="hover-popup-snowfall" data-original="${originalSnowfallText}">${originalSnowfallText}</div>
+        ${hoverInsightsHtml(resort)}
         <div id="hover-popup-chart"></div>
     `;
 }
@@ -1061,7 +1062,7 @@ function positionHoverPopup(resort) {
     const mapRect = mapContainer.getBoundingClientRect();
     
     const popupWidth = 300;
-    const popupHeight = 220;
+    const popupHeight = 240;
     const margin = 10; // Minimum margin from viewport edges
     
     // Calculate marker position in viewport coordinates
@@ -1182,6 +1183,66 @@ function getSourcesFromForecasts(dailyForecasts) {
     return Array.from(sources).sort();
 }
 
+// ---- Model agreement + snow quality (helpers in snow.js) -------------------------
+
+const Snow = (typeof window !== 'undefined' && window.PowderSnow) || null;
+
+// Small dot after a day's average: green agree, amber mixed, red split, plus the range
+function agreementChipHtml(sources) {
+    if (!Snow) return '';
+    const spread = Snow.modelSpread(sources);
+    if (!spread) return '';
+    const tip = escapeHtml(`${Snow.AGREEMENT_TEXT[spread.level]}: ${Snow.modelTooltip(sources)}`);
+    const range = spread.level === 'agree' ? ''
+        : `<span class="agree-range">${spread.lo}–${spread.hi}"</span>`;
+    return `<span class="agree-chip agree-${spread.level}" title="${tip}" aria-label="${tip}"></span>${range}`;
+}
+
+function qualityCellHtml(day) {
+    const c = day.conditions;
+    const q = Snow && c ? Snow.qualityLabel(c.quality) : null;
+    if (!q) return '<td class="quality"></td>';
+    const temps = c.temp_min_f != null ? ` ${c.temp_min_f}–${c.temp_max_f}°F mid-mountain.` : '';
+    const tip = escapeHtml(`${q.label}: ${q.hint}.${temps}`);
+    return `<td class="quality"><span class="quality-chip quality-${c.quality}" title="${tip}">${q.icon} ${q.short}</span></td>`;
+}
+
+// One-word day name for "Best day: Sat"
+function shortDay(iso) {
+    return new Date(`${iso}T12:00:00`).toLocaleDateString('en-US', { weekday: 'short' });
+}
+
+function detailInsightsHtml(resort) {
+    if (!Snow) return '';
+    const lines = [];
+    const sum = Snow.agreementSummary(resort.daily_forecasts || [], 7);
+    if (sum.totalLo !== null) {
+        const range = `${sum.totalLo.toFixed(0)}–${sum.totalHi.toFixed(0)}"`;
+        lines.push(`<span class="insight agree-${sum.level}" title="Range of each model's 7-day total">` +
+            `<span class="agree-chip agree-${sum.level}"></span>Next 7 days: models say ${range}` +
+            ` · agree on ${sum.agreeDays} of ${sum.totalDays} days</span>`);
+    }
+    const best = Snow.bestDay(resort.daily_forecasts || []);
+    if (best && best.avg_inches >= 1) {
+        const q = Snow.qualityLabel(best.conditions.quality);
+        lines.push(`<span class="insight" title="${escapeHtml(q.hint)}">Best day: ${shortDay(best.date)} · ` +
+            `${best.avg_inches}" ${q.label.toLowerCase()}</span>`);
+    }
+    return lines.length ? `<div class="detail-insights">${lines.join('')}</div>` : '';
+}
+
+function hoverInsightsHtml(resort) {
+    if (!Snow) return '';
+    const parts = [];
+    const sum = Snow.agreementSummary(resort.daily_forecasts || [], 7);
+    if (sum.level) parts.push(`<span class="agree-chip agree-${sum.level}"></span>${Snow.AGREEMENT_TEXT[sum.level]}`);
+    const best = Snow.bestDay(resort.daily_forecasts || []);
+    if (best && best.avg_inches >= 1) {
+        parts.push(`${shortDay(best.date)}: ${Snow.qualityLabel(best.conditions.quality).label.toLowerCase()}`);
+    }
+    return parts.length ? `<div class="hover-popup-insights">${parts.join(' · ')}</div>` : '';
+}
+
 // Only https links from the curated webcam list make it into the page
 function safeHttpsUrl(url) {
     return typeof url === 'string' && /^https:\/\//i.test(url) ? url : null;
@@ -1221,7 +1282,7 @@ function buildDetailContent(resort) {
     let forecastRows = '';
     if (filter === 'forecast' || filter === 'total') {
         if (filter === 'total') {
-            forecastRows = `<tr class="section-header"><td colspan="${2 + numSourceCols}">Upcoming Forecast</td></tr>`;
+            forecastRows = `<tr class="section-header"><td colspan="${3 + numSourceCols}">Upcoming Forecast</td></tr>`;
         }
         const sortedForecasts = [...(resort.daily_forecasts || [])].sort((a, b) => b.date.localeCompare(a.date));
         for (const day of sortedForecasts) {
@@ -1229,18 +1290,18 @@ function buildDetailContent(resort) {
                 const val = day.sources && day.sources[s] !== undefined ? day.sources[s] : '-';
                 return `<td class="source">${val !== '-' ? val + '"' : val}</td>`;
             }).join('');
-            forecastRows += `<tr><td class="date">${formatDate(day.date)}</td><td class="avg">${day.avg_inches}"</td>${sourceCells}</tr>`;
+            forecastRows += `<tr><td class="date">${formatDate(day.date)}</td><td class="avg">${day.avg_inches}"${agreementChipHtml(day.sources)}</td>${qualityCellHtml(day)}${sourceCells}</tr>`;
         }
     }
 
     let historicalRows = '';
     if ((filter === 'historical' || filter === 'total') && resort.historical_snowfall) {
         if (filter === 'total') {
-            historicalRows = `<tr class="section-header"><td colspan="${2 + numSourceCols}">Recent Snowfall (Past 14 Days)</td></tr>`;
+            historicalRows = `<tr class="section-header"><td colspan="${3 + numSourceCols}">Recent Snowfall (Past 14 Days)</td></tr>`;
         }
         const sortedHistorical = [...resort.historical_snowfall].sort((a, b) => b.date.localeCompare(a.date));
         for (const day of sortedHistorical) {
-            historicalRows += `<tr class="historical"><td class="date">${formatDate(day.date)}</td><td class="avg">${day.snowfall_inches}"</td><td class="source" colspan="${numSourceCols}">Archive</td></tr>`;
+            historicalRows += `<tr class="historical"><td class="date">${formatDate(day.date)}</td><td class="avg">${day.snowfall_inches}"</td>${qualityCellHtml(day)}<td class="source" colspan="${numSourceCols}">Archive</td></tr>`;
         }
     }
 
@@ -1259,11 +1320,12 @@ function buildDetailContent(resort) {
         <div class="detail-total">
             <div class="value">${displaySnowfall.toFixed(1)}"</div>
             <div class="label">${displayLabel}</div>
+            ${detailInsightsHtml(resort)}
         </div>
         <div id="detail-chart-container"></div>
         <div class="detail-chart-info" id="detail-chart-info" data-original="${displayLabel}: ${displaySnowfall.toFixed(1)}&quot;">${displayLabel}: ${displaySnowfall.toFixed(1)}"</div>
         <table class="forecast-table">
-            <thead><tr><th>Date</th><th>Snow</th>${sourceHeaders}</tr></thead>
+            <thead><tr><th>Date</th><th>Snow</th><th title="Snow quality, from the temperature and freezing level on the mountain">Type</th>${sourceHeaders}</tr></thead>
             <tbody>${forecastRows}${historicalRows}</tbody>
         </table>
         ${webcamsHtml(resort)}
@@ -1583,6 +1645,7 @@ async function startTourIfAny(resort) {
     if (switching) {
         flyby.stop({ level: false });
         clearTourMarkers();
+        clearFreshSnow();
     }
     const tour = await flyby.getTour(resort.name);
     if (!tour || currentDetailResort !== resort) {
@@ -1598,7 +1661,128 @@ async function startTourIfAny(resort) {
     setTourMarkers(tour.markers);
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     flyby.start(tour, { autoplay: !reduceMotion });
+    showFreshSnow(resort);
     return true;
+}
+
+// ---- Fresh snow + flight HUD during a flyover ----------------------------------------
+// The last 72 h of new snow is painted white on the terrain above the lowest snow line it
+// reached (a color-relief layer on its own DEM source), so summer satellite imagery shows
+// where the fresh snow is. Ids start with `fresh-` so applyLayerPrefs leaves them alone.
+
+const FRESH_SNOW_LAYER = 'fresh-snow';
+const FRESH_SNOW_SOURCE = 'fresh-snow-dem';
+const FRESH_SNOW_KEY = 'powder.freshSnow';
+const HUD_INTERVAL_MS = 250;
+let freshSnowOn = loadFreshSnowPref();
+let tourResort = null;
+let tourCover = null;
+let hudUpdatedAt = 0;
+
+function loadFreshSnowPref() {
+    try { return localStorage.getItem(FRESH_SNOW_KEY) !== 'off'; } catch (e) { return true; }
+}
+
+function showFreshSnow(resort) {
+    clearFreshSnow();
+    tourResort = resort;
+    tourCover = Snow ? Snow.freshSnowCover(resort, Snow.todayIsoIn(resort.timezone)) : null;
+    if (tourCover && map && demSource) {
+        try {
+            map.addSource(FRESH_SNOW_SOURCE, {
+                type: 'raster-dem', tiles: [demSource.sharedDemProtocolUrl], encoding: 'terrarium',
+                tileSize: 256, maxzoom: DEM_MAX_ZOOM,
+            });
+            // Under lift names, labels and tour markers
+            const before = map.getStyle().layers.find(l =>
+                /^(trails-|lbl-|tourmarks-|resorts)/.test(l.id));
+            map.addLayer({
+                id: FRESH_SNOW_LAYER, type: 'color-relief', source: FRESH_SNOW_SOURCE,
+                layout: { visibility: freshSnowOn ? 'visible' : 'none' },
+                paint: { 'color-relief-color': Snow.freshSnowColor(tourCover.snowLineFt, tourCover.opacity) },
+            }, before ? before.id : undefined);
+        } catch (e) {
+            console.warn('Fresh snow layer unavailable', e);
+            tourCover = null;
+        }
+    }
+    syncFreshSnowButton();
+    hudUpdatedAt = 0;
+}
+
+function clearFreshSnow() {
+    if (map && map.getLayer(FRESH_SNOW_LAYER)) map.removeLayer(FRESH_SNOW_LAYER);
+    if (map && map.getSource(FRESH_SNOW_SOURCE)) map.removeSource(FRESH_SNOW_SOURCE);
+    tourResort = null;
+    tourCover = null;
+    syncFreshSnowButton();
+    const hud = document.getElementById('flyby-hud');
+    if (hud) hud.hidden = true;
+}
+
+function syncFreshSnowButton() {
+    const button = document.getElementById('flyby-snow');
+    if (!button) return;
+    button.hidden = !tourCover;
+    button.setAttribute('aria-pressed', String(freshSnowOn));
+    button.classList.toggle('active', freshSnowOn);
+    button.title = freshSnowOn ? 'Hide fresh snow' : 'Show fresh snow (last 72 h)';
+}
+
+function toggleFreshSnow() {
+    freshSnowOn = !freshSnowOn;
+    try { localStorage.setItem(FRESH_SNOW_KEY, freshSnowOn ? 'on' : 'off'); } catch (e) { /* storage unavailable */ }
+    if (map && map.getLayer(FRESH_SNOW_LAYER)) {
+        map.setLayoutProperty(FRESH_SNOW_LAYER, 'visibility', freshSnowOn ? 'visible' : 'none');
+    }
+    syncFreshSnowButton();
+}
+
+function formatFeet(ft) {
+    return `${Math.round(ft).toLocaleString()} ft`;
+}
+
+// Altitude, height above the snow, temperature at the camera, fresh snow and snow line
+function updateFlybyHud(force = false) {
+    const hud = document.getElementById('flyby-hud');
+    if (!hud || !tourResort || !map) return;
+    const now = performance.now();
+    if (!force && now - hudUpdatedAt < HUD_INTERVAL_MS) return;
+    hudUpdatedAt = now;
+    const parts = [];
+    let altFt = null;
+    try {
+        // Camera height = view-centre height + the drop from camera to centre (all in
+        // exaggerated world metres, like queryTerrainElevation)
+        const center = map.getCenter(), pitch = map.getPitch();
+        const mpp = 40075016.686 * Math.cos((center.lat * Math.PI) / 180) / (512 * Math.pow(2, map.getZoom()));
+        const altM = map.getCameraTargetElevation() +
+            map.transform.cameraToCenterDistance * mpp * Math.cos((pitch * Math.PI) / 180);
+        altFt = (altM / TERRAIN_EXAGGERATION) * FEET_PER_METER;
+        const groundM = map.queryTerrainElevation(map.transform.getCameraLngLat());
+        parts.push(['Altitude', formatFeet(altFt)]);
+        if (groundM != null) {
+            const aglFt = altFt - (groundM / TERRAIN_EXAGGERATION) * FEET_PER_METER;
+            if (aglFt > 0) parts.push(['Above ground', formatFeet(aglFt)]);
+        }
+    } catch (e) { /* camera not ready */ }
+    const today = Snow ? (tourResort.daily_forecasts || []).find(d => d.date === Snow.todayIsoIn(tourResort.timezone)) : null;
+    const c = today && today.conditions;
+    // The lapse rate means nothing far above the mountain (on the way in from the globe)
+    if (c && altFt !== null && altFt < 18000 && c.temp_min_f != null && c.ref_elevation_ft != null) {
+        const lo = Math.round(Snow.lapseTempF(c.temp_min_f, c.ref_elevation_ft, altFt));
+        const hi = Math.round(Snow.lapseTempF(c.temp_max_f, c.ref_elevation_ft, altFt));
+        parts.push(['Today here', `${lo}–${hi}°F`]);
+    }
+    if (tourCover) {
+        parts.push(['New snow 72h', `${tourCover.inches72}"`]);
+        const base = tourResort.elevation_base_ft || 0;
+        parts.push(['Snow line', tourCover.snowLineFt <= base ? 'to the base' : formatFeet(tourCover.snowLineFt)]);
+    }
+    const q = c && Snow.qualityLabel(c.quality);
+    if (q) parts.push(['Today', q.label]);
+    hud.innerHTML = parts.map(([k, v]) => `<span class="hud-item"><span class="hud-key">${k}</span><b>${escapeHtml(v)}</b></span>`).join('');
+    hud.hidden = parts.length === 0;
 }
 
 // Stop flying and give the user back their own layer settings. With deferLayers the flight stops
@@ -1610,6 +1794,7 @@ let layerRestoreTimer = 0;
 function endTour({ deferLayers = false } = {}) {
     if (flyby) flyby.stop();
     clearTourMarkers();
+    clearFreshSnow();
     clearTimeout(layerRestoreTimer);
     layerRestoreTimer = 0;
     if (deferLayers && tourPrefsBackup) {
@@ -1617,6 +1802,15 @@ function endTour({ deferLayers = false } = {}) {
         return;
     }
     restoreUserLayers();
+}
+
+// ✕ on the flyover bar: close the resort and go back to the In view list, leaving the camera
+// where the flight was (no fly-out)
+function exitFlyover() {
+    hideDetail(); // ends the tour and gives the user's layers back now
+    if (document.getElementById('search-input').value) clearSearch({ focus: false });
+    setListMode('view');
+    updateInView(true);
 }
 
 function restoreUserLayers() {
@@ -1653,6 +1847,7 @@ function startFlybyClock() {
     const tick = () => {
         if (!flyby || !flyby.getState().hasTour) return;
         updateFlybyClock();
+        updateFlybyHud();
         flybyClockFrame = requestAnimationFrame(tick);
     };
     tick();
@@ -1680,6 +1875,8 @@ function wireFlybyBar() {
         updateFlybyClock();
     });
     document.getElementById('flyby-restart').addEventListener('click', () => { if (flyby) { flyby.seek(0); updateFlybyClock(); } });
+    document.getElementById('flyby-snow').addEventListener('click', toggleFreshSnow);
+    document.getElementById('flyby-exit').addEventListener('click', exitFlyover);
     document.getElementById('flyby-end').addEventListener('click', () => { if (flyby) { flyby.seek(flyby.getDuration() - 6); updateFlybyClock(); } });
 }
 

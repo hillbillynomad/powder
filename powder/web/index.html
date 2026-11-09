@@ -183,7 +183,10 @@
                            aria-label="Flyover position">
                     <span id="flyby-time" class="flyby-time">0:00 / 0:00</span>
                     <button id="flyby-end" class="flyby-btn" type="button" aria-label="Jump to the end">⏭</button>
+                    <button id="flyby-snow" class="flyby-btn flyby-snow" type="button" aria-label="Fresh snow on the terrain" aria-pressed="true" hidden>❄</button>
+                    <button id="flyby-exit" class="flyby-btn flyby-exit" type="button" aria-label="Exit flyover" title="Exit flyover">✕</button>
                 </div>
+                <div id="flyby-hud" class="flyby-hud" aria-live="off" hidden></div>
                 <div id="wx-timebar" class="wx-timebar" hidden>
                     <button id="wx-play" class="wx-play" type="button" aria-label="Play">▶</button>
                     <div class="wx-track">
@@ -206,6 +209,7 @@
     <script src="https://unpkg.com/maplibre-contour@0.1.1/dist/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.45.1/dist/apexcharts.min.js"></script>
     <script src="js/weather.js"></script>
+    <script src="js/snow.js"></script>
     <script src="js/flyby.js"></script>
     <script src="js/app.js"></script>
 </body>

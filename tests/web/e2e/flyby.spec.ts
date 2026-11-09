@@ -116,6 +116,43 @@ test.describe('Resort flyover', () => {
     await expect(page.locator('#flyby-toggle')).toHaveAttribute('aria-label', 'Fly over');
   });
 
+  test('a flyover shows the flight HUD and cleans up its fresh-snow layer on close', async ({ page }) => {
+    await page.locator('#search-input').fill('snowbird');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForFunction(() => window.__powder.flyby()?.playing, undefined, { timeout: 20000 });
+    await expect(page.locator('#flyby-hud')).toBeVisible();
+    await expect(page.locator('#flyby-hud')).toContainText('Altitude');
+    // the tint only appears after fresh snow; its button and layer come and go together
+    const hasLayer = await page.evaluate(() => !!window.__map.getLayer('fresh-snow'));
+    await expect(page.locator('#flyby-snow')).toBeVisible({ visible: hasLayer });
+
+    await page.locator('#detail-back').click();
+    await expect(page.locator('#flyby-hud')).toBeHidden();
+    expect(await page.evaluate(() => !!window.__map.getLayer('fresh-snow') || !!window.__map.getSource('fresh-snow-dem'))).toBe(false);
+  });
+
+  test('the exit button ends the flyover and returns to In view from where the camera is', async ({ page }) => {
+    await page.locator('#search-input').fill('snowbird');
+    await page.locator('#search-input').press('Enter');
+    await page.waitForFunction(() => window.__powder.flyby()?.playing, undefined, { timeout: 20000 });
+    await page.locator('#flyby-slider').fill(String(Math.round((await page.evaluate(() => window.__powder.flybyDuration())) * 4)));
+    const before = await page.evaluate(() => { const c = window.__map.getCenter(); return { lng: c.lng, lat: c.lat, z: window.__map.getZoom() }; });
+
+    await page.locator('#flyby-exit').click();
+
+    await expect(page.locator('#flyby-bar')).toBeHidden();
+    await expect(page.locator('#flyby-hud')).toBeHidden();
+    expect(await page.evaluate(() => window.__powder.flyby()?.hasTour)).toBeFalsy();
+    await expect(page.locator('#list-content')).not.toHaveClass(/hidden/);
+    await expect(page.locator('#search-input')).toHaveValue('');
+    await expect(page.locator('.panel-mode.active')).toContainText('In view');
+    // no fly-out: the view stays near where the flight was
+    const after = await page.evaluate(() => { const c = window.__map.getCenter(); return { lng: c.lng, lat: c.lat, z: window.__map.getZoom() }; });
+    expect(Math.abs(after.lng - before.lng)).toBeLessThan(0.05);
+    expect(Math.abs(after.lat - before.lat)).toBeLessThan(0.05);
+    expect(Math.abs(after.z - before.z)).toBeLessThan(1);
+  });
+
   test('clicking or zooming the map pauses the flyover but keeps the timeline to resume from', async ({ page }) => {
     await page.locator('#search-input').fill('snowbird');
     await page.locator('#search-input').press('Enter');

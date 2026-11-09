@@ -8,6 +8,7 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 
 from .cache import set_cache_enabled
+from .conditions import conditions_json, rate_snow
 from .forecast import DailyForecast, ForecastResult, calculate_avg_forecasts
 from .providers import (
     BOMProvider,
@@ -133,7 +134,17 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
     results = calculate_avg_forecasts(all_forecasts)
     
     today = date.today()
-    
+
+    # Mid-mountain conditions + snow-quality rating per day (same Open-Meteo request, cached)
+    conditions = OpenMeteoProvider().get_conditions(resort, 16)
+
+    def add_conditions(entry: dict, day: date, snowfall_in: float) -> None:
+        cond = conditions.get(day)
+        if cond is None:
+            return
+        cond.quality = rate_snow(cond, snowfall_in, resort.elevation_base_ft, resort.elevation_peak_ft)
+        entry["conditions"] = conditions_json(cond)
+
     # Split into historical (past) and forecast (today+future)
     historical_data = []
     daily_forecasts = []
@@ -141,10 +152,12 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
     for result in results:
         if result.date < today:
             # Historical day - simpler format without per-source breakdown
-            historical_data.append({
+            entry = {
                 "date": result.date.isoformat(),
                 "snowfall_inches": round(result.avg_snowfall_inches, 1),
-            })
+            }
+            add_conditions(entry, result.date, result.avg_snowfall_inches)
+            historical_data.append(entry)
         else:
             # Forecast day (today and future) - include source breakdown
             source_values = {f.source: f.snowfall_inches for f in result.forecasts}
@@ -152,11 +165,13 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
             for source_name in ["Open-Meteo", "ECMWF", "NWS", "ICON", "JMA", "BOM"]:
                 if source_name in source_values:
                     sources[source_name] = round(source_values[source_name], 1)
-            daily_forecasts.append({
+            entry = {
                 "date": result.date.isoformat(),
                 "avg_inches": round(result.avg_snowfall_inches, 1),
                 "sources": sources,
-            })
+            }
+            add_conditions(entry, result.date, result.avg_snowfall_inches)
+            daily_forecasts.append(entry)
 
     total_forecast = sum(d["avg_inches"] for d in daily_forecasts)
     total_historical = sum(h["snowfall_inches"] for h in historical_data)

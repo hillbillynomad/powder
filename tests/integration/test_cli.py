@@ -5,6 +5,7 @@ from dataclasses import replace
 
 import pytest
 import responses
+from freezegun import freeze_time
 from io import StringIO
 from pathlib import Path
 from unittest.mock import patch, MagicMock
@@ -256,6 +257,50 @@ class TestBuildResortForecastData:
             "url": "https://www.northstarcalifornia.com/the-mountain/mountain-conditions/mountain-cams.aspx",
         }]
 
+
+@pytest.mark.integration
+@pytest.mark.cli
+class TestExportConditions:
+    """Each day carries mid-mountain conditions and a snow-quality rating."""
+
+    @responses.activate
+    @freeze_time("2024-01-16")
+    def test_conditions_on_forecast_and_historical_days(self, sample_resort):
+        mock_all_api_endpoints()
+        responses.replace(
+            responses.GET,
+            "https://api.open-meteo.com/v1/forecast",
+            json={
+                **SAMPLE_FORECAST_RESPONSE,
+                "elevation": 2400.0,
+                "hourly": {
+                    "time": ["2024-01-15T06:00", "2024-01-16T06:00", "2024-01-17T06:00"],
+                    "temperature_2m": [-14.0, -4.0, 3.0],
+                    "freezing_level_height": [900.0, 1500.0, 4500.0],
+                    "snowfall": [5.0, 0.0, 2.5],
+                    "rain": [0.0, 0.0, 6.0],
+                    "wind_gusts_10m": [20.0, 30.0, 40.0],
+                },
+            },
+            status=200,
+        )
+
+        data = build_resort_forecast_data(sample_resort)
+
+        hist = data["historical_snowfall"][0]
+        assert hist["date"] == "2024-01-15"
+        assert hist["conditions"]["quality"] == "champagne"
+        assert hist["conditions"]["snow_line_ft"] is not None
+        days = {d["date"]: d for d in data["daily_forecasts"]}
+        assert days["2024-01-16"]["conditions"]["quality"] is None  # nothing fell
+        assert days["2024-01-17"]["conditions"]["quality"] == "rain"  # freezing level above the peak
+        assert "sources" in days["2024-01-17"]  # existing keys unchanged
+
+    @responses.activate
+    def test_days_without_hourly_data_have_no_conditions(self, sample_resort):
+        mock_all_api_endpoints()
+        data = build_resort_forecast_data(sample_resort)
+        assert all("conditions" not in d for d in data["daily_forecasts"] + data["historical_snowfall"])
 
 
 @pytest.mark.integration

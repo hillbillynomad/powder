@@ -225,3 +225,53 @@ class TestOpenMeteoWithPastDays:
 
         request = responses.calls[0].request
         assert "past_days=14" in request.url
+
+
+@pytest.mark.unit
+@pytest.mark.providers
+class TestOpenMeteoConditions:
+    """Hourly conditions ride along on the same request as the daily snowfall."""
+
+    HOURLY = {
+        "time": ["2024-01-15T00:00", "2024-01-15T12:00", "2024-01-16T00:00"],
+        "temperature_2m": [-8.0, -6.0, 1.0],
+        "freezing_level_height": [1200.0, 1400.0, 2800.0],
+        "snowfall": [3.0, 1.0, 0.0],
+        "rain": [0.0, 0.0, 2.0],
+        "wind_gusts_10m": [30.0, 50.0, 20.0],
+    }
+
+    @responses.activate
+    def test_requests_hourly_fields(self, provider, sample_resort):
+        responses.add(responses.GET, "https://api.open-meteo.com/v1/forecast",
+                      json={"daily": {"time": [], "snowfall_sum": []}}, status=200)
+        provider.get_snowfall_forecast(sample_resort, days=7)
+        url = responses.calls[0].request.url
+        assert "hourly=temperature_2m%2Cfreezing_level_height%2Csnowfall%2Crain%2Cwind_gusts_10m" in url
+
+    @responses.activate
+    def test_get_conditions_parses_days(self, provider, sample_resort):
+        responses.add(responses.GET, "https://api.open-meteo.com/v1/forecast",
+                      json={"elevation": 2500.0, "hourly": self.HOURLY}, status=200)
+        conditions = provider.get_conditions(sample_resort, days=16)
+        assert set(conditions) == {date(2024, 1, 15), date(2024, 1, 16)}
+        jan15 = conditions[date(2024, 1, 15)]
+        assert jan15.snow_line_ft is not None
+        assert jan15.temp_max_f < 32
+        assert conditions[date(2024, 1, 16)].rain_in > 0
+
+    @responses.activate
+    def test_get_conditions_same_params_as_forecast(self, provider, sample_resort):
+        responses.add(responses.GET, "https://api.open-meteo.com/v1/forecast",
+                      json={"daily": {"time": [], "snowfall_sum": []}, "hourly": self.HOURLY}, status=200)
+        provider.get_snowfall_forecast(sample_resort, days=16)
+        provider.get_conditions(sample_resort, days=16)
+        assert responses.calls[0].request.url == responses.calls[1].request.url
+
+    @responses.activate
+    def test_get_conditions_handles_errors_and_no_hourly(self, provider, sample_resort):
+        responses.add(responses.GET, "https://api.open-meteo.com/v1/forecast", status=500)
+        assert provider.get_conditions(sample_resort) == {}
+        responses.replace(responses.GET, "https://api.open-meteo.com/v1/forecast",
+                          json={"daily": {}}, status=200)
+        assert provider.get_conditions(sample_resort) == {}

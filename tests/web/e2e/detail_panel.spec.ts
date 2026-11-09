@@ -80,6 +80,15 @@ test.describe('Detail Panel with Data', () => {
     await expect(table).toBeVisible();
   });
 
+  test('forecast table has a snow Type column and model agreement dots', async ({ page }) => {
+    await clickFirstMarker(page);
+    await page.waitForSelector('.forecast-table', { timeout: 5000 });
+    await expect(page.locator('.forecast-table thead')).toContainText('Type');
+    // every forecast row with 2+ models gets a dot whose tooltip lists each model
+    const dot = page.locator('.forecast-table .agree-chip').first();
+    if (await dot.count()) await expect(dot).toHaveAttribute('title', /Models (agree|differ|disagree): /);
+  });
+
   test('back bar returns from details to the list', async ({ page }) => {
     await clickFirstMarker(page);
     await expect(page.locator('#details-content')).not.toHaveClass(/hidden/);

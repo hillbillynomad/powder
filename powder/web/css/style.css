@@ -465,6 +465,36 @@ body {
 .flyby-slider { flex: 1 1 auto; min-width: 60px; accent-color: var(--color-accent); cursor: pointer; }
 .flyby-time { flex: 0 0 auto; min-width: 74px; text-align: right; font-size: 0.8rem; font-variant-numeric: tabular-nums; color: var(--color-text-muted); }
 
+.flyby-snow { opacity: 0.55; }
+.flyby-snow.active { opacity: 1; border-color: rgba(255, 255, 255, 0.6); }
+.flyby-snow[hidden] { display: none; }
+.flyby-exit { font-size: 0.85rem; color: var(--color-text-muted); }
+.flyby-exit:hover { color: var(--color-text); }
+
+/* Flight HUD: altitude, temperature and fresh snow, top-left of the map during a flyover */
+.flyby-hud {
+    position: absolute;
+    z-index: 5;
+    top: 10px;
+    left: 10px;
+    max-width: calc(100% - 70px); /* clear of the map controls */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    padding: 6px 12px;
+    background: rgba(22, 33, 62, 0.82);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(6px);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+}
+.flyby-hud[hidden] { display: none; }
+.flyby-hud .hud-item { display: inline-flex; gap: 5px; white-space: nowrap; }
+.flyby-hud .hud-key { color: var(--color-text-muted); }
+
 .wx-play, .wx-now {
     flex: 0 0 auto;
     background: var(--color-bg-input);
@@ -533,6 +563,7 @@ body {
     .wx-timebar { left: 6px; right: 34px; bottom: 6px; gap: 8px; padding: 6px 8px; }
     .flyby-bar { left: 6px; right: 34px; bottom: 6px; gap: 4px; padding: 4px 8px; }
     .flyby-time { min-width: 66px; font-size: 0.72rem; }
+    .flyby-hud { top: 6px; left: 6px; gap: 2px 10px; padding: 4px 8px; font-size: 0.68rem; }
     .wx-time { min-width: 60px; }
     .wx-time-when { font-size: 0.78rem; }
 }
@@ -983,6 +1014,54 @@ body {
 .forecast-table tr.historical { background: var(--color-accent-05); }
 .forecast-table tr.historical:hover { background: var(--color-accent-15); }
 
+/* Model agreement + snow quality */
+:root {
+    --color-agree: #34d399;
+    --color-mixed: #fbbf24;
+    --color-split: #f87171;
+}
+
+.agree-chip {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 4px 1px 5px;
+    border-radius: 50%;
+    vertical-align: middle;
+    background: var(--color-text-muted);
+}
+.agree-chip.agree-agree { background: var(--color-agree); }
+.agree-chip.agree-mixed { background: var(--color-mixed); }
+.agree-chip.agree-split { background: var(--color-split); }
+.agree-range { display: block; font-size: 0.68rem; font-weight: 400; color: var(--color-text-muted); }
+
+.quality-chip {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    background: var(--color-accent-10);
+    color: var(--color-text);
+    cursor: help;
+}
+.quality-chip.quality-champagne { background: rgba(196, 181, 253, 0.22); color: #ddd6fe; }
+.quality-chip.quality-powder { background: rgba(96, 165, 250, 0.2); color: #bfdbfe; }
+.quality-chip.quality-heavy { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+.quality-chip.quality-mixed { background: rgba(251, 191, 36, 0.16); color: #fde68a; }
+.quality-chip.quality-rain { background: rgba(248, 113, 113, 0.16); color: #fecaca; }
+
+.detail-insights {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: var(--color-text);
+}
+.detail-insights .insight { display: block; }
+.detail-insights .agree-chip { margin-left: 0; }
+
 /* Mountain webcams (under the forecast table): links that open in a new tab */
 .detail-cams { margin-top: 20px; }
 
@@ -1017,6 +1096,13 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.hover-popup-insights {
+    margin: -4px 0 6px;
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+}
+.hover-popup-insights .agree-chip { margin-left: 0; }
 
 /* Responsive: narrow screens */
 /* Narrow / portrait: the panel becomes a bottom sheet under the map.
