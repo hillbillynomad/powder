@@ -1,4 +1,5 @@
 {
+  "Aconcagua": [],
   "Adelboden-Lenk": [
     {
       "label": "Mountain cams",
@@ -255,10 +256,22 @@
       "url": "https://www.davosklostersmountains.ch/en/mountains/winter/live-info/webcams"
     }
   ],
+  "Deer Valley": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.deervalley.com/explore-the-mountain/webcams"
+    }
+  ],
   "El Colorado": [
     {
       "label": "Mountain cams",
       "url": "https://www.elcolorado.cl/live-cam/"
+    }
+  ],
+  "Eldora": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.eldora.com/the-mountain/current-conditions/webcams/"
     }
   ],
   "Engelberg-Titlis": [
@@ -333,6 +346,7 @@
       "url": "https://www.jungfrau.ch/en-gb/live/webcams/"
     }
   ],
+  "Gulmarg": [],
   "Hafjell": [
     {
       "label": "Mountain cams",
@@ -381,6 +395,12 @@
       "url": "https://www.stationsnicecotedazur.com/en/webcam/isola/"
     }
   ],
+  "Jackson Hole": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.jacksonhole.com/live-mountain-cams"
+    }
+  ],
   "Jasná": [
     {
       "label": "Mountain cams",
@@ -403,6 +423,12 @@
     {
       "label": "Mountain cams",
       "url": "https://kickinghorseresort.com/conditions/mountain-cam/"
+    }
+  ],
+  "Killington": [
+    {
+      "label": "Mountain cams",
+      "url": "https://killington.com/webcams"
     }
   ],
   "Kirkwood": [
@@ -541,6 +567,12 @@
       "url": "https://mottolino.com/en/webcam-livigno"
     }
   ],
+  "Loon Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.loonmtn.com/mountain-report"
+    }
+  ],
   "Madarao Kogen": [
     {
       "label": "Mountain cams",
@@ -551,6 +583,12 @@
     {
       "label": "Mountain cams",
       "url": "https://www.ski.it/en/info-live/webcam-and-livecam"
+    }
+  ],
+  "Mammoth Mountain": [
+    {
+      "label": "Mountain cams",
+      "url": "https://www.mammothmountain.com/on-the-mountain/mammoth-webcam"
     }
   ],
   "Mayrhofen": [
@@ -581,6 +619,8 @@
       "url": "https://monterosaski.eu/en/webcam"
     }
   ],
+  "Mount Audubon": [],
+  "Mount Baker": [],
   "Mount Buller": [
     {
       "label": "Mountain cams",
@@ -757,6 +797,16 @@
     {
       "label": "Mountain cams",
       "url": "https://www.purgatory.ski/webcams"
+    }
+  ],
+  "Queenstown (Remarkables + Coronet Peak)": [
+    {
+      "label": "Remarkables cams",
+      "url": "https://www.theremarkables.co.nz/weather-report#webcams"
+    },
+    {
+      "label": "Coronet Peak cams",
+      "url": "https://www.coronetpeak.co.nz/weather-report#webcams"
     }
   ],
   "Revelstoke Mountain Resort": [
@@ -1035,6 +1085,7 @@
       "url": "https://tellurideskiresort.com/webcams/"
     }
   ],
+  "Thaiwoo": [],
   "The Summit at Snoqualmie": [
     {
       "label": "Mountain cams",
