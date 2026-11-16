@@ -1355,6 +1355,18 @@ files = [
 ]
 
 [[package]]
+name = "tzdata"
+version = "2026.6"
+description = "Provider of IANA time zone data"
+optional = false
+python-versions = ">=2"
+groups = ["main"]
+files = [
+    {file = "tzdata-2026.6-py2.py3-none-any.whl", hash = "sha256:0a10eec6e13ef16b627fabed9a5f2ba61a62b1c67f327305f4e7e412a70b4aec"},
+    {file = "tzdata-2026.6.tar.gz", hash = "sha256:85d2cd9c09f81f0bb29db27759fc83af4f1e620efb814f8c5bf8b4cc4feece6d"},
+]
+
+[[package]]
 name = "url-normalize"
 version = "2.2.1"
 description = "URL normalization for Python"
@@ -1393,4 +1405,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "f0db89e80b9f25b731167c25d5678d7154af85ecd9b7c09e773814d1bc48e993"
+content-hash = "b9d059b0c29c2b7aed8df94b854ecd2a1b272a2bdb9ad942583c377d39b0a3fa"

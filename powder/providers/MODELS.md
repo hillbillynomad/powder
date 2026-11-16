@@ -233,6 +233,68 @@ Using regional models (ICON, JMA, BOM) in addition to global models provides:
 - **Orographic lift:** Fine-scale uplift on windward slopes is missed
 - **Valley effects:** Cold air pooling and temperature inversions require <5km resolution
 
+### Calibrated against reported snowfall (November 2026)
+
+`tools/calibrate/` hindcasts the app's method on archived model runs (Open-Meteo
+historical-forecast API, identical to what the live API served) for 46 resorts in California,
+Colorado, Utah, Wyoming, Montana and Canada, and compares Nov-Apr season totals with what the
+resorts reported to OnTheSnow (2022-23 to 2025-26, skipping seasons with incomplete reports).
+
+What it found, with the mid-mountain request and Kuchera ratio below:
+
+| Model (mid-mountain) | California | Canada | Colorado | Montana | Utah |
+|---|---|---|---|---|---|
+| GFS + ECMWF average | +20% | -25% | -43% | -42% | -46% |
+| ECMWF alone | +35% | +1% | -13% | -6% | -30% |
+| ECMWF + GEM | +8% | -10% | -8% | +11% | -23% |
+
+GFS has a third to a half of ECMWF's water in the interior ranges. No single snow-ratio
+formula fixed both California (dense, intense storms: too high) and Utah (too low), because
+Montana and Utah share temperatures and storm rates but sit on opposite sides. So the shipped
+model is: a temperature x storm-rate snow ratio (`snow_ratio`), plus a bias factor per
+provider and region (`powder/data/snow_calibration.json`, provider default elsewhere).
+Leave-one-resort-out (a resort with no history): median |error| 19%, median bias per region
+within ±13%. What's left is mostly steady per resort, from how each one measures and reports:
+neighbours disagree by 40-80% (Northstar vs Heavenly, Big White vs Fernie) every season. So
+resorts with reported history also get their own factor (`resorts` in the table,
+`tools/calibrate/resort_factors.py`, 0.5-1.8). Held out one season at a time:
+
+| Region | resort-seasons | median bias | median abs error | within 20% |
+|---|---|---|---|---|
+| California | 30 | -4% | 12% | 70% |
+| Canada | 46 | +3% | 13% | 65% |
+| Colorado | 41 | +0% | 9% | 85% |
+| Montana | 11 | +9% | 17% | 64% |
+| Utah | 21 | -8% | 12% | 71% |
+| Wyoming | 4 | -0% | 19% | 50% |
+| All | 153 | +0% | 12% | 72% |
+
+Outside the reported regions, GFS and GEM are tied per country (or US state / Canadian
+province) to ECMWF's season snowfall (`tools/calibrate/anchor.py`), since ECMWF's own global
+factor against the reports is ~1.0.
+
+### How Powder corrects for this
+
+Checked against OpenSnow and snow-forecast.com for the California resorts in November 2026,
+the raw model numbers ran 1.5-2.5x low, for two reasons we now correct
+(`providers/open_meteo_common.py`, `providers/nws.py`):
+
+- **Forecast elevation.** Resort coordinates sit at the base lodge. Every Open-Meteo request
+  (GFS, ECMWF, ICON, JMA, BOM) passes `elevation` = mid-mountain, so the downscaled temperature
+  and the rain/snow split are for the skiing rather than the parking lot. NWS has no elevation
+  parameter, so we ask for the grid cell of a nearby point at about mid-mountain: a ring of
+  candidates out to 3 km, ranked by one call to Open-Meteo's elevation API (`|elevation - mid|`
+  plus 150 ft per km of distance), falling back to the resort point.
+- **Snow-to-liquid ratio.** Open-Meteo's `snowfall` is frozen water x 7 (cm = mm x 0.7) whatever
+  the temperature. We turn it back into water and apply
+  `0.84 x kuchera(T) x rate^-0.31`, clamped 5-25:1: `kuchera` is 12:1 at 28 °F, +0.92 per °C
+  colder, -2 per °C warmer (hourly mid-mountain 2 m temperature), and `rate` is the snow water
+  over the surrounding 6 hours in mm/h (heavy storms pack denser snow). Constants fitted by
+  `tools/calibrate/optimize.py`. NWS amounts already include NWS's own ratio and are used as is.
+
+Borderline storms (snow at 31-34 °F, such as Southern California) still come out low: the
+models' own rain/snow split calls most of it rain.
+
 ### Recommendations for Ski Resort Forecasts
 1. Use **regional models** where available (ICON for Europe, NWS for US)
 2. Use **ECMWF** as primary global model (best mountain accuracy)

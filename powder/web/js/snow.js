@@ -3,7 +3,7 @@
 
 (function () {
     const MODEL_NAMES = {
-        'Open-Meteo': 'GFS', ECMWF: 'ECMWF', NWS: 'NWS', ICON: 'ICON', JMA: 'JMA', BOM: 'BOM',
+        'Open-Meteo': 'GFS', ECMWF: 'ECMWF', GEM: 'GEM', NWS: 'NWS', ICON: 'ICON', JMA: 'JMA', BOM: 'BOM',
     };
     const LAPSE_F_PER_FT = 6.5 * 1.8 / 3280.84; // 6.5 °C per km, in °F per foot
 

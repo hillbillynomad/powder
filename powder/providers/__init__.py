@@ -7,6 +7,7 @@ their strengths, weaknesses, and optimal use cases.
 from .base import ForecastProvider
 from .bom import BOMProvider
 from .ecmwf import ECMWFProvider
+from .gem import GEMProvider
 from .icon import ICONProvider
 from .jma import JMAProvider
 from .nws import NWSProvider
@@ -23,6 +24,7 @@ __all__ = [
     "BOMProvider",
     "ECMWFProvider",
     "EUROPEAN_COUNTRIES",
+    "GEMProvider",
     "ICONProvider",
     "JMAProvider",
     "NWSProvider",

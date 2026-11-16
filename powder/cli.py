@@ -14,6 +14,7 @@ from .providers import (
     BOMProvider,
     ECMWFProvider,
     EUROPEAN_COUNTRIES,
+    GEMProvider,
     ICONProvider,
     JMAProvider,
     NWSProvider,
@@ -32,6 +33,7 @@ def fetch_all_forecasts(resort: SkiResort) -> dict[date, list[DailyForecast]]:
     Uses regional providers for better accuracy:
     - Open-Meteo/GFS: Global baseline (16 days)
     - ECMWF: Global premium (10 days)
+    - GEM: Canadian global model (10 days)
     - NWS: US only (7 days)
     - ICON: Europe - best for Alpine terrain (7 days)
     - JMA: Japan (7 days)
@@ -41,6 +43,7 @@ def fetch_all_forecasts(resort: SkiResort) -> dict[date, list[DailyForecast]]:
     providers_with_max_days = [
         (OpenMeteoProvider(), 16),
         (ECMWFProvider(), 10),
+        (GEMProvider(), 10),
     ]
 
     # Regional providers for better accuracy
@@ -93,8 +96,8 @@ def display_forecasts(resort: SkiResort) -> None:
     results = calculate_avg_forecasts(all_forecasts)
 
     # Print header (models: GFS, NWS Blend, ECMWF IFS)
-    print(f"{'Date':<12} {'Avg':>8} {'GFS':>8} {'NWS':>8} {'ECMWF':>8}")
-    print("-" * 46)
+    print(f"{'Date':<12} {'Avg':>8} {'GFS':>8} {'NWS':>8} {'ECMWF':>8} {'GEM':>8}")
+    print("-" * 55)
 
     for result in results:
         date_str = result.date.strftime("%a %m/%d")
@@ -104,6 +107,7 @@ def display_forecasts(resort: SkiResort) -> None:
         gfs = source_values.get("Open-Meteo", "-")
         nws = source_values.get("NWS", "-")
         ecmwf = source_values.get("ECMWF", "-")
+        gem = source_values.get("GEM", "-")
 
         # Format values
         def fmt(val):
@@ -114,13 +118,14 @@ def display_forecasts(resort: SkiResort) -> None:
         avg_str = f"{result.avg_snowfall_inches:.1f}\""
 
         print(
-            f"{date_str:<12} {avg_str:>8} {fmt(gfs):>8} {fmt(nws):>8} {fmt(ecmwf):>8}"
+            f"{date_str:<12} {avg_str:>8} {fmt(gfs):>8} {fmt(nws):>8} {fmt(ecmwf):>8} {fmt(gem):>8}"
         )
 
-    # Print summary
-    total_avg = sum(r.avg_snowfall_inches for r in results)
-    print("-" * 46)
-    print(f"{'Total'::<12} {total_avg:.1f}\"")
+    # Print summary: the table also lists the past 14 days, which the total leaves out
+    today = date.today()
+    total_avg = sum(r.avg_snowfall_inches for r in results if r.date >= today)
+    print("-" * 55)
+    print(f"{'Total':<12} {total_avg:.1f}\" forecast (today onward)")
     print()
 
 
@@ -162,7 +167,7 @@ def build_resort_forecast_data(resort: SkiResort) -> dict:
             # Forecast day (today and future) - include source breakdown
             source_values = {f.source: f.snowfall_inches for f in result.forecasts}
             sources = {}
-            for source_name in ["Open-Meteo", "ECMWF", "NWS", "ICON", "JMA", "BOM"]:
+            for source_name in ["Open-Meteo", "ECMWF", "GEM", "NWS", "ICON", "JMA", "BOM"]:
                 if source_name in source_values:
                     sources[source_name] = round(source_values[source_name], 1)
             entry = {

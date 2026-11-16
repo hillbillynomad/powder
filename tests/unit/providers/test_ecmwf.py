@@ -29,7 +29,7 @@ class TestECMWFProvider:
         """Test successful forecast fetch."""
         responses.add(
             responses.GET,
-            "https://api.open-meteo.com/v1/ecmwf",
+            "https://api.open-meteo.com/v1/forecast",
             json=open_meteo_response,
             status=200,
         )
@@ -44,7 +44,7 @@ class TestECMWFProvider:
         """Test that forecast_days is capped at 10."""
         responses.add(
             responses.GET,
-            "https://api.open-meteo.com/v1/ecmwf",
+            "https://api.open-meteo.com/v1/forecast",
             json={"daily": {"time": [], "snowfall_sum": []}},
             status=200,
         )
@@ -59,21 +59,21 @@ class TestECMWFProvider:
         """Test that ECMWF endpoint is used."""
         responses.add(
             responses.GET,
-            "https://api.open-meteo.com/v1/ecmwf",
+            "https://api.open-meteo.com/v1/forecast",
             json={"daily": {"time": [], "snowfall_sum": []}},
             status=200,
         )
 
         provider.get_snowfall_forecast(sample_resort, days=7)
 
-        assert "ecmwf" in responses.calls[0].request.url
+        assert "models=ecmwf_ifs" in responses.calls[0].request.url
 
     @responses.activate
     def test_handles_api_error(self, provider, sample_resort):
         """Test graceful handling of API errors."""
         responses.add(
             responses.GET,
-            "https://api.open-meteo.com/v1/ecmwf",
+            "https://api.open-meteo.com/v1/forecast",
             status=500,
         )
 
@@ -86,7 +86,7 @@ class TestECMWFProvider:
         """Test centimeters to inches conversion."""
         responses.add(
             responses.GET,
-            "https://api.open-meteo.com/v1/ecmwf",
+            "https://api.open-meteo.com/v1/forecast",
             json={
                 "daily": {
                     "time": ["2024-01-15"],

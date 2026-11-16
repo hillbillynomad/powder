@@ -5,7 +5,7 @@ import responses
 from datetime import date
 from freezegun import freeze_time
 
-from powder.providers.nws import NWSProvider
+from powder.providers.nws import ELEVATION_URL, NWSProvider, candidate_points, pick_point
 from powder.resorts import SkiResort
 
 
@@ -83,10 +83,10 @@ class TestNWSProvider:
                 "properties": {
                     "snowfallAmount": {
                         "values": [
-                            {"validTime": "2024-01-15T00:00:00+00:00/PT6H", "value": 10},
-                            {"validTime": "2024-01-15T06:00:00+00:00/PT6H", "value": 15},
-                            {"validTime": "2024-01-15T12:00:00+00:00/PT6H", "value": 5},
-                            {"validTime": "2024-01-15T18:00:00+00:00/PT6H", "value": 10},
+                            {"validTime": "2024-01-15T12:00:00+00:00/PT1H", "value": 10},
+                            {"validTime": "2024-01-15T15:00:00+00:00/PT1H", "value": 15},
+                            {"validTime": "2024-01-15T18:00:00+00:00/PT1H", "value": 5},
+                            {"validTime": "2024-01-15T21:00:00+00:00/PT1H", "value": 10},
                         ]
                     }
                 }
@@ -121,7 +121,7 @@ class TestNWSProvider:
                 "properties": {
                     "snowfallAmount": {
                         "values": [
-                            {"validTime": "2024-01-15T00:00:00+00:00/PT6H", "value": 25.4},
+                            {"validTime": "2024-01-15T18:00:00+00:00/PT6H", "value": 25.4},
                         ]
                     }
                 }
@@ -225,9 +225,9 @@ class TestNWSProvider:
                             # Yesterday - should be filtered
                             {"validTime": "2024-01-14T06:00:00+00:00/PT6H", "value": 50},
                             # Today - should be included
-                            {"validTime": "2024-01-15T06:00:00+00:00/PT6H", "value": 10},
+                            {"validTime": "2024-01-15T18:00:00+00:00/PT6H", "value": 10},
                             # Tomorrow - should be included
-                            {"validTime": "2024-01-16T06:00:00+00:00/PT6H", "value": 20},
+                            {"validTime": "2024-01-16T18:00:00+00:00/PT6H", "value": 20},
                         ]
                     }
                 }
@@ -317,7 +317,7 @@ class TestNWSProvider:
                     "snowfallAmount": {
                         "values": [
                             # Valid entry
-                            {"validTime": "2024-01-15T06:00:00+00:00/PT6H", "value": 10},
+                            {"validTime": "2024-01-15T18:00:00+00:00/PT6H", "value": 10},
                             # Malformed - should be skipped
                             {"validTime": "invalid-date", "value": 50},
                             # Missing validTime - should be skipped
@@ -388,6 +388,49 @@ class TestNWSProvider:
         forecasts = provider.get_snowfall_forecast(us_resort, days=7)
 
         assert forecasts == []
+
+    @responses.activate
+    @freeze_time("2024-01-15")
+    def test_groups_into_resort_local_days(self, provider, us_resort, nws_grid_response):
+        """04:00 UTC on the 16th is still the evening of the 15th in Denver."""
+        responses.add(
+            responses.GET,
+            f"https://api.weather.gov/points/{us_resort.latitude},{us_resort.longitude}",
+            json=nws_grid_response,
+        )
+        responses.add(
+            responses.GET,
+            "https://api.weather.gov/gridpoints/SLC/97,175",
+            json={"properties": {"snowfallAmount": {"values": [
+                {"validTime": "2024-01-15T18:00:00+00:00/PT6H", "value": 10},
+                {"validTime": "2024-01-16T04:00:00+00:00/PT6H", "value": 15},
+            ]}}},
+        )
+        forecasts = provider.get_snowfall_forecast(us_resort, days=7)
+        assert [f.date for f in forecasts] == [date(2024, 1, 15)]
+        assert forecasts[0].snowfall_inches == pytest.approx(1.0, abs=0.05)
+
+    def test_query_point_without_peak_is_resort_point(self, provider, us_resort):
+        assert provider.query_point(us_resort) == (us_resort.latitude, us_resort.longitude)
+
+    @responses.activate
+    def test_query_point_moves_to_mid_mountain(self, provider, sample_resort):
+        """Of the candidates, the one at mid-mountain elevation (8,413 ft) wins."""
+        points = candidate_points(sample_resort.latitude, sample_resort.longitude)
+        elevations = [6800 / 3.28084] * len(points)
+        elevations[3] = 8400 / 3.28084  # a 1 km point near mid-mountain
+        elevations[-1] = 8413 / 3.28084  # a 3 km point at exactly mid, but further away
+        responses.add(responses.GET, ELEVATION_URL, json={"elevation": elevations})
+        assert provider.query_point(sample_resort) == points[3][:2]
+
+    @responses.activate
+    def test_query_point_falls_back_on_error(self, provider, sample_resort):
+        responses.add(responses.GET, ELEVATION_URL, status=500)
+        assert provider.query_point(sample_resort) == (sample_resort.latitude, sample_resort.longitude)
+
+    def test_pick_point_skips_missing_elevations(self):
+        points = [(1.0, 1.0, 0.0), (2.0, 2.0, 1000.0)]
+        assert pick_point(points, [None, 2000.0], 6500) == (2.0, 2.0)
 
     @responses.activate
     def test_uses_correct_headers(self, provider, us_resort):

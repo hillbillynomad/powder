@@ -19,6 +19,14 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
 
 @pytest.fixture(autouse=True)
+def no_snow_calibration(monkeypatch):
+    """Provider snowfall uncalibrated (factor 1) unless a test installs a table."""
+    from powder.providers import open_meteo_common
+
+    monkeypatch.setattr(open_meteo_common, "_calibration", lambda: {})
+
+
+@pytest.fixture(autouse=True)
 def disable_cache_for_tests():
     """Disable HTTP caching for all tests to ensure isolation."""
     import powder.cache as cache_module

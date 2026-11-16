@@ -44,3 +44,6 @@ tools/flyby/specs/auto/
 
 # Webcam link-check reports
 tools/webcams/cache/
+
+# Hindcast raw model data
+tools/calibrate/.cache/
