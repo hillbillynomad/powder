@@ -1,8 +1,8 @@
 """Canadian GEM model provider via Open-Meteo API (free, no API key required).
 
-Environment Canada's GEM (global 15 km, blended with the regional and 2.5 km HRDPS models over
-North America). It is the second model in the snowfall calibration: averaged with ECMWF it
-balances ECMWF's high Sierra totals and low Wasatch totals. Global, so used for every resort.
+Environment Canada's GEM global (15 km), the same model for the whole range and every resort.
+Not gem_seamless: that swaps in HRDPS (2.5 km) and GEM regional (10 km) over North America for
+the first days, each with its own bias, and HRDPS has no archive to calibrate it on.
 """
 
 from ..forecast import DailyForecast
@@ -10,7 +10,7 @@ from ..resorts import SkiResort
 from .base import ForecastProvider
 from .open_meteo_common import daily_snowfall, fetch, request_params
 
-MODEL = "gem_seamless"
+MODEL = "gem_global"
 
 
 class GEMProvider(ForecastProvider):

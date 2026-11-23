@@ -6,14 +6,23 @@ One snowfall model for every resort, calibrated against resort-reported season t
 * Every request carries `elevation` = mid-mountain. Resort coordinates sit at the base lodge, and
   Open-Meteo otherwise downscales to the terrain there, so storms with a snow level between base
   and mid-mountain came back as rain.
-* Open-Meteo's `snowfall` is the model's frozen water times a fixed 7 (cm = mm x 0.7). We turn it
-  back into water and apply a snow-to-liquid ratio from the hour's mid-mountain temperature
+* Snow water is the hour's precipitation times the share falling as snow, from the wet-bulb
+  temperature at mid-mountain (temperature + humidity + the pressure of that height). We don't
+  use Open-Meteo's `snowfall` field: each model splits rain and snow its own way (GFS by its
+  frozen-precipitation fraction), and the GFS archive the calibration is fitted on has no
+  `snowfall` at all, so the fit and the live app would not run the same maths. (A response
+  without `precipitation` still falls back to `snowfall`, which is the frozen water times a
+  fixed 7.)
+* The snow water gets a snow-to-liquid ratio from the hour's mid-mountain temperature
   (Kuchera-style: colder = fluffier) damped by storm intensity (heavy, wet storms pack denser).
 * Each provider's snowfall is then multiplied by its bias factor for the resort's region
   (`powder/data/snow_calibration.json`, written by tools/calibrate/factors.py), or the
-  provider's global factor where no region was calibrated. Providers without a calibration
-  (ICON, JMA, BOM) use 1.
+  provider's global factor where no region was calibrated, and by the resort's own factor
+  where it has reported history (shrunk toward 1 and capped, tools/calibrate/resort_factors.py).
+  Providers without a calibration (ICON, JMA, BOM, NWS) use 1.
 """
+
+import math
 
 import json
 from collections import defaultdict
@@ -28,7 +37,9 @@ from ..forecast import DailyForecast
 from ..resorts import SkiResort
 
 OPEN_METEO_SLR = 7.0  # Open-Meteo snowfall (cm) = snow water (mm) * 0.7
-SNOW_HOURLY_FIELDS = "snowfall,temperature_2m"
+SNOW_HOURLY_FIELDS = "precipitation,temperature_2m,relative_humidity_2m"
+DEFAULT_RH = 85.0  # % when a model has no humidity: typical of precipitating air
+DEFAULT_ELEVATION_M = 1500.0
 CALIBRATION_FILE = Path(__file__).resolve().parents[1] / "data" / "snow_calibration.json"
 
 # Snow ratio = clamp(SCALE * kuchera(T) * rate ** RATE_EXP, MIN_SLR, MAX_SLR), fitted by
@@ -58,6 +69,37 @@ def snow_ratio(temp_c: Optional[float], rate_mm_h: float = 1.0) -> float:
         kuchera = 12 + WARM_SLOPE * (PIVOT_C - temp_c)
     ratio = SCALE * kuchera * max(rate_mm_h, MIN_RATE) ** RATE_EXP
     return min(max(ratio, MIN_SLR), MAX_SLR)
+
+
+def wet_bulb_c(temp_c: float, rh_pct: Optional[float], elevation_m: float) -> float:
+    """Wet-bulb temperature (°C) from the psychrometric equation at the pressure of `elevation_m`."""
+    rh = min(max(DEFAULT_RH if rh_pct is None else rh_pct, 5.0), 100.0)
+    p = 1013.25 * (1 - 2.25577e-5 * elevation_m) ** 5.25588
+
+    def es(t: float) -> float:
+        return 6.112 * math.exp(17.62 * t / (243.12 + t))
+
+    e = rh / 100 * es(temp_c)
+    tw = temp_c - (100 - rh) / 10
+    for _ in range(12):  # Newton's method; converges in a few steps
+        f = es(tw) - 6.6e-4 * p * (temp_c - tw) - e
+        df = es(tw) * 17.62 * 243.12 / (243.12 + tw) ** 2 + 6.6e-4 * p
+        tw -= f / df
+    return min(tw, temp_c)
+
+
+def snow_fraction(wet_bulb: float) -> float:
+    """Share of precipitation falling as snow (Wang et al. 2019 wet-bulb sigmoid, 50% at +0.8 °C)."""
+    return 1 / (1 + 6.99e-5 * math.exp(min(2.0 * (wet_bulb + 3.97), 700)))
+
+
+def snow_water_mm(precip_mm: Optional[float], temp_c: Optional[float], rh_pct: Optional[float],
+                  elevation_m: float) -> float:
+    """Frozen part of an hour's precipitation (mm of water)."""
+    if not precip_mm or precip_mm <= 0:
+        return 0.0
+    t = -5.0 if temp_c is None else temp_c
+    return precip_mm * snow_fraction(wet_bulb_c(t, rh_pct, elevation_m))
 
 
 def storm_rates(water_mm: list[float]) -> list[float]:
@@ -128,10 +170,12 @@ def fetch(url: str, params: dict, name: str) -> Optional[dict]:
 
 def daily_snowfall(data: Optional[dict], source: str, resort: Optional[SkiResort] = None,
                    use_resort_factor: bool = True) -> list[DailyForecast]:
-    """Daily snowfall in inches: hourly water x snow ratio, times the provider's calibration
+    """Daily snowfall in inches: hourly snow water x snow ratio, times the provider's calibration
     (region or default) and the resort's own correction where it has reported history.
 
-    Falls back to the daily `snowfall_sum` (Open-Meteo's own 7:1) when hourly data is missing.
+    Snow water comes from `precipitation` with a wet-bulb rain/snow split at the response's
+    elevation (mid-mountain); a response without precipitation uses Open-Meteo's `snowfall`,
+    and one without hourly data the daily `snowfall_sum` (Open-Meteo's own 7:1).
     """
     if not data:
         return []
@@ -140,12 +184,25 @@ def daily_snowfall(data: Optional[dict], source: str, resort: Optional[SkiResort
         factor *= resort_factor(source, resort)
     hourly = data.get("hourly") or {}
     times = hourly.get("time") or []
+    precip = hourly.get("precipitation") or []
     snow_cm = hourly.get("snowfall") or []
     temps = hourly.get("temperature_2m") or []
+    humidity = hourly.get("relative_humidity_2m") or []
 
-    if times and snow_cm:
-        water = [((snow_cm[i] if i < len(snow_cm) else None) or 0.0) * 10 / OPEN_METEO_SLR
+    def at(values: list, i: int):
+        return values[i] if i < len(values) else None
+
+    water: list[float] = []
+    if times and any(p is not None for p in precip):
+        elevation = data.get("elevation")
+        if elevation is None:
+            elevation = mid_mountain_m(resort) if resort is not None else DEFAULT_ELEVATION_M
+        water = [snow_water_mm(at(precip, i), at(temps, i), at(humidity, i), elevation)
                  for i in range(len(times))]
+    elif times and snow_cm:
+        water = [(at(snow_cm, i) or 0.0) * 10 / OPEN_METEO_SLR for i in range(len(times))]
+
+    if water:
         rates = storm_rates(water)
         totals: dict = defaultdict(float)
         for i, t in enumerate(times):

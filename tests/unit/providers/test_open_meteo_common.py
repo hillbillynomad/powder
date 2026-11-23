@@ -17,8 +17,11 @@ from powder.providers.open_meteo_common import (
     daily_snowfall,
     mid_mountain_m,
     request_params,
+    snow_fraction,
     snow_ratio,
+    snow_water_mm,
     storm_rates,
+    wet_bulb_c,
 )
 from powder.resorts import SkiResort
 
@@ -116,18 +119,57 @@ class TestCalibration:
 
 @pytest.mark.unit
 @pytest.mark.providers
+class TestRainSnowSplit:
+    def test_saturated_air_wet_bulb_is_air_temperature(self):
+        assert wet_bulb_c(2.0, 100, 2000) == pytest.approx(2.0, abs=0.05)
+
+    def test_dry_air_cools_the_wet_bulb(self):
+        assert wet_bulb_c(2.0, 50, 2000) < 0.0 < wet_bulb_c(2.0, 90, 2000)
+
+    def test_snow_fraction_half_near_plus_0_8_c(self):
+        assert snow_fraction(0.82) == pytest.approx(0.5, abs=0.01)
+        assert snow_fraction(-3) > 0.99 and snow_fraction(4) < 0.01
+
+    def test_snow_water_is_frozen_part_of_precipitation(self):
+        assert snow_water_mm(2.0, -8, 90, 2500) == pytest.approx(2.0, abs=0.01)
+        assert snow_water_mm(2.0, 6, 90, 2500) == pytest.approx(0.0, abs=0.01)
+        assert snow_water_mm(0.0, -8, 90, 2500) == 0.0
+        assert snow_water_mm(None, -8, 90, 2500) == 0.0
+
+    def test_daily_snowfall_uses_precipitation_when_present(self):
+        # snowfall field says 0 but the precipitation is cold: precipitation wins
+        data = {"elevation": 2500, "hourly": {"time": ["2024-01-15T03:00", "2024-01-15T04:00"],
+                                              "precipitation": [3.0, 3.0], "snowfall": [0.0, 0.0],
+                                              "temperature_2m": [-6.0, -6.0],
+                                              "relative_humidity_2m": [95, 95]}}
+        [day] = daily_snowfall(data, "X")
+        assert day.snowfall_inches > 1.0
+
+    def test_warm_rain_gives_no_snow(self):
+        data = {"elevation": 2500, "hourly": {"time": ["2024-01-15T03:00"], "precipitation": [5.0],
+                                              "temperature_2m": [7.0], "relative_humidity_2m": [95]}}
+        assert daily_snowfall(data, "X")[0].snowfall_inches == 0.0
+
+    def test_missing_humidity_still_works(self):
+        data = {"hourly": {"time": ["2024-01-15T03:00"], "precipitation": [5.0], "temperature_2m": [-6.0]}}
+        assert daily_snowfall(data, "X")[0].snowfall_inches > 0
+
+
+@pytest.mark.unit
+@pytest.mark.providers
 class TestMidMountainRequests:
     def test_params_carry_mid_mountain_elevation(self, sample_resort):
         params = request_params(sample_resort, 7)
         mid_ft = (sample_resort.elevation_base_ft + sample_resort.elevation_peak_ft) / 2
         assert params["elevation"] == round(mid_ft / 3.28084) == mid_mountain_m(sample_resort)
-        assert "temperature_2m" in params["hourly"] and "snowfall" in params["hourly"]
+        for field in ("precipitation", "temperature_2m", "relative_humidity_2m"):
+            assert field in params["hourly"]
 
     @responses.activate
     @pytest.mark.parametrize("provider,model", [
-        (OpenMeteoProvider(), "gfs_seamless"),
+        (OpenMeteoProvider(), "gfs_global"),
         (ECMWFProvider(), "ecmwf_ifs"),
-        (GEMProvider(), "gem_seamless"),
+        (GEMProvider(), "gem_global"),
     ])
     def test_providers_send_elevation_and_model(self, provider, model, sample_resort):
         responses.add(responses.GET, "https://api.open-meteo.com/v1/forecast",

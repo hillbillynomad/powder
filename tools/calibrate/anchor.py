@@ -17,18 +17,20 @@ import statistics
 import sys
 import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import appmodel  # noqa: E402
 import hindcast  # noqa: E402
 
 from powder.providers import open_meteo_common as omc  # noqa: E402
 from powder.resorts import load_resorts  # noqa: E402
 
-CACHE = hindcast.CACHE / "anchor"
-MODELS = {"gfs_seamless": "Open-Meteo", "ecmwf_ifs": "ECMWF", "gem_seamless": "GEM"}
+CACHE = hindcast.CACHE / "anchor_v2"  # GFS global / ECMWF IFS / GEM global, precipitation-based
+MODELS = appmodel.PROVIDERS
 SKIP = {"US", "CA"}  # countries whose regions are keyed by state / province
 PER_COUNTRY = 3
 SEASONS = {"north": ("2024-11-01", "2025-04-30"), "south": ("2025-05-15", "2025-10-15")}
@@ -59,39 +61,42 @@ def path(r) -> Path:
     return CACHE / f"{r.name.replace(' ', '_').replace('/', '-')}.json"
 
 
-def fetch():
+def fetch(workers: int = 3):
     CACHE.mkdir(parents=True, exist_ok=True)
-    for country, rs in sample().items():
-        for r in rs:
-            if path(r).exists():
+    jobs = [(c, r) for c, rs in sample().items() for r in rs if not path(r).exists()]
+    print(len(jobs), "resorts to fetch", flush=True)
+
+    def one(job):
+        country, r = job
+        start, end = SEASONS["south" if r.latitude < 0 else "north"]
+        for attempt in range(8):
+            try:
+                resp = requests.get(hindcast.URL, params={
+                    "latitude": r.latitude, "longitude": r.longitude,
+                    "elevation": omc.mid_mountain_m(r), "start_date": start, "end_date": end,
+                    "hourly": omc.SNOW_HOURLY_FIELDS, "models": ",".join(MODELS),
+                    "timezone": r.timezone}, timeout=180)
+            except (requests.ConnectionError, requests.Timeout):
+                time.sleep(10 * (attempt + 1))
                 continue
-            start, end = SEASONS["south" if r.latitude < 0 else "north"]
-            for attempt in range(5):
-                try:
-                    resp = requests.get(hindcast.URL, params={
-                        "latitude": r.latitude, "longitude": r.longitude,
-                        "elevation": omc.mid_mountain_m(r), "start_date": start, "end_date": end,
-                        "hourly": "snowfall,temperature_2m", "models": ",".join(MODELS),
-                        "timezone": r.timezone}, timeout=120)
-                except requests.ConnectionError:
-                    time.sleep(30 * (attempt + 1))
-                    continue
-                if resp.status_code == 429:
-                    print("rate limited, waiting", flush=True)
-                    time.sleep(70 * (attempt + 1))
-                    continue
-                resp.raise_for_status()
-                path(r).write_text(resp.text)
-                print(f"fetched {country} {r.name}", flush=True)
-                time.sleep(2)
-                break
+            if resp.status_code == 429 or "limit" in resp.text[:300].lower():
+                print("rate limited, waiting", resp.text[:100], flush=True)
+                time.sleep(70 * (attempt + 1))
+                continue
+            resp.raise_for_status()
+            path(r).write_text(resp.text)
+            print(f"fetched {country} {r.name}", flush=True)
+            return
+
+    with ThreadPoolExecutor(workers) as pool:
+        list(pool.map(one, jobs))
 
 
 def season_snow(data: dict, model: str, provider: str, resort) -> float:
-    h = data["hourly"]
-    single = {"hourly": {"time": h["time"], "snowfall": h.get(f"snowfall_{model}") or [],
-                         "temperature_2m": h.get(f"temperature_2m_{model}") or []}}
-    return sum(d.snowfall_inches for d in omc.daily_snowfall(single, provider, None))
+    block = appmodel.single(data, model)
+    if block is None:
+        return 0.0
+    return sum(d.snowfall_inches for d in omc.daily_snowfall(block, provider, None))
 
 
 def write():

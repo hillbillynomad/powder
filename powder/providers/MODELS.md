@@ -9,12 +9,20 @@ application, their strengths, weaknesses, and optimal use cases for ski resort s
 
 #### 1. Open-Meteo (GFS Model)
 **File:** `open_meteo.py`
-**Model:** NOAA GFS (Global Forecast System)
+**Model:** NOAA GFS global (`gfs_global`), the same model for every day and every resort
 **API:** https://open-meteo.com/en/docs
+
+Not `gfs_seamless`: over the US that serves HRRR (3 km) for the first ~46 hours, and the archive
+behind `past_days` and the calibration stores HRRR's first forecast hours, before its
+precipitation has spun up: 1.4-4x less than HRRR forecasts a day ahead (Palisades 1.4x, Alta
+2.2x, Vail 2.5x, Big Sky 4.2x, Dec-Mar 2025-26). Factors fitted on that archive (x1.3-3.7)
+inflated every US and Canadian forecast by about a third. GFS global's archive is within ~15%
+of its own 1-3 day forecasts. The GEM provider is pinned to `gem_global` for the same reason
+(`gem_seamless` swaps in HRDPS and GEM regional, and HRDPS has no archive).
 
 | Attribute | Value |
 |-----------|-------|
-| Resolution | 0.25° (~25km) |
+| Resolution | 0.11-0.25° (~13-25km) |
 | Forecast Range | Up to 16 days |
 | Historical Range | 14 days (via `past_days` parameter) |
 | Update Frequency | Every 6 hours |
@@ -250,28 +258,38 @@ What it found, with the mid-mountain request and Kuchera ratio below:
 
 GFS has a third to a half of ECMWF's water in the interior ranges. No single snow-ratio
 formula fixed both California (dense, intense storms: too high) and Utah (too low), because
-Montana and Utah share temperatures and storm rates but sit on opposite sides. So the shipped
-model is: a temperature x storm-rate snow ratio (`snow_ratio`), plus a bias factor per
-provider and region (`powder/data/snow_calibration.json`, provider default elsewhere).
-Leave-one-resort-out (a resort with no history): median |error| 19%, median bias per region
-within ±13%. What's left is mostly steady per resort, from how each one measures and reports:
-neighbours disagree by 40-80% (Northstar vs Heavenly, Big White vs Fernie) every season. So
-resorts with reported history also get their own factor (`resorts` in the table,
-`tools/calibrate/resort_factors.py`, 0.5-1.8). Held out one season at a time:
+Montana and Utah share temperatures and storm rates but sit on opposite sides. That first version (factors on each provider's own `snowfall`, the
+GFS factors fitted on the HRRR archive) is replaced by the model below.
 
-| Region | resort-seasons | median bias | median abs error | within 20% |
-|---|---|---|---|---|
-| California | 30 | -4% | 12% | 70% |
-| Canada | 46 | +3% | 13% | 65% |
-| Colorado | 41 | +0% | 9% | 85% |
-| Montana | 11 | +9% | 17% | 64% |
-| Utah | 21 | -8% | 12% | 71% |
-| Wyoming | 4 | -0% | 19% | 50% |
-| All | 153 | +0% | 12% | 72% |
+#### Shipped model (revised November 2026)
 
-Outside the reported regions, GFS and GEM are tied per country (or US state / Canadian
-province) to ECMWF's season snowfall (`tools/calibrate/anchor.py`), since ECMWF's own global
-factor against the reports is ~1.0.
+- **One underlying model per provider**: GFS global, ECMWF IFS, GEM global, the same for past
+  days and forecast days, so the archive the factors are fitted on is what the app serves.
+- **Snow water from precipitation**: precipitation x the share falling as snow, from the
+  wet-bulb temperature at mid-mountain (temperature, humidity and the pressure of that height;
+  Wang et al. 2019 sigmoid, 50% snow at +0.8 °C). Open-Meteo's `snowfall` is not used: each model
+  splits rain and snow its own way, and the GFS archive has no `snowfall` at all.
+- **Snow ratio** unchanged: `0.84 x kuchera(T) x rate^-0.31`, clamped 5-25:1.
+- **A factor per provider and region** (US state / Canadian province with two or more reported
+  resorts, else the provider default), fitted by `tools/calibrate/factors.py` on the exact
+  provider code (`tools/calibrate/appmodel.py`). GFS's factors are now 0.73-1.20 (were 1.29-3.69).
+  Elsewhere GFS and GEM are tied per country to ECMWF (`tools/calibrate/anchor.py`).
+- **A small per-resort factor** (`tools/calibrate/resort_factors.py`): only for resorts with two
+  or more complete reported seasons, shrunk toward 1 by n / (n + 1) and capped to 0.6-1.6
+  (shipped 0.69-1.37, were 0.50-1.77). Part of a site factor absorbs the snow ratio's
+  temperature error (against NWS observers, a whole-winter site factor misses by 30-60% in cold
+  spells), so large factors amplify the error when the weather changes.
+
+| Held-out score, per resort-season | median abs error | within 20% |
+|---|---|---|
+| No resort history (region factors, leave-one-resort-out per resort) | 15% (was 19%) | 63% |
+| Leave-one-season-out, region factors only | 14% | 61% |
+| Leave-one-season-out, + resort factor | 11% (was 12%) | 75% |
+| Out of time (fit 2022-24, score 2024-26), region factors only | 19% | 54% |
+| Out of time, + resort factor | 14% (was 15%) | 64% |
+
+Out of time is the number to expect next season and the gate for a refit: refit once a year in
+spring on the latest seasons, and ship only if it holds. Don't tune on a few weeks of weather.
 
 ### How Powder corrects for this
 
@@ -285,15 +303,17 @@ the raw model numbers ran 1.5-2.5x low, for two reasons we now correct
   parameter, so we ask for the grid cell of a nearby point at about mid-mountain: a ring of
   candidates out to 3 km, ranked by one call to Open-Meteo's elevation API (`|elevation - mid|`
   plus 150 ft per km of distance), falling back to the resort point.
-- **Snow-to-liquid ratio.** Open-Meteo's `snowfall` is frozen water x 7 (cm = mm x 0.7) whatever
-  the temperature. We turn it back into water and apply
+- **Rain/snow split and snow-to-liquid ratio.** Snow water is the hourly precipitation times a
+  wet-bulb snow fraction at mid-mountain (above). (Open-Meteo's `snowfall` would be frozen water
+  x 7, whatever the temperature; it is only a fallback now.) We apply
   `0.84 x kuchera(T) x rate^-0.31`, clamped 5-25:1: `kuchera` is 12:1 at 28 °F, +0.92 per °C
   colder, -2 per °C warmer (hourly mid-mountain 2 m temperature), and `rate` is the snow water
   over the surrounding 6 hours in mm/h (heavy storms pack denser snow). Constants fitted by
   `tools/calibrate/optimize.py`. NWS amounts already include NWS's own ratio and are used as is.
 
-Borderline storms (snow at 31-34 °F, such as Southern California) still come out low: the
-models' own rain/snow split calls most of it rain.
+Borderline storms (snow at 31-34 °F, such as Southern California) are now split by our own
+wet-bulb rule at mid-mountain rather than the models' split at their grid-cell height, which
+called most of them rain.
 
 ### Recommendations for Ski Resort Forecasts
 1. Use **regional models** where available (ICON for Europe, NWS for US)

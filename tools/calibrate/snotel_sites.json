@@ -1,0 +1,157 @@
+{
+ "_source": "SNOTEL stations (GHCN-Daily ids) nearest each US calibration resort",
+ "stations": {
+  "USS0005J41S": {
+   "name": "Lake Eldora",
+   "lat": 39.94,
+   "lon": -105.59,
+   "elev_m": 2956.6
+  },
+  "USS0005K09S": {
+   "name": "Grizzly Peak",
+   "lat": 39.65,
+   "lon": -105.87,
+   "elev_m": 3383.3
+  },
+  "USS0005K30S": {
+   "name": "Fool Creek",
+   "lat": 39.87,
+   "lon": -105.87,
+   "elev_m": 3398.5
+  },
+  "USS0006J01S": {
+   "name": "Dry Lake",
+   "lat": 40.53,
+   "lon": -106.78,
+   "elev_m": 2560.3
+  },
+  "USS0006K24S": {
+   "name": "Copper Mountain",
+   "lat": 39.49,
+   "lon": -106.17,
+   "elev_m": 3215.6
+  },
+  "USS0006K39S": {
+   "name": "Vail Mountain",
+   "lat": 39.62,
+   "lon": -106.38,
+   "elev_m": 3139.4
+  },
+  "USS0006K44S": {
+   "name": "Mccoy Park",
+   "lat": 39.6,
+   "lon": -106.54,
+   "elev_m": 2889.5
+  },
+  "USS0006L11S": {
+   "name": "Butte",
+   "lat": 38.89,
+   "lon": -106.95,
+   "elev_m": 3096.8
+  },
+  "USS0007M35S": {
+   "name": "Cascade #2",
+   "lat": 37.66,
+   "lon": -107.8,
+   "elev_m": 2718.8
+  },
+  "USS0010D10S": {
+   "name": "Sacajawea",
+   "lat": 45.87,
+   "lon": -110.93,
+   "elev_m": 1996.4
+  },
+  "USS0010F23S": {
+   "name": "Phillips Bench",
+   "lat": 43.52,
+   "lon": -110.91,
+   "elev_m": 2499.4
+  },
+  "USS0011D19S": {
+   "name": "Lone Mountain",
+   "lat": 45.27,
+   "lon": -111.43,
+   "elev_m": 2706.6
+  },
+  "USS0011J42S": {
+   "name": "Snowbird",
+   "lat": 40.56,
+   "lon": -111.66,
+   "elev_m": 2938.3
+  },
+  "USS0011J56S": {
+   "name": "Thaynes Canyon",
+   "lat": 40.62,
+   "lon": -111.53,
+   "elev_m": 2813.3
+  },
+  "USS0011J57S": {
+   "name": "Brighton",
+   "lat": 40.6,
+   "lon": -111.58,
+   "elev_m": 2667.0
+  },
+  "USS0019L24S": {
+   "name": "Heavenly Valley",
+   "lat": 38.92,
+   "lon": -119.92,
+   "elev_m": 2615.8
+  },
+  "USS0019L45S": {
+   "name": "Carson Pass",
+   "lat": 38.69,
+   "lon": -119.99,
+   "elev_m": 2546.0
+  },
+  "USS0020K13S": {
+   "name": "Truckee #2",
+   "lat": 39.3,
+   "lon": -120.18,
+   "elev_m": 1983.9
+  },
+  "USS0020K30S": {
+   "name": "Squaw Valley G.C.",
+   "lat": 39.19,
+   "lon": -120.26,
+   "elev_m": 2447.2
+  },
+  "USS0020K31S": {
+   "name": "Css Lab",
+   "lat": 39.33,
+   "lon": -120.37,
+   "elev_m": 2089.4
+  },
+  "USS0020L06S": {
+   "name": "Echo Peak",
+   "lat": 38.85,
+   "lon": -120.08,
+   "elev_m": 2337.8
+  }
+ },
+ "resorts": {
+  "Park City Mountain": "USS0011J56S",
+  "Big Sky": "USS0011D19S",
+  "Vail": "USS0006K39S",
+  "Palisades Tahoe": "USS0020K30S",
+  "Heavenly": "USS0019L24S",
+  "Beaver Creek": "USS0006K44S",
+  "Winter Park": "USS0005K30S",
+  "Copper Mountain": "USS0006K24S",
+  "Deer Valley": "USS0011J56S",
+  "Northstar": "USS0020K13S",
+  "Crested Butte": "USS0006L11S",
+  "Kirkwood": "USS0019L45S",
+  "Snowbird": "USS0011J42S",
+  "Alta": "USS0011J42S",
+  "Arapahoe Basin": "USS0005K09S",
+  "Solitude": "USS0011J57S",
+  "Brighton": "USS0011J57S",
+  "Eldora": "USS0005J41S",
+  "Purgatory": "USS0007M35S",
+  "Sierra-at-Tahoe": "USS0020L06S",
+  "Sugar Bowl": "USS0020K31S",
+  "Bridger Bowl": "USS0010D10S",
+  "Steamboat": "USS0006J01S",
+  "Jackson Hole": "USS0010F23S"
+ }
+}

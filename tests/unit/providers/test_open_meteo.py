@@ -3,6 +3,7 @@
 import pytest
 import responses
 from datetime import date
+from urllib.parse import parse_qs, urlparse
 
 from powder.providers.open_meteo import OpenMeteoProvider
 from powder.resorts import SkiResort
@@ -247,7 +248,10 @@ class TestOpenMeteoConditions:
                       json={"daily": {"time": [], "snowfall_sum": []}}, status=200)
         provider.get_snowfall_forecast(sample_resort, days=7)
         url = responses.calls[0].request.url
-        assert "hourly=temperature_2m%2Cfreezing_level_height%2Csnowfall%2Crain%2Cwind_gusts_10m" in url
+        hourly = parse_qs(urlparse(url).query)["hourly"][0].split(",")
+        for field in ("precipitation", "temperature_2m", "relative_humidity_2m",
+                      "freezing_level_height", "snowfall", "rain", "wind_gusts_10m"):
+            assert field in hourly
 
     @responses.activate
     def test_get_conditions_parses_days(self, provider, sample_resort):

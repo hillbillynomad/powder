@@ -3,8 +3,8 @@
     poetry run python tools/calibrate/factors.py            # score with leave-one-resort-out CV
     poetry run python tools/calibrate/factors.py --write    # also write powder/data/snow_calibration.json
 
-Every model's season snowfall (the app's method: mid-mountain, temperature snow ratio) is compared
-with resort-reported totals on complete seasons. A region's factor for a model is the geometric
+Every model's season snowfall (the app's own `daily_snowfall` on the raw archive of the model the
+provider pins, appmodel.py) is compared with resort-reported totals on complete seasons. A region's factor for a model is the geometric
 median of reported / model over its resorts; regions without enough resorts fall back to the
 model's global factor, which is also what every resort outside the calibrated regions uses.
 
@@ -19,13 +19,13 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import appmodel  # noqa: E402
 import hindcast  # noqa: E402
+from appmodel import PROVIDERS  # noqa: E402  (underlying model -> app provider name)
 from reported import complete  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "powder" / "data" / "snow_calibration.json"
-# hindcast model -> app provider name
-PROVIDERS = {"best_match": "Open-Meteo", "ecmwf_ifs": "ECMWF", "gem_seamless": "GEM"}
 MIN_RESORTS = 2  # a region needs this many other resorts to get its own factor
 
 
@@ -33,39 +33,19 @@ def region_key(r) -> str:
     return f"{r.country}-{r.state}" if r.state else r.country
 
 
-RATIO = None  # snow-ratio function for season_totals (None = the app's snow_ratio)
-
-
-def ratios() -> dict:
-    """{model: {resort name: (region key, display region, log(reported / model))}}"""
+def ratios(seasons=None) -> dict:
+    """{model: {resort name: (region key, display region, log(reported / model))}} over the
+    resort's complete seasons (optionally only those in `seasons`)."""
     out = {m: {} for m in PROVIDERS}
     for r in hindcast.resorts():
-        if not hindcast.cache_path(r, 0.5).exists():
-            continue
-        data = hindcast.merged(r, 0.5)
         rep = hindcast.REPORTED[r.name]
-        seasons = [s for s in hindcast.SEASONS if complete(rep, str(s))]
+        use = [s for s in (seasons or hindcast.SEASONS) if complete(rep, str(s))]
         for m in PROVIDERS:
-            tot = (hindcast.season_totals(data, models=(m,)) if RATIO is None
-                   else rate_totals(data, m, RATIO))
-            if not tot or not seasons:
-                continue
-            model_in = sum(tot[s] for s in seasons)
-            if model_in > 0:
+            tot = appmodel.season_totals(r.name, r, m)
+            ss = [s for s in use if tot.get(s, 0) > 0]
+            if ss:
                 out[m][r.name] = (region_key(r), hindcast.region(r),
-                                  math.log(sum(rep[str(s)][0] for s in seasons) / model_in))
-    return out
-
-
-def rate_totals(data: dict, model: str, params) -> dict:
-    """Season totals with a temperature x storm-rate ratio (optimize.py's kuchera form)."""
-    import numpy as np
-    import optimize
-    optimize.FORM = "kuchera"
-    out = {}
-    for s in hindcast.SEASONS:
-        arrs = optimize.arrays(data, (model,), [s])
-        out[s] = sum(float((w * optimize.ratio(params, t, r)).sum()) for w, t, r, _ in arrs) / 25.4
+                                  math.log(sum(rep[str(s)][0] for s in ss) / sum(tot[s] for s in ss)))
     return out
 
 
@@ -101,9 +81,10 @@ def main(write: bool):
         print(f"  == {disp:10s} n={len(es):2d} median bias {statistics.median(es):+.0%}  median |err| "
               f"{statistics.median(map(abs, es)):.0%}  within 20% {sum(abs(x) <= .2 for x in es) / len(es):.0%}")
     if write:
-        table = {"_doc": "Snowfall bias factors per provider: multiply that provider's snowfall by "
-                         "regions[country-state] (or default). Fitted by tools/calibrate/factors.py "
-                         "against resort-reported season totals, 2022-23 to 2025-26."}
+        table = {"_doc": "Snowfall bias factors per provider (GFS global, ECMWF IFS, GEM global): "
+                         "multiply that provider's snowfall by regions[country-state] (or default). "
+                         "Fitted by tools/calibrate/factors.py against resort-reported season "
+                         "totals, 2022-23 to 2025-26."}
         for m, rows in rat.items():
             regions, glob = fit(rows)
             table[PROVIDERS[m]] = {"default": round(math.exp(glob), 3),
@@ -113,7 +94,4 @@ def main(write: bool):
 
 
 if __name__ == "__main__":
-    for a in sys.argv[1:]:
-        if a.startswith("--ratio="):
-            RATIO = tuple(float(x) for x in a.split("=", 1)[1].split(","))
     main("--write" in sys.argv)

@@ -1,0 +1,14 @@
+{
+ "_doc": "Where each resort measures the snowfall it reports (the single headline number OnTheSnow carries). elev_ft = the plot / stake that feeds daily and season totals; 'other' lists further plots the resort also publishes. Resorts not listed: no published plot elevation found (2026-11); model2.py puts them at DEFAULT_FRACTION of the vertical.",
+ "_default_fraction_note": "Median position of the plots below is ~0.63 of the way from base to summit (range 0.33-0.84), so 'mid-mountain' (0.5) is a little low for the typical reporting plot.",
+ "Alta": {"elev_ft": 9662, "where": "Collins study plot, mid-mountain; manual 12 h boards", "source": "https://hive.utah.edu/concern/datasets/08612n598"},
+ "Snowbird": {"elev_ft": 9840, "where": "snow stake / mid-mountain study plot", "source": "https://www.skiutah.com/blog/authors/andrew-muse/a-very-snowbird-christmas/@@index.html"},
+ "Palisades Tahoe": {"elev_ft": 8000, "where": "upper plot in Alpine Bowl near top of Roundhouse; headline and season totals", "other": {"base patrol shack": 6200, "Alpine lodge": 6835}, "source": "https://www.palisadestahoe.com/mountain-information/snowfall-tracker"},
+ "Jackson Hole": {"elev_ft": 9580, "where": "Rendezvous Bowl plot (with Raymer 9,360 ft) = 'summit' daily and season totals", "other": {"Raymer": 9360, "mid-mountain": 8180, "base": 6510}, "source": "https://www.jacksonhole.com/blog/how-we-measure-snow"},
+ "Vail": {"elev_ft": 10295, "where": "Mid-Vail stake on the snow report; official season record kept at patrol HQ near the top of chairs 4/5/11 (~11,250 ft)", "other": {"patrol HQ": 11250}, "source": "https://opensnow.com/news/post/how-does-vail-actually-measure-snow-behind-the-scenes"},
+ "Keystone": {"elev_ft": 11237, "where": "snow stake", "source": "https://www.keystoneresort.com/Explore/Snow"},
+ "Mammoth Mountain": {"elev_ft": 8950, "where": "ski patrol snow study site near Main Lodge / chair 11 (8,900-9,000 ft); season totals are 'at Main Lodge'", "source": "https://www.mammothmountain.com/on-the-mountain/snowfall-history"},
+ "Big Sky": {"elev_ft": 9000, "where": "several patrol stakes (Lobo, Bavaria, Headwaters ~9,000 ft); storm stakes are left to accumulate", "source": "https://www.bigskyresort.com/current-conditions/snow-report-faqs"},
+ "Whistler Blackcomb": {"elev_ft": 5413, "where": "Pig Alley plot, 1,650 m, sheltered trees below the Roundhouse; alpine not measured (wind)", "source": "https://www.whistler.com/blog/post/the-science-behind-a-whistler-snow-report/"},
+ "Revelstoke Mountain Resort": {"elev_ft": 6398, "where": "The Ripper plot, 1,950 m, sheltered tree-line stake", "source": "https://www.revelstokemountainresort.com/conditions"}
+}

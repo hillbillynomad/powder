@@ -1,0 +1,845 @@
+{
+ "_doc": "Mountain COOP stations (GHCN-Daily) for coop.py",
+ "stations": {
+  "USC00028326": {
+   "name": "SUNRISE MTN",
+   "state": "AZ",
+   "lat": 33.9733,
+   "lon": -109.5631,
+   "elev_m": 2856.0,
+   "at_resort": null
+  },
+  "USC00021001": {
+   "name": "BRIGHT ANGEL RS",
+   "state": "AZ",
+   "lat": 36.2147,
+   "lon": -112.062,
+   "elev_m": 2545.1,
+   "at_resort": null
+  },
+  "USC00023013": {
+   "name": "FLAGSTAFF 14N",
+   "state": "AZ",
+   "lat": 35.3836,
+   "lon": -111.7294,
+   "elev_m": 2481.1,
+   "at_resort": null
+  },
+  "USC00020159": {
+   "name": "ALPINE",
+   "state": "AZ",
+   "lat": 33.8492,
+   "lon": -109.1469,
+   "elev_m": 2453.6,
+   "at_resort": null
+  },
+  "USC00023584": {
+   "name": "GRAND CANYON E ENTRANCE",
+   "state": "AZ",
+   "lat": 36.0353,
+   "lon": -111.8303,
+   "elev_m": 2279.9,
+   "at_resort": null
+  },
+  "USC00023828": {
+   "name": "HAPPY JACK RS",
+   "state": "AZ",
+   "lat": 34.7425,
+   "lon": -111.4094,
+   "elev_m": 2279.9,
+   "at_resort": null
+  },
+  "USC00049063": {
+   "name": "TUOLUMNE MEADOWS RS",
+   "state": "CA",
+   "lat": 37.8769,
+   "lon": -119.3436,
+   "elev_m": 2649.9,
+   "at_resort": null
+  },
+  "USC00040820": {
+   "name": "ASPENDELL",
+   "state": "CA",
+   "lat": 37.2322,
+   "lon": -118.5994,
+   "elev_m": 2581.7,
+   "at_resort": null
+  },
+  "USC00045091": {
+   "name": "LONG VALLEY 2",
+   "state": "CA",
+   "lat": 33.8131,
+   "lon": -116.6419,
+   "elev_m": 2554.2,
+   "at_resort": null
+  },
+  "USC00040943": {
+   "name": "BODIE CALIFORNIA ST HISTORIC P",
+   "state": "CA",
+   "lat": 38.2119,
+   "lon": -119.0142,
+   "elev_m": 2551.2,
+   "at_resort": null
+  },
+  "USC00044881": {
+   "name": "LEE VINING",
+   "state": "CA",
+   "lat": 37.9567,
+   "lon": -119.1194,
+   "elev_m": 2071.7,
+   "at_resort": null
+  },
+  "USC00040741": {
+   "name": "BIG BEAR LAKE",
+   "state": "CA",
+   "lat": 34.2431,
+   "lon": -116.9169,
+   "elev_m": 2058.3,
+   "at_resort": "Big Bear Mountain"
+  },
+  "USC00043551": {
+   "name": "GRANT GROVE",
+   "state": "CA",
+   "lat": 36.7375,
+   "lon": -118.9619,
+   "elev_m": 2005.6,
+   "at_resort": null
+  },
+  "USC00048760": {
+   "name": "TAHOMA",
+   "state": "CA",
+   "lat": 39.06,
+   "lon": -120.1292,
+   "elev_m": 1924.8,
+   "at_resort": null
+  },
+  "USC00045968": {
+   "name": "MT LAGUNA #3",
+   "state": "CA",
+   "lat": 32.8672,
+   "lon": -116.4194,
+   "elev_m": 1804.4,
+   "at_resort": null
+  },
+  "USC00049040": {
+   "name": "TRUCKEE-TAHOE AP",
+   "state": "CA",
+   "lat": 39.3181,
+   "lon": -120.145,
+   "elev_m": 1798.3,
+   "at_resort": null
+  },
+  "USC00046006": {
+   "name": "MT WILSON CBS",
+   "state": "CA",
+   "lat": 34.2308,
+   "lon": -118.0711,
+   "elev_m": 1740.4,
+   "at_resort": null
+  },
+  "USC00046657": {
+   "name": "PALOMAR MTN OBSY",
+   "state": "CA",
+   "lat": 33.3781,
+   "lon": -116.84,
+   "elev_m": 1691.6,
+   "at_resort": null
+  },
+  "USC00049298": {
+   "name": "VERDI 2W",
+   "state": "CA",
+   "lat": 39.5214,
+   "lon": -120.0269,
+   "elev_m": 1654.8,
+   "at_resort": null
+  },
+  "USC00041018": {
+   "name": "BOWMAN DAM",
+   "state": "CA",
+   "lat": 39.4539,
+   "lon": -120.6556,
+   "elev_m": 1641.3,
+   "at_resort": null
+  },
+  "USC00051660": {
+   "name": "CLIMAX",
+   "state": "CO",
+   "lat": 39.3672,
+   "lon": -106.1897,
+   "elev_m": 3457.7,
+   "at_resort": null
+  },
+  "USC00051186": {
+   "name": "CABIN CREEK",
+   "state": "CO",
+   "lat": 39.6553,
+   "lon": -105.7089,
+   "elev_m": 3054.1,
+   "at_resort": null
+  },
+  "USC00052816": {
+   "name": "FAIRPLAY S PARK RD",
+   "state": "CO",
+   "lat": 39.2219,
+   "lon": -105.9936,
+   "elev_m": 3015.4,
+   "at_resort": null
+  },
+  "USC00050825": {
+   "name": "BONHAM RSVR",
+   "state": "CO",
+   "lat": 39.1025,
+   "lon": -107.8989,
+   "elev_m": 3009.0,
+   "at_resort": null
+  },
+  "USC00058064": {
+   "name": "SUGARLOAF RSVR",
+   "state": "CO",
+   "lat": 39.2494,
+   "lon": -106.3714,
+   "elev_m": 2968.1,
+   "at_resort": null
+  },
+  "USC00057450": {
+   "name": "SANTA MARIA RSVR",
+   "state": "CO",
+   "lat": 37.8228,
+   "lon": -107.1097,
+   "elev_m": 2958.1,
+   "at_resort": null
+  },
+  "USC00050909": {
+   "name": "BRECKENRIDGE",
+   "state": "CO",
+   "lat": 39.4864,
+   "lon": -106.0431,
+   "elev_m": 2925.5,
+   "at_resort": "Breckenridge"
+  },
+  "USC00057050": {
+   "name": "RIO GRANDE RSVR",
+   "state": "CO",
+   "lat": 37.7219,
+   "lon": -107.2667,
+   "elev_m": 2893.2,
+   "at_resort": null
+  },
+  "USC00057656": {
+   "name": "SILVERTON",
+   "state": "CO",
+   "lat": 37.8089,
+   "lon": -107.6633,
+   "elev_m": 2830.1,
+   "at_resort": null
+  },
+  "USC00058501": {
+   "name": "TWIN LAKES RSVR",
+   "state": "CO",
+   "lat": 39.0942,
+   "lon": -106.3506,
+   "elev_m": 2815.1,
+   "at_resort": null
+  },
+  "USC00051977": {
+   "name": "CRIPPLE CREEK 3NNW",
+   "state": "CO",
+   "lat": 38.7956,
+   "lon": -105.2003,
+   "elev_m": 2814.8,
+   "at_resort": null
+  },
+  "USC00058184": {
+   "name": "TAYLOR PARK",
+   "state": "CO",
+   "lat": 38.8183,
+   "lon": -106.6086,
+   "elev_m": 2797.8,
+   "at_resort": null
+  },
+  "USC00052294": {
+   "name": "DIVIDE 4NW",
+   "state": "CO",
+   "lat": 38.9608,
+   "lon": -105.2158,
+   "elev_m": 2784.0,
+   "at_resort": null
+  },
+  "USC00059175": {
+   "name": "WINTER PARK",
+   "state": "CO",
+   "lat": 39.8878,
+   "lon": -105.7614,
+   "elev_m": 2780.7,
+   "at_resort": "Winter Park"
+  },
+  "USC00052281": {
+   "name": "DILLON 1 E",
+   "state": "CO",
+   "lat": 39.6244,
+   "lon": -106.0336,
+   "elev_m": 2767.9,
+   "at_resort": null
+  },
+  "USC00057309": {
+   "name": "RUXTON PARK",
+   "state": "CO",
+   "lat": 38.8417,
+   "lon": -104.9742,
+   "elev_m": 2761.5,
+   "at_resort": null
+  },
+  "USC00104598": {
+   "name": "ISLAND PARK",
+   "state": "ID",
+   "lat": 44.4203,
+   "lon": -111.3711,
+   "elev_m": 1917.2,
+   "at_resort": null
+  },
+  "USC00101671": {
+   "name": "CHILLY BARTON FLAT",
+   "state": "ID",
+   "lat": 43.9778,
+   "lon": -113.8292,
+   "elev_m": 1908.0,
+   "at_resort": null
+  },
+  "USC00108676": {
+   "name": "STANLEY",
+   "state": "ID",
+   "lat": 44.2208,
+   "lon": -114.9347,
+   "elev_m": 1904.7,
+   "at_resort": null
+  },
+  "USC00102676": {
+   "name": "DRIGGS",
+   "state": "ID",
+   "lat": 43.7792,
+   "lon": -111.1111,
+   "elev_m": 1879.1,
+   "at_resort": null
+  },
+  "USC00100803": {
+   "name": "BERN",
+   "state": "ID",
+   "lat": 42.3353,
+   "lon": -111.3856,
+   "elev_m": 1817.8,
+   "at_resort": null
+  },
+  "USC00102392": {
+   "name": "DEADWOOD LODGE",
+   "state": "ID",
+   "lat": 44.4622,
+   "lon": -115.5817,
+   "elev_m": 1813.0,
+   "at_resort": null
+  },
+  "USC00105275": {
+   "name": "LIFTON PUMPING STN",
+   "state": "ID",
+   "lat": 42.1231,
+   "lon": -111.3133,
+   "elev_m": 1809.0,
+   "at_resort": null
+  },
+  "USC00102260": {
+   "name": "CRATERS OF THE MOON",
+   "state": "ID",
+   "lat": 43.4625,
+   "lon": -113.5603,
+   "elev_m": 1802.6,
+   "at_resort": null
+  },
+  "USC00105462": {
+   "name": "MACKAY LOST RVR RS",
+   "state": "ID",
+   "lat": 43.9178,
+   "lon": -113.6153,
+   "elev_m": 1797.4,
+   "at_resort": null
+  },
+  "USC00104845": {
+   "name": "KETCHUM RS",
+   "state": "ID",
+   "lat": 43.6842,
+   "lon": -114.3603,
+   "elev_m": 1795.3,
+   "at_resort": null
+  },
+  "USC00248858": {
+   "name": "W YELLOWSTONE GATEWAY",
+   "state": "MT",
+   "lat": 44.6567,
+   "lon": -111.0903,
+   "elev_m": 2035.8,
+   "at_resort": null
+  },
+  "USC00245961": {
+   "name": "MYSTIC LAKE",
+   "state": "MT",
+   "lat": 45.2436,
+   "lon": -109.7311,
+   "elev_m": 1994.6,
+   "at_resort": null
+  },
+  "USC00244038": {
+   "name": "HEBGEN DAM",
+   "state": "MT",
+   "lat": 44.8667,
+   "lon": -111.3392,
+   "elev_m": 1977.8,
+   "at_resort": null
+  },
+  "USC00245030": {
+   "name": "LIMA",
+   "state": "MT",
+   "lat": 44.6331,
+   "lon": -112.5928,
+   "elev_m": 1913.8,
+   "at_resort": null
+  },
+  "USC00248597": {
+   "name": "VIRGINIA CITY",
+   "state": "MT",
+   "lat": 45.2925,
+   "lon": -111.9444,
+   "elev_m": 1777.9,
+   "at_resort": null
+  },
+  "USC00243707": {
+   "name": "GRANT 5 SE",
+   "state": "MT",
+   "lat": 44.9656,
+   "lon": -113.0042,
+   "elev_m": 1761.7,
+   "at_resort": null
+  },
+  "USC00241313": {
+   "name": "MONTANA TECH (BUTTE SCH OF MIN",
+   "state": "MT",
+   "lat": 46.0125,
+   "lon": -112.5586,
+   "elev_m": 1752.6,
+   "at_resort": null
+  },
+  "USC00240111": {
+   "name": "ALDER 19S",
+   "state": "MT",
+   "lat": 45.0961,
+   "lon": -112.0856,
+   "elev_m": 1752.3,
+   "at_resort": null
+  },
+  "USC00249082": {
+   "name": "WISE RVR 3 WNW",
+   "state": "MT",
+   "lat": 45.8025,
+   "lon": -112.9939,
+   "elev_m": 1746.5,
+   "at_resort": null
+  },
+  "USC00246918": {
+   "name": "RED LODGE",
+   "state": "MT",
+   "lat": 45.1769,
+   "lon": -109.2572,
+   "elev_m": 1720.9,
+   "at_resort": null
+  },
+  "USC00265400": {
+   "name": "MT CHARLESTON FIRE STN",
+   "state": "NV",
+   "lat": 36.2594,
+   "lon": -115.6458,
+   "elev_m": 2267.7,
+   "at_resort": null
+  },
+  "USC00262119": {
+   "name": "DAGGET PASS",
+   "state": "NV",
+   "lat": 38.9783,
+   "lon": -119.8914,
+   "elev_m": 2235.4,
+   "at_resort": null
+  },
+  "USC00263340": {
+   "name": "GREAT BASIN NP",
+   "state": "NV",
+   "lat": 39.0056,
+   "lon": -114.2206,
+   "elev_m": 2087.9,
+   "at_resort": null
+  },
+  "USC00260507": {
+   "name": "AUSTIN #2",
+   "state": "NV",
+   "lat": 39.4931,
+   "lon": -117.0675,
+   "elev_m": 2066.5,
+   "at_resort": null
+  },
+  "USC00265371": {
+   "name": "MOORMAN RCH - RUTH 16WNW",
+   "state": "NV",
+   "lat": 39.3569,
+   "lon": -115.3303,
+   "elev_m": 1995.8,
+   "at_resort": null
+  },
+  "USC00266746": {
+   "name": "REESE RVR - IONE 13NE",
+   "state": "NV",
+   "lat": 39.0628,
+   "lon": -117.4133,
+   "elev_m": 1960.5,
+   "at_resort": null
+  },
+  "USC00291931": {
+   "name": "CLOUDCROFT",
+   "state": "NM",
+   "lat": 32.92,
+   "lon": -105.7472,
+   "elev_m": 2658.8,
+   "at_resort": null
+  },
+  "USC00292700": {
+   "name": "EAGLE NEST",
+   "state": "NM",
+   "lat": 36.5575,
+   "lon": -105.2628,
+   "elev_m": 2523.7,
+   "at_resort": null
+  },
+  "USC00299820": {
+   "name": "WOLF CANYON",
+   "state": "NM",
+   "lat": 35.9478,
+   "lon": -106.7469,
+   "elev_m": 2505.5,
+   "at_resort": null
+  },
+  "USC00291389": {
+   "name": "CANJILON R/S",
+   "state": "NM",
+   "lat": 36.4819,
+   "lon": -106.4403,
+   "elev_m": 2386.0,
+   "at_resort": null
+  },
+  "USC00295084": {
+   "name": "LOS ALAMOS",
+   "state": "NM",
+   "lat": 35.8644,
+   "lon": -106.3214,
+   "elev_m": 2262.8,
+   "at_resort": null
+  },
+  "USC00294742": {
+   "name": "LAKE MALOYA",
+   "state": "NM",
+   "lat": 36.9825,
+   "lon": -104.3753,
+   "elev_m": 2255.5,
+   "at_resort": null
+  },
+  "USC00292785": {
+   "name": "EL MORRO NATL MON",
+   "state": "NM",
+   "lat": 35.0381,
+   "lon": -108.3492,
+   "elev_m": 2201.6,
+   "at_resort": null
+  },
+  "USC00351946": {
+   "name": "CRATER LAKE NPS HQ",
+   "state": "OR",
+   "lat": 42.8978,
+   "lon": -122.1339,
+   "elev_m": 1976.6,
+   "at_resort": null
+  },
+  "USC00353692": {
+   "name": "HART MTN REFUGE",
+   "state": "OR",
+   "lat": 42.5486,
+   "lon": -119.6558,
+   "elev_m": 1712.4,
+   "at_resort": null
+  },
+  "USC00356252": {
+   "name": "ODELL LAKE-EAST",
+   "state": "OR",
+   "lat": 43.5492,
+   "lon": -121.9633,
+   "elev_m": 1464.6,
+   "at_resort": null
+  },
+  "USC00358029": {
+   "name": "SQUAW BUTTE-NORTHERN GREAT BAS",
+   "state": "OR",
+   "lat": 43.4869,
+   "lon": -119.7211,
+   "elev_m": 1420.4,
+   "at_resort": null
+  },
+  "USC00350036": {
+   "name": "ADEL",
+   "state": "OR",
+   "lat": 42.1761,
+   "lon": -119.8958,
+   "elev_m": 1399.0,
+   "at_resort": null
+  },
+  "USC00354060": {
+   "name": "HOWARD PRAIRIE DAM",
+   "state": "OR",
+   "lat": 42.2153,
+   "lon": -122.3719,
+   "elev_m": 1393.2,
+   "at_resort": null
+  },
+  "USC00351986": {
+   "name": "CRESCENT",
+   "state": "OR",
+   "lat": 43.4642,
+   "lon": -121.7094,
+   "elev_m": 1365.8,
+   "at_resort": null
+  },
+  "USC00350118": {
+   "name": "ALKALI LAKE",
+   "state": "OR",
+   "lat": 42.9675,
+   "lon": -119.9933,
+   "elev_m": 1323.7,
+   "at_resort": null
+  },
+  "USC00358173": {
+   "name": "SUMMER LAKE 1 S",
+   "state": "OR",
+   "lat": 42.955,
+   "lon": -120.7869,
+   "elev_m": 1276.8,
+   "at_resort": null
+  },
+  "USC00354329": {
+   "name": "JOSEPH",
+   "state": "OR",
+   "lat": 45.3497,
+   "lon": -117.2242,
+   "elev_m": 1275.3,
+   "at_resort": null
+  },
+  "USC00421258": {
+   "name": "CEDAR BREAKS NM",
+   "state": "UT",
+   "lat": 37.6094,
+   "lon": -112.8378,
+   "elev_m": 3161.4,
+   "at_resort": null
+  },
+  "USC00427846": {
+   "name": "SILVER LAKE BRIGHTON",
+   "state": "UT",
+   "lat": 40.6011,
+   "lon": -111.5839,
+   "elev_m": 2664.0,
+   "at_resort": "Brighton"
+  },
+  "USC00427729": {
+   "name": "SCOFIELD-SKYLINE MINE",
+   "state": "UT",
+   "lat": 39.6842,
+   "lon": -111.2053,
+   "elev_m": 2650.8,
+   "at_resort": null
+  },
+  "USC00421008": {
+   "name": "BRYCE CANYON NP HQRS",
+   "state": "UT",
+   "lat": 37.6411,
+   "lon": -112.1703,
+   "elev_m": 2404.9,
+   "at_resort": null
+  },
+  "USC00427559": {
+   "name": "SALINA 24 E",
+   "state": "UT",
+   "lat": 38.9128,
+   "lon": -111.4164,
+   "elev_m": 2304.3,
+   "at_resort": null
+  },
+  "USC00420086": {
+   "name": "ALTON",
+   "state": "UT",
+   "lat": 37.4403,
+   "lon": -112.4819,
+   "elev_m": 2163.5,
+   "at_resort": null
+  },
+  "USC00425807": {
+   "name": "MONTICELLO #2",
+   "state": "UT",
+   "lat": 37.8675,
+   "lon": -109.3514,
+   "elev_m": 2159.8,
+   "at_resort": null
+  },
+  "USC00425148": {
+   "name": "LOA",
+   "state": "UT",
+   "lat": 38.4061,
+   "lon": -111.6422,
+   "elev_m": 2153.4,
+   "at_resort": null
+  },
+  "USC00423776": {
+   "name": "HATCH",
+   "state": "UT",
+   "lat": 37.6522,
+   "lon": -112.4361,
+   "elev_m": 2101.0,
+   "at_resort": null
+  },
+  "USC00424947": {
+   "name": "LA SAL 1SW",
+   "state": "UT",
+   "lat": 38.3014,
+   "lon": -109.2661,
+   "elev_m": 2068.7,
+   "at_resort": null
+  },
+  "USC00420849": {
+   "name": "BOULDER",
+   "state": "UT",
+   "lat": 37.905,
+   "lon": -111.42,
+   "elev_m": 2026.9,
+   "at_resort": null
+  },
+  "USC00426601": {
+   "name": "PANGUITCH",
+   "state": "UT",
+   "lat": 37.8247,
+   "lon": -112.4308,
+   "elev_m": 2016.3,
+   "at_resort": null
+  },
+  "USC00456898": {
+   "name": "RAINIER PARADISE RS",
+   "state": "WA",
+   "lat": 46.7864,
+   "lon": -121.7422,
+   "elev_m": 1650.5,
+   "at_resort": null
+  },
+  "USC00458521": {
+   "name": "TONASKET 11NE",
+   "state": "WA",
+   "lat": 48.7978,
+   "lon": -119.2592,
+   "elev_m": 1046.7,
+   "at_resort": null
+  },
+  "USC00450294": {
+   "name": "ASOTIN 14 SW",
+   "state": "WA",
+   "lat": 46.2039,
+   "lon": -117.2472,
+   "elev_m": 1037.2,
+   "at_resort": null
+  },
+  "USC00453730": {
+   "name": "HOLDEN VILLAGE",
+   "state": "WA",
+   "lat": 48.1989,
+   "lon": -120.7736,
+   "elev_m": 980.8,
+   "at_resort": null
+  },
+  "USC00482375": {
+   "name": "DARWIN RCH",
+   "state": "WY",
+   "lat": 43.4128,
+   "lon": -110.1633,
+   "elev_m": 2496.3,
+   "at_resort": null
+  },
+  "USC00481220": {
+   "name": "BURGESS JUNCTION",
+   "state": "WY",
+   "lat": 44.7742,
+   "lon": -107.5217,
+   "elev_m": 2456.7,
+   "at_resort": null
+  },
+  "USC00485345": {
+   "name": "LAKE YELLOWSTONE",
+   "state": "WY",
+   "lat": 44.5622,
+   "lon": -110.3986,
+   "elev_m": 2405.5,
+   "at_resort": null
+  },
+  "USC00485417": {
+   "name": "LARAMIE 4SE",
+   "state": "WY",
+   "lat": 41.2847,
+   "lon": -105.5319,
+   "elev_m": 2252.5,
+   "at_resort": null
+  },
+  "USC00486845": {
+   "name": "OLD FAITHFUL",
+   "state": "WY",
+   "lat": 44.4569,
+   "lon": -110.8328,
+   "elev_m": 2240.6,
+   "at_resort": null
+  },
+  "USC00482242": {
+   "name": "DANIEL FISH HATCHERY",
+   "state": "WY",
+   "lat": 42.9281,
+   "lon": -110.1272,
+   "elev_m": 2237.5,
+   "at_resort": null
+  },
+  "USC00487260": {
+   "name": "PINEDALE",
+   "state": "WY",
+   "lat": 42.875,
+   "lon": -109.8622,
+   "elev_m": 2195.2,
+   "at_resort": null
+  },
+  "USC00481736": {
+   "name": "CHURCH BUTTES GAS PLT",
+   "state": "WY",
+   "lat": 41.3975,
+   "lon": -110.0883,
+   "elev_m": 2157.7,
+   "at_resort": null
+  },
+  "USC00488192": {
+   "name": "SHIRLEY BASIN",
+   "state": "WY",
+   "lat": 42.3703,
+   "lon": -106.105,
+   "elev_m": 2150.1,
+   "at_resort": null
+  },
+  "USC00482715": {
+   "name": "DUBOIS",
+   "state": "WY",
+   "lat": 43.5397,
+   "lon": -109.6553,
+   "elev_m": 2119.9,
+   "at_resort": null
+  }
+ }
+}
