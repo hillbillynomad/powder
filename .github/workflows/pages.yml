@@ -4,12 +4,20 @@ on:
   # Every 6 hours, ~5.5h after each GFS cycle (00/06/12/18Z) so the newest model run is
   # fully published for the weather overlays
   schedule:
-    - cron: '30 5,11,17,23 * * *'
+    - cron: '30 5,11,23 * * *'
+    # The 17:30 run also writes the daily snow log (snow-log job below): by then North American
+    # resorts have posted their morning snow reports
+    - cron: '30 17 * * *'
   # Run on push to main
   push:
     branches: ["main"]
   # Allow manual trigger
   workflow_dispatch:
+    inputs:
+      snow_log:
+        description: Also log this run's forecasts and resort snow reports to the snow-log branch
+        type: boolean
+        default: false
 
 permissions:
   pages: write
@@ -48,6 +56,15 @@ jobs:
       - name: Validate forecast data
         run: python scripts/validate_export.py
 
+      - name: Keep forecasts.json for the snow log
+        if: github.event.schedule == '30 17 * * *' || inputs.snow_log
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: forecasts
+          path: powder/web/data/forecasts.json
+          retention-days: 3
+
       - name: Generate weather overlays
         # Optional layer (GFS temperature / snow frames): if NOAA's bucket is unreachable the
         # site still deploys and the UI just shows the Weather menu as unavailable
@@ -60,3 +77,59 @@ jobs:
           path: 'powder/web'
       - id: deployment
         uses: actions/deploy-pages@v5
+
+  snow-log:
+    # Daily forecast-verification log (tools/calibrate/daily_log.py): the forecast this run
+    # exported plus OnTheSnow's resort-reported new snow, one JSONL per day on the snow-log
+    # branch. Runs after the deploy and never fails the workflow.
+    needs: deploy
+    if: ${{ !cancelled() && (github.event.schedule == '30 17 * * *' || inputs.snow_log) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    continue-on-error: true
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install requests
+        run: pip install requests
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: forecasts
+          path: powder/web/data
+
+      - name: Check out the snow-log branch
+        run: |
+          if git fetch --depth=1 origin snow-log; then
+            git worktree add --detach "$RUNNER_TEMP/snow-log" FETCH_HEAD
+          else
+            git worktree add --orphan -b snow-log "$RUNNER_TEMP/snow-log"
+            printf '%s\n' '# Snow log' '' \
+              'One JSONL per day of forecasts at every lead time plus resort-reported new snow,' \
+              'written by tools/calibrate/daily_log.py on main. Score it with' \
+              '`python tools/calibrate/daily_score.py --git origin/snow-log` (see tools/calibrate/README.md).' \
+              > "$RUNNER_TEMP/snow-log/README.md"
+          fi
+
+      - name: Log forecasts and resort reports
+        run: python tools/calibrate/daily_log.py --out "$RUNNER_TEMP/snow-log/log"
+
+      - name: Commit the day's log
+        working-directory: ${{ runner.temp }}/snow-log
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing new to log"
+            exit 0
+          fi
+          days=$(git diff --cached --name-only -- log | xargs -r -n1 basename | sed 's/\.jsonl$//' | tr '\n' ' ')
+          git -c user.name=github-actions -c user.email=github-actions@github.com \
+            commit -q -m "Snow log ${days% }"
+          git push origin HEAD:refs/heads/snow-log
